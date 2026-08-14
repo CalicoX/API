@@ -3318,125 +3318,261 @@
   overflow: hidden;
 }
 
-/* 1. Status — hanging form, cropped like webhook */
+/* 1. Status — dual orbit rings around 17TRACK mark */
+.api-s4-illus:has(.api-s4-vig--status) > * {
+  width: 100%;
+  max-width: 100%;
+}
+
 .api-s4-vig--status {
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding: 0 0 0;
+  padding: 0;
 }
 
-.api-s4-status {
-  width: min(100%, 360px);
-  height: calc(100% - 40px + 72px);
-  margin: 40px 0 -72px;
-  padding: 12px 14px 16px;
-  box-sizing: border-box;
-  overflow: hidden;
-  border-radius: 12px 12px 0 0;
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  border-bottom: none;
-  background: #fff;
+.api-s4-orbit {
+  --logo: 92px;
+  --r-out: 154px;
+  --r-in: 100px;
+  --spin-out: 38s;
+  --spin-in: 28s;
+  position: relative;
+  width: min(100%, 400px);
+  aspect-ratio: 1;
+  margin: 0 auto;
 }
 
-.api-s4-status .api-vig-checks {
-  margin: 0 0 10px;
-  gap: 6px 8px;
+.api-s4-orbit-track {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1.5px solid rgba(148, 163, 184, 0.45);
+  border-radius: 50%;
+  pointer-events: none;
+  translate: -50% -50%;
 }
 
-.api-s4-status .api-vig-checks li {
-  font-size: 10.5px;
+.api-s4-orbit-track--outer {
+  width: calc(var(--r-out) * 2);
+  height: calc(var(--r-out) * 2);
 }
 
-.api-s4-status-chips {
-  list-style: none;
+.api-s4-orbit-track--inner {
+  width: calc(var(--r-in) * 2);
+  height: calc(var(--r-in) * 2);
+}
+
+.api-s4-orbit-ring {
+  position: absolute;
+  inset: 0;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  list-style: none;
+  animation: api-s4-orbit-cw var(--spin-out) linear infinite;
+  animation-play-state: paused;
 }
 
-.api-s4-status-chips li {
+.api-s4-orbit-ring--inner {
+  animation-name: api-s4-orbit-ccw;
+  animation-duration: var(--spin-in);
+  transform: rotate(30deg);
+}
+
+.api-s4-orbit-ring li {
+  --a: calc(var(--i) * 360deg / var(--n));
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: rotate(var(--a)) translateY(calc(var(--r) * -1));
+}
+
+.api-s4-orbit-ring--outer li {
+  --r: var(--r-out);
+}
+
+.api-s4-orbit-ring--inner li {
+  --r: var(--r-in);
+}
+
+.api-s4-orbit-fix {
+  display: block;
+  animation: api-s4-orbit-unspin-cw var(--spin-out) linear infinite;
+  animation-play-state: paused;
+}
+
+.api-s4-orbit-ring--inner .api-s4-orbit-fix {
+  animation-name: api-s4-orbit-unspin-ccw;
+  animation-duration: var(--spin-in);
+}
+
+.api-s4-orbit-chip {
+  display: block;
+  width: max-content;
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: 999px;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  background: #f8fafc;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
   font-size: 9px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   color: #475569;
-  transform: translateX(0);
-  opacity: 0.55;
+  white-space: nowrap;
+  transform: translate(-50%, -50%) rotate(calc(var(--a) * -1));
 }
 
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:not(.is-on) {
-  animation: api-s4-check-row 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+.api-s4-orbit-ring--inner .api-s4-orbit-chip {
+  padding: 3px 7px;
+  font-size: 8px;
+  font-weight: 500;
+  color: #64748b;
+  background: #f8fafc;
 }
 
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(3) { animation-delay: 0.06s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(4) { animation-delay: 0.12s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(5) { animation-delay: 0.18s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(6) { animation-delay: 0.24s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(7) { animation-delay: 0.3s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(8) { animation-delay: 0.36s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(9) { animation-delay: 0.42s; }
-
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:not(.is-on)::before {
-  animation: api-s4-check-box 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+.api-s4-orbit-chip.is-on {
+  color: #1d4ed8;
+  border-color: rgba(37, 99, 235, 0.32);
+  background: #eff6ff;
 }
 
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(3)::before { animation-delay: 0.06s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(4)::before { animation-delay: 0.12s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(5)::before { animation-delay: 0.18s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(6)::before { animation-delay: 0.24s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(7)::before { animation-delay: 0.3s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(8)::before { animation-delay: 0.36s; }
-.api-s4-card:hover .api-s4-vig--status .api-vig-checks li:nth-child(9)::before { animation-delay: 0.42s; }
-
-.api-s4-card:hover .api-s4-status-chips li {
-  animation: api-s4-chip-in 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+.api-s4-card:hover .api-s4-orbit-ring,
+.api-s4-card:hover .api-s4-orbit-fix {
+  animation-play-state: running;
 }
 
-.api-s4-card:hover .api-s4-status-chips li:nth-child(1) { animation-delay: 0.08s; }
-.api-s4-card:hover .api-s4-status-chips li:nth-child(2) { animation-delay: 0.14s; }
-.api-s4-card:hover .api-s4-status-chips li:nth-child(3) { animation-delay: 0.2s; }
-.api-s4-card:hover .api-s4-status-chips li:nth-child(4) { animation-delay: 0.26s; }
-.api-s4-card:hover .api-s4-status-chips li:nth-child(5) { animation-delay: 0.32s; }
-.api-s4-card:hover .api-s4-status-chips li:nth-child(6) { animation-delay: 0.38s; }
-
-@keyframes api-s4-check-row {
-  0%, 14% { color: #475569; }
-  28%, 68% { color: #334155; }
-  86%, 100% { color: #475569; }
+.api-s4-orbit-core {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
 }
 
-@keyframes api-s4-check-box {
-  0%, 14% {
-    border-color: #cbd5e1;
-    background: #fff;
+.api-s4-orbit-core::before {
+  content: "";
+  position: absolute;
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.38) 0%, rgba(249, 115, 22, 0.12) 40%, transparent 70%);
+  filter: blur(8px);
+}
+
+.api-s4-card:hover .api-s4-orbit-core::before {
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.5) 0%, rgba(249, 115, 22, 0.18) 44%, transparent 72%);
+}
+
+.api-s4-logo {
+  width: var(--logo);
+  height: var(--logo);
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #1b57e0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -14px 20px rgba(8, 28, 96, 0.32),
+    1px 1px 0 #1e4fd6,
+    2px 2px 0 #1a46c4,
+    3px 3px 0 #163db2,
+    4px 4px 0 #1334a0,
+    5px 5px 0 #102b8e,
+    6px 7px 0 #0c2278,
+    10px 16px 28px rgba(15, 40, 120, 0.34);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.api-s4-card:hover .api-s4-logo {
+  transform: translate(-1px, -2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -14px 20px rgba(8, 28, 96, 0.28),
+    1px 1px 0 #1e4fd6,
+    2px 2px 0 #1a46c4,
+    3px 3px 0 #163db2,
+    4px 4px 0 #1334a0,
+    5px 5px 0 #102b8e,
+    6px 6px 0 #0e2684,
+    7px 8px 0 #0c2278,
+    12px 20px 32px rgba(15, 40, 120, 0.38);
+}
+
+.api-s4-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.api-s4-logo-bevel {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.38) 0%, transparent 42%),
+    radial-gradient(120% 80% at 18% 12%, rgba(255, 255, 255, 0.32), transparent 46%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.api-s4-logo-shine {
+  position: absolute;
+  inset: -30%;
+  background: linear-gradient(
+    118deg,
+    transparent 36%,
+    rgba(255, 255, 255, 0.08) 44%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0.08) 56%,
+    transparent 66%
+  );
+  transform: translateX(-70%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.api-s4-card:hover .api-s4-logo-shine {
+  animation: api-s4-logo-shine 2.8s ease-in-out infinite;
+}
+
+@keyframes api-s4-orbit-cw {
+  to {
+    transform: rotate(360deg);
   }
-  28%, 68% {
-    border-color: #2563eb;
-    background: #2563eb
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2L5 8.7 9.5 3.5' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
-      center / 10px 10px no-repeat;
+}
+
+@keyframes api-s4-orbit-ccw {
+  from {
+    transform: rotate(30deg);
   }
-  86%, 100% {
-    border-color: #cbd5e1;
-    background: #fff;
+  to {
+    transform: rotate(-330deg);
   }
 }
 
-@keyframes api-s4-chip-in {
-  0%, 10% {
-    opacity: 0.35;
-    transform: translateX(12px);
+@keyframes api-s4-orbit-unspin-cw {
+  to {
+    transform: rotate(-360deg);
   }
-  24%, 68% {
-    opacity: 1;
-    transform: translateX(0);
+}
+
+@keyframes api-s4-orbit-unspin-ccw {
+  to {
+    transform: rotate(360deg);
   }
-  86%, 100% {
-    opacity: 0.35;
-    transform: translateX(12px);
+}
+
+@keyframes api-s4-logo-shine {
+  0%,
+  18% {
+    transform: translateX(-70%);
+  }
+  58%,
+  100% {
+    transform: translateX(70%);
   }
 }
 
@@ -3845,9 +3981,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .api-s4-card:hover .api-s4-vig--status .api-vig-checks li:not(.is-on),
-  .api-s4-card:hover .api-s4-vig--status .api-vig-checks li:not(.is-on)::before,
-  .api-s4-card:hover .api-s4-status-chips li,
+  .api-s4-orbit-ring,
+  .api-s4-orbit-fix,
+  .api-s4-card:hover .api-s4-orbit-ring,
+  .api-s4-card:hover .api-s4-orbit-fix,
+  .api-s4-card:hover .api-s4-logo-shine {
+    animation: none;
+  }
+
   .api-s4-card:hover .api-s4-hub-wires path,
   .api-s4-card:hover .api-s4-hub-logo.is-left,
   .api-s4-card:hover .api-s4-hub-logo.is-right,

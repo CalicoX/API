@@ -77,12 +77,12 @@ const S4_MAINS = [
 ];
 
 const S4_SUBS = [
-  "Address issue",
-  "Customer not available",
-  "Refused by recipient",
-  "Held at customs",
-  "Damaged in transit",
-  "Returned to sender",
+  { label: "Address issue" },
+  { label: "Not available" },
+  { label: "Refused" },
+  { label: "Customs hold" },
+  { label: "Damaged" },
+  { label: "Returned" },
 ];
 
 const S4_HUB_LEFT = [
@@ -110,29 +110,36 @@ const S4_ARCS = [
   [0.05, "#06b6d4", "Out For Delivery"],
 ];
 
+function StatusOrbitRing({ items, tone }) {
+  return (
+    <ul className={`api-s4-orbit-ring api-s4-orbit-ring--${tone}`} style={{ "--n": items.length }}>
+      {items.map((item, i) => (
+        <li key={item.label} style={{ "--i": i }}>
+          <span className="api-s4-orbit-fix">
+            <span className={`api-s4-orbit-chip${item.on ? " is-on" : ""}`}>{item.label}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function DataStatusStage() {
   return (
     <div className="api-s4-vig api-s4-vig--status" aria-hidden="true">
-      <article className="api-s4-status">
-        <header className="api-vig-head">
-          <h4 className="api-vig-title">Package status</h4>
-          <span className="api-vig-close">×</span>
-        </header>
-        <span className="api-vig-k">9 main status</span>
-        <ul className="api-vig-checks">
-          {S4_MAINS.map(({ label, on }) => (
-            <li key={label} className={on ? "is-on" : ""}>
-              {label}
-            </li>
-          ))}
-        </ul>
-        <span className="api-vig-k api-vig-k--status">Exception · 27 sub</span>
-        <ul className="api-s4-status-chips">
-          {S4_SUBS.map((label) => (
-            <li key={label}>{label}</li>
-          ))}
-        </ul>
-      </article>
+      <div className="api-s4-orbit">
+        <span className="api-s4-orbit-track api-s4-orbit-track--outer" />
+        <span className="api-s4-orbit-track api-s4-orbit-track--inner" />
+        <StatusOrbitRing items={S4_MAINS} tone="outer" />
+        <StatusOrbitRing items={S4_SUBS} tone="inner" />
+        <div className="api-s4-orbit-core">
+          <div className="api-s4-logo">
+            <img src="/assets/logo-17-mark.png" alt="" />
+            <i className="api-s4-logo-bevel" />
+            <i className="api-s4-logo-shine" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

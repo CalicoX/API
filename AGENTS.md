@@ -22,7 +22,7 @@ Park 在这个仓库里直接改代码、看效果。Agent 用简体中文回复
 
 - How-it-works / Data Operations 插图：浅灰井 `#f7f8fa` + 点阵，白 UI 碎片，8–11px 字，细描边。不要实拍、不要 3D 开盖。
 - 四张 Data Operations 卡必须**四种构图**，不要同一套铺满双栏。
-  1. Tracking data：挂井里的状态表单，hover 勾选 9 主状态。
+  1. Tracking data：双环 status 绕 17TRACK 方标；hover 内外环反向慢转；logo 轻微立体 + 光效。
   2. Carriers：中心 3400+ + 两侧 logo **连线**。
   3. Visibility：两张重叠卡拆开（运单号 → 自动识别）。
   4. Dashboard：井中小卡，**环形图描边**动画。
