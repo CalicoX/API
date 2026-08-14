@@ -79,16 +79,26 @@ const S4_MAINS_INNER = [
   { label: "Not Found", on: false, icon: "missing", src: "/assets/status/not-found.svg" },
 ];
 
-const S4_HUB_LEFT = [
-  ["/assets/carriers/dhl.svg", "DHL"],
-  ["/assets/carriers/ups.svg", "UPS"],
-  ["/assets/carriers/dpd.svg", "DPD"],
+const S4_HUB_NODES = [
+  { src: "/assets/carriers/dhl.svg", name: "DHL", x: 128, y: 178 },
+  { src: "/assets/carriers/ups.svg", name: "UPS", x: 200, y: 178 },
+  { src: "/assets/carriers/usps.svg", name: "USPS", x: 272, y: 178 },
+  { src: "/assets/carriers/fedex.svg", name: "FedEx", x: 56, y: 248 },
+  { src: "/assets/carriers/tnt.svg", name: "TNT", x: 128, y: 248 },
+  { src: "/assets/carriers/gls.svg", name: "GLS", x: 200, y: 248 },
+  { src: "/assets/carriers/dpd.svg", name: "DPD", x: 272, y: 248 },
+  { src: "/assets/carriers/royal-mail.svg", name: "Royal Mail", x: 344, y: 248 },
+  { src: "/assets/carriers/yunexpress.svg", name: "YunExpress", x: 56, y: 318, fade: true },
+  { src: "/assets/carriers/4px.svg", name: "4PX", x: 128, y: 318, fade: true },
+  { src: "/assets/carriers/cainiao.svg", name: "Cainiao", x: 200, y: 318, fade: true },
+  { src: "/assets/carriers/china-post.svg", name: "China Post", x: 272, y: 318, fade: true },
+  { src: "/assets/carriers/laposte.svg", name: "La Poste", x: 344, y: 318, fade: true },
 ];
 
-const S4_HUB_RIGHT = [
-  ["/assets/carriers/usps.svg", "USPS"],
-  ["/assets/carriers/gls.svg", "GLS"],
-];
+function hubWirePath(x, y) {
+  const mid = 128 + (y - 128) * 0.42;
+  return `M200 128 C 200 ${mid.toFixed(1)}, ${x} ${mid.toFixed(1)}, ${x} ${y}`;
+}
 
 const DONUT_R = 38;
 const DONUT_C = 2 * Math.PI * DONUT_R;
@@ -150,35 +160,28 @@ export function DataCarriersStage() {
       <div className="api-s4-hub">
         <svg
           className="api-s4-hub-wires"
-          viewBox="0 0 220 96"
-          preserveAspectRatio="none"
+          viewBox="0 0 400 360"
+          preserveAspectRatio="xMidYMin meet"
           fill="none"
           aria-hidden="true"
         >
-          <path d="M28 16 C 72 16, 96 48, 110 48" />
-          <path d="M28 48 C 72 48, 96 48, 110 48" />
-          <path d="M28 80 C 72 80, 96 48, 110 48" />
-          <path d="M192 22 C 148 22, 124 48, 110 48" />
-          <path d="M192 74 C 148 74, 124 48, 110 48" />
-        </svg>
-        <div className="api-s4-hub-col">
-          {S4_HUB_LEFT.map(([src, name]) => (
-            <span key={name} className="api-s4-hub-logo is-left">
-              <img src={src} alt="" />
-            </span>
+          {S4_HUB_NODES.map((node, i) => (
+            <path key={node.name} d={hubWirePath(node.x, node.y)} style={{ "--i": i }} />
           ))}
-        </div>
+        </svg>
         <div className="api-s4-hub-core">
           <b>3400+</b>
           <em>carriers</em>
         </div>
-        <div className="api-s4-hub-col is-right">
-          {S4_HUB_RIGHT.map(([src, name]) => (
-            <span key={name} className="api-s4-hub-logo is-right">
-              <img src={src} alt="" />
-            </span>
-          ))}
-        </div>
+        {S4_HUB_NODES.map((node, i) => (
+          <span
+            key={node.name}
+            className={`api-s4-hub-logo${node.fade ? " is-fade" : ""}`}
+            style={{ "--x": `${(node.x / 400) * 100}%`, "--y": `${(node.y / 360) * 100}%`, "--i": i }}
+          >
+            <img src={node.src} alt="" />
+          </span>
+        ))}
       </div>
     </div>
   );
