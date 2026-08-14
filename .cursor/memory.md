@@ -27,5 +27,5 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-08-14 10:38 — memory.md
 - 2026-08-14 10:38 — .gitignore、.cursor、AGENTS.md
-- （hook 会把每次自动同步写在这里）
