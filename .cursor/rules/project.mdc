@@ -1,0 +1,11 @@
+---
+description: 项目记忆与改完自动同步
+alwaysApply: true
+---
+
+# 开工与收工
+
+- 先读根目录 `AGENTS.md` 和 `.cursor/memory.md`。
+- 用户纠正、新的布局数字、插图/动画取舍，立刻写进 `.cursor/memory.md`。
+- 一轮改完必须 `commit` + `push` 到 `origin/main`。stop hook 会自动做；没跑就自己做，不要再问一句「要不要提交」。
+- 回复用简体中文。产品文案不要改。
