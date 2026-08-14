@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Liquid Glass Prism — WebGL2 Demo</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #16171a;
+      --panel: rgba(255, 255, 255, 0.06);
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #f4f6fb;
+      --muted: #9aa3b5;
+      --accent: #7dd3fc;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      min-height: 100%;
+    }
+
+    @media (max-width: 900px) {
+      body { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
+    }
+
+    .stage-wrap {
+      position: relative;
+      min-height: 70vh;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    #stage {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: none;
+      touch-action: none;
+    }
+
+    .hint {
+      position: absolute;
+      left: 20px;
+      bottom: 18px;
+      z-index: 2;
+      pointer-events: none;
+      color: var(--muted);
+      font-size: 13px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      padding: 8px 14px;
+    }
+
+    .panel {
+      border-left: 1px solid var(--line);
+      background: #0e1118;
+      padding: 20px 18px 28px;
+      overflow: auto;
+    }
+
+    @media (max-width: 900px) {
+      .panel { border-left: 0; border-top: 1px solid var(--line); }
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+
+    .sub {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .group {
+      margin-bottom: 16px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+    }
+
+    .group label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .group label strong {
+      color: var(--text);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    button, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 9px 10px;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    button:hover { background: rgba(255, 255, 255, 0.08); }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+
+    .note {
+      margin-top: 14px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .note b { color: #dbe4f0; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="stage-wrap">
+    <canvas id="stage"></canvas>
+    <div class="hint" id="hint">移动透镜体验 liquid glass · 拖动滑块改变光束扩散</div>
+  </div>
+
+  <aside class="panel">
+    <h1>Liquid Glass Prism</h1>
+    <p class="sub">
+      复刻 shaders.com slider-pricing 的视觉效果：<br>
+      Prism 光束 → Glass 透镜（折射/色散/高光）→ Film Grain。
+    </p>
+
+    <div class="group">
+      <label>光束扩散 spread <strong id="v-spread">0.70</strong></label>
+      <input id="spread" type="range" min="0" max="3" step="0.01" value="0.7" />
+    </div>
+
+    <div class="group">
+      <label>透镜半径 radius <strong id="v-radius">0.33</strong></label>
+      <input id="radius" type="range" min="0.1" max="0.6" step="0.01" value="0.33" />
+    </div>
+
+    <div class="group">
+      <label>折射强度 refraction <strong id="v-refraction">2.0</strong></label>
+      <input id="refraction" type="range" min="0" max="4" step="0.05" value="2" />
+    </div>
+
+    <div class="group">
+      <label>折射厚度 thickness <strong id="v-thickness">1.0</strong></label>
+      <input id="thickness" type="range" min="0.1" max="3" step="0.05" value="1" />
+    </div>
+
+    <div class="group">
+      <label>色散 aberration <strong id="v-aberration">1.0</strong></label>
+      <input id="aberration" type="range" min="0" max="2" step="0.05" value="1" />
+    </div>
+
+    <div class="group">
+      <label>边缘柔化 edgeSoftness <strong id="v-edgeSoftness">0.30</strong></label>
+      <input id="edgeSoftness" type="range" min="0.01" max="1" step="0.01" value="0.3" />
+    </div>
+
+    <div class="group">
+      <label>高光 highlight <strong id="v-highlight">0.15</strong></label>
+      <input id="highlight" type="range" min="0" max="2" step="0.01" value="0.15" />
+    </div>
+
+    <div class="group">
+      <label>高光柔化 highlightSoftness <strong id="v-highlightSoftness">0.10</strong></label>
+      <input id="highlightSoftness" type="range" min="0" max="1" step="0.01" value="0.1" />
+    </div>
+
+    <div class="group">
+      <label>光照角度 lightAngle <strong id="v-lightAngle">205</strong></label>
+      <input id="lightAngle" type="range" min="0" max="360" step="1" value="205" />
+    </div>
+
+    <div class="group">
+      <label>内部缩放 innerZoom <strong id="v-innerZoom">0.85</strong></label>
+      <input id="innerZoom" type="range" min="0.5" max="2" step="0.01" value="0.85" />
+    </div>
+
+    <div class="group">
+      <label>模糊 blur <strong id="v-blur">0.0</strong></label>
+      <input id="blur" type="range" min="0" max="10" step="0.1" value="0" />
+    </div>
+
+    <div class="group">
+      <label> Fresnel <strong id="v-fresnel">0.0</strong></label>
+      <input id="fresnel" type="range" min="0" max="1" step="0.01" value="0" />
+    </div>
+
+    <div class="row">
+      <button id="preset-default" type="button">默认</button>
+      <button id="preset-prism" type="button">强棱镜</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button id="preset-soft" type="button">柔边玻璃</button>
+      <button id="preset-clear" type="button">清透</button>
+    </div>
+
+    <p class="note">
+      <b>实现要点：</b>单 pass WebGL2 fragment shader。
+      先程序化生成 Prism 彩虹光束，再用 SDF 梯度做
+      <code>glassLensUVs</code> 折射偏移与 RGB 色散分离，
+      叠加边缘高光与镜面高光，最后加 film grain。
+      透镜跟随鼠标，<code>spread</code> 可映射到滑块。
+    </p>
+  </aside>
+
+  <script>
+    /**
+     * Liquid Glass Prism — standalone WebGL2 implementation
+     * Recreates shaders.com slider-pricing visual stack in one pass:
+     *   SolidColor → Prism → Glass (refraction/dispersion/highlight) → FilmGrain
+     */
+
+    const stage = document.getElementById("stage");
+    const gl = stage.getContext("webgl2", {
+      alpha: false,
+      antialias: false,
+      premultipliedAlpha: false,
+    });
+
+    if (!gl) {
+      document.body.innerHTML = "<p style='padding:24px'>需要 WebGL2 支持。</p>";
+      throw new Error("WebGL2 not available");
+    }
+
+    // ── options ──────────────────────────────────────────────
+    const opts = {
+      spread: 0.7,
+      radius: 0.33,
+      refraction: 2.0,
+      thickness: 1.0,
+      aberration: 1.0,
+      edgeSoftness: 0.3,
+      highlight: 0.15,
+      highlightSoftness: 0.1,
+      lightAngle: 205,
+      innerZoom: 0.85,
+      blur: 0,
+      fresnel: 0,
+    };
+
+    // ── pointer / lens state ─────────────────────────────────
+    let targetX = 0.36, targetY = 0.5;   // normalized [0,1]
+    let posX = 0.36, posY = 0.5;
+    let presence = 1, presenceTarget = 1;
+    let lastT = performance.now();
+    let running = false;
+
+    // ── shaders ──────────────────────────────────────────────
+    const VERT = `#version 300 es
+    layout(location = 0) in vec2 aPos;
+    void main() {
+      gl_Position = vec4(aPos, 0.0, 1.0);
+    }`;
+
+    const FRAG = `#version 300 es
+    precision highp float;
+    out vec4 outColor;
+
+    uniform vec2  uResolution;
+    uniform float uTime;
+    uniform vec2  uLensCenter;   // [0,1] normalized, top-left origin
+    uniform float uLensRadius;   // normalized to min dimension
+    uniform float uRefraction;
+    uniform float uThickness;
+    uniform float uAberration;
+    uniform float uEdgeSoftness;
+    uniform float uHighlight;
+    uniform float uHighlightSoftness;
+    uniform float uLightAngle;
+    uniform float uInnerZoom;
+    uniform float uBlur;
+    uniform float uFresnel;
+    uniform float uSpread;
+    uniform float uPresence;
+
+    const float PI = 3.14159265358979;
+    const float DEG_TO_RAD = 0.017453292519943295;
+    const float INV_HLEN = 0.4472135954999579; // 1/sqrt(5), for half-vector z=2
+
+    // ── helpers ──────────────────────────────────────────────
+    float pow2(float x) { return x * x; }
+    float pow5(float x) { float x2 = x * x; return x2 * x2 * x; }
+    float linearStep(float e0, float e1, float x) {
+      return clamp((x - e0) / (e1 - e0), 0.0, 1.0);
+    }
+    float ign(vec2 v) {
+      return fract(52.9829189 * fract(0.06711056 * v.x + 0.00583715 * v.y));
+    }
+
+    // ── prism beam ───────────────────────────────────────────
+    vec3 prismHue2Rgb(float h) {
+      float x = fract(h) * 6.0;
+      float r = clamp(abs(x - 3.0) - 1.0, 0.0, 1.0);
+      float g = clamp(2.0 - abs(x - 2.0), 0.0, 1.0);
+      float b = clamp(2.0 - abs(x - 4.0), 0.0, 1.0);
+      return vec3(r, g, b);
+    }
+
+    vec4 prismBeam(vec2 uv, vec2 vp, float animTime,
+                   vec2 position, vec2 splitPosition,
+                   vec3 beamColor, float beamWidth, float intensity,
+                   float startFalloff, float endFalloff,
+                   float spread, float softness, float saturation) {
+      float aspect = vp.x / vp.y;
+      vec2 pos = vec2(position.x * aspect, 1.0 - position.y);
+      vec2 split = vec2(splitPosition.x * aspect, 1.0 - splitPosition.y);
+      vec2 rel = vec2(uv.x * aspect, uv.y) - pos;
+      vec2 splitRel = split - pos;
+
+      float splitAlong = max(length(splitRel), 0.0001);
+      vec2 dir = splitRel / splitAlong;
+      vec2 perp = vec2(-dir.y, dir.x);
+
+      float along = dot(rel, dir);
+      float across = dot(rel, perp);
+
+      float soft = max(softness, 0.001);
+      float raw = along - splitAlong;
+      float k = soft * 0.6;
+      float past = (raw + sqrt(raw * raw + k * k)) * 0.5;
+
+      float fadeIn = smoothstep(0.0, max(startFalloff, 0.001), along);
+      float fadeOut = exp(-past / max(endFalloff, 0.001));
+      float longEnv = fadeIn * fadeOut;
+
+      float fanWidth = max(beamWidth + past * spread, 0.001);
+      float an = across / fanWidth;
+      float profile = exp(-an * an * 2.5);
+
+      float splitSat = smoothstep(splitAlong, splitAlong + soft, along);
+      float hue = an * 0.42 + animTime;
+      vec3 col = mix(beamColor, prismHue2Rgb(hue), vec3(splitSat * saturation));
+
+      float amt = profile * longEnv;
+      vec3 rgb = col * amt * intensity;
+      float alpha = clamp(amt, 0.0, 1.0);
+      return vec4(rgb, alpha);
+    }
+
+    // ── glass helpers ────────────────────────────────────────
+    float glassRefrStrength(float sdf, float thickness, float volumetric) {
+      float thicknessRange = max(thickness * 0.3, 0.005);
+      float depthNorm = clamp(-sdf / thicknessRange, 0.0, 1.0);
+      float vol = smoothstep(0.0, 1.0, depthNorm);
+      float flatMode = (1.0 - depthNorm) * (1.0 - depthNorm);
+      return volumetric > 0.5 ? vol : flatMode;
+    }
+
+    vec3 glassLensUVs(vec2 uv, vec2 center, float sdfRaw, float scale,
+                      float gradX, float gradY,
+                      float refraction, float innerZoom,
+                      float thickness, float aberration,
+                      float aspect, float volumetric) {
+      float sdf = sdfRaw / scale;
+      float refrStrength = glassRefrStrength(sdf, thickness, volumetric);
+      float refrScale = refraction * 0.15;
+      float slopeLen = max(length(vec2(gradX, gradY)), 0.0001);
+      float slopeScale = min(1.0, 12.0 / slopeLen);
+
+      vec2 offset = -vec2(gradX, gradY) * slopeScale * refrScale * refrStrength;
+      offset.x /= aspect;
+
+      vec2 zoomed = center + (uv - center) / innerZoom;
+      vec2 lensUV = zoomed + offset;
+
+      float chrScale = aberration * 0.06;
+      vec2 chrOff = offset * chrScale;
+      vec2 rUV = lensUV + chrOff;
+      vec2 bUV = lensUV - chrOff;
+
+      return vec3(lensUV, rUV.x); // pack: xy=lens, z=rUV.x (reconstruct below)
+    }
+
+    // ── scene sampling ───────────────────────────────────────
+    vec3 sampleScene(vec2 uv) {
+      // base color
+      vec3 base = vec3(0.086, 0.090, 0.102); // #16171a
+
+      // prism beam
+      vec4 prism = prismBeam(
+        uv, uResolution, uTime * 0.04,
+        vec2(-0.05, 0.5),      // position
+        vec2(0.39, 0.5),       // splitPosition
+        vec3(1.0),             // beamColor
+        0.002,                 // beamWidth
+        2.45,                  // intensity
+        0.47,                  // startFalloff
+        0.44,                  // endFalloff
+        uSpread,               // spread
+        0.18,                  // softness
+        0.95                   // saturation
+      );
+      base += prism.rgb;
+
+      // subtle grid for refraction visibility
+      vec2 grid = fract(uv * vec2(40.0, 40.0 * uResolution.y / uResolution.x));
+      float gridLine = smoothstep(0.95, 1.0, max(grid.x, grid.y));
+      base += vec3(0.03) * gridLine;
+
+      return base;
+    }
+
+    // simple 9-tap gaussian for blur
+    vec3 sampleSceneBlur(vec2 uv, float blurPx) {
+      if (blurPx < 0.5) return sampleScene(uv);
+      vec2 texel = 1.0 / uResolution;
+      float sigma = blurPx * 0.5;
+      vec3 acc = vec3(0.0);
+      float wsum = 0.0;
+      for (int j = -1; j <= 1; j++) {
+        for (int i = -1; i <= 1; i++) {
+          vec2 o = vec2(float(i), float(j)) * sigma * texel;
+          float w = exp(-(o.x * o.x + o.y * o.y) / (2.0 * sigma * sigma * texel.x * texel.x));
+          acc += sampleScene(uv + o) * w;
+          wsum += w;
+        }
+      }
+      return acc / max(wsum, 1e-4);
+    }
+
+    // ── main ─────────────────────────────────────────────────
+    void main() {
+      vec2 uv = gl_FragCoord.xy / uResolution;
+      float aspect = uResolution.x / uResolution.y;
+
+      // lens center in aspect-corrected space
+      vec2 center = vec2(uLensCenter.x * aspect, 1.0 - uLensCenter.y);
+      vec2 p = vec2(uv.x * aspect, uv.y) - center;
+
+      // SDF: circle (negative inside)
+      float sdfRaw = length(p) - uLensRadius * min(aspect, 1.0);
+      float scale = 1.0;
+
+      // numerical gradient
+      float e = 0.0015;
+      float sdfX = length(vec2((uv.x + e) * aspect, uv.y) - center) - uLensRadius * min(aspect, 1.0);
+      float sdfY = length(vec2(uv.x * aspect, uv.y + e) - center) - uLensRadius * min(aspect, 1.0);
+      float gradX = (sdfX - sdfRaw) / e;
+      float gradY = (sdfY - sdfRaw) / e;
+
+      // edge mask
+      float sharp = max(uEdgeSoftness * 0.5, 0.001);
+      float pxH = 1.0 / uResolution.y;
+      float w1 = max(sharp * 0.03125, pxH * 1.5);
+      float rb1 = clamp(-sdfRaw / w1, 0.0, 1.0);
+      float transition = smoothstep(0.0, 1.0, rb1);
+
+      // outside lens: show raw scene
+      vec3 baseColor = sampleScene(uv);
+      if (transition < 0.001 || uPresence < 0.001) {
+        // film grain
+        float grain = (ign(gl_FragCoord.xy) * 2.0 - 1.0) * 0.1 * 0.5;
+        outColor = vec4(baseColor + grain * (1.0 - dot(baseColor, vec3(0.2126, 0.7152, 0.0722))), 1.0);
+        return;
+      }
+
+      // ── glass refraction ──
+      float refrStrength = glassRefrStrength(sdfRaw, uThickness, 0.0);
+      float refrScale = uRefraction * 0.15;
+      float slopeLen = max(length(vec2(gradX, gradY)), 0.0001);
+      float slopeScale = min(1.0, 12.0 / slopeLen);
+      vec2 offset = -vec2(gradX, gradY) * slopeScale * refrScale * refrStrength;
+      offset.x /= aspect;
+
+      vec2 zoomed = center + (vec2(uv.x * aspect, uv.y) - center) / uInnerZoom;
+      vec2 lensUV = vec2(zoomed.x / aspect, zoomed.y) + offset;
+
+      float chrScale = uAberration * 0.06;
+      vec2 chrOff = offset * chrScale;
+      vec2 rUV = lensUV + chrOff;
+      vec2 bUV = lensUV - chrOff;
+
+      // sample with optional blur
+      vec3 sampled;
+      if (uBlur > 0.01) {
+        if (uAberration > 0.001) {
+          sampled = vec3(
+            sampleSceneBlur(rUV, uBlur).r,
+            sampleSceneBlur(lensUV, uBlur).g,
+            sampleSceneBlur(bUV, uBlur).b
+          );
+        } else {
+          sampled = sampleSceneBlur(lensUV, uBlur);
+        }
+      } else {
+        if (uAberration > 0.001) {
+          sampled = vec3(
+            sampleScene(rUV).r,
+            sampleScene(lensUV).g,
+            sampleScene(bUV).b
+          );
+        } else {
+          sampled = sampleScene(lensUV);
+        }
+      }
+
+      // ── lighting ──
+      // border highlight
+      float w2 = max(sharp * 0.0625, pxH * 1.5);
+      float sdfOuter = sdfRaw - pxH;
+      float rb2base = clamp(-sdfOuter / w2, 0.0, 1.0) - clamp(-sdfRaw / w2, 0.0, 1.0);
+      float lx = cos(uLightAngle * DEG_TO_RAD);
+      float ly = sin(uLightAngle * DEG_TO_RAD);
+      float normalDotLight = gradX * lx + gradY * ly;
+      float lightFacing = clamp(normalDotLight * 0.5 + 0.5, 0.0, 1.0);
+      float borderHighlight = rb2base * lightFacing * uHighlight;
+
+      // specular glint
+      float nz = 2.0;
+      float nLen = sqrt(gradX * gradX + gradY * gradY + nz * nz);
+      float nx = gradX / nLen;
+      float ny = gradY / nLen;
+      float nnz = nz / nLen;
+      float nDotH = nx * lx * INV_HLEN + ny * ly * INV_HLEN + nnz * 2.0 * INV_HLEN;
+      float shininess = exp2(8.0 - uHighlightSoftness * 7.0);
+      float specGlint = pow(clamp(nDotH, 0.0, 1.0), shininess) * uHighlight * refrStrength;
+
+      // fresnel rim
+      float slopeSq = gradX * gradX + gradY * gradY;
+      float cosView = 1.0 / sqrt(slopeSq + 1.0);
+      float exponent = mix(6.0, 1.5, clamp(uFresnel, 0.0, 1.0));
+      float fresnelRim = pow(1.0 - cosView, exponent) * uFresnel * 2.0 * rb1;
+
+      // combine
+      vec3 lit = sampled;
+      lit += vec3(1.0) * borderHighlight;
+      lit += vec3(1.0) * specGlint;
+      lit += vec3(1.0) * fresnelRim;
+
+      // final composite
+      vec3 col = mix(baseColor, lit, transition * uPresence);
+
+      // film grain
+      float brightness = dot(col, vec3(0.2126, 0.7152, 0.0722));
+      float grain = (ign(gl_FragCoord.xy) * 2.0 - 1.0) * 0.1 * 0.5;
+      col += grain * (1.0 - brightness);
+
+      outColor = vec4(col, 1.0);
+    }`;
+
+    function compile(type, src) {
+      const sh = gl.createShader(type);
+      gl.shaderSource(sh, src);
+      gl.compileShader(sh);
+      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+        console.error(gl.getShaderInfoLog(sh));
+        throw new Error("shader compile failed");
+      }
+      return sh;
+    }
+
+    const prog = gl.createProgram();
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      throw new Error(gl.getProgramInfoLog(prog));
+    }
+    gl.useProgram(prog);
+
+    const uniforms = {};
+    const n = gl.getProgramParameter(prog, gl.ACTIVE_UNIFORMS);
+    for (let i = 0; i < n; i++) {
+      const info = gl.getActiveUniform(prog, i);
+      uniforms[info.name] = gl.getUniformLocation(prog, info.name);
+    }
+
+    const quad = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(0);
+    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+    // ── layout / resize ──────────────────────────────────────
+    let cssW = 1, cssH = 1, dpr = 1;
+
+    function resize() {
+      const rect = stage.getBoundingClientRect();
+      cssW = Math.max(1, rect.width);
+      cssH = Math.max(1, rect.height);
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      stage.width = Math.round(cssW * dpr);
+      stage.height = Math.round(cssH * dpr);
+      gl.viewport(0, 0, stage.width, stage.height);
+      start();
+    }
+
+    // ── render loop ──────────────────────────────────────────
+    function render() {
+      gl.useProgram(prog);
+      gl.uniform2f(uniforms.uResolution, stage.width, stage.height);
+      gl.uniform1f(uniforms.uTime, performance.now() / 1000);
+      gl.uniform2f(uniforms.uLensCenter, posX, posY);
+      gl.uniform1f(uniforms.uLensRadius, opts.radius);
+      gl.uniform1f(uniforms.uRefraction, opts.refraction);
+      gl.uniform1f(uniforms.uThickness, opts.thickness);
+      gl.uniform1f(uniforms.uAberration, opts.aberration);
+      gl.uniform1f(uniforms.uEdgeSoftness, opts.edgeSoftness);
+      gl.uniform1f(uniforms.uHighlight, opts.highlight);
+      gl.uniform1f(uniforms.uHighlightSoftness, opts.highlightSoftness);
+      gl.uniform1f(uniforms.uLightAngle, opts.lightAngle);
+      gl.uniform1f(uniforms.uInnerZoom, opts.innerZoom);
+      gl.uniform1f(uniforms.uBlur, opts.blur);
+      gl.uniform1f(uniforms.uFresnel, opts.fresnel);
+      gl.uniform1f(uniforms.uSpread, opts.spread);
+      gl.uniform1f(uniforms.uPresence, presence);
+
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+
+    function frame(now) {
+      const dt = Math.min((now - lastT) / 1000, 1 / 30);
+      lastT = now;
+
+      const kPos = 1 - Math.exp(-dt * 8);
+      const kScale = 1 - Math.exp(-dt * 11);
+
+      posX += (targetX - posX) * kPos;
+      posY += (targetY - posY) * kPos;
+      presence += (presenceTarget - presence) * kScale;
+
+      render();
+
+      const settled =
+        Math.abs(targetX - posX) < 0.0005 &&
+        Math.abs(targetY - posY) < 0.0005 &&
+        Math.abs(presenceTarget - presence) < 0.002;
+
+      if (settled) {
+        posX = targetX;
+        posY = targetY;
+        presence = presenceTarget;
+        running = false;
+        return;
+      }
+      requestAnimationFrame(frame);
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      lastT = performance.now();
+      requestAnimationFrame(frame);
+    }
+
+    // ── events ───────────────────────────────────────────────
+    stage.addEventListener("pointermove", (e) => {
+      const rect = stage.getBoundingClientRect();
+      targetX = (e.clientX - rect.left) / rect.width;
+      targetY = (e.clientY - rect.top) / rect.height;
+      presenceTarget = 1;
+      start();
+    });
+
+    stage.addEventListener("pointerleave", () => {
+      presenceTarget = 0;
+      start();
+    });
+
+    window.addEventListener("resize", resize);
+
+    // ── UI bindings ──────────────────────────────────────────
+    function bindRange(id, key, fmt = (v) => String(v)) {
+      const el = document.getElementById(id);
+      const label = document.getElementById("v-" + id);
+      const sync = () => {
+        const v = parseFloat(el.value);
+        opts[key] = v;
+        label.textContent = fmt(v);
+        start();
+      };
+      el.addEventListener("input", sync);
+      sync();
+    }
+
+    bindRange("spread", "spread", (v) => v.toFixed(2));
+    bindRange("radius", "radius", (v) => v.toFixed(2));
+    bindRange("refraction", "refraction", (v) => v.toFixed(2));
+    bindRange("thickness", "thickness", (v) => v.toFixed(2));
+    bindRange("aberration", "aberration", (v) => v.toFixed(2));
+    bindRange("edgeSoftness", "edgeSoftness", (v) => v.toFixed(2));
+    bindRange("highlight", "highlight", (v) => v.toFixed(2));
+    bindRange("highlightSoftness", "highlightSoftness", (v) => v.toFixed(2));
+    bindRange("lightAngle", "lightAngle", (v) => String(Math.round(v)));
+    bindRange("innerZoom", "innerZoom", (v) => v.toFixed(2));
+    bindRange("blur", "blur", (v) => v.toFixed(1));
+    bindRange("fresnel", "fresnel", (v) => v.toFixed(2));
+
+    function setOpts(next) {
+      Object.assign(opts, next);
+      for (const [id, key] of [
+        ["spread", "spread"], ["radius", "radius"], ["refraction", "refraction"],
+        ["thickness", "thickness"], ["aberration", "aberration"],
+        ["edgeSoftness", "edgeSoftness"], ["highlight", "highlight"],
+        ["highlightSoftness", "highlightSoftness"], ["lightAngle", "lightAngle"],
+        ["innerZoom", "innerZoom"], ["blur", "blur"], ["fresnel", "fresnel"],
+      ]) {
+        const el = document.getElementById(id);
+        if (el && opts[key] != null) {
+          el.value = opts[key];
+          el.dispatchEvent(new Event("input"));
+        }
+      }
+      start();
+    }
+
+    document.getElementById("preset-default").onclick = () => setOpts({
+      spread: 0.7, radius: 0.33, refraction: 2.0, thickness: 1.0,
+      aberration: 1.0, edgeSoftness: 0.3, highlight: 0.15,
+      highlightSoftness: 0.1, lightAngle: 205, innerZoom: 0.85,
+      blur: 0, fresnel: 0,
+    });
+    document.getElementById("preset-prism").onclick = () => setOpts({
+      spread: 1.4, radius: 0.38, refraction: 3.2, thickness: 1.5,
+      aberration: 1.8, edgeSoftness: 0.25, highlight: 0.35,
+      highlightSoftness: 0.06, lightAngle: 220, innerZoom: 0.9,
+      blur: 0, fresnel: 0.4,
+    });
+    document.getElementById("preset-soft").onclick = () => setOpts({
+      spread: 0.5, radius: 0.3, refraction: 1.2, thickness: 0.8,
+      aberration: 0.5, edgeSoftness: 0.55, highlight: 0.08,
+      highlightSoftness: 0.3, lightAngle: 190, innerZoom: 0.95,
+      blur: 3, fresnel: 0.2,
+    });
+    document.getElementById("preset-clear").onclick = () => setOpts({
+      spread: 0.9, radius: 0.35, refraction: 2.4, thickness: 1.2,
+      aberration: 0.3, edgeSoftness: 0.2, highlight: 0.2,
+      highlightSoftness: 0.15, lightAngle: 205, innerZoom: 0.8,
+      blur: 0, fresnel: 0,
+    });
+
+    // boot
+    resize();
+    presenceTarget = 1;
+    presence = 1;
+    start();
+  </script>
+</body>
+</html>

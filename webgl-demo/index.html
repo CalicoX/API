@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js 交互场景</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #0a0a0f;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      }
+
+      #canvas-container {
+        width: 100%;
+        height: 100%;
+      }
+
+      canvas {
+        display: block;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      .title {
+        padding: 40px 48px;
+        color: #fff;
+      }
+
+      .title h1 {
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        opacity: 0.95;
+      }
+
+      .title p {
+        margin-top: 8px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.45);
+        letter-spacing: 0.03em;
+      }
+
+      .hint {
+        position: fixed;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.35);
+        letter-spacing: 0.08em;
+        pointer-events: none;
+        z-index: 10;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay">
+      <div class="title">
+        <h1>Three.js Interactive Scene</h1>
+        <p>移动鼠标 · 点击切换配色 · 滚轮缩放</p>
+      </div>
+    </div>
+    <div class="hint">DRAG TO ROTATE — SCROLL TO ZOOM — CLICK TO CHANGE COLOR</div>
+    <div id="canvas-container"></div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "../node_modules/three/build/three.module.js",
+          "three/addons/": "../node_modules/three/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
