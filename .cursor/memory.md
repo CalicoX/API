@@ -24,7 +24,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 未完成
 
-- Tracking data：官方 9 态图标 + 中间 logo 发光、轨道圈已淡化。Park 再看。
+- 2026-08-14 先停在这里。
+- Tracking data：中间 logo 发光、轨道圈已淡。Park 再看。
 - 承运商卡已改成从上往下散开。Visibility / Dashboard 还没按同一轮重做。
 
 ## 日志
