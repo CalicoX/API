@@ -3418,7 +3418,7 @@
   display: grid;
   place-items: center;
   border: none;
-  border-radius: 10px;
+  border-radius: 6px;
   color: #fff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
   transform: translate(-50%, -50%);
@@ -3427,29 +3427,30 @@
 .api-s4-orbit-ring--inner .api-s4-orbit-chip.is-icon {
   width: 32px;
   height: 32px;
-  border-radius: 9px;
+  border-radius: 6px;
 }
 
-.api-s4-orbit-chip.is-icon svg {
+.api-s4-orbit-chip.is-icon img {
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }
 
-.api-s4-orbit-ring--inner .api-s4-orbit-chip.is-icon svg {
-  width: 16px;
-  height: 16px;
+.api-s4-orbit-ring--inner .api-s4-orbit-chip.is-icon img {
+  width: 19px;
+  height: 19px;
 }
 
-.api-s4-orbit-chip.is-icon[data-icon="info"] { background: #3b82f6; }
-.api-s4-orbit-chip.is-icon[data-icon="transit"] { background: #6366f1; }
-.api-s4-orbit-chip.is-icon[data-icon="pickup"] { background: #f59e0b; }
-.api-s4-orbit-chip.is-icon[data-icon="out"] { background: #06b6d4; }
-.api-s4-orbit-chip.is-icon[data-icon="done"] { background: #22c55e; }
-.api-s4-orbit-chip.is-icon[data-icon="fail"] { background: #fb7185; }
-.api-s4-orbit-chip.is-icon[data-icon="alert"] { background: #f97316; }
-.api-s4-orbit-chip.is-icon[data-icon="expired"] { background: #94a3b8; }
-.api-s4-orbit-chip.is-icon[data-icon="missing"] { background: #ef4444; }
+.api-s4-orbit-chip.is-icon[data-icon="info"] { background: #00bcd4; }
+.api-s4-orbit-chip.is-icon[data-icon="transit"] { background: #2196f3; }
+.api-s4-orbit-chip.is-icon[data-icon="out"] { background: #2962ff; }
+.api-s4-orbit-chip.is-icon[data-icon="pickup"] { background: #0d47a1; }
+.api-s4-orbit-chip.is-icon[data-icon="alert"] { background: #ff6f00; }
+.api-s4-orbit-chip.is-icon[data-icon="done"] { background: #43a047; }
+.api-s4-orbit-chip.is-icon[data-icon="expired"] { background: #b71c1c; }
+.api-s4-orbit-chip.is-icon[data-icon="fail"] { background: #f44336; }
+.api-s4-orbit-chip.is-icon[data-icon="missing"] { background: #757575; }
 
 .api-s4-card:hover .api-s4-orbit-ring {
   animation-play-state: running;
@@ -3478,10 +3479,15 @@
   width: var(--logo);
   height: var(--logo);
   position: relative;
-  border-radius: 14px;
-  overflow: hidden;
-  background: #1b57e0;
-  box-shadow: 0 4px 12px rgba(15, 40, 120, 0.16);
+  overflow: visible;
+  background: transparent;
+  filter: drop-shadow(0 4px 12px rgba(15, 40, 120, 0.16));
+}
+
+.api-s4-logo-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
 }
 
 .api-s4-logo img {
@@ -3489,6 +3495,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  background: #1b57e0;
+  border-radius: 32%;
+  corner-shape: superellipse(2);
+  clip-path: url(#api-s4-logo-squircle);
 }
 
 @keyframes api-s4-orbit-cw {

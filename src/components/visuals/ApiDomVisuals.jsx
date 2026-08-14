@@ -65,74 +65,19 @@ export function UseCasesStage() {
 }
 
 const S4_MAINS_OUTER = [
-  { label: "Info Received", on: true, icon: "info" },
-  { label: "In Transit", on: true, icon: "transit" },
-  { label: "Pick Up", on: false, icon: "pickup" },
-  { label: "Out For Delivery", on: false, icon: "out" },
-  { label: "Delivered", on: false, icon: "done" },
+  { label: "Info Received", on: true, icon: "info", src: "/assets/status/info-received.svg" },
+  { label: "In Transit", on: true, icon: "transit", src: "/assets/status/in-transit.svg" },
+  { label: "Out For Delivery", on: false, icon: "out", src: "/assets/status/out-for-delivery.svg" },
+  { label: "Pick Up", on: false, icon: "pickup", src: "/assets/status/pickup.svg" },
+  { label: "Delivered", on: false, icon: "done", src: "/assets/status/delivered.svg" },
 ];
 
 const S4_MAINS_INNER = [
-  { label: "Undelivered", on: false, icon: "fail" },
-  { label: "Alert", on: false, icon: "alert" },
-  { label: "Expired", on: false, icon: "expired" },
-  { label: "Not Found", on: false, icon: "missing" },
+  { label: "Alert", on: false, icon: "alert", src: "/assets/status/alert.svg" },
+  { label: "Expired", on: false, icon: "expired", src: "/assets/status/expired.svg" },
+  { label: "Undelivered", on: false, icon: "fail", src: "/assets/status/undelivered.svg" },
+  { label: "Not Found", on: false, icon: "missing", src: "/assets/status/not-found.svg" },
 ];
-
-function StatusGlyph({ name }) {
-  return (
-    <svg viewBox="0 0 16 16" aria-hidden="true">
-      {name === "info" && (
-        <path
-          fill="currentColor"
-          d="M4.2 2.4h7.6A1.4 1.4 0 0 1 13.2 3.8v8.4A1.4 1.4 0 0 1 11.8 13.6H4.2A1.4 1.4 0 0 1 2.8 12.2V3.8A1.4 1.4 0 0 1 4.2 2.4zm1.2 2.2v1.2h5.2V4.6zm0 2.4v1.2h5.2V7zm0 2.4V10.6h3.4V9.4z"
-        />
-      )}
-      {name === "transit" && (
-        <path fill="currentColor" d="M2 9.2 14 4.6l-3.2 7.2-2.4-2.2-2.2 1.6.6-2.8L2 9.2z" />
-      )}
-      {name === "pickup" && (
-        <path
-          fill="currentColor"
-          d="M3 7.2 8 4.4l5 2.8v4.4L8 14.4 3 11.6V7.2zm5 1.6 3.2-1.8L8 5.2 4.8 7 8 8.8z"
-        />
-      )}
-      {name === "out" && (
-        <path
-          fill="currentColor"
-          d="M2.4 6.2h7.2v5.2H2.4zm7.2 1.4h2.2l1.8 1.8v2H9.6zM4.2 12.4a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zm7.2 0a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"
-        />
-      )}
-      {name === "done" && (
-        <path fill="currentColor" d="M6.4 11.4 3.2 8.2l1.2-1.2 2 2 5.2-5.2 1.2 1.2z" />
-      )}
-      {name === "fail" && (
-        <path
-          fill="currentColor"
-          d="M8 2.2A5.8 5.8 0 1 0 13.8 8 5.8 5.8 0 0 0 8 2.2zM5.6 6.1 6.7 5l1.3 1.3L9.3 5l1.1 1.1-1.3 1.3 1.3 1.3-1.1 1.1-1.3-1.3-1.3 1.3L5.6 8.8l1.3-1.3z"
-        />
-      )}
-      {name === "alert" && (
-        <path
-          fill="currentColor"
-          d="M8 2.6 14 13.4H2L8 2.6zm0 3.4-.7 4h1.4L8 6zm0 5.2a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6z"
-        />
-      )}
-      {name === "expired" && (
-        <path
-          fill="currentColor"
-          d="M8 2.2A5.8 5.8 0 1 0 13.8 8 5.8 5.8 0 0 0 8 2.2zM8.7 8V5.1H7.3V9.2h3.6V8z"
-        />
-      )}
-      {name === "missing" && (
-        <path
-          fill="currentColor"
-          d="M7.2 3.2a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 1.4a2.6 2.6 0 1 0 0 5.2 2.6 2.6 0 0 0 0-5.2zm4.1 5.3 2.9 2.9-1 1-2.9-2.9z"
-        />
-      )}
-    </svg>
-  );
-}
 
 const S4_HUB_LEFT = [
   ["/assets/carriers/dhl.svg", "DHL"],
@@ -168,7 +113,7 @@ function StatusOrbitRing({ items, tone }) {
             className={`api-s4-orbit-chip is-icon${item.on ? " is-on" : ""}`}
             data-icon={item.icon}
           >
-            <StatusGlyph name={item.icon} />
+            <img src={item.src} alt="" />
           </span>
         </li>
       ))}
@@ -186,6 +131,11 @@ export function DataStatusStage() {
         <StatusOrbitRing items={S4_MAINS_INNER} tone="inner" />
         <div className="api-s4-orbit-core">
           <div className="api-s4-logo">
+            <svg className="api-s4-logo-defs" width="0" height="0" aria-hidden="true">
+              <clipPath id="api-s4-logo-squircle" clipPathUnits="objectBoundingBox">
+                <path d="M0.6456,0.0034Q0.7912,0.0069 0.8351,0.0174Q0.8789,0.0280 0.9071,0.0463Q0.9353,0.0647 0.9537,0.0929Q0.9720,0.1211 0.9826,0.1649Q0.9931,0.2088 0.9966,0.3544Q1.0000,0.5000 0.9966,0.6456Q0.9931,0.7912 0.9826,0.8351Q0.9720,0.8789 0.9537,0.9071Q0.9353,0.9353 0.9071,0.9537Q0.8789,0.9720 0.8351,0.9826Q0.7912,0.9931 0.6456,0.9966Q0.5000,1.0000 0.3544,0.9966Q0.2088,0.9931 0.1649,0.9826Q0.1211,0.9720 0.0929,0.9537Q0.0647,0.9353 0.0463,0.9071Q0.0280,0.8789 0.0174,0.8351Q0.0069,0.7912 0.0034,0.6456Q0.0000,0.5000 0.0034,0.3544Q0.0069,0.2088 0.0174,0.1649Q0.0280,0.1211 0.0463,0.0929Q0.0647,0.0647 0.0929,0.0463Q0.1211,0.0280 0.1649,0.0174Q0.2088,0.0069 0.3544,0.0034Q0.5000,0.0000 0.6456,0.0034Z" />
+              </clipPath>
+            </svg>
             <img src="/assets/logo-17-mark.png" alt="" />
           </div>
         </div>
