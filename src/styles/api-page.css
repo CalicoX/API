@@ -3330,14 +3330,21 @@
   padding: 0;
 }
 
+@property --orbit {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
 .api-s4-orbit {
-  --logo: 52px;
-  --r-out: 138px;
-  --r-in: 88px;
+  --logo: 64px;
+  --r-out: 168px;
+  --r-in: 108px;
   --spin-out: 38s;
   --spin-in: 28s;
+  --orbit: 0deg;
   position: relative;
-  width: min(100%, 360px);
+  width: min(100%, 420px);
   aspect-ratio: 1;
   margin: 0 auto;
 }
@@ -3368,24 +3375,29 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  --orbit-base: 0deg;
   animation: api-s4-orbit-cw var(--spin-out) linear infinite;
   animation-play-state: paused;
 }
 
 .api-s4-orbit-ring--inner {
+  --orbit-base: 36deg;
   animation-name: api-s4-orbit-ccw;
   animation-duration: var(--spin-in);
-  transform: rotate(22deg);
 }
 
 .api-s4-orbit-ring li {
   --a: calc(var(--i) * 360deg / var(--n));
+  --turn: calc(var(--a) + var(--orbit-base) + var(--orbit));
   position: absolute;
   left: 50%;
   top: 50%;
   width: 0;
   height: 0;
-  transform: rotate(var(--a)) translateY(calc(var(--r) * -1));
+  transform:
+    rotate(var(--turn))
+    translateY(calc(var(--r) * -1))
+    rotate(calc(var(--turn) * -1));
 }
 
 .api-s4-orbit-ring--outer li {
@@ -3396,45 +3408,37 @@
   --r: var(--r-in);
 }
 
-.api-s4-orbit-fix {
-  display: block;
-  animation: api-s4-orbit-unspin-cw var(--spin-out) linear infinite;
-  animation-play-state: paused;
-}
-
-.api-s4-orbit-ring--inner .api-s4-orbit-fix {
-  animation-name: api-s4-orbit-unspin-ccw;
-  animation-duration: var(--spin-in);
-}
-
 .api-s4-orbit-chip.is-icon {
-  width: 28px;
-  height: 28px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
   padding: 0;
   display: grid;
   place-items: center;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #fff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
-  transform: translate(-50%, -50%) rotate(calc(var(--a) * -1));
+  transform: translate(-50%, -50%);
 }
 
 .api-s4-orbit-ring--inner .api-s4-orbit-chip.is-icon {
-  width: 24px;
-  height: 24px;
-  border-radius: 7px;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
 }
 
 .api-s4-orbit-chip.is-icon svg {
   display: block;
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
 }
 
 .api-s4-orbit-ring--inner .api-s4-orbit-chip.is-icon svg {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
 }
 
 .api-s4-orbit-chip.is-icon[data-icon="info"] { background: #3b82f6; }
@@ -3447,8 +3451,7 @@
 .api-s4-orbit-chip.is-icon[data-icon="expired"] { background: #94a3b8; }
 .api-s4-orbit-chip.is-icon[data-icon="missing"] { background: #ef4444; }
 
-.api-s4-card:hover .api-s4-orbit-ring,
-.api-s4-card:hover .api-s4-orbit-fix {
+.api-s4-card:hover .api-s4-orbit-ring {
   animation-play-state: running;
 }
 
@@ -3464,8 +3467,8 @@
 .api-s4-orbit-core::before {
   content: "";
   position: absolute;
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(59, 130, 246, 0.22) 0%, rgba(249, 115, 22, 0.08) 42%, transparent 70%);
   filter: blur(8px);
@@ -3475,7 +3478,7 @@
   width: var(--logo);
   height: var(--logo);
   position: relative;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
   background: #1b57e0;
   box-shadow: 0 4px 12px rgba(15, 40, 120, 0.16);
@@ -3490,28 +3493,13 @@
 
 @keyframes api-s4-orbit-cw {
   to {
-    transform: rotate(360deg);
+    --orbit: 360deg;
   }
 }
 
 @keyframes api-s4-orbit-ccw {
-  from {
-    transform: rotate(22deg);
-  }
   to {
-    transform: rotate(-338deg);
-  }
-}
-
-@keyframes api-s4-orbit-unspin-cw {
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
-@keyframes api-s4-orbit-unspin-ccw {
-  to {
-    transform: rotate(360deg);
+    --orbit: -360deg;
   }
 }
 
@@ -3921,9 +3909,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .api-s4-orbit-ring,
-  .api-s4-orbit-fix,
-  .api-s4-card:hover .api-s4-orbit-ring,
-  .api-s4-card:hover .api-s4-orbit-fix {
+  .api-s4-card:hover .api-s4-orbit-ring {
     animation: none;
   }
 

@@ -164,13 +164,11 @@ function StatusOrbitRing({ items, tone }) {
     <ul className={`api-s4-orbit-ring api-s4-orbit-ring--${tone}`} style={{ "--n": items.length }}>
       {items.map((item, i) => (
         <li key={item.label} style={{ "--i": i }}>
-          <span className="api-s4-orbit-fix">
-            <span
-              className={`api-s4-orbit-chip is-icon${item.on ? " is-on" : ""}`}
-              data-icon={item.icon}
-            >
-              <StatusGlyph name={item.icon} />
-            </span>
+          <span
+            className={`api-s4-orbit-chip is-icon${item.on ? " is-on" : ""}`}
+            data-icon={item.icon}
+          >
+            <StatusGlyph name={item.icon} />
           </span>
         </li>
       ))}
