@@ -4,8 +4,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 现在
 
-- 仓库：https://github.com/CalicoX/API.git
-- 这个 worktree（`cursor/f4a7f5aa`）专门做插图，**不要合并进 main**。
+- 仓库：https://github.com/CalicoX/API.git（`main`）
 - 本地开发：`http://127.0.0.1:5173/`
 - 用户：Park，设计师，直接改代码迭代
 - 产品：17TRACK Tracking API 落地页
@@ -25,8 +24,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 未完成
 
-- Tracking data 双环刚换上，Park 要看疏密、转速、logo 立体/光效强弱。
-- 其余三张 Data Operations 插图还没在这个 worktree 里重做。
+- Tracking data 双环已上 main；Park 若要再调疏密、转速、logo 立体/光效，直接在 main 改。
+- 其余三张 Data Operations 插图还没按同一轮重做。
 
 ## 日志
 
