@@ -15,7 +15,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 内容区 1440px，注意 wrap 的 24px padding；不要负 margin 撑出外壳。
 - How-it-works 三张卡：白卡 20px 圆角、8px 内边距；插图井浅灰点阵、overflow hidden。
 - Data Operations 四张卡插图要各不相同，不能都顶满井。
-- Tracking data 卡：双环 status（外 9 主状态 / 内 exception 子状态），hover 整卡触发、内外反向慢转；中间正方形 17TRACK logo（`public/assets/logo-17-mark.png`），轻微 CSS 3D 挤出 + 扫光，不是状态表单。
+- Tracking data 卡：单环只绕 9 个大状态；选中态是彩色图标，未选中仍是文字 pill。中间 17TRACK 方标要小、平面（无厚度/挤出/扫光），约 52px。
 - 承运商卡用连线枢纽；报表卡用环形图动画。
 - 标题单词亮度跟滚动走（`--on`），不是进场自动播。
 - 右侧渐隐遮罩跟 `--s4-p`，最后一张收掉。
@@ -24,11 +24,12 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 未完成
 
-- Tracking data 双环已上 main；Park 若要再调疏密、转速、logo 立体/光效，直接在 main 改。
+- Tracking data：logo 已缩小并去厚度；内环子状态已去掉；选中大状态改图标。Park 再看疏密。
 - 其余三张 Data Operations 插图还没按同一轮重做。
 
 ## 日志
 
+- 2026-08-14 14:45 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-14 11:31 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css、logo-17-mark.png
 - 2026-08-14 10:38 — memory.md
 - 2026-08-14 10:38 — .gitignore、.cursor、AGENTS.md

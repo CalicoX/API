@@ -3331,13 +3331,11 @@
 }
 
 .api-s4-orbit {
-  --logo: 92px;
-  --r-out: 154px;
-  --r-in: 100px;
+  --logo: 52px;
+  --r-out: 132px;
   --spin-out: 38s;
-  --spin-in: 28s;
   position: relative;
-  width: min(100%, 400px);
+  width: min(100%, 360px);
   aspect-ratio: 1;
   margin: 0 auto;
 }
@@ -3346,20 +3344,12 @@
   position: absolute;
   left: 50%;
   top: 50%;
+  width: calc(var(--r-out) * 2);
+  height: calc(var(--r-out) * 2);
   border: 1.5px solid rgba(148, 163, 184, 0.45);
   border-radius: 50%;
   pointer-events: none;
   translate: -50% -50%;
-}
-
-.api-s4-orbit-track--outer {
-  width: calc(var(--r-out) * 2);
-  height: calc(var(--r-out) * 2);
-}
-
-.api-s4-orbit-track--inner {
-  width: calc(var(--r-in) * 2);
-  height: calc(var(--r-in) * 2);
 }
 
 .api-s4-orbit-ring {
@@ -3372,14 +3362,9 @@
   animation-play-state: paused;
 }
 
-.api-s4-orbit-ring--inner {
-  animation-name: api-s4-orbit-ccw;
-  animation-duration: var(--spin-in);
-  transform: rotate(30deg);
-}
-
 .api-s4-orbit-ring li {
   --a: calc(var(--i) * 360deg / var(--n));
+  --r: var(--r-out);
   position: absolute;
   left: 50%;
   top: 50%;
@@ -3388,23 +3373,10 @@
   transform: rotate(var(--a)) translateY(calc(var(--r) * -1));
 }
 
-.api-s4-orbit-ring--outer li {
-  --r: var(--r-out);
-}
-
-.api-s4-orbit-ring--inner li {
-  --r: var(--r-in);
-}
-
 .api-s4-orbit-fix {
   display: block;
   animation: api-s4-orbit-unspin-cw var(--spin-out) linear infinite;
   animation-play-state: paused;
-}
-
-.api-s4-orbit-ring--inner .api-s4-orbit-fix {
-  animation-name: api-s4-orbit-unspin-ccw;
-  animation-duration: var(--spin-in);
 }
 
 .api-s4-orbit-chip {
@@ -3423,19 +3395,33 @@
   transform: translate(-50%, -50%) rotate(calc(var(--a) * -1));
 }
 
-.api-s4-orbit-ring--inner .api-s4-orbit-chip {
-  padding: 3px 7px;
-  font-size: 8px;
-  font-weight: 500;
-  color: #64748b;
-  background: #f8fafc;
+.api-s4-orbit-chip.is-icon {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
 }
 
-.api-s4-orbit-chip.is-on {
-  color: #1d4ed8;
-  border-color: rgba(37, 99, 235, 0.32);
-  background: #eff6ff;
+.api-s4-orbit-chip.is-icon svg {
+  display: block;
+  width: 14px;
+  height: 14px;
 }
+
+.api-s4-orbit-chip.is-icon[data-icon="info"] { background: #3b82f6; }
+.api-s4-orbit-chip.is-icon[data-icon="transit"] { background: #6366f1; }
+.api-s4-orbit-chip.is-icon[data-icon="pickup"] { background: #f59e0b; }
+.api-s4-orbit-chip.is-icon[data-icon="out"] { background: #06b6d4; }
+.api-s4-orbit-chip.is-icon[data-icon="done"] { background: #22c55e; }
+.api-s4-orbit-chip.is-icon[data-icon="fail"] { background: #fb7185; }
+.api-s4-orbit-chip.is-icon[data-icon="alert"] { background: #f97316; }
+.api-s4-orbit-chip.is-icon[data-icon="expired"] { background: #94a3b8; }
+.api-s4-orbit-chip.is-icon[data-icon="missing"] { background: #ef4444; }
 
 .api-s4-card:hover .api-s4-orbit-ring,
 .api-s4-card:hover .api-s4-orbit-fix {
@@ -3454,50 +3440,21 @@
 .api-s4-orbit-core::before {
   content: "";
   position: absolute;
-  width: 168px;
-  height: 168px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.38) 0%, rgba(249, 115, 22, 0.12) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.22) 0%, rgba(249, 115, 22, 0.08) 42%, transparent 70%);
   filter: blur(8px);
-}
-
-.api-s4-card:hover .api-s4-orbit-core::before {
-  background: radial-gradient(circle, rgba(96, 165, 250, 0.5) 0%, rgba(249, 115, 22, 0.18) 44%, transparent 72%);
 }
 
 .api-s4-logo {
   width: var(--logo);
   height: var(--logo);
   position: relative;
-  border-radius: 18px;
+  border-radius: 12px;
   overflow: hidden;
   background: #1b57e0;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -14px 20px rgba(8, 28, 96, 0.32),
-    1px 1px 0 #1e4fd6,
-    2px 2px 0 #1a46c4,
-    3px 3px 0 #163db2,
-    4px 4px 0 #1334a0,
-    5px 5px 0 #102b8e,
-    6px 7px 0 #0c2278,
-    10px 16px 28px rgba(15, 40, 120, 0.34);
-  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.api-s4-card:hover .api-s4-logo {
-  transform: translate(-1px, -2px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -14px 20px rgba(8, 28, 96, 0.28),
-    1px 1px 0 #1e4fd6,
-    2px 2px 0 #1a46c4,
-    3px 3px 0 #163db2,
-    4px 4px 0 #1334a0,
-    5px 5px 0 #102b8e,
-    6px 6px 0 #0e2684,
-    7px 8px 0 #0c2278,
-    12px 20px 32px rgba(15, 40, 120, 0.38);
+  box-shadow: 0 4px 12px rgba(15, 40, 120, 0.16);
 }
 
 .api-s4-logo img {
@@ -3507,72 +3464,15 @@
   object-fit: cover;
 }
 
-.api-s4-logo-bevel {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.38) 0%, transparent 42%),
-    radial-gradient(120% 80% at 18% 12%, rgba(255, 255, 255, 0.32), transparent 46%);
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-
-.api-s4-logo-shine {
-  position: absolute;
-  inset: -30%;
-  background: linear-gradient(
-    118deg,
-    transparent 36%,
-    rgba(255, 255, 255, 0.08) 44%,
-    rgba(255, 255, 255, 0.55) 50%,
-    rgba(255, 255, 255, 0.08) 56%,
-    transparent 66%
-  );
-  transform: translateX(-70%);
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-
-.api-s4-card:hover .api-s4-logo-shine {
-  animation: api-s4-logo-shine 2.8s ease-in-out infinite;
-}
-
 @keyframes api-s4-orbit-cw {
   to {
     transform: rotate(360deg);
   }
 }
 
-@keyframes api-s4-orbit-ccw {
-  from {
-    transform: rotate(30deg);
-  }
-  to {
-    transform: rotate(-330deg);
-  }
-}
-
 @keyframes api-s4-orbit-unspin-cw {
   to {
     transform: rotate(-360deg);
-  }
-}
-
-@keyframes api-s4-orbit-unspin-ccw {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes api-s4-logo-shine {
-  0%,
-  18% {
-    transform: translateX(-70%);
-  }
-  58%,
-  100% {
-    transform: translateX(70%);
   }
 }
 
@@ -3984,8 +3884,7 @@
   .api-s4-orbit-ring,
   .api-s4-orbit-fix,
   .api-s4-card:hover .api-s4-orbit-ring,
-  .api-s4-card:hover .api-s4-orbit-fix,
-  .api-s4-card:hover .api-s4-logo-shine {
+  .api-s4-card:hover .api-s4-orbit-fix {
     animation: none;
   }
 

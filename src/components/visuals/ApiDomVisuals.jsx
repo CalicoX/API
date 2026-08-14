@@ -65,25 +65,71 @@ export function UseCasesStage() {
 }
 
 const S4_MAINS = [
-  { label: "Info Received", on: true },
-  { label: "In Transit", on: true },
-  { label: "Pick Up", on: false },
-  { label: "Out For Delivery", on: false },
-  { label: "Delivered", on: false },
-  { label: "Undelivered", on: false },
-  { label: "Alert", on: false },
-  { label: "Expired", on: false },
-  { label: "Not Found", on: false },
+  { label: "Info Received", on: true, icon: "info" },
+  { label: "In Transit", on: true, icon: "transit" },
+  { label: "Pick Up", on: false, icon: "pickup" },
+  { label: "Out For Delivery", on: false, icon: "out" },
+  { label: "Delivered", on: false, icon: "done" },
+  { label: "Undelivered", on: false, icon: "fail" },
+  { label: "Alert", on: false, icon: "alert" },
+  { label: "Expired", on: false, icon: "expired" },
+  { label: "Not Found", on: false, icon: "missing" },
 ];
 
-const S4_SUBS = [
-  { label: "Address issue" },
-  { label: "Not available" },
-  { label: "Refused" },
-  { label: "Customs hold" },
-  { label: "Damaged" },
-  { label: "Returned" },
-];
+function StatusGlyph({ name }) {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      {name === "info" && (
+        <path
+          fill="currentColor"
+          d="M4.2 2.4h7.6A1.4 1.4 0 0 1 13.2 3.8v8.4A1.4 1.4 0 0 1 11.8 13.6H4.2A1.4 1.4 0 0 1 2.8 12.2V3.8A1.4 1.4 0 0 1 4.2 2.4zm1.2 2.2v1.2h5.2V4.6zm0 2.4v1.2h5.2V7zm0 2.4V10.6h3.4V9.4z"
+        />
+      )}
+      {name === "transit" && (
+        <path fill="currentColor" d="M2 9.2 14 4.6l-3.2 7.2-2.4-2.2-2.2 1.6.6-2.8L2 9.2z" />
+      )}
+      {name === "pickup" && (
+        <path
+          fill="currentColor"
+          d="M3 7.2 8 4.4l5 2.8v4.4L8 14.4 3 11.6V7.2zm5 1.6 3.2-1.8L8 5.2 4.8 7 8 8.8z"
+        />
+      )}
+      {name === "out" && (
+        <path
+          fill="currentColor"
+          d="M2.4 6.2h7.2v5.2H2.4zm7.2 1.4h2.2l1.8 1.8v2H9.6zM4.2 12.4a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zm7.2 0a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"
+        />
+      )}
+      {name === "done" && (
+        <path fill="currentColor" d="M6.4 11.4 3.2 8.2l1.2-1.2 2 2 5.2-5.2 1.2 1.2z" />
+      )}
+      {name === "fail" && (
+        <path
+          fill="currentColor"
+          d="M8 2.2A5.8 5.8 0 1 0 13.8 8 5.8 5.8 0 0 0 8 2.2zM5.6 6.1 6.7 5l1.3 1.3L9.3 5l1.1 1.1-1.3 1.3 1.3 1.3-1.1 1.1-1.3-1.3-1.3 1.3L5.6 8.8l1.3-1.3z"
+        />
+      )}
+      {name === "alert" && (
+        <path
+          fill="currentColor"
+          d="M8 2.6 14 13.4H2L8 2.6zm0 3.4-.7 4h1.4L8 6zm0 5.2a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6z"
+        />
+      )}
+      {name === "expired" && (
+        <path
+          fill="currentColor"
+          d="M8 2.2A5.8 5.8 0 1 0 13.8 8 5.8 5.8 0 0 0 8 2.2zM8.7 8V5.1H7.3V9.2h3.6V8z"
+        />
+      )}
+      {name === "missing" && (
+        <path
+          fill="currentColor"
+          d="M7.2 3.2a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 1.4a2.6 2.6 0 1 0 0 5.2 2.6 2.6 0 0 0 0-5.2zm4.1 5.3 2.9 2.9-1 1-2.9-2.9z"
+        />
+      )}
+    </svg>
+  );
+}
 
 const S4_HUB_LEFT = [
   ["/assets/carriers/dhl.svg", "DHL"],
@@ -110,13 +156,18 @@ const S4_ARCS = [
   [0.05, "#06b6d4", "Out For Delivery"],
 ];
 
-function StatusOrbitRing({ items, tone }) {
+function StatusOrbitRing({ items }) {
   return (
-    <ul className={`api-s4-orbit-ring api-s4-orbit-ring--${tone}`} style={{ "--n": items.length }}>
+    <ul className="api-s4-orbit-ring" style={{ "--n": items.length }}>
       {items.map((item, i) => (
         <li key={item.label} style={{ "--i": i }}>
           <span className="api-s4-orbit-fix">
-            <span className={`api-s4-orbit-chip${item.on ? " is-on" : ""}`}>{item.label}</span>
+            <span
+              className={`api-s4-orbit-chip${item.on ? " is-on is-icon" : ""}`}
+              data-icon={item.icon}
+            >
+              {item.on ? <StatusGlyph name={item.icon} /> : item.label}
+            </span>
           </span>
         </li>
       ))}
@@ -128,15 +179,11 @@ export function DataStatusStage() {
   return (
     <div className="api-s4-vig api-s4-vig--status" aria-hidden="true">
       <div className="api-s4-orbit">
-        <span className="api-s4-orbit-track api-s4-orbit-track--outer" />
-        <span className="api-s4-orbit-track api-s4-orbit-track--inner" />
-        <StatusOrbitRing items={S4_MAINS} tone="outer" />
-        <StatusOrbitRing items={S4_SUBS} tone="inner" />
+        <span className="api-s4-orbit-track" />
+        <StatusOrbitRing items={S4_MAINS} />
         <div className="api-s4-orbit-core">
           <div className="api-s4-logo">
             <img src="/assets/logo-17-mark.png" alt="" />
-            <i className="api-s4-logo-bevel" />
-            <i className="api-s4-logo-shine" />
           </div>
         </div>
       </div>
