@@ -3332,8 +3332,10 @@
 
 .api-s4-orbit {
   --logo: 52px;
-  --r-out: 132px;
+  --r-out: 138px;
+  --r-in: 88px;
   --spin-out: 38s;
+  --spin-in: 28s;
   position: relative;
   width: min(100%, 360px);
   aspect-ratio: 1;
@@ -3344,12 +3346,20 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: calc(var(--r-out) * 2);
-  height: calc(var(--r-out) * 2);
   border: 1.5px solid rgba(148, 163, 184, 0.45);
   border-radius: 50%;
   pointer-events: none;
   translate: -50% -50%;
+}
+
+.api-s4-orbit-track--outer {
+  width: calc(var(--r-out) * 2);
+  height: calc(var(--r-out) * 2);
+}
+
+.api-s4-orbit-track--inner {
+  width: calc(var(--r-in) * 2);
+  height: calc(var(--r-in) * 2);
 }
 
 .api-s4-orbit-ring {
@@ -3362,9 +3372,14 @@
   animation-play-state: paused;
 }
 
+.api-s4-orbit-ring--inner {
+  animation-name: api-s4-orbit-ccw;
+  animation-duration: var(--spin-in);
+  transform: rotate(22deg);
+}
+
 .api-s4-orbit-ring li {
   --a: calc(var(--i) * 360deg / var(--n));
-  --r: var(--r-out);
   position: absolute;
   left: 50%;
   top: 50%;
@@ -3373,26 +3388,23 @@
   transform: rotate(var(--a)) translateY(calc(var(--r) * -1));
 }
 
+.api-s4-orbit-ring--outer li {
+  --r: var(--r-out);
+}
+
+.api-s4-orbit-ring--inner li {
+  --r: var(--r-in);
+}
+
 .api-s4-orbit-fix {
   display: block;
   animation: api-s4-orbit-unspin-cw var(--spin-out) linear infinite;
   animation-play-state: paused;
 }
 
-.api-s4-orbit-chip {
-  display: block;
-  width: max-content;
-  padding: 4px 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: #fff;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #475569;
-  white-space: nowrap;
-  transform: translate(-50%, -50%) rotate(calc(var(--a) * -1));
+.api-s4-orbit-ring--inner .api-s4-orbit-fix {
+  animation-name: api-s4-orbit-unspin-ccw;
+  animation-duration: var(--spin-in);
 }
 
 .api-s4-orbit-chip.is-icon {
@@ -3405,12 +3417,24 @@
   border-radius: 8px;
   color: #fff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+  transform: translate(-50%, -50%) rotate(calc(var(--a) * -1));
+}
+
+.api-s4-orbit-ring--inner .api-s4-orbit-chip.is-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
 }
 
 .api-s4-orbit-chip.is-icon svg {
   display: block;
   width: 14px;
   height: 14px;
+}
+
+.api-s4-orbit-ring--inner .api-s4-orbit-chip.is-icon svg {
+  width: 12px;
+  height: 12px;
 }
 
 .api-s4-orbit-chip.is-icon[data-icon="info"] { background: #3b82f6; }
@@ -3470,9 +3494,24 @@
   }
 }
 
+@keyframes api-s4-orbit-ccw {
+  from {
+    transform: rotate(22deg);
+  }
+  to {
+    transform: rotate(-338deg);
+  }
+}
+
 @keyframes api-s4-orbit-unspin-cw {
   to {
     transform: rotate(-360deg);
+  }
+}
+
+@keyframes api-s4-orbit-unspin-ccw {
+  to {
+    transform: rotate(360deg);
   }
 }
 

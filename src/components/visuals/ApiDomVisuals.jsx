@@ -64,12 +64,15 @@ export function UseCasesStage() {
   );
 }
 
-const S4_MAINS = [
+const S4_MAINS_OUTER = [
   { label: "Info Received", on: true, icon: "info" },
   { label: "In Transit", on: true, icon: "transit" },
   { label: "Pick Up", on: false, icon: "pickup" },
   { label: "Out For Delivery", on: false, icon: "out" },
   { label: "Delivered", on: false, icon: "done" },
+];
+
+const S4_MAINS_INNER = [
   { label: "Undelivered", on: false, icon: "fail" },
   { label: "Alert", on: false, icon: "alert" },
   { label: "Expired", on: false, icon: "expired" },
@@ -156,17 +159,17 @@ const S4_ARCS = [
   [0.05, "#06b6d4", "Out For Delivery"],
 ];
 
-function StatusOrbitRing({ items }) {
+function StatusOrbitRing({ items, tone }) {
   return (
-    <ul className="api-s4-orbit-ring" style={{ "--n": items.length }}>
+    <ul className={`api-s4-orbit-ring api-s4-orbit-ring--${tone}`} style={{ "--n": items.length }}>
       {items.map((item, i) => (
         <li key={item.label} style={{ "--i": i }}>
           <span className="api-s4-orbit-fix">
             <span
-              className={`api-s4-orbit-chip${item.on ? " is-on is-icon" : ""}`}
+              className={`api-s4-orbit-chip is-icon${item.on ? " is-on" : ""}`}
               data-icon={item.icon}
             >
-              {item.on ? <StatusGlyph name={item.icon} /> : item.label}
+              <StatusGlyph name={item.icon} />
             </span>
           </span>
         </li>
@@ -179,8 +182,10 @@ export function DataStatusStage() {
   return (
     <div className="api-s4-vig api-s4-vig--status" aria-hidden="true">
       <div className="api-s4-orbit">
-        <span className="api-s4-orbit-track" />
-        <StatusOrbitRing items={S4_MAINS} />
+        <span className="api-s4-orbit-track api-s4-orbit-track--outer" />
+        <span className="api-s4-orbit-track api-s4-orbit-track--inner" />
+        <StatusOrbitRing items={S4_MAINS_OUTER} tone="outer" />
+        <StatusOrbitRing items={S4_MAINS_INNER} tone="inner" />
         <div className="api-s4-orbit-core">
           <div className="api-s4-logo">
             <img src="/assets/logo-17-mark.png" alt="" />
