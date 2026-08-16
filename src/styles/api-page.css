@@ -1049,17 +1049,26 @@
 @media (max-width: 900px) {
   .api-s2-line {
     flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    padding: 28px 0 24px;
+    justify-content: flex-start;
+    gap: 16px;
+    height: auto;
+    padding: 20px 0 16px;
   }
 
   .api-s2-visual {
-    flex: 1 1 auto;
+    /* host is position:absolute — without a real min-height, flex-shrink
+       collapses this well to 0 once copy is height:100% */
+    flex: 0 0 auto;
     width: 100%;
-    /* leave room for copy; hostFit keeps scene unclipped on short hosts */
-    height: min(48vh, 380px);
-    max-height: 48vh;
+    height: min(88vw, 340px);
+    min-height: 280px;
+    max-height: 360px;
+  }
+
+  .api-s2-visual .api-hub,
+  .api-s2-visual .api-hub--webgl,
+  .api-s2-visual .api-iso-host {
+    min-height: 100%;
   }
 
   .api-s2-copy {
@@ -1067,6 +1076,12 @@
     width: 100%;
     max-width: none;
     min-width: 0;
+    height: auto;
+    padding: 0;
+  }
+
+  .api-s2-tickbar {
+    display: none;
   }
 }
 
@@ -4658,8 +4673,24 @@
   }
 
   .api-s3-illus {
-    height: 260px;
+    height: min(90vw, 340px);
+    min-height: 340px;
     padding: 0;
+  }
+
+  .api-vig-sheet--webhook {
+    top: 18px;
+    left: 8%;
+    right: 8%;
+    padding: 10px 12px 12px;
+  }
+
+  .api-vig-desc {
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .api-s3-card-text h3 {
@@ -4751,8 +4782,49 @@
   }
 
   .api-s4-illus {
-    height: 240px;
-    min-height: 240px;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1;
+  }
+
+  .api-s4-orbit {
+    --logo: 52px;
+    --r-out: 118px;
+    --r-in: 76px;
+    width: min(92%, 300px);
+  }
+
+  .api-s4-orbit-chip.is-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .api-s4-orbit-ring--inner .api-s4-orbit-chip.is-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .api-s4-hub {
+    width: min(96%, 320px);
+  }
+
+  .api-s4-hub-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .api-s4-hub-logo.is-fade {
+    width: 32px;
+    height: 32px;
+  }
+
+  .api-s4-hub-core {
+    width: 100px;
+    height: 100px;
+  }
+
+  .api-s4-hub-core b {
+    font-size: 24px;
   }
 
   .api-s4-copy {
