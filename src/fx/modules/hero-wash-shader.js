@@ -24,8 +24,8 @@
  * Preset props (Undertones 1, 3c8b5d14):
  *   Swirl:       colorA #FFFFFF, colorB #EBEBEB (measured from live render),
  *                detail 1, blend 50, speed 1
- *   ChromaFlow:  base #FFFFFF, up/right #5B4FFF, down/left #D042FF
- *                (park: trail is purple + blue only; drop green/orange)
+ *   ChromaFlow:  base #FFFFFF, up/right #5B4FFF, down #D042FF, left #FF3805
+ *                (park: purple + blue, plus a little orange; no green)
  *                radius 3.5, momentum 13
  *                (design tweak: intensity 1.2 instead of preset 0.85,
  *                 decay slowed via CF_FADE_SCALE 0.45)
@@ -136,9 +136,10 @@ export function mount() {
     const CF_BASE = lin("#FFFFFF");
     const CF_PURPLE = lin("#D042FF");
     const CF_BLUE = lin("#5B4FFF");
+    const CF_ORANGE = lin("#FF3805");
     const CF_UP = CF_BLUE;
     const CF_DOWN = CF_PURPLE;
-    const CF_LEFT = CF_PURPLE;
+    const CF_LEFT = CF_ORANGE;
     const CF_RIGHT = CF_BLUE;
 
     const VERT = `

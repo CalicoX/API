@@ -48,8 +48,8 @@ Park 在这个仓库里直接改代码、看效果。Agent 用简体中文回复
   softness 1（rounded：expHi 8, expLo 3）/ lightAngle -90 / highlight 0.12 / speed 0（棱条静止）/ edges mirror；
   FilmGrain strength 0.05 / bias 2 / 静态；Swirl colorA `#FFFFFF`, colorB `#EBEBEB`（对原版实况逐像素实测）。
 - **设计微调**（偏离原版，故意的）：`CF_INTENSITY 1.2`（原 0.85），`CF_FADE_SCALE 0.45`
-  （衰减 `1-dt` → `1-dt*0.45`，拖尾约 2.2 倍寿命）。拖尾色只留紫 `#D042FF` + 蓝 `#5B4FFF`
-  （原版 up 绿 / left 橙已拿掉）。想调手感只动 intensity / fade。
+  （衰减 `1-dt` → `1-dt*0.45`，拖尾约 2.2 倍寿命）。拖尾色：紫 `#D042FF` + 蓝 `#5B4FFF`
+  + left 一点橙 `#FF3805`（绿不要）。想调手感只动 intensity / fade。
 - 布局：`.api-s4-track` 有 `overflow-x: clip`（不是 hidden，hidden 会杀 sticky）——
   用例轮播的探出卡片不能撑宽文档，删了会回归横向滚动条。
 
