@@ -29,6 +29,29 @@ Park 在这个仓库里直接改代码、看效果。Agent 用简体中文回复
 - Hover：整卡触发，约 3.2s，`cubic-bezier(0.22, 1, 0.36, 1)`；位移走水平，不要斜移。
 - Data Operations：浅灰整段、sticky 竖滑横移、标题左对齐、右侧圆形 prev/next。单卡约 800×500。滚动用连续 `--s4-x`，不要整卡跳。
 
+## Hero shader（Undertones 1 本地复刻）
+
+`src/fx/modules/hero-wash-shader.js`，纯 WebGL 双 pass，替代了 npm `shaders` 包（依赖已移除）。
+逐行移植自 `shaders` v3.0.453 的组件源码（`dist/core/{Swirl,ChromaFlow,FlutedGlass,FilmGrain}-*.js`），
+对应 shaders.com 预设 Undertones 1（`3c8b5d14`）。
+
+- **管线**：原版四层 Swirl（底色）→ ChromaFlow（光标墨迹）→ FlutedGlass（折射）→ FilmGrain（颗粒），
+  映射为 Pass 1（FBO：Swirl + ChromaFlow premultiplied-over 合成）+ Pass 2（屏幕：玻璃折射 + 颗粒 + sRGB 编码）。
+- **色彩空间**：所有颜色 CPU 端 sRGB→线性（colorjs `srgb-linear` 同款公式），全程线性混合，
+  末端 shader 里做 piecewise sRGB 编码。原版引擎渲到 `-srgb` surface，这一步不能省。
+- **坐标系**：原版引擎 uv/pointer 都是 **y-down**（`pointer.y=(clientY-top)/height`），本地按字面移植；
+  FBO 是 y-up，只在采样时翻转。条纹方向、光标方向颜色都依赖这个约定，别改回 y-up。
+- **ChromaFlow**：128×128 RGBA16F 半浮点场纹理（WebGL2；WebGL1 回退字节打包），CPU 逐帧平流 + 注入。
+  注意：方向色标签和屏幕方向相反（鼠标向上出 downColor 紫红），原版如此；
+  颜色只在移动中可见，停手后残液以白色 base 混合、白底上隐形。
+- **锁定参数**（原版预设）：FlutedGlass angle 31 / freq 8 / refraction 4 / aberration 0.61 /
+  softness 1（rounded：expHi 8, expLo 3）/ lightAngle -90 / highlight 0.12 / speed 0（棱条静止）/ edges mirror；
+  FilmGrain strength 0.05 / bias 2 / 静态；Swirl colorA `#FFFFFF`, colorB `#EBEBEB`（对原版实况逐像素实测）。
+- **设计微调**（偏离原版，故意的）：`CF_INTENSITY 1.2`（原 0.85），`CF_FADE_SCALE 0.45`
+  （衰减 `1-dt` → `1-dt*0.45`，拖尾约 2.2 倍寿命）。想调手感只动这两个常量。
+- 布局：`.api-s4-track` 有 `overflow-x: clip`（不是 hidden，hidden 会杀 sticky）——
+  用例轮播的探出卡片不能撑宽文档，删了会回归横向滚动条。
+
 ## Git
 
 - 远程：`https://github.com/CalicoX/API.git`，默认分支 `main`。

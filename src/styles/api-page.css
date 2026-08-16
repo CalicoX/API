@@ -264,6 +264,20 @@
   z-index: 0;
 }
 
+/* Idle pearl fluted wash when WebGL is skipped (no chroma — matches 5173 idle) */
+.api-page .api-s1.hero.hero-shader-fallback {
+  background:
+    repeating-linear-gradient(
+      31deg,
+      rgba(255, 255, 255, 0.0) 0px,
+      rgba(255, 255, 255, 0.0) 11px,
+      rgba(240, 242, 248, 0.35) 15px,
+      rgba(255, 255, 255, 0.75) 19px,
+      rgba(255, 255, 255, 0.0) 24px
+    ),
+    #fbfcfe;
+}
+
 /* signup card */
 .api-form-card {
   align-self: center;
@@ -3008,6 +3022,9 @@
 
 .api-s4-track {
   position: relative;
+  /* clip (not hidden): overhanging rail cards must not widen the document;
+     clip does not create a scroll container, so the sticky panel keeps working */
+  overflow-x: clip;
 }
 
 .api-s4-sticky {

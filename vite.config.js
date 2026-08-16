@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    // iso-hub-webgl (three) + glass-agency-hero (shaders/js) are on-demand chunks.
+    // iso-hub-webgl (three) is an on-demand chunk.
     chunkSizeWarningLimit: 1800,
   },
 })

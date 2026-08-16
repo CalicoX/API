@@ -750,8 +750,8 @@ void main(){
       syncSize();
       start();
     });
-    ro.observe(tabsEl);
-    ro.observe(output);
+    if (tabsEl) ro.observe(tabsEl);
+    if (output) ro.observe(output);
 
     var api = {
       opts: config,

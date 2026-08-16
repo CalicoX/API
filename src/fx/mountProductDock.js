@@ -4,13 +4,19 @@
  * @returns {Promise<() => void>} dispose
  */
 export async function mountProductDock() {
-  const { mount: mountLib } = await import("./modules/liquid-glass-dock.js");
-  const disposeLib = mountLib();
-
   const tabs = document.getElementById("product-tabs");
   const source = document.getElementById("glass-source");
   const content = document.getElementById("glass-content");
   const output = document.getElementById("glass-output");
+
+  // ProductDock may be intentionally omitted (API landing). Skip FX cleanly.
+  if (!tabs || !output) {
+    document.documentElement.classList.add("glass-mode-frosted");
+    return () => {};
+  }
+
+  const { mount: mountLib } = await import("./modules/liquid-glass-dock.js");
+  const disposeLib = mountLib();
 
   if (!window.createLiquidGlassDock) {
     document.documentElement.classList.add("glass-mode-frosted");
@@ -20,7 +26,7 @@ export async function mountProductDock() {
   }
 
   document.documentElement.classList.remove("glass-html-in-canvas");
-  if (output) output.style.display = "";
+  output.style.display = "";
   if (source && content && content.parentNode === source) {
     const shell0 = document.querySelector(".glass-shell");
     if (shell0) shell0.insertBefore(content, source);

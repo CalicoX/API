@@ -21,6 +21,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 右侧渐隐遮罩跟 `--s4-p`，最后一张收掉。
 - Contact Us 在四张卡都有；当前卡 / hover 箭头 `api-s4-cta-nudge`。
 - 手机 ≤900px：取消 sticky，竖排叠卡，藏导航按钮。
+- Hero shader 已本地化：`hero-wash-shader.js` 纯 WebGL 复刻 shaders.com Undertones 1，npm `shaders` 依赖已删。技术细节见 AGENTS.md「Hero shader」节。墨迹手感只调 `CF_INTENSITY`（1.2）和 `CF_FADE_SCALE`（0.45）。
+- `.api-s4-track` 的 `overflow-x: clip` 防横向滚动，不能换成 hidden（会杀 sticky）。
 
 ## 未完成
 

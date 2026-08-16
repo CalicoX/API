@@ -441,9 +441,9 @@ export function IllusWebhookPanel() {
             d="M4.2 3.2 L4.2 19.4 L8.8 14.9 L12.6 22.2 L15.4 20.8 L11.7 13.6 L18.2 13.6 Z"
             fill="#0a0a0a"
             stroke="#fff"
-            stroke-width="2.2"
-            stroke-linejoin="round"
-            stroke-linecap="round"
+            strokeWidth="2.2"
+            strokeLinejoin="round"
+            strokeLinecap="round"
           />
         </svg>
       </span>
