@@ -30,6 +30,7 @@ function pinTop() {
 const CARDS = [
   {
     Visual: DataStatusStage,
+    well: "status",
     title: "Tracking data that counts",
     body: "The combination of 9 main + 27 sub package status makes it a no-brainer to understand the shipping progress, and the cause of delivery exceptions.",
   },
@@ -247,10 +248,10 @@ export default function DataOperations() {
 
             <div className="api-s4-viewport">
               <div className="api-s4-rail">
-                {CARDS.map(({ Visual, title, body }) => (
+                {CARDS.map(({ Visual, title, body, well }) => (
                   <article className="api-s4-card" key={title}>
                     <div className="api-s4-card-body">
-                      <div className="api-s4-illus">
+                      <div className={`api-s4-illus${well ? ` api-s4-illus--${well}` : ""}`}>
                         <Visual />
                       </div>
                       <div className="api-s4-copy">

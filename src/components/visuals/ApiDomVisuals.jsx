@@ -134,6 +134,7 @@ function StatusOrbitRing({ items, tone }) {
 export function DataStatusStage() {
   return (
     <div className="api-s4-vig api-s4-vig--status" aria-hidden="true">
+      <span className="api-s4-status-light" />
       <div className="api-s4-orbit">
         <span className="api-s4-orbit-track api-s4-orbit-track--outer" />
         <span className="api-s4-orbit-track api-s4-orbit-track--inner" />
