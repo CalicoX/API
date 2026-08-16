@@ -25,6 +25,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - How-it-works 井不要锁 260：`min(90vw, 340)` / min 300，webhook 仍可底裁。
 - Data Ops 井不要锁 240：正方形 `aspect-ratio: 1`；轨道缩到 `--r-out:118` / `--r-in:76`，避免图标被裁。
 - Hero shader 已本地化：`hero-wash-shader.js` 纯 WebGL 复刻 shaders.com Undertones 1，npm `shaders` 依赖已删。技术细节见 AGENTS.md「Hero shader」节。墨迹手感只调 `CF_INTENSITY`（1.2）和 `CF_FADE_SCALE`（0.45）。
+- Hero 拖尾只留紫 `#D042FF` + 蓝 `#5B4FFF`。原版四向色里的绿 `#66FF73` / 橙 `#FF3805` 不要。
 - `.api-s4-track` 的 `overflow-x: clip` 防横向滚动，不能换成 hidden（会杀 sticky）。
 
 ## 未完成

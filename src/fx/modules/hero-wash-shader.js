@@ -24,8 +24,9 @@
  * Preset props (Undertones 1, 3c8b5d14):
  *   Swirl:       colorA #FFFFFF, colorB #EBEBEB (measured from live render),
  *                detail 1, blend 50, speed 1
- *   ChromaFlow:  base #FFFFFF, up #66FF73, down #D042FF, left #FF3805,
- *                right #5B4FFF, radius 3.5, momentum 13
+ *   ChromaFlow:  base #FFFFFF, up/right #5B4FFF, down/left #D042FF
+ *                (park: trail is purple + blue only; drop green/orange)
+ *                radius 3.5, momentum 13
  *                (design tweak: intensity 1.2 instead of preset 0.85,
  *                 decay slowed via CF_FADE_SCALE 0.45)
  *   FlutedGlass: shape rounded, angle 31, frequency 8, softness 1, refraction 4,
@@ -133,10 +134,12 @@ export function mount() {
     const SWIRL_A = lin("#FFFFFF");
     const SWIRL_B = lin("#EBEBEB");
     const CF_BASE = lin("#FFFFFF");
-    const CF_UP = lin("#66FF73");
-    const CF_DOWN = lin("#D042FF");
-    const CF_LEFT = lin("#FF3805");
-    const CF_RIGHT = lin("#5B4FFF");
+    const CF_PURPLE = lin("#D042FF");
+    const CF_BLUE = lin("#5B4FFF");
+    const CF_UP = CF_BLUE;
+    const CF_DOWN = CF_PURPLE;
+    const CF_LEFT = CF_PURPLE;
+    const CF_RIGHT = CF_BLUE;
 
     const VERT = `
 attribute vec2 aPos;
