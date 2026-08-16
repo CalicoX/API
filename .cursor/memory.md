@@ -15,7 +15,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 内容区 1440px，注意 wrap 的 24px padding；不要负 margin 撑出外壳。
 - How-it-works 三张卡：白卡 20px 圆角、8px 内边距；插图井浅灰点阵、overflow hidden。
 - Data Operations 四张卡插图要各不相同，不能都顶满井。
-- Tracking data 卡：双环 9 个大状态用 Figma 官方图标（`public/assets/status/`），外 5 / 内 4。色值：Info `#00bcd4`、Transit `#2196f3`、Out `#2962ff`、Pickup `#0d47a1`、Alert `#ff6f00`、Delivered `#43a047`、Expired `#b71c1c`、Undelivered `#f44336`、NotFound `#757575`。圆角 6px。hover 内外反向公转，图标正向、中心在轨道上。中间 17 logo 平面约 64px，外形是超椭圆（n=5，二次贝塞尔平滑曲线），不要普通圆角矩形。中间 logo 要亮、贴边的白蓝光（紧贴超椭圆，不要大团脏雾）；轨道圆圈很淡（约 0.16 透明度）。
+- Tracking data 卡：双环 9 个大状态用 Figma 官方图标（`public/assets/status/`），外 5 / 内 4。色值：Info `#00bcd4`、Transit `#2196f3`、Out `#2962ff`、Pickup `#0d47a1`、Alert `#ff6f00`、Delivered `#43a047`、Expired `#b71c1c`、Undelivered `#f44336`、NotFound `#757575`。圆角 6px。每个图标按自身底色：1px 浅描边 + 1px 深描边 + 160° 体积渐变。hover 内外反向公转，图标正向、中心在轨道上。中间 17 logo 平面约 64px，外形是超椭圆（n=5，二次贝塞尔平滑曲线），不要普通圆角矩形。中间 logo 要亮、贴边的白蓝光（紧贴超椭圆，不要大团脏雾）；轨道圆圈很淡（约 0.16 透明度）。
 - Tracking data 井是深色：干净近黑 `#0a0d14`，光只要白蓝（不要紫蓝叠、不要 overlay 噪点，会脏）。点阵很淡。其它三张 Data Ops 井仍浅灰点阵。
 - 承运商卡：3400+ 在上，13 个运输商 logo 分三排往下散开，底排淡出表示还有更多。枢纽约 120px，插图尽量铺满井。
 - 标题单词亮度跟滚动走（`--on`），不是进场自动播。
