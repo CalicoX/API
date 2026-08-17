@@ -18,6 +18,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 内容区 1440px，注意 wrap 的 24px padding；不要负 margin 撑出外壳。
 - How-it-works 三张卡：白卡 20px 圆角、8px 内边距；插图井浅灰点阵、overflow hidden。
 - Data Operations 四张卡插图要各不相同，不能都顶满井。
+- Dashboard 卡（2026-08-17 重做）：井里是「圆形半透明遮罩 + 仪表盘拼贴」。遮罩 `api-s4-dash-disc`：白色半透明圆盘（min(84%,320px)，径向白 0.92→0.22 + 淡蓝晕），1px `rgba(15,23,42,0.06)` 发丝描边，垫在点阵上、拼贴下，与拼贴中心对位。拼贴 `api-s4-dashgrid` min(88%,336px) 两列 `grid-template-rows: auto 1fr`，左右两列**上下齐平**（Park 嫌右列下沉重心歪，别加 margin-top 错位）：左 donut 主卡（Status distribution，donut 118px，图例单列 4 项——不要两列会换行）、右列 Carrier time performance 迷你条形（4 承运商 ×天数，条色 #2962ff/#2196f3/#00bcd4/#43a047）+ Tracking function status LED 行（绿绿橙 + 右对齐 %，1fr 拉伸 + `padding-bottom: 42px` 留空）；Webhook push alert toast 锚在网格右下角（bottom -10 / right -8，压在 fn 卡的留白区上，不悬空、不盖行），铃铛橙块 #fff7ed/#ff6f00。hover 全部 3.2s cubic-bezier(0.22,1,0.36,1) infinite：donut 重描（原有）、条形 scaleX 重涨（delay --i×0.09s）、LED box-shadow 呼吸、toast 从右滑入左滑出（位移只走水平）。≤900px：donut 96px、grid 94%、toast 改 static 入流占整行靠右（绝对定位会压行或被井底裁）。reduce-motion 全停。仪表盘微字 8–9px 是插图微文案，不算产品文案。
 - Tracking data 卡：双环 9 个大状态用 Figma 官方图标（`public/assets/status/`），外 5 / 内 4。状态色必须用产品官方值，不要改灰：Info `#00bcd4`、Transit `#2196f3`、Out `#2962ff`、Pickup `#0d47a1`、Alert `#ff6f00`、Delivered `#43a047`、Expired `#b71c1c`、Undelivered `#f44336`、NotFound `#757575`。圆角 6px。体积渐变 160°：亮停靠白、暗停靠井色 `#151b28`，不要混纯黑。两圈描边：外圈用状态色本身（`0 0 0 1px var(--chip)`），不要混白、不要混黑；内圈深（`inset 1px`，chip 混井色）。整卡 hover：放大的是中间 logo（`.api-s4-orbit-core` 从 `scale(0.84)` 缓动到 1，现在的 64px 是 hover 尺寸），不是状态图标；同时内外反向公转。图标正向、中心在轨道上，环 `z-index: 4` 压在光晕之上，光不能遮住 icon。中间 17 logo 平面约 64px，外形是超椭圆（n=5，二次贝塞尔平滑曲线），不要普通圆角矩形。中间 logo 光还要更大（外圈约 168px / blur 34 / drop-shadow 68px），饱和蓝（`#2f7dff` / `#5eb0ff`），贴边+外扩，中心亮、边缘干净衰减；不要发白、不要紫、不要脏雾。Park 连说不够。轨道圆圈很淡（约 0.2 透明度）。
 - Tracking data 光晕点亮时机（2026-08-17）：平时收敛成微光（`::before` opacity 0.16 / `::after` 0.22，logo drop-shadow 用同构弱化列表 alpha 0.7/0.28/0.22/0.14），整卡 `.api-s4-card:hover` 才亮到全强度（0.95/1 + 原 drop-shadow）。过渡 0.9s `cubic-bezier(0.22,1,0.36,1)`，只走 opacity/filter 插值（logo 的 filter 列表 hover 前后函数个数、类型必须一致才能平滑插值，别删项）。与 logo scale、双环公转的 transition 并存互不覆盖。reduce-motion 瞬切。
 - Tracking data 井：深色，只比 `#0a0d14` 稍浅一档，不要改浅灰、不要改成中灰蓝 `#3c465e`。渐变中心 `#1c2434` → 边 `#111620`，再加很淡的白蓝径向。点阵用淡白点。承运商井是蓝色 + 第二屏同款 WebGL 点状地球；Visibility / Dashboard 仍浅灰点阵。
@@ -45,6 +46,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-08-17 17:27 — memory.md、api-page.css
 - 2026-08-17 17:12 — memory.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-17 17:03 — memory.md、ApiDomVisuals.jsx、particle-earth.js、structure.test.js、api-page.css
 - 2026-08-17 16:42 — memory.md、ApiDomVisuals.jsx、iso-hub-webgl.js、use-cases-scroll.js、api-page.css
@@ -64,4 +66,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-17 10:40 — memory.md、api-page.css
 - 2026-08-17 10:37 — memory.md、api-page.css
 - 2026-08-17 10:26 — memory.md、api-page.css
-- 2026-08-17 10:24 — memory.md、api-page.css
