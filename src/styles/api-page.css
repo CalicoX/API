@@ -3450,6 +3450,7 @@
 .api-s4-orbit-ring {
   position: absolute;
   inset: 0;
+  z-index: 4;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -3510,11 +3511,7 @@
     0 0 0 1px color-mix(in srgb, var(--chip) 58%, #151b28),
     inset 0 0 0 1px color-mix(in srgb, var(--chip) 20%, #fff),
     inset 0 1px 0 color-mix(in srgb, var(--chip) 32%, #fff);
-  transform: translate(-50%, -50%) scale(0.84);
-  filter: brightness(0.78);
-  transition:
-    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate(-50%, -50%);
 }
 
 .api-s4-orbit-ring--inner .api-s4-orbit-chip.is-icon {
@@ -3549,26 +3546,26 @@
   animation-play-state: running;
 }
 
-.api-s4-card:hover .api-s4-orbit-chip.is-icon {
-  transform: translate(-50%, -50%) scale(1);
-  filter: brightness(1.08);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .api-s4-orbit-chip.is-icon {
-    transform: translate(-50%, -50%) scale(1);
-    filter: none;
-    transition: none;
-  }
-}
-
 .api-s4-orbit-core {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 1;
   display: grid;
   place-items: center;
   pointer-events: none;
+  transform: scale(0.84);
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.api-s4-card:hover .api-s4-orbit-core {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .api-s4-orbit-core {
+    transform: none;
+    transition: none;
+  }
 }
 
 .api-s4-orbit-core::before,
