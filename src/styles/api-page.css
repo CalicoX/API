@@ -222,10 +222,37 @@
   white-space: nowrap;
 }
 
+/* 注册成 <number> 才能对 hover 光强做平滑过渡 */
+@property --h1-glow {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
 .api-s1-copy h1.api-h1 {
+  --h1-x: 50%;
+  --h1-y: 42%;
   margin-bottom: 10px;
   font-size: clamp(2.05rem, 3.6vw, 3.15rem);
   text-wrap: pretty;
+  /* 字内光：光斑裁进字形，底层保持墨色 */
+  background:
+    radial-gradient(
+      170px circle at var(--h1-x) var(--h1-y),
+      rgba(196, 222, 255, calc(var(--h1-glow) * 0.98)) 0%,
+      rgba(91, 111, 255, calc(var(--h1-glow) * 0.6)) 42%,
+      rgba(91, 111, 255, 0) 72%
+    ),
+    linear-gradient(var(--api-ink), var(--api-ink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: --h1-glow 0.45s ease;
+}
+
+.api-s1-copy h1.api-h1:hover {
+  --h1-glow: 1;
 }
 
 .api-s1-copy .api-h2 {

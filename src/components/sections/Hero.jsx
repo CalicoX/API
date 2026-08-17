@@ -7,7 +7,15 @@ export default function Hero() {
     <section className="api-s1 hero" id="content" aria-labelledby="api-hero-title">
       <div className="api-wrap api-s1-grid">
         <div className="api-s1-copy">
-          <h1 className="api-h1" id="api-hero-title">
+          <h1
+            className="api-h1"
+            id="api-hero-title"
+            onMouseMove={(e) => {
+              const r = e.currentTarget.getBoundingClientRect();
+              e.currentTarget.style.setProperty("--h1-x", `${e.clientX - r.left}px`);
+              e.currentTarget.style.setProperty("--h1-y", `${e.clientY - r.top}px`);
+            }}
+          >
             International Package{" "}
             <span className="api-nowrap">Tracking API</span>
           </h1>
