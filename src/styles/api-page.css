@@ -374,7 +374,7 @@
 
 .api-field textarea {
   min-height: 72px;
-  resize: vertical;
+  resize: none;
 }
 
 .api-form-agree {
