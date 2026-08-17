@@ -3357,12 +3357,31 @@
   max-width: 100%;
 }
 
+.api-s4-illus--status {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(186, 214, 255, 0.16) 0%, rgba(90, 130, 190, 0.06) 24%, transparent 46%),
+    radial-gradient(ellipse 92% 82% at 50% 48%, #1c2434 0%, #151b28 46%, #111620 100%);
+}
+
+.api-s4-illus--status::before {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.12) 1px,
+    transparent 1.2px
+  );
+  opacity: 0.28;
+}
+
 .api-s4-status-light {
   display: none;
 }
 
 .api-s4-illus--status .api-s4-orbit {
   z-index: 1;
+}
+
+.api-s4-illus--status .api-s4-orbit-track {
+  border-color: rgba(198, 214, 240, 0.2);
 }
 
 .api-s4-vig--status {
@@ -3478,18 +3497,19 @@
   display: grid;
   place-items: center;
   box-sizing: border-box;
-  border: 1px solid color-mix(in srgb, var(--chip) 52%, #000);
+  border: 1px solid color-mix(in srgb, var(--chip) 38%, #fff);
   border-radius: 6px;
   color: #fff;
   background: linear-gradient(
     160deg,
-    color-mix(in srgb, var(--chip) 56%, #fff) 0%,
-    var(--chip) 46%,
-    color-mix(in srgb, var(--chip) 70%, #000) 100%
+    color-mix(in srgb, var(--chip) 62%, #fff) 0%,
+    var(--chip) 48%,
+    color-mix(in srgb, var(--chip) 78%, #151b28) 100%
   );
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--chip) 38%, #fff),
-    0 1px 2px rgba(0, 0, 0, 0.16);
+    inset 0 0 0 1px color-mix(in srgb, var(--chip) 42%, #1c2434),
+    inset 0 1px 0 color-mix(in srgb, var(--chip) 36%, #fff),
+    0 1px 2px rgba(20, 26, 40, 0.22);
   transform: translate(-50%, -50%);
 }
 
@@ -3544,19 +3564,19 @@
 }
 
 .api-s4-orbit-core::before {
-  width: 72px;
-  height: 72px;
+  width: 74px;
+  height: 74px;
   background: #8ec8ff;
-  filter: blur(10px);
-  opacity: 0.42;
+  filter: blur(12px);
+  opacity: 0.55;
 }
 
 .api-s4-orbit-core::after {
   width: 68px;
   height: 68px;
   background: #e8f3ff;
-  filter: blur(4px);
-  opacity: 0.7;
+  filter: blur(5px);
+  opacity: 0.75;
 }
 
 .api-s4-logo {
@@ -3568,8 +3588,8 @@
   background: transparent;
   filter:
     drop-shadow(0 0 1px #fff)
-    drop-shadow(0 0 6px rgba(185, 220, 255, 0.7))
-    drop-shadow(0 0 12px rgba(94, 176, 255, 0.28));
+    drop-shadow(0 0 7px rgba(185, 220, 255, 0.85))
+    drop-shadow(0 0 14px rgba(94, 176, 255, 0.4));
 }
 
 .api-s4-logo-defs {
