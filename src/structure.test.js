@@ -130,7 +130,7 @@ describe("API landing structure (gating)", () => {
     );
     expect(read("components/visuals/ApiDomVisuals.jsx")).toMatch(/api-s4-carriers-earth/);
     expect(read("components/visuals/ApiDomVisuals.jsx")).not.toMatch(/api-s4-carriers-earth-slot/);
-    expect(read("fx/lib/particle-earth.js")).toMatch(/half-well|scale: 1\.08|manualVis/);
+    expect(read("fx/lib/particle-earth.js")).toMatch(/half-well|scale: 1\.3|manualVis/);
     expect(read("fx/modules/iso-hub-webgl.js")).toMatch(
       /hard-edge gradient sweep|xLead|createLinearGradient/
     );

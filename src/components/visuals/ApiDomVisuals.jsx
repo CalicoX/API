@@ -82,11 +82,11 @@ const S4_HUB_NODES = [
   { src: "/assets/carriers/dhl.svg", name: "DHL", x: 128, y: 188 },
   { src: "/assets/carriers/ups.svg", name: "UPS", x: 200, y: 188 },
   { src: "/assets/carriers/usps.svg", name: "USPS", x: 272, y: 188 },
-  { src: "/assets/carriers/fedex.svg", name: "FedEx", x: 56, y: 268 },
-  { src: "/assets/carriers/tnt.svg", name: "TNT", x: 128, y: 268 },
-  { src: "/assets/carriers/gls.svg", name: "GLS", x: 200, y: 268 },
-  { src: "/assets/carriers/dpd.svg", name: "DPD", x: 272, y: 268 },
-  { src: "/assets/carriers/royal-mail.svg", name: "Royal Mail", x: 344, y: 268 },
+  { src: "/assets/carriers/fedex.svg", name: "FedEx", x: 56, y: 300 },
+  { src: "/assets/carriers/tnt.svg", name: "TNT", x: 128, y: 300 },
+  { src: "/assets/carriers/gls.svg", name: "GLS", x: 200, y: 300 },
+  { src: "/assets/carriers/dpd.svg", name: "DPD", x: 272, y: 300 },
+  { src: "/assets/carriers/royal-mail.svg", name: "Royal Mail", x: 344, y: 300 },
 ];
 
 function hubWirePath(x, y) {
@@ -191,6 +191,37 @@ export function DataCarriersStage() {
           ))}
         </svg>
         <div className="api-s4-hub-core">
+          <svg className="api-s4-hub-server" viewBox="0 0 76 46" fill="none" aria-hidden="true">
+            {/* unit 1 — LEDs + vents */}
+            <rect x="2.5" y="1.5" width="71" height="12" rx="3.5" fill="#fbfdff" stroke="#d5deec" />
+            <circle className="led" style={{ "--i": 0 }} cx="10" cy="7.5" r="1.7" fill="#2563eb" />
+            <circle cx="15.5" cy="7.5" r="1.7" fill="#bfdbfe" />
+            <path
+              d="M27 4.8v5.4M31.5 4.8v5.4M36 4.8v5.4M40.5 4.8v5.4M45 4.8v5.4"
+              stroke="#dbe4f0"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+            />
+            <rect x="56" y="5.6" width="12" height="3.8" rx="1.9" fill="#e8eef8" />
+            {/* unit 2 — activity bars */}
+            <rect x="2.5" y="16.5" width="71" height="12" rx="3.5" fill="#fbfdff" stroke="#d5deec" />
+            <circle className="led" style={{ "--i": 1 }} cx="10" cy="22.5" r="1.7" fill="#2563eb" />
+            <circle cx="15.5" cy="22.5" r="1.7" fill="#bfdbfe" />
+            <rect x="27" y="20.8" width="8" height="3.4" rx="1.4" fill="#93c5fd" />
+            <rect x="37" y="20.8" width="8" height="3.4" rx="1.4" fill="#bfdbfe" />
+            <rect x="47" y="20.8" width="8" height="3.4" rx="1.4" fill="#dbeafe" />
+            {/* unit 3 — LEDs + vents */}
+            <rect x="2.5" y="31.5" width="71" height="12" rx="3.5" fill="#fbfdff" stroke="#d5deec" />
+            <circle className="led" style={{ "--i": 2 }} cx="10" cy="37.5" r="1.7" fill="#2563eb" />
+            <circle cx="15.5" cy="37.5" r="1.7" fill="#bfdbfe" />
+            <path
+              d="M27 34.8v5.4M31.5 34.8v5.4M36 34.8v5.4M40.5 34.8v5.4M45 34.8v5.4"
+              stroke="#dbe4f0"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+            />
+            <rect x="56" y="35.6" width="12" height="3.8" rx="1.9" fill="#e8eef8" />
+          </svg>
           <b>
             3,400<span>+</span>
           </b>

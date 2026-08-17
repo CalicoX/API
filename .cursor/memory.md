@@ -19,8 +19,9 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - How-it-works 三张卡：白卡 20px 圆角、8px 内边距；插图井浅灰点阵、overflow hidden。
 - Data Operations 四张卡插图要各不相同，不能都顶满井。
 - Tracking data 卡：双环 9 个大状态用 Figma 官方图标（`public/assets/status/`），外 5 / 内 4。状态色必须用产品官方值，不要改灰：Info `#00bcd4`、Transit `#2196f3`、Out `#2962ff`、Pickup `#0d47a1`、Alert `#ff6f00`、Delivered `#43a047`、Expired `#b71c1c`、Undelivered `#f44336`、NotFound `#757575`。圆角 6px。体积渐变 160°：亮停靠白、暗停靠井色 `#151b28`，不要混纯黑。两圈描边：外圈用状态色本身（`0 0 0 1px var(--chip)`），不要混白、不要混黑；内圈深（`inset 1px`，chip 混井色）。整卡 hover：放大的是中间 logo（`.api-s4-orbit-core` 从 `scale(0.84)` 缓动到 1，现在的 64px 是 hover 尺寸），不是状态图标；同时内外反向公转。图标正向、中心在轨道上，环 `z-index: 4` 压在光晕之上，光不能遮住 icon。中间 17 logo 平面约 64px，外形是超椭圆（n=5，二次贝塞尔平滑曲线），不要普通圆角矩形。中间 logo 光还要更大（外圈约 168px / blur 34 / drop-shadow 68px），饱和蓝（`#2f7dff` / `#5eb0ff`），贴边+外扩，中心亮、边缘干净衰减；不要发白、不要紫、不要脏雾。Park 连说不够。轨道圆圈很淡（约 0.2 透明度）。
+- Tracking data 光晕点亮时机（2026-08-17）：平时收敛成微光（`::before` opacity 0.16 / `::after` 0.22，logo drop-shadow 用同构弱化列表 alpha 0.7/0.28/0.22/0.14），整卡 `.api-s4-card:hover` 才亮到全强度（0.95/1 + 原 drop-shadow）。过渡 0.9s `cubic-bezier(0.22,1,0.36,1)`，只走 opacity/filter 插值（logo 的 filter 列表 hover 前后函数个数、类型必须一致才能平滑插值，别删项）。与 logo scale、双环公转的 transition 并存互不覆盖。reduce-motion 瞬切。
 - Tracking data 井：深色，只比 `#0a0d14` 稍浅一档，不要改浅灰、不要改成中灰蓝 `#3c465e`。渐变中心 `#1c2434` → 边 `#111620`，再加很淡的白蓝径向。点阵用淡白点。承运商井是蓝色 + 第二屏同款 WebGL 点状地球；Visibility / Dashboard 仍浅灰点阵。
-- 承运商卡：底排 5 个淡出 logo 去掉，只留上两排（3+5）。井是蓝色（`#4a86ff` → `#1b57e0` → `#143eb4`），不要浅灰点阵。背景是第二屏 Use Cases 同款 WebGL 点状地球（公共模块 `src/fx/lib/particle-earth.js`），不是 SVG 点、不是井点阵。地球要淡、往下放、井口只切出上半颗：`scale: 1.08`，`offset [0,-1.02]`（赤道贴井底，下半被 overflow 裁掉），`alphaMul: 0.78`。不要用 absolute+aspect-ratio 空槽当 WebGL host（高度容易是 0，地球就没了）。不要铺成 124% 全幅。z-index 低于 3400+ / logo；蓝底上用白/浅蓝点；慢转。横向 sticky + `overflow-x: clip` 时不要只靠 IntersectionObserver 才 start，用 getBoundingClientRect 判可见。卡滚出可视区停画。3400+ 视觉写成 `3,400+`（+ 略小、偏蓝），字重 700、tabular，carriers 大写字距。枢轴白卡约 132px 宽。logo 构图铺满井，地球不铺满。
+- 承运商卡：底排 5 个淡出 logo 去掉，只留上两排（3+5）。井是蓝色（`#4a86ff` → `#1b57e0` → `#143eb4`），不要浅灰点阵。背景是第二屏 Use Cases 同款 WebGL 点状地球（公共模块 `src/fx/lib/particle-earth.js`），不是 SVG 点、不是井点阵。地球要淡、往下放、井口只切出上半颗：`scale: 1.3`，`offset [0,-1.05]`（赤道贴井底，下半被 overflow 裁掉，两侧略出血），`alphaMul: 0.62`（2026-08-17 Park 要再大再淡）。自转是 hover 驱动：平时定格零重绘（引擎 `getAnimating` 返回 false 时不排 rAF，`onApi.wake` 唤醒），整卡 `.api-s4-card` mouseenter 缓动加速到 0.18 rad/s、mouseleave 缓动刹停（速度因子指数逼近，dt 钳 0.1s）；reduce-motion / 触屏（`hover: none`）不挂监听、保持静态。不要用 absolute+aspect-ratio 空槽当 WebGL host（高度容易是 0，地球就没了）。不要铺成 124% 全幅。z-index 低于 3400+ / logo；蓝底上用白/浅蓝点；横向 sticky + `overflow-x: clip` 时不要只靠 IntersectionObserver 才 start，用 getBoundingClientRect 判可见。卡滚出可视区停画。3400+ 视觉写成 `3,400+`（+ 略小、偏蓝），字重 700、tabular，carriers 大写字距。枢轴白卡约 132px 宽。logo 构图铺满井，地球不铺满。第二排 logo 在 y=300（2026-08-17 从 268 下移拉开两排），`hubWirePath` 自动跟随，但 `stroke-dasharray`/keyframes 要 ≥300 盖住最长连线，否则线中间断。白卡顶部有三层机架服务器 SVG（76×46，细描边 `#d5deec`、白底、蓝 LED + 浅蓝通风条/活动条），hover 时三颗蓝 LED 错峰闪（`api-s4-led`，delay `--i`×0.38s），reduce-motion 关。服务器在数字上方，卡 padding 收成 15/14。
 - Use Cases（iso-hub-webgl）性能约定（2026-08-17）：动画观感不许动，优化全部走「不画/少画」——① host 离屏（IO，rootMargin 120px）就 `stopLoop()` 停 rAF，回屏续播；② 终端 680×520 canvas 纹理只在画面变了才重绘/上传（打字字符数、光标 500ms 闪烁、progress 变化 >0.0005 三者之一）；③ `measureText` 逐字符缓存；④ host 尺寸、callout 右侧空间全部缓存（RO 失效时才重测），不许逐帧 `getBoundingClientRect`；⑤ `renderer.setSize` 只在 host 真变尺寸时调，滚动缩放只改相机 frustum。滚过该屏后 rAF JS 占用 ~98→5 ms/s（桌面）/ ~240→5（手机）。
 - Use Cases 进度驱动的坑：`use-cases-scroll` 的 `apply()` 里 `setProgress` 必须每次滚动都发、放在「p 没变就 return」之前——WebGL 是懒加载的，p 稳定后才挂载完就再也收不到进度。挂载种子在 `window.__isoHubWebGL = gl` 赋值后立刻做（onReady 闭包里 gl 未赋值，是空转的，别再用）。≤768px `__reduceFx=true`，该屏直接定格 p=1 终态（正视图+标签），这是有意的。
 - Use Cases 手机端（≤900px）：iso 线条糊的根源是 renderer DPR 被钳 1.5、3x 屏上 1px 线放大成 2 物理像素——手机端 DPR 放开到原生（≤3，canvas 小所以开销可控），桌面仍 1.5。callout canvas 手机同理 ≤3。井加高：`min(96vw, 375px)`、min 300 / max 390（原 88vw/340/280/360）；短井填充率上调（hostFit h<420 → far 0.58 / near 0.66）。`.api-s2-cross` 十字准星 ≤900px 隐藏（会压到文案）。
@@ -43,6 +44,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-08-17 17:03 — memory.md、ApiDomVisuals.jsx、particle-earth.js、structure.test.js、api-page.css
 - 2026-08-17 16:42 — memory.md、ApiDomVisuals.jsx、iso-hub-webgl.js、use-cases-scroll.js、api-page.css
 - 2026-08-17 14:35 — memory.md、AGENTS.md、hero-wash-shader.js
 - 2026-08-17 14:32 — hero-wash-shader.js、api-page.css
@@ -62,4 +64,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-17 10:26 — memory.md、api-page.css
 - 2026-08-17 10:24 — memory.md、api-page.css
 - 2026-08-17 10:22 — api-page.css
-- 2026-08-17 10:19 — memory.md、api-page.css

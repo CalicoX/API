@@ -126,7 +126,7 @@ export const CARRIERS_THEME = {
   ocean: [0.62, 0.76, 0.96],
   oceanHi: [0.78, 0.88, 1],
   violet: [0.75, 0.86, 1],
-  alphaMul: 0.78,
+  alphaMul: 0.62,
 };
 
 function landWeight(lon, lat) {
@@ -546,7 +546,13 @@ export function createParticleEarth(opts) {
     opts.onFrame?.({ smoothScroll, t, spin, canvas });
 
     if (!staticMode) {
-      raf = requestAnimationFrame(draw);
+      // idle pause: when the scene reports itself static, keep the last frame
+      // on screen and stop scheduling; wake() resumes the loop.
+      if (!opts.getAnimating || opts.getAnimating()) {
+        raf = requestAnimationFrame(draw);
+      } else {
+        raf = 0;
+      }
     }
   }
 
@@ -562,6 +568,12 @@ export function createParticleEarth(opts) {
     raf = 0;
     releaseBackbuffer();
   }
+
+  function wake() {
+    if (disposed || !visible || raf) return;
+    raf = requestAnimationFrame(draw);
+  }
+  opts.onApi?.({ wake });
 
   function wellOnScreen() {
     const r = observeEl.getBoundingClientRect();
@@ -599,7 +611,10 @@ export function createParticleEarth(opts) {
     if (opts.manualVis) syncVis();
     if (!visible) return;
     if (staticMode) raf = requestAnimationFrame(draw);
-    else resize();
+    else {
+      resize();
+      wake();
+    }
   }
 
   window.addEventListener("resize", onResize, { passive: true });
@@ -774,13 +789,28 @@ export function mountUseCasesEarth({ section, host, canvas }) {
 /**
  * Carriers well — canvas fills the well; globe sits on the bottom edge so
  * only the upper hemisphere shows (overflow clips the rest). Keep it faint.
+ * Spin is hover-driven: idle frames are frozen (no rAF), hovering the card
+ * eases the rotation in, leaving eases it back to a stop.
  */
 export function mountCarriersEarth(host, canvas) {
   const reduce = prefersReducedMotion() || !!window.__reduceFx;
   const narrow =
     (window.matchMedia && window.matchMedia("(max-width: 900px)").matches) ||
     !!window.__isMobileLayout;
-  return createParticleEarth({
+  const canHover =
+    !reduce &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(hover: hover)").matches;
+
+  const BASE_SPIN = 0.18;
+  const HOVER_SPEED = 0.18; // rad/s once fully spun up
+  let spinAngle = BASE_SPIN;
+  let speedK = 0; // eased 0..1 speed factor
+  let speedTarget = 0;
+  let lastT = null;
+  let api = null;
+
+  const dispose = createParticleEarth({
     host,
     canvas,
     canvasClass: "api-s4-carriers-earth",
@@ -791,13 +821,27 @@ export function mountCarriersEarth(host, canvas) {
     drawBackground: false,
     particleCount: narrow ? 4200 : 7200,
     dprMax: narrow ? 1.25 : 1.5,
-    scale: 1.08,
+    scale: 1.3,
     size: 2.25,
     followScroll: false,
     staticMode: reduce,
     manualVis: true,
-    getSpin: reduce ? () => 0.18 : ({ t }) => 0.18 + t * 0.07,
-    getNdcOffset: () => [0, -1.02],
+    getSpin: reduce
+      ? () => BASE_SPIN
+      : ({ t }) => {
+          if (lastT == null) lastT = t;
+          const dt = Math.min(Math.max(t - lastT, 0), 0.1);
+          lastT = t;
+          speedK += (speedTarget - speedK) * Math.min(1, dt * 2.6);
+          if (Math.abs(speedK - speedTarget) < 0.004) speedK = speedTarget;
+          spinAngle += HOVER_SPEED * speedK * dt;
+          return spinAngle;
+        },
+    getAnimating: () => speedTarget > 0 || speedK > 0.004,
+    onApi: (a) => {
+      api = a;
+    },
+    getNdcOffset: () => [0, -1.05],
     theme: CARRIERS_THEME,
     logPrefix: "[carriers-earth]",
     fallback2d: true,
@@ -805,4 +849,27 @@ export function mountCarriersEarth(host, canvas) {
     threshold: 0,
     rootMargin: "80px",
   });
+
+  let hoverEl = null;
+  const onEnter = () => {
+    speedTarget = 1;
+    lastT = null;
+    api?.wake();
+  };
+  const onLeave = () => {
+    speedTarget = 0;
+  };
+  if (canHover) {
+    hoverEl = host.closest(".api-s4-card") || host;
+    hoverEl.addEventListener("mouseenter", onEnter);
+    hoverEl.addEventListener("mouseleave", onLeave);
+  }
+
+  return function disposeCarriersEarth() {
+    if (hoverEl) {
+      hoverEl.removeEventListener("mouseenter", onEnter);
+      hoverEl.removeEventListener("mouseleave", onLeave);
+    }
+    dispose();
+  };
 }

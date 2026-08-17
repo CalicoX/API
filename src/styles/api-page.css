@@ -3666,6 +3666,7 @@
   }
 }
 
+/* 光晕平时收敛成微光，整卡 hover 才点亮到全强度（只过渡 opacity/filter，不逐帧重绘） */
 .api-s4-orbit-core::before,
 .api-s4-orbit-core::after {
   content: "";
@@ -3673,6 +3674,7 @@
   border-radius: 32%;
   corner-shape: superellipse(2);
   pointer-events: none;
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .api-s4-orbit-core::before {
@@ -3680,7 +3682,7 @@
   height: 168px;
   background: #2f7dff;
   filter: blur(34px);
-  opacity: 0.95;
+  opacity: 0.16;
 }
 
 .api-s4-orbit-core::after {
@@ -3688,6 +3690,14 @@
   height: 88px;
   background: #5eb0ff;
   filter: blur(10px);
+  opacity: 0.22;
+}
+
+.api-s4-card:hover .api-s4-orbit-core::before {
+  opacity: 0.95;
+}
+
+.api-s4-card:hover .api-s4-orbit-core::after {
   opacity: 1;
 }
 
@@ -3698,6 +3708,16 @@
   z-index: 1;
   overflow: visible;
   background: transparent;
+  /* 与 hover 态同构的 drop-shadow 列表，保证 filter 可平滑插值 */
+  filter:
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.7))
+    drop-shadow(0 0 14px rgba(110, 182, 255, 0.28))
+    drop-shadow(0 0 32px rgba(47, 125, 255, 0.22))
+    drop-shadow(0 0 68px rgba(47, 125, 255, 0.14));
+  transition: filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.api-s4-card:hover .api-s4-logo {
   filter:
     drop-shadow(0 0 1px #fff)
     drop-shadow(0 0 14px #6eb6ff)
@@ -3789,7 +3809,8 @@
   stroke: rgba(210, 230, 255, 0.55);
   stroke-width: 1.35;
   stroke-linecap: round;
-  stroke-dasharray: 220;
+  /* 第二排下移后最长连线约 260+，dash 必须盖过全长，否则线中间会断 */
+  stroke-dasharray: 300;
   stroke-dashoffset: 0;
 }
 
@@ -3800,7 +3821,7 @@
 
 @keyframes api-s4-wire {
   0% {
-    stroke-dashoffset: 220;
+    stroke-dashoffset: 300;
     opacity: 0.2;
   }
   22%, 58% {
@@ -3808,7 +3829,7 @@
     opacity: 1;
   }
   86%, 100% {
-    stroke-dashoffset: -220;
+    stroke-dashoffset: -300;
     opacity: 0.2;
   }
 }
@@ -3859,7 +3880,7 @@
   width: 132px;
   height: auto;
   min-height: 108px;
-  padding: 22px 14px 18px;
+  padding: 15px 14px 14px;
   box-sizing: border-box;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.75);
@@ -3868,6 +3889,23 @@
   box-shadow:
     0 0 0 6px rgba(255, 255, 255, 0.12),
     0 12px 28px rgba(8, 28, 90, 0.22);
+}
+
+.api-s4-hub-server {
+  display: block;
+  width: 76px;
+  height: auto;
+  margin-bottom: 9px;
+}
+
+.api-s4-card:hover .api-s4-hub-server .led {
+  animation: api-s4-led 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation-delay: calc(var(--i, 0) * 0.38s);
+}
+
+@keyframes api-s4-led {
+  0%, 100% { opacity: 1; }
+  30%, 46% { opacity: 0.22; }
 }
 
 .api-s4-hub-core b {
@@ -4168,6 +4206,7 @@
   .api-s4-card:hover .api-s4-hub-wires path,
   .api-s4-card:hover .api-s4-hub-logo,
   .api-s4-card:hover .api-s4-hub-core,
+  .api-s4-card:hover .api-s4-hub-server .led,
   .api-s4-card:hover .api-s4-codewin,
   .api-s4-card:hover .api-s4-float,
   .api-s4-card:hover .api-s4-link,
@@ -5013,7 +5052,12 @@
   .api-s4-hub-core {
     width: 112px;
     min-height: 92px;
-    padding: 16px 10px 14px;
+    padding: 12px 10px 11px;
+  }
+
+  .api-s4-hub-server {
+    width: 62px;
+    margin-bottom: 7px;
   }
 
   .api-s4-hub-core b {
