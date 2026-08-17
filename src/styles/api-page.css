@@ -3637,15 +3637,37 @@
 }
 
 /* 2. Carriers — hub on top, logos fan downward */
-.api-s4-illus:has(.api-s4-vig--carriers) > * {
+.api-s4-illus:has(.api-s4-vig--carriers) > *,
+.api-s4-illus--carriers > * {
   width: 100%;
   max-width: 100%;
+}
+
+.api-s4-illus--carriers {
+  background:
+    radial-gradient(circle at 50% 42%, #4a86ff 0%, #1b57e0 48%, #143eb4 100%);
+}
+
+.api-s4-illus--carriers::before {
+  display: none;
 }
 
 .api-s4-vig--carriers {
   align-items: center;
   justify-content: center;
   padding: 8px 6px 4px;
+}
+
+.api-s4-hub-globe {
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  z-index: 0;
+  width: 124%;
+  height: auto;
+  aspect-ratio: 1;
+  pointer-events: none;
+  translate: -50% -50%;
 }
 
 .api-s4-hub {
@@ -3657,6 +3679,7 @@
 .api-s4-hub-wires {
   position: absolute;
   inset: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
   pointer-events: none;
@@ -3665,7 +3688,7 @@
 
 .api-s4-hub-wires path {
   fill: none;
-  stroke: #93c5fd;
+  stroke: rgba(210, 230, 255, 0.55);
   stroke-width: 1.35;
   stroke-linecap: round;
   stroke-dasharray: 220;
@@ -3696,23 +3719,17 @@
   position: absolute;
   left: var(--x);
   top: var(--y);
-  z-index: 1;
+  z-index: 2;
   width: 46px;
   height: 46px;
   padding: 0;
   box-sizing: border-box;
   border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   background: #fff;
   overflow: hidden;
   transform: translate(-50%, -50%);
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
-}
-
-.api-s4-hub-logo.is-fade {
-  width: 38px;
-  height: 38px;
-  opacity: 0.4;
+  box-shadow: 0 6px 16px rgba(8, 28, 90, 0.22);
 }
 
 .api-s4-hub-logo img {
@@ -3735,36 +3752,51 @@
 .api-s4-hub-core {
   position: absolute;
   left: 50%;
-  top: 8px;
-  z-index: 2;
+  top: 10px;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 120px;
-  height: 120px;
-  border-radius: 22px;
-  border: 1px solid rgba(15, 23, 42, 0.1);
+  width: 132px;
+  height: auto;
+  min-height: 108px;
+  padding: 22px 14px 18px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
   background: #fff;
   transform: translateX(-50%);
   box-shadow:
-    0 0 0 6px rgba(59, 130, 246, 0.08),
-    0 10px 24px rgba(15, 40, 120, 0.08);
+    0 0 0 6px rgba(255, 255, 255, 0.12),
+    0 12px 28px rgba(8, 28, 90, 0.22);
 }
 
 .api-s4-hub-core b {
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  color: #0f172a;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.048em;
+  line-height: 0.92;
+  font-variant-numeric: tabular-nums;
+  color: #0b1b4a;
+}
+
+.api-s4-hub-core b span {
+  margin-left: 1px;
+  font-size: 0.58em;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  vertical-align: 0.22em;
+  color: #2563eb;
 }
 
 .api-s4-hub-core em {
-  margin-top: 6px;
-  font-size: 12px;
+  margin-top: 8px;
+  font-size: 10px;
   font-style: normal;
-  color: #64748b;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7b8798;
 }
 
 .api-s4-card:hover .api-s4-hub-core {
@@ -4884,18 +4916,14 @@
     height: 40px;
   }
 
-  .api-s4-hub-logo.is-fade {
-    width: 32px;
-    height: 32px;
-  }
-
   .api-s4-hub-core {
-    width: 100px;
-    height: 100px;
+    width: 112px;
+    min-height: 92px;
+    padding: 16px 10px 14px;
   }
 
   .api-s4-hub-core b {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .api-s4-copy {

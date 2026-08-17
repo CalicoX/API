@@ -36,6 +36,7 @@ const CARDS = [
   },
   {
     Visual: DataCarriersStage,
+    well: "carriers",
     title: "The world's carriers covered",
     body: "17TRACK now includes 3400+ mainstream carriers worldwide, with ever-increasing new ones every week. Contact us anytime and request an unsupported carrier.",
   },

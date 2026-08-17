@@ -80,20 +80,25 @@ const S4_MAINS_INNER = [
 ];
 
 const S4_HUB_NODES = [
-  { src: "/assets/carriers/dhl.svg", name: "DHL", x: 128, y: 178 },
-  { src: "/assets/carriers/ups.svg", name: "UPS", x: 200, y: 178 },
-  { src: "/assets/carriers/usps.svg", name: "USPS", x: 272, y: 178 },
-  { src: "/assets/carriers/fedex.svg", name: "FedEx", x: 56, y: 248 },
-  { src: "/assets/carriers/tnt.svg", name: "TNT", x: 128, y: 248 },
-  { src: "/assets/carriers/gls.svg", name: "GLS", x: 200, y: 248 },
-  { src: "/assets/carriers/dpd.svg", name: "DPD", x: 272, y: 248 },
-  { src: "/assets/carriers/royal-mail.svg", name: "Royal Mail", x: 344, y: 248 },
-  { src: "/assets/carriers/yunexpress.svg", name: "YunExpress", x: 56, y: 318, fade: true },
-  { src: "/assets/carriers/4px.svg", name: "4PX", x: 128, y: 318, fade: true },
-  { src: "/assets/carriers/cainiao.svg", name: "Cainiao", x: 200, y: 318, fade: true },
-  { src: "/assets/carriers/china-post.svg", name: "China Post", x: 272, y: 318, fade: true },
-  { src: "/assets/carriers/laposte.svg", name: "La Poste", x: 344, y: 318, fade: true },
+  { src: "/assets/carriers/dhl.svg", name: "DHL", x: 128, y: 188 },
+  { src: "/assets/carriers/ups.svg", name: "UPS", x: 200, y: 188 },
+  { src: "/assets/carriers/usps.svg", name: "USPS", x: 272, y: 188 },
+  { src: "/assets/carriers/fedex.svg", name: "FedEx", x: 56, y: 268 },
+  { src: "/assets/carriers/tnt.svg", name: "TNT", x: 128, y: 268 },
+  { src: "/assets/carriers/gls.svg", name: "GLS", x: 200, y: 268 },
+  { src: "/assets/carriers/dpd.svg", name: "DPD", x: 272, y: 268 },
+  { src: "/assets/carriers/royal-mail.svg", name: "Royal Mail", x: 344, y: 268 },
 ];
+
+const GLOBE_GOLDEN = Math.PI * (3 - Math.sqrt(5));
+const S4_GLOBE_DOTS = Array.from({ length: 560 }, (_, i) => {
+  const y = 1 - (i / 559) * 2;
+  const r = Math.sqrt(Math.max(0, 1 - y * y));
+  const t = GLOBE_GOLDEN * i;
+  const x = Math.cos(t) * r;
+  const z = Math.sin(t) * r;
+  return { x, y, z };
+}).filter((d) => d.z > -0.14);
 
 function hubWirePath(x, y) {
   const mid = 128 + (y - 128) * 0.42;
@@ -159,6 +164,21 @@ export function DataCarriersStage() {
   return (
     <div className="api-s4-vig api-s4-vig--carriers" aria-hidden="true">
       <div className="api-s4-hub">
+        <svg className="api-s4-hub-globe" viewBox="-1.12 -1.12 2.24 2.24" aria-hidden="true">
+          <circle cx="0" cy="0" r="1.02" fill="none" stroke="rgba(255,255,255,0.16)" strokeWidth="0.012" />
+          {S4_GLOBE_DOTS.map((d, i) => {
+            const shade = 0.28 + 0.72 * ((d.z + 0.14) / 1.14);
+            return (
+              <circle
+                key={i}
+                cx={d.x}
+                cy={d.y}
+                r={0.01 + shade * 0.01}
+                fill={`rgba(255,255,255,${(0.18 + shade * 0.55).toFixed(3)})`}
+              />
+            );
+          })}
+        </svg>
         <svg
           className="api-s4-hub-wires"
           viewBox="0 0 400 360"
@@ -171,13 +191,15 @@ export function DataCarriersStage() {
           ))}
         </svg>
         <div className="api-s4-hub-core">
-          <b>3400+</b>
+          <b>
+            3,400<span>+</span>
+          </b>
           <em>carriers</em>
         </div>
         {S4_HUB_NODES.map((node, i) => (
           <span
             key={node.name}
-            className={`api-s4-hub-logo${node.fade ? " is-fade" : ""}`}
+            className="api-s4-hub-logo"
             style={{ "--x": `${(node.x / 400) * 100}%`, "--y": `${(node.y / 360) * 100}%`, "--i": i }}
           >
             <img src={node.src} alt="" />
