@@ -712,29 +712,30 @@ export function mountUseCasesEarth({ section, host, canvas }) {
   });
 }
 
-/** Carriers well — centered, slow spin, ice dots on the blue well. */
+/** Carriers well — half-well globe (slot ~58%), lower, slow spin. Not full-bleed. */
 export function mountCarriersEarth(host, canvas) {
   const reduce = prefersReducedMotion() || !!window.__reduceFx;
   const narrow =
     (window.matchMedia && window.matchMedia("(max-width: 900px)").matches) ||
     !!window.__isMobileLayout;
+  const card = host.closest?.(".api-s4-card") || host;
   return createParticleEarth({
     host,
     canvas,
     canvasClass: "api-s4-carriers-earth",
-    observeEl: host.closest(".api-s4-card") || host,
+    observeEl: card,
     alpha: true,
     antialias: !narrow,
     premultipliedAlpha: true,
     drawBackground: false,
     particleCount: narrow ? 4200 : 7200,
     dprMax: narrow ? 1.25 : 1.5,
-    scale: 1.14,
-    size: 1.55,
+    scale: 1.02,
+    size: 1.7,
     followScroll: false,
     staticMode: reduce,
     getSpin: reduce ? () => 0.18 : ({ t }) => 0.18 + t * 0.07,
-    getNdcOffset: () => [0, 0.05],
+    getNdcOffset: () => [0, 0],
     theme: CARRIERS_THEME,
     logPrefix: "[carriers-earth]",
     fallback2d: true,

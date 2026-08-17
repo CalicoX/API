@@ -165,10 +165,10 @@ export function DataCarriersStage() {
       loaded = true;
       import("../../fx/lib/particle-earth.js").then(({ mountCarriersEarth }) => {
         if (cancelled || !hostRef.current) return;
-        dispose = mountCarriersEarth(
-          hostRef.current,
-          hostRef.current.querySelector(".api-s4-carriers-earth")
-        );
+        const slot = hostRef.current.querySelector(".api-s4-carriers-earth-slot");
+        const canvas = hostRef.current.querySelector(".api-s4-carriers-earth");
+        if (!slot || !canvas) return;
+        dispose = mountCarriersEarth(slot, canvas);
         if (cancelled) {
           dispose();
           dispose = () => {};
@@ -193,7 +193,9 @@ export function DataCarriersStage() {
 
   return (
     <div className="api-s4-vig api-s4-vig--carriers" ref={hostRef} aria-hidden="true">
-      <canvas className="api-s4-carriers-earth" aria-hidden="true" />
+      <div className="api-s4-carriers-earth-slot">
+        <canvas className="api-s4-carriers-earth" aria-hidden="true" />
+      </div>
       <div className="api-s4-hub">
         <svg
           className="api-s4-hub-wires"
