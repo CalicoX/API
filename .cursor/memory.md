@@ -17,7 +17,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Data Operations 四张卡插图要各不相同，不能都顶满井。
 - Tracking data 卡：双环 9 个大状态用 Figma 官方图标（`public/assets/status/`），外 5 / 内 4。状态色必须用产品官方值，不要改灰：Info `#00bcd4`、Transit `#2196f3`、Out `#2962ff`、Pickup `#0d47a1`、Alert `#ff6f00`、Delivered `#43a047`、Expired `#b71c1c`、Undelivered `#f44336`、NotFound `#757575`。圆角 6px。体积渐变 160°：亮停靠白、暗停靠井色 `#151b28`，不要混纯黑。两圈描边：外圈用状态色本身（`0 0 0 1px var(--chip)`），不要混白、不要混黑；内圈深（`inset 1px`，chip 混井色）。整卡 hover：放大的是中间 logo（`.api-s4-orbit-core` 从 `scale(0.84)` 缓动到 1，现在的 64px 是 hover 尺寸），不是状态图标；同时内外反向公转。图标正向、中心在轨道上，环 `z-index: 4` 压在光晕之上，光不能遮住 icon。中间 17 logo 平面约 64px，外形是超椭圆（n=5，二次贝塞尔平滑曲线），不要普通圆角矩形。中间 logo 光还要更大（外圈约 168px / blur 34 / drop-shadow 68px），饱和蓝（`#2f7dff` / `#5eb0ff`），贴边+外扩，中心亮、边缘干净衰减；不要发白、不要紫、不要脏雾。Park 连说不够。轨道圆圈很淡（约 0.2 透明度）。
 - Tracking data 井：深色，只比 `#0a0d14` 稍浅一档，不要改浅灰、不要改成中灰蓝 `#3c465e`。渐变中心 `#1c2434` → 边 `#111620`，再加很淡的白蓝径向。点阵用淡白点。承运商井是蓝色 + 第二屏同款 WebGL 点状地球；Visibility / Dashboard 仍浅灰点阵。
-- 承运商卡：底排 5 个淡出 logo 去掉，只留上两排（3+5）。井是蓝色（`#4a86ff` → `#1b57e0` → `#143eb4`），不要浅灰点阵。背景是第二屏 Use Cases 同款 WebGL 点状地球（公共模块 `src/fx/lib/particle-earth.js`），不是 SVG 点、不是井点阵。地球要大：canvas 铺满井拿真实尺寸，shader `scale: 1.08` + 偏下 `offset [0,-0.16]`。0.62 太小，Park 否了。不要用 absolute+aspect-ratio 空槽当 WebGL host（高度容易是 0，地球就没了）。不要铺成 124% 全幅。z-index 低于 3400+ / logo；蓝底上用白/浅蓝点；慢转。横向 sticky + `overflow-x: clip` 时不要只靠 IntersectionObserver 才 start，用 getBoundingClientRect 判可见。卡滚出可视区停画。3400+ 视觉写成 `3,400+`（+ 略小、偏蓝），字重 700、tabular，carriers 大写字距。枢轴白卡约 132px 宽。logo 构图铺满井，地球不铺满。
+- 承运商卡：底排 5 个淡出 logo 去掉，只留上两排（3+5）。井是蓝色（`#4a86ff` → `#1b57e0` → `#143eb4`），不要浅灰点阵。背景是第二屏 Use Cases 同款 WebGL 点状地球（公共模块 `src/fx/lib/particle-earth.js`），不是 SVG 点、不是井点阵。地球要淡、往下放、井口只切出上半颗：`scale: 1.08`，`offset [0,-1.02]`（赤道贴井底，下半被 overflow 裁掉），`alphaMul: 0.78`。不要用 absolute+aspect-ratio 空槽当 WebGL host（高度容易是 0，地球就没了）。不要铺成 124% 全幅。z-index 低于 3400+ / logo；蓝底上用白/浅蓝点；慢转。横向 sticky + `overflow-x: clip` 时不要只靠 IntersectionObserver 才 start，用 getBoundingClientRect 判可见。卡滚出可视区停画。3400+ 视觉写成 `3,400+`（+ 略小、偏蓝），字重 700、tabular，carriers 大写字距。枢轴白卡约 132px 宽。logo 构图铺满井，地球不铺满。
 - 标题单词亮度跟滚动走（`--on`），不是进场自动播。
 - 右侧渐隐遮罩跟 `--s4-p`，最后一张收掉。
 - Contact Us 在四张卡都有；当前卡 / hover 箭头 `api-s4-cta-nudge`。
@@ -37,6 +37,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-08-17 11:09 — memory.md、particle-earth.js
 - 2026-08-17 11:07 — memory.md、ApiDomVisuals.jsx、particle-earth.js、structure.test.js、api-page.css
 - 2026-08-17 10:53 — memory.md、ApiDomVisuals.jsx、particle-earth.js、structure.test.js、api-page.css
 - 2026-08-17 10:50 — memory.md、ApiDomVisuals.jsx、use-cases-bg-shader.js、structure.test.js、api-page.css 等 6 项
@@ -56,4 +57,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-14 14:45 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-14 11:31 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css、logo-17-mark.png
 - 2026-08-14 10:38 — memory.md
-- 2026-08-14 10:38 — .gitignore、.cursor、AGENTS.md

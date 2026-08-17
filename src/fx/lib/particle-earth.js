@@ -121,12 +121,12 @@ export const USE_CASES_THEME = {
 
 /** White / ice-blue dots on the carriers blue well. */
 export const CARRIERS_THEME = {
-  land: [0.95, 0.97, 1],
-  landHi: [1, 1, 1],
-  ocean: [0.72, 0.84, 1],
-  oceanHi: [0.88, 0.94, 1],
-  violet: [0.8, 0.9, 1],
-  alphaMul: 2.15,
+  land: [0.88, 0.93, 1],
+  landHi: [0.96, 0.98, 1],
+  ocean: [0.62, 0.76, 0.96],
+  oceanHi: [0.78, 0.88, 1],
+  violet: [0.75, 0.86, 1],
+  alphaMul: 0.78,
 };
 
 function landWeight(lon, lat) {
@@ -772,8 +772,8 @@ export function mountUseCasesEarth({ section, host, canvas }) {
 }
 
 /**
- * Carriers well — canvas fills the well (real size); globe is large via
- * shader scale/offset (slightly lower). Do not size WebGL from an empty slot.
+ * Carriers well — canvas fills the well; globe sits on the bottom edge so
+ * only the upper hemisphere shows (overflow clips the rest). Keep it faint.
  */
 export function mountCarriersEarth(host, canvas) {
   const reduce = prefersReducedMotion() || !!window.__reduceFx;
@@ -797,7 +797,7 @@ export function mountCarriersEarth(host, canvas) {
     staticMode: reduce,
     manualVis: true,
     getSpin: reduce ? () => 0.18 : ({ t }) => 0.18 + t * 0.07,
-    getNdcOffset: () => [0, -0.16],
+    getNdcOffset: () => [0, -1.02],
     theme: CARRIERS_THEME,
     logPrefix: "[carriers-earth]",
     fallback2d: true,
