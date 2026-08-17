@@ -28,7 +28,7 @@
  *                (park: purple + blue, plus a little orange; no green)
  *                radius 3.5, momentum 13
  *                (design tweak: intensity 1.2 instead of preset 0.85,
- *                 decay slowed via CF_FADE_SCALE 0.45)
+ *                 decay slowed via CF_FADE_SCALE 0.7)
  *   FlutedGlass: shape rounded, angle 31, frequency 8, softness 1, refraction 4,
  *                aberration 0.61, lightAngle -90, highlight 0.12,
  *                highlightSoftness 0.3, highlightColor #FFFFFF, speed 0, edges mirror
