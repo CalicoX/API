@@ -40,6 +40,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-08-17 14:32 — hero-wash-shader.js、api-page.css
 - 2026-08-17 14:25 — memory.md、Hero.jsx、api-page.css
 - 2026-08-17 14:06 — memory.md、Hero.jsx、api-page.css
 - 2026-08-17 13:59 — memory.md、api-page.css
@@ -59,4 +60,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-17 10:19 — memory.md、api-page.css
 - 2026-08-17 10:17 — memory.md、api-page.css
 - 2026-08-17 10:13 — memory.md、api-page.css
-- 2026-08-14 15:39 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css、status

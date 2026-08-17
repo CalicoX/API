@@ -235,13 +235,13 @@
   margin-bottom: 10px;
   font-size: clamp(2.05rem, 3.6vw, 3.15rem);
   text-wrap: pretty;
-  /* 字内光：光斑裁进字形，底层保持墨色 */
+  /* 字内光：光斑裁进字形，底层保持墨色。单色相品牌蓝，保持比背景深，不发浅、不发紫 */
   background:
     radial-gradient(
-      170px circle at var(--h1-x) var(--h1-y),
-      rgba(196, 222, 255, calc(var(--h1-glow) * 0.98)) 0%,
-      rgba(91, 111, 255, calc(var(--h1-glow) * 0.6)) 42%,
-      rgba(91, 111, 255, 0) 72%
+      130px circle at var(--h1-x) var(--h1-y),
+      rgba(59, 130, 246, calc(var(--h1-glow) * 0.95)) 0%,
+      rgba(37, 99, 235, calc(var(--h1-glow) * 0.55)) 46%,
+      rgba(37, 99, 235, 0) 74%
     ),
     linear-gradient(var(--api-ink), var(--api-ink));
   -webkit-background-clip: text;

@@ -101,7 +101,7 @@ export function mount() {
     // Design tweaks over the original preset (0.85 / fade ×1):
     // stronger ink deposits, slower trail decay.
     const CF_INTENSITY = 1.2;
-    const CF_FADE_SCALE = 0.45; // 1 = original decay speed; lower = slower
+    const CF_FADE_SCALE = 0.7; // 1 = original decay speed; lower = slower
 
     const FG_ANGLE = 31;
     const FG_FREQ = 8;
