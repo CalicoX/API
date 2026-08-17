@@ -117,7 +117,16 @@ describe("API landing structure (gating)", () => {
     expect(read("fx/modules/iso-hub-webgl.js")).toMatch(/createIsoHubWebGL|three/);
     expect(read("fx/modules/use-cases-bg-shader.js")).toMatch(/export function mount/);
     expect(read("fx/modules/use-cases-bg-shader.js")).toMatch(
+      /Fibonacci|particle earth|aLand|uSpin|progPt|particle-earth/
+    );
+    expect(read("fx/lib/particle-earth.js")).toMatch(
       /Fibonacci|particle earth|aLand|uSpin|progPt/
+    );
+    expect(read("components/visuals/ApiDomVisuals.jsx")).toMatch(
+      /mountCarriersEarth|particle-earth/
+    );
+    expect(read("components/visuals/ApiDomVisuals.jsx")).not.toMatch(
+      /S4_GLOBE_DOTS|api-s4-hub-globe/
     );
     expect(read("fx/modules/iso-hub-webgl.js")).toMatch(
       /hard-edge gradient sweep|xLead|createLinearGradient/

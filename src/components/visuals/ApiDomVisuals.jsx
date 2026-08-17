@@ -90,16 +90,6 @@ const S4_HUB_NODES = [
   { src: "/assets/carriers/royal-mail.svg", name: "Royal Mail", x: 344, y: 268 },
 ];
 
-const GLOBE_GOLDEN = Math.PI * (3 - Math.sqrt(5));
-const S4_GLOBE_DOTS = Array.from({ length: 560 }, (_, i) => {
-  const y = 1 - (i / 559) * 2;
-  const r = Math.sqrt(Math.max(0, 1 - y * y));
-  const t = GLOBE_GOLDEN * i;
-  const x = Math.cos(t) * r;
-  const z = Math.sin(t) * r;
-  return { x, y, z };
-}).filter((d) => d.z > -0.14);
-
 function hubWirePath(x, y) {
   const mid = 128 + (y - 128) * 0.42;
   return `M200 128 C 200 ${mid.toFixed(1)}, ${x} ${mid.toFixed(1)}, ${x} ${y}`;
@@ -161,24 +151,50 @@ export function DataStatusStage() {
 }
 
 export function DataCarriersStage() {
+  const hostRef = useRef(null);
+
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host) return undefined;
+    let cancelled = false;
+    let dispose = () => {};
+    let loaded = false;
+
+    const load = () => {
+      if (loaded || cancelled) return;
+      loaded = true;
+      import("../../fx/lib/particle-earth.js").then(({ mountCarriersEarth }) => {
+        if (cancelled || !hostRef.current) return;
+        dispose = mountCarriersEarth(
+          hostRef.current,
+          hostRef.current.querySelector(".api-s4-carriers-earth")
+        );
+        if (cancelled) {
+          dispose();
+          dispose = () => {};
+        }
+      });
+    };
+
+    const unvis = observeVisibility(
+      host,
+      (vis) => {
+        if (vis) load();
+      },
+      { threshold: 0.01, rootMargin: "160px" }
+    );
+
+    return () => {
+      cancelled = true;
+      unvis();
+      dispose();
+    };
+  }, []);
+
   return (
-    <div className="api-s4-vig api-s4-vig--carriers" aria-hidden="true">
+    <div className="api-s4-vig api-s4-vig--carriers" ref={hostRef} aria-hidden="true">
+      <canvas className="api-s4-carriers-earth" aria-hidden="true" />
       <div className="api-s4-hub">
-        <svg className="api-s4-hub-globe" viewBox="-1.12 -1.12 2.24 2.24" aria-hidden="true">
-          <circle cx="0" cy="0" r="1.02" fill="none" stroke="rgba(255,255,255,0.16)" strokeWidth="0.012" />
-          {S4_GLOBE_DOTS.map((d, i) => {
-            const shade = 0.28 + 0.72 * ((d.z + 0.14) / 1.14);
-            return (
-              <circle
-                key={i}
-                cx={d.x}
-                cy={d.y}
-                r={0.01 + shade * 0.01}
-                fill={`rgba(255,255,255,${(0.18 + shade * 0.55).toFixed(3)})`}
-              />
-            );
-          })}
-        </svg>
         <svg
           className="api-s4-hub-wires"
           viewBox="0 0 400 360"
