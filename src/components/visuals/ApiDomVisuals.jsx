@@ -158,44 +158,27 @@ export function DataCarriersStage() {
     if (!host) return undefined;
     let cancelled = false;
     let dispose = () => {};
-    let loaded = false;
 
-    const load = () => {
-      if (loaded || cancelled) return;
-      loaded = true;
-      import("../../fx/lib/particle-earth.js").then(({ mountCarriersEarth }) => {
-        if (cancelled || !hostRef.current) return;
-        const slot = hostRef.current.querySelector(".api-s4-carriers-earth-slot");
-        const canvas = hostRef.current.querySelector(".api-s4-carriers-earth");
-        if (!slot || !canvas) return;
-        dispose = mountCarriersEarth(slot, canvas);
-        if (cancelled) {
-          dispose();
-          dispose = () => {};
-        }
-      });
-    };
-
-    const unvis = observeVisibility(
-      host,
-      (vis) => {
-        if (vis) load();
-      },
-      { threshold: 0.01, rootMargin: "160px" }
-    );
+    import("../../fx/lib/particle-earth.js").then(({ mountCarriersEarth }) => {
+      if (cancelled || !hostRef.current) return;
+      const canvas = hostRef.current.querySelector(".api-s4-carriers-earth");
+      if (!canvas) return;
+      dispose = mountCarriersEarth(hostRef.current, canvas);
+      if (cancelled) {
+        dispose();
+        dispose = () => {};
+      }
+    });
 
     return () => {
       cancelled = true;
-      unvis();
       dispose();
     };
   }, []);
 
   return (
     <div className="api-s4-vig api-s4-vig--carriers" ref={hostRef} aria-hidden="true">
-      <div className="api-s4-carriers-earth-slot">
-        <canvas className="api-s4-carriers-earth" aria-hidden="true" />
-      </div>
+      <canvas className="api-s4-carriers-earth" aria-hidden="true" />
       <div className="api-s4-hub">
         <svg
           className="api-s4-hub-wires"

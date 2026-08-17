@@ -121,12 +121,12 @@ export const USE_CASES_THEME = {
 
 /** White / ice-blue dots on the carriers blue well. */
 export const CARRIERS_THEME = {
-  land: [0.9, 0.95, 1],
+  land: [0.95, 0.97, 1],
   landHi: [1, 1, 1],
-  ocean: [0.62, 0.78, 1],
-  oceanHi: [0.8, 0.9, 1],
-  violet: [0.72, 0.84, 1],
-  alphaMul: 1.65,
+  ocean: [0.72, 0.84, 1],
+  oceanHi: [0.88, 0.94, 1],
+  violet: [0.8, 0.9, 1],
+  alphaMul: 2.15,
 };
 
 function landWeight(lon, lat) {
@@ -360,6 +360,7 @@ export function createParticleEarth(opts) {
       getSpin,
       getNdcOffset,
       observeEl,
+      manualVis: !!opts.manualVis,
       removeCanvas: opts.removeCanvasOnDispose && createdCanvas,
     });
   }
@@ -381,6 +382,7 @@ export function createParticleEarth(opts) {
         getSpin,
         getNdcOffset,
         observeEl,
+        manualVis: !!opts.manualVis,
         removeCanvas: opts.removeCanvasOnDispose && createdCanvas,
       });
     }
@@ -561,9 +563,29 @@ export function createParticleEarth(opts) {
     releaseBackbuffer();
   }
 
+  function wellOnScreen() {
+    const r = observeEl.getBoundingClientRect();
+    const overlapX = Math.min(r.right, window.innerWidth) - Math.max(r.left, 0);
+    const overlapY = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
+    return r.width > 8 && r.height > 8 && overlapX > 24 && overlapY > 24;
+  }
+
+  function syncVis() {
+    if (disposed) return;
+    if (opts.manualVis) {
+      if (wellOnScreen()) start();
+      else stop();
+      return;
+    }
+  }
+
   const io = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (e) {
+        if (opts.manualVis) {
+          syncVis();
+          return;
+        }
         if (e.isIntersecting) start();
         else stop();
       });
@@ -573,7 +595,9 @@ export function createParticleEarth(opts) {
   io.observe(observeEl);
 
   function onResize() {
-    if (!visible || disposed) return;
+    if (disposed) return;
+    if (opts.manualVis) syncVis();
+    if (!visible) return;
     if (staticMode) raf = requestAnimationFrame(draw);
     else resize();
   }
@@ -598,6 +622,19 @@ export function createParticleEarth(opts) {
 
   resize();
   if (opts.followScroll) readScroll();
+  if (opts.manualVis) {
+    window.addEventListener("scroll", syncVis, { passive: true });
+    if (window.__lenis?.on) {
+      try {
+        window.__lenis.on("scroll", syncVis);
+      } catch {
+        /* ignore */
+      }
+    }
+    requestAnimationFrame(syncVis);
+  } else if (opts.autostart) {
+    start();
+  }
 
   return function dispose() {
     disposed = true;
@@ -605,6 +642,7 @@ export function createParticleEarth(opts) {
     io.disconnect();
     ro?.disconnect();
     window.removeEventListener("resize", onResize);
+    if (opts.manualVis) window.removeEventListener("scroll", syncVis);
     if (opts.followScroll) {
       window.removeEventListener("scroll", readScroll);
     }
@@ -628,6 +666,13 @@ function mount2dFallback(cfg) {
     cfg;
   let disposed = false;
   let visible = false;
+
+  function onScreen() {
+    const r = observeEl.getBoundingClientRect();
+    const overlapX = Math.min(r.right, window.innerWidth) - Math.max(r.left, 0);
+    const overlapY = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
+    return r.width > 8 && r.height > 8 && overlapX > 24 && overlapY > 24;
+  }
 
   function paint() {
     if (disposed || !visible) return;
@@ -658,23 +703,37 @@ function mount2dFallback(cfg) {
     }
   }
 
+  function syncVis() {
+    if (disposed) return;
+    if (onScreen()) {
+      start();
+      paint();
+    } else stop();
+  }
+
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((e) => {
-        if (e.isIntersecting) start();
+        if (cfg.manualVis) syncVis();
+        else if (e.isIntersecting) start();
         else stop();
       });
     },
     { threshold: 0.02, rootMargin: "80px" }
   );
   io.observe(observeEl);
-  window.addEventListener("resize", paint, { passive: true });
+  window.addEventListener("resize", cfg.manualVis ? syncVis : paint, { passive: true });
+  if (cfg.manualVis) {
+    window.addEventListener("scroll", syncVis, { passive: true });
+    requestAnimationFrame(syncVis);
+  }
 
   return function dispose() {
     disposed = true;
     stop();
     io.disconnect();
-    window.removeEventListener("resize", paint);
+    window.removeEventListener("resize", cfg.manualVis ? syncVis : paint);
+    if (cfg.manualVis) window.removeEventListener("scroll", syncVis);
     if (cfg.removeCanvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
   };
 }
@@ -712,35 +771,38 @@ export function mountUseCasesEarth({ section, host, canvas }) {
   });
 }
 
-/** Carriers well — half-well globe (slot ~58%), lower, slow spin. Not full-bleed. */
+/**
+ * Carriers well — canvas fills the well (real size); globe is large via
+ * shader scale/offset (slightly lower). Do not size WebGL from an empty slot.
+ */
 export function mountCarriersEarth(host, canvas) {
   const reduce = prefersReducedMotion() || !!window.__reduceFx;
   const narrow =
     (window.matchMedia && window.matchMedia("(max-width: 900px)").matches) ||
     !!window.__isMobileLayout;
-  const card = host.closest?.(".api-s4-card") || host;
   return createParticleEarth({
     host,
     canvas,
     canvasClass: "api-s4-carriers-earth",
-    observeEl: card,
+    observeEl: host,
     alpha: true,
     antialias: !narrow,
     premultipliedAlpha: true,
     drawBackground: false,
     particleCount: narrow ? 4200 : 7200,
     dprMax: narrow ? 1.25 : 1.5,
-    scale: 1.02,
-    size: 1.7,
+    scale: 1.08,
+    size: 2.25,
     followScroll: false,
     staticMode: reduce,
+    manualVis: true,
     getSpin: reduce ? () => 0.18 : ({ t }) => 0.18 + t * 0.07,
-    getNdcOffset: () => [0, 0],
+    getNdcOffset: () => [0, -0.16],
     theme: CARRIERS_THEME,
     logPrefix: "[carriers-earth]",
     fallback2d: true,
     removeCanvasOnDispose: false,
-    threshold: 0.08,
-    rootMargin: "40px",
+    threshold: 0,
+    rootMargin: "80px",
   });
 }
