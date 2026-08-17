@@ -181,7 +181,7 @@
   z-index: 2;
   flex: 1 1 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(380px, 460px);
+  grid-template-columns: minmax(0, 1.2fr) minmax(420px, 520px);
   gap: 36px 48px;
   align-items: center;
   justify-items: stretch;
