@@ -257,9 +257,18 @@ export function DataHubStage() {
             </div>
             <div className="api-vig-field">
               <span>Carrier*</span>
-              <b>
-                <i className="api-s4-detect-auto">Auto-detect</i>
-                <i className="api-s4-detect-hit">DHL Express</i>
+              <b className="api-s4-carrier-box">
+                <i className="api-s4-detect-auto">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <circle cx="5.2" cy="5.2" r="3.4" stroke="currentColor" strokeWidth="1.4" />
+                    <path d="M7.9 7.9l2.3 2.3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                  Auto-detect
+                </i>
+                <i className="api-s4-detect-hit">
+                  <img src="/assets/carriers/dhl.svg" alt="" />
+                  DHL Express
+                </i>
               </b>
             </div>
           </div>
@@ -277,8 +286,21 @@ export function DataHubStage() {
               <img src="/assets/carriers/dhl.svg" alt="" />
               <div>
                 <b>DHL Express</b>
-                <em>80%+ match · syncing until fulfilled</em>
+                <em>LV123242CN</em>
               </div>
+              <span className="api-s4-match">80%+ match</span>
+            </div>
+            <div className="api-s4-sync">
+              <div className="api-s4-sync-track">
+                <i className="api-s4-sync-dot" style={{ "--c": "#00bcd4", "--i": 0 }} />
+                <i className="api-s4-sync-seg" style={{ "--i": 0 }} />
+                <i className="api-s4-sync-dot" style={{ "--c": "#2196f3", "--i": 1 }} />
+                <i className="api-s4-sync-seg" style={{ "--i": 1 }} />
+                <i className="api-s4-sync-dot" style={{ "--c": "#2962ff", "--i": 2 }} />
+                <i className="api-s4-sync-seg" style={{ "--i": 2 }} />
+                <i className="api-s4-sync-dot is-live" style={{ "--c": "#43a047", "--i": 3 }} />
+              </div>
+              <em>Auto-sync · non-stop until fulfilled</em>
             </div>
           </div>
         </div>
@@ -287,57 +309,120 @@ export function DataHubStage() {
   );
 }
 
+/* Dashboard collage — bars: carrier avg transit days, part of well width */
+const S4_PERF_BARS = [
+  ["USPS", "3.2d", 0.86, "#2962ff"],
+  ["UPS", "2.4d", 0.64, "#2196f3"],
+  ["FedEx", "2.1d", 0.56, "#00bcd4"],
+  ["DHL", "1.9d", 0.5, "#43a047"],
+];
+
+const S4_FN_ROWS = [
+  ["Register API", "99.9%", "#43a047"],
+  ["Webhook push", "99.8%", "#43a047"],
+  ["Carrier sync", "97.2%", "#ff6f00"],
+];
+
 export function DataChartStage() {
   let acc = 0;
   return (
     <div className="api-s4-vig api-s4-vig--dash" aria-hidden="true">
-      <article className="api-s4-chartcard">
-        <span className="api-s4-chart-kicker">Status distribution</span>
-        <div className="api-s4-donut-wrap">
-          <svg viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r={DONUT_R} fill="none" stroke="#eef2f7" strokeWidth="11" />
-            <g transform="rotate(-90 50 50)">
-              {S4_ARCS.map(([part, color, label], i) => {
-                const len = part * DONUT_C;
-                const off = -acc;
-                acc += len;
-                return (
-                  <circle
-                    key={label}
-                    className="api-s4-donut-seg"
-                    cx="50"
-                    cy="50"
-                    r={DONUT_R}
-                    fill="none"
-                    stroke={color}
-                    strokeWidth="11"
-                    strokeDasharray={`${len} ${DONUT_C - len}`}
-                    strokeDashoffset={off}
-                    style={{
-                      "--len": len,
-                      "--rest": DONUT_C - len,
-                      "--off": off,
-                      "--delay": `${i * 0.07}s`,
-                    }}
-                  />
-                );
-              })}
-            </g>
-          </svg>
-          <div className="api-s4-donut-label">
-            <b>9</b>
-            <em>status</em>
+      <i className="api-s4-dash-disc" />
+      <div className="api-s4-dashgrid">
+        <article className="api-s4-dashtile api-s4-dashtile--donut">
+          <span className="api-s4-chart-kicker">Status distribution</span>
+          <div className="api-s4-donut-wrap">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r={DONUT_R} fill="none" stroke="#eef2f7" strokeWidth="11" />
+              <g transform="rotate(-90 50 50)">
+                {S4_ARCS.map(([part, color, label], i) => {
+                  const len = part * DONUT_C;
+                  const off = -acc;
+                  acc += len;
+                  return (
+                    <circle
+                      key={label}
+                      className="api-s4-donut-seg"
+                      cx="50"
+                      cy="50"
+                      r={DONUT_R}
+                      fill="none"
+                      stroke={color}
+                      strokeWidth="11"
+                      strokeDasharray={`${len} ${DONUT_C - len}`}
+                      strokeDashoffset={off}
+                      style={{
+                        "--len": len,
+                        "--rest": DONUT_C - len,
+                        "--off": off,
+                        "--delay": `${i * 0.07}s`,
+                      }}
+                    />
+                  );
+                })}
+              </g>
+            </svg>
+            <div className="api-s4-donut-label">
+              <b>9</b>
+              <em>status</em>
+            </div>
           </div>
+          <ul className="api-s4-legend">
+            {S4_ARCS.slice(0, 4).map(([, color, label]) => (
+              <li key={label}>
+                <i style={{ background: color }} />
+                {label}
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <article className="api-s4-dashtile api-s4-dashtile--perf">
+          <span className="api-s4-chart-kicker">Carrier time performance</span>
+          <ul className="api-s4-bars">
+            {S4_PERF_BARS.map(([label, days, part, color], i) => (
+              <li key={label}>
+                <em>{label}</em>
+                <span className="api-s4-bar-track">
+                  <i style={{ "--w": `${Math.round(part * 100)}%`, "--c": color, "--i": i }} />
+                </span>
+                <b>{days}</b>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <article className="api-s4-dashtile api-s4-dashtile--fn">
+          <span className="api-s4-chart-kicker">Tracking function status</span>
+          <ul className="api-s4-fnlist">
+            {S4_FN_ROWS.map(([label, pct, color], i) => (
+              <li key={label}>
+                <i style={{ "--c": color, "--i": i }} />
+                {label}
+                <b>{pct}</b>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <div className="api-s4-dashtoast">
+          <span className="api-s4-dashtoast-ico">
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path
+                d="M7 1.6a3.6 3.6 0 0 0-3.6 3.6c0 2.6-.9 3.6-1.4 4.1h10c-.5-.5-1.4-1.5-1.4-4.1A3.6 3.6 0 0 0 7 1.6Z"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+              />
+              <path d="M5.8 11.6a1.3 1.3 0 0 0 2.4 0" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+          </span>
+          <span className="api-s4-dashtoast-txt">
+            <b>Webhook push alert</b>
+            <em>Endpoint retry · 200 OK</em>
+          </span>
         </div>
-        <ul className="api-s4-legend">
-          {S4_ARCS.slice(0, 5).map(([, color, label]) => (
-            <li key={label}>
-              <i style={{ background: color }} />
-              {label}
-            </li>
-          ))}
-        </ul>
-      </article>
+      </div>
     </div>
   );
 }
