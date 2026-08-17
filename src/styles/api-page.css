@@ -3564,10 +3564,10 @@
 }
 
 .api-s4-orbit-core::before {
-  width: 76px;
-  height: 76px;
+  width: 96px;
+  height: 96px;
   background: #2f7dff;
-  filter: blur(11px);
+  filter: blur(17px);
   opacity: 0.9;
 }
 
@@ -3589,8 +3589,8 @@
   filter:
     drop-shadow(0 0 1px #fff)
     drop-shadow(0 0 6px #6eb6ff)
-    drop-shadow(0 0 12px #2f7dff)
-    drop-shadow(0 0 20px rgba(47, 125, 255, 0.72));
+    drop-shadow(0 0 14px #2f7dff)
+    drop-shadow(0 0 30px rgba(47, 125, 255, 0.72));
 }
 
 .api-s4-logo-defs {
