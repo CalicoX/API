@@ -15,7 +15,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 内容区 1440px，注意 wrap 的 24px padding；不要负 margin 撑出外壳。
 - How-it-works 三张卡：白卡 20px 圆角、8px 内边距；插图井浅灰点阵、overflow hidden。
 - Data Operations 四张卡插图要各不相同，不能都顶满井。
-- Tracking data 卡：双环 9 个大状态用 Figma 官方图标（`public/assets/status/`），外 5 / 内 4。状态色必须用产品官方值，不要改灰：Info `#00bcd4`、Transit `#2196f3`、Out `#2962ff`、Pickup `#0d47a1`、Alert `#ff6f00`、Delivered `#43a047`、Expired `#b71c1c`、Undelivered `#f44336`、NotFound `#757575`。圆角 6px。体积渐变 160°：亮停靠白、暗停靠井色 `#151b28`，不要混纯黑。两圈描边：外圈浅（`0 0 0 1px`，chip 混白），内圈深（`inset 1px`，chip 混井色）。Park 说内外颜色要对掉，不要外深内浅。整卡 hover：放大的是中间 logo（`.api-s4-orbit-core` 从 `scale(0.84)` 缓动到 1，现在的 64px 是 hover 尺寸），不是状态图标；同时内外反向公转。图标正向、中心在轨道上，环 `z-index: 4` 压在光晕之上，光不能遮住 icon。中间 17 logo 平面约 64px，外形是超椭圆（n=5，二次贝塞尔平滑曲线），不要普通圆角矩形。中间 logo 光还要更大（外圈约 168px / blur 34 / drop-shadow 68px），饱和蓝（`#2f7dff` / `#5eb0ff`），贴边+外扩，中心亮、边缘干净衰减；不要发白、不要紫、不要脏雾。Park 连说不够。轨道圆圈很淡（约 0.2 透明度）。
+- Tracking data 卡：双环 9 个大状态用 Figma 官方图标（`public/assets/status/`），外 5 / 内 4。状态色必须用产品官方值，不要改灰：Info `#00bcd4`、Transit `#2196f3`、Out `#2962ff`、Pickup `#0d47a1`、Alert `#ff6f00`、Delivered `#43a047`、Expired `#b71c1c`、Undelivered `#f44336`、NotFound `#757575`。圆角 6px。体积渐变 160°：亮停靠白、暗停靠井色 `#151b28`，不要混纯黑。两圈描边：外圈用状态色本身（`0 0 0 1px var(--chip)`），不要混白、不要混黑；内圈深（`inset 1px`，chip 混井色）。整卡 hover：放大的是中间 logo（`.api-s4-orbit-core` 从 `scale(0.84)` 缓动到 1，现在的 64px 是 hover 尺寸），不是状态图标；同时内外反向公转。图标正向、中心在轨道上，环 `z-index: 4` 压在光晕之上，光不能遮住 icon。中间 17 logo 平面约 64px，外形是超椭圆（n=5，二次贝塞尔平滑曲线），不要普通圆角矩形。中间 logo 光还要更大（外圈约 168px / blur 34 / drop-shadow 68px），饱和蓝（`#2f7dff` / `#5eb0ff`），贴边+外扩，中心亮、边缘干净衰减；不要发白、不要紫、不要脏雾。Park 连说不够。轨道圆圈很淡（约 0.2 透明度）。
 - Tracking data 井：深色，只比 `#0a0d14` 稍浅一档，不要改浅灰、不要改成中灰蓝 `#3c465e`。渐变中心 `#1c2434` → 边 `#111620`，再加很淡的白蓝径向。点阵用淡白点。其它三张 Data Ops 井仍浅灰点阵。
 - 承运商卡：3400+ 在上，13 个运输商 logo 分三排往下散开，底排淡出表示还有更多。枢纽约 120px，插图尽量铺满井。
 - 标题单词亮度跟滚动走（`--on`），不是进场自动播。
@@ -37,6 +37,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-08-17 10:42 — memory.md、api-page.css
 - 2026-08-17 10:40 — memory.md、api-page.css
 - 2026-08-17 10:37 — memory.md、api-page.css
 - 2026-08-17 10:26 — memory.md、api-page.css

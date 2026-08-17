@@ -3508,7 +3508,7 @@
     color-mix(in srgb, var(--chip) 78%, #151b28) 100%
   );
   box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--chip) 18%, #fff),
+    0 0 0 1px var(--chip),
     inset 0 0 0 1px color-mix(in srgb, var(--chip) 62%, #151b28),
     inset 0 1px 0 color-mix(in srgb, var(--chip) 28%, #fff);
   transform: translate(-50%, -50%);
