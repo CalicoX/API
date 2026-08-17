@@ -15,13 +15,9 @@ export default function Hero() {
             Accurate, <span className="api-nowrap">Reliable, Up-to-Date.</span>
           </h2>
           <p className="api-lead">
-            <span className="api-lead-line">
-              Access the tracking data of{" "}
-              <span className="api-lead-tag">3400+</span> carriers worldwide via
-            </span>
-            <span className="api-lead-line">
-              17TRACK’s tracking api integration, optimizing your operations
-            </span>
+            Access the tracking data of{" "}
+            <span className="api-lead-tag">3400+</span> carriers worldwide via
+            17TRACK’s tracking api integration, optimizing your operations
           </p>
           <ul className="api-check-list">
             <li>For developers and dev-capable teams.</li>

@@ -72,7 +72,7 @@
   margin: 22px 0 0;
   padding: 0;
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .api-check-list li {
@@ -91,11 +91,13 @@
   height: 18px;
   margin-top: 2px;
   flex-shrink: 0;
+  box-sizing: border-box;
   border-radius: 50%;
+  border: 1px solid #bfdbfe;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8.2l2.8 2.8 6.2-6.5' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8.2l2.8 2.8 6.2-6.5' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
       center/10px 10px no-repeat,
-    var(--api-blue);
+    #eff6ff;
 }
 
 .api-btn-primary {
@@ -189,6 +191,7 @@
 }
 
 .api-s1-copy {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -198,6 +201,21 @@
   max-width: none;
   padding-top: 0;
   text-align: left;
+}
+
+/* readability veil: keeps copy legible over bright shader streaks */
+.api-s1-copy::before {
+  content: "";
+  position: absolute;
+  inset: -48px -72px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 72% 64% at 38% 46%,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.28) 46%,
+    transparent 74%
+  );
 }
 
 .api-s1-copy .api-nowrap {
@@ -212,22 +230,17 @@
 
 .api-s1-copy .api-h2 {
   margin: 0 0 18px;
-  font-size: clamp(1.35rem, 2.1vw, 1.8rem);
-  font-weight: 700;
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  font-weight: 600;
   line-height: 1.28;
-  color: #1e40af;
+  color: #3352b3;
   text-wrap: pretty;
 }
 
 .api-s1-copy .api-lead {
-  max-width: none;
+  max-width: 42ch;
   font-size: 16px;
   text-wrap: pretty;
-}
-
-.api-s1-copy .api-lead-line {
-  display: block;
-  white-space: nowrap;
 }
 
 .api-s1-copy .api-lead-tag {
@@ -236,11 +249,11 @@
   margin: 0 1px;
   padding: 1px 8px 2px;
   border-radius: 999px;
-  background: var(--api-blue);
+  background: #dbeafe;
   border: 0;
-  color: #fff;
+  color: #1d4ed8;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1.35;
   vertical-align: 1px;
@@ -4813,10 +4826,6 @@
   .api-s1-copy {
     max-width: none;
     padding-top: 0;
-  }
-
-  .api-s1-copy .api-lead-line {
-    white-space: normal;
   }
 
   .api-s1-grid {

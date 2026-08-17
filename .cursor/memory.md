@@ -12,6 +12,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 ## 决策
 
 - 产品原文不改。
+- Hero 左栏文案（2026-08-17 定稿）：H2 副标降级不抢 H1——`clamp(1.2rem, 1.8vw, 1.55rem)`、字重 600、色 `#3352b3`（不用 `#1e40af` 粗黑蓝）。lead 去掉 `.api-lead-line` 强制两行 nowrap，自然换行 + `max-width: 42ch`。`3400+` 药丸改浅底：`#dbeafe` 底 + `#1d4ed8` 字，不再实心蓝底白字。checklist 圆点改轻量：`#eff6ff` 底 + `#bfdbfe` 描边 + 蓝勾（不再实心蓝底白勾），行距 gap 10px。copy 区加 `::before` 白色径向 veil（z:-1，压在 shader 上保证可读性）。左栏第五条「View docs」次级 CTA 暂不加。
 - Hero 注册表单：右栏宽 `minmax(420px, 520px)`（原 380/460，Park 要更宽）。不用红星标必填，非必填（Company Website / 留言）label 右侧灰字 `Optional`。留言框默认收成 44px、focus 缓动展开到 96px、`resize: none` 不能拖。输入框白底 `#e2e8f0` 描边 + 浅投影，hover 描边加深。Password 有 show/hide 眼睛。`No credit card required` 徽章在 CTA 按钮正下方居中，不在标题行。法务 checkbox 11px 淡灰。字段间距 15/14px。
 - 内容区 1440px，注意 wrap 的 24px padding；不要负 margin 撑出外壳。
 - How-it-works 三张卡：白卡 20px 圆角、8px 内边距；插图井浅灰点阵、overflow hidden。
@@ -38,6 +39,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-08-17 14:06 — memory.md、Hero.jsx、api-page.css
 - 2026-08-17 13:59 — memory.md、api-page.css
 - 2026-08-17 13:57 — memory.md、Hero.jsx、structure.test.js、api-page.css
 - 2026-08-17 13:45 — api-page.css
@@ -57,4 +59,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-17 10:13 — memory.md、api-page.css
 - 2026-08-14 15:39 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css、status
 - 2026-08-14 15:32 — memory.md、ApiDomVisuals.jsx、api-page.css
-- 2026-08-14 14:50 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css
