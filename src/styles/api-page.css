@@ -3507,10 +3507,14 @@
     color-mix(in srgb, var(--chip) 78%, #151b28) 100%
   );
   box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--chip) 20%, #fff),
-    inset 0 0 0 1px color-mix(in srgb, var(--chip) 58%, #151b28),
+    0 0 0 1px color-mix(in srgb, var(--chip) 58%, #151b28),
+    inset 0 0 0 1px color-mix(in srgb, var(--chip) 20%, #fff),
     inset 0 1px 0 color-mix(in srgb, var(--chip) 32%, #fff);
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.84);
+  filter: brightness(0.78);
+  transition:
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .api-s4-orbit-ring--inner .api-s4-orbit-chip.is-icon {
@@ -3545,6 +3549,19 @@
   animation-play-state: running;
 }
 
+.api-s4-card:hover .api-s4-orbit-chip.is-icon {
+  transform: translate(-50%, -50%) scale(1);
+  filter: brightness(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .api-s4-orbit-chip.is-icon {
+    transform: translate(-50%, -50%) scale(1);
+    filter: none;
+    transition: none;
+  }
+}
+
 .api-s4-orbit-core {
   position: absolute;
   inset: 0;
@@ -3564,19 +3581,19 @@
 }
 
 .api-s4-orbit-core::before {
-  width: 96px;
-  height: 96px;
+  width: 168px;
+  height: 168px;
   background: #2f7dff;
-  filter: blur(17px);
-  opacity: 0.9;
+  filter: blur(34px);
+  opacity: 0.95;
 }
 
 .api-s4-orbit-core::after {
-  width: 70px;
-  height: 70px;
+  width: 88px;
+  height: 88px;
   background: #5eb0ff;
-  filter: blur(5px);
-  opacity: 0.95;
+  filter: blur(10px);
+  opacity: 1;
 }
 
 .api-s4-logo {
@@ -3588,9 +3605,9 @@
   background: transparent;
   filter:
     drop-shadow(0 0 1px #fff)
-    drop-shadow(0 0 6px #6eb6ff)
-    drop-shadow(0 0 14px #2f7dff)
-    drop-shadow(0 0 30px rgba(47, 125, 255, 0.72));
+    drop-shadow(0 0 14px #6eb6ff)
+    drop-shadow(0 0 32px #2f7dff)
+    drop-shadow(0 0 68px rgba(47, 125, 255, 0.8));
 }
 
 .api-s4-logo-defs {
