@@ -49,7 +49,7 @@ describe("API landing structure (gating)", () => {
   it("Hero copy matches 17track API hero", () => {
     const hero = read("components/sections/Hero.jsx");
     expect(hero).toMatch(/International Package Tracking API/);
-    expect(hero).toMatch(/Accurate, Reliable/);
+    expect(hero).toMatch(/Accurate,\s*(<span[^>]*>)?Reliable/);
     expect(hero).toMatch(/Start My Free Trial/);
     expect(hero).toMatch(/No credit card required/);
     expect(hero).toMatch(/className=\"api-s1 hero\"|className=\{?[\"']api-s1 hero/);

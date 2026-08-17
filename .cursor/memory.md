@@ -12,6 +12,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 ## 决策
 
 - 产品原文不改。
+- Hero 注册表单：不用红星标必填，非必填（Company Website / 留言）label 右侧灰字 `Optional`。留言框默认收成 44px、focus 缓动展开到 96px、`resize: none` 不能拖。输入框白底 `#e2e8f0` 描边 + 浅投影，hover 描边加深。Password 有 show/hide 眼睛。`No credit card required` 徽章在 CTA 按钮正下方居中，不在标题行。法务 checkbox 11px 淡灰。字段间距 15/14px。
 - 内容区 1440px，注意 wrap 的 24px padding；不要负 margin 撑出外壳。
 - How-it-works 三张卡：白卡 20px 圆角、8px 内边距；插图井浅灰点阵、overflow hidden。
 - Data Operations 四张卡插图要各不相同，不能都顶满井。
@@ -37,6 +38,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-08-17 13:57 — memory.md、Hero.jsx、structure.test.js、api-page.css
 - 2026-08-17 13:45 — api-page.css
 - 2026-08-17 11:09 — memory.md、particle-earth.js
 - 2026-08-17 11:07 — memory.md、ApiDomVisuals.jsx、particle-earth.js、structure.test.js、api-page.css
@@ -56,4 +58,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-14 15:32 — memory.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-14 14:50 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-14 14:45 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css
-- 2026-08-14 11:31 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css、logo-17-mark.png

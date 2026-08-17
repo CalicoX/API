@@ -310,9 +310,11 @@
 }
 
 .api-form-nocc {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  margin-top: 12px;
   font-size: 12px;
   font-weight: 600;
   color: var(--api-muted);
@@ -326,7 +328,7 @@
 .api-form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px 12px;
+  gap: 15px 14px;
 }
 
 .api-field {
@@ -341,28 +343,40 @@
 }
 
 .api-field label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
   font-size: 12px;
   font-weight: 600;
   color: #475569;
 }
 
-.api-field label .req {
-  color: #ef4444;
-  margin-left: 2px;
+.api-field label .opt {
+  font-size: 11px;
+  font-weight: 500;
+  color: #a2adbd;
 }
 
 .api-field input,
 .api-field textarea {
   width: 100%;
-  border: 1px solid #dbe3ef;
+  box-sizing: border-box;
+  border: 1px solid #e2e8f0;
   border-radius: 10px;
-  background: #fbfcfe;
+  background: #fff;
   padding: 11px 12px;
   font: inherit;
   font-size: 14px;
   color: var(--api-ink);
   outline: none;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.api-field input:hover,
+.api-field textarea:hover {
+  border-color: #c8d3e2;
 }
 
 .api-field input:focus,
@@ -373,8 +387,47 @@
 }
 
 .api-field textarea {
-  min-height: 72px;
+  height: 44px;
+  min-height: 44px;
   resize: none;
+  transition:
+    height 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.api-field textarea:focus {
+  height: 96px;
+}
+
+.api-pass-wrap {
+  position: relative;
+}
+
+.api-pass-wrap input {
+  padding-right: 40px;
+}
+
+.api-pass-eye {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.api-pass-eye:hover {
+  color: #475569;
+  background: #f1f5f9;
 }
 
 .api-form-agree {
@@ -382,9 +435,9 @@
   align-items: flex-start;
   gap: 8px;
   margin: 14px 0 16px;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.5;
-  color: var(--api-muted);
+  color: #8b96a5;
 }
 
 .api-form-agree input {
