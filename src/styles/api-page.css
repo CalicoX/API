@@ -1153,9 +1153,14 @@
        collapses this well to 0 once copy is height:100% */
     flex: 0 0 auto;
     width: 100%;
-    height: min(88vw, 340px);
-    min-height: 280px;
-    max-height: 360px;
+    height: min(96vw, 375px);
+    min-height: 300px;
+    max-height: 390px;
+  }
+
+  /* 桌面构图用的十字准星在手机上会压到文案 */
+  .api-s2-cross {
+    display: none;
   }
 
   .api-s2-visual .api-hub,

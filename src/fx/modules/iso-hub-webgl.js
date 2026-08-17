@@ -24,6 +24,10 @@ export function createIsoHubWebGL(host, opts = {}) {
   let targetProgress = 0;
   let raf = 0;
 
+  const MOBILE = !!(
+    window.matchMedia && window.matchMedia("(max-width: 900px)").matches
+  );
+
   // ---------------------------------------------------------------------------
   // Renderer / scene / isometric camera
   // ---------------------------------------------------------------------------
@@ -33,7 +37,8 @@ export function createIsoHubWebGL(host, opts = {}) {
     alpha: true,
     powerPreference: "high-performance",
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  // 手机小画布按原生 DPR 渲：1px 线宽 = 1 物理像素，否则 3x 屏上被放大 2 倍发糊
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, MOBILE ? 3 : 1.5));
   renderer.setClearColor(0x000000, 0);
   host.appendChild(renderer.domElement);
   renderer.domElement.className = "api-iso-canvas";
@@ -52,19 +57,27 @@ export function createIsoHubWebGL(host, opts = {}) {
   const FIT_NEAR = 0.78;
   let frustum = CONTENT_H / FIT_FAR;
 
-  function hostSize() {
+  // host 尺寸缓存：每帧多处要用，避免逐帧 getBoundingClientRect 强制布局
+  let hostW = 2;
+  let hostH = 2;
+  function measureHost() {
     const r = host.getBoundingClientRect();
-    return {
-      w: Math.max(2, Math.floor(r.width)),
-      h: Math.max(2, Math.floor(r.height)),
-    };
+    hostW = Math.max(2, Math.floor(r.width));
+    hostH = Math.max(2, Math.floor(r.height));
+  }
+  measureHost();
+
+  function hostSize() {
+    if (hostW <= 2 && hostH <= 2) measureHost();
+    return { w: hostW, h: hostH };
   }
 
   /** Viewport-aware fill: taller host → a bit larger; short host keeps margin so no clip. */
   function hostFit(hostH) {
     // far = initial / low progress; near = scrolled push-in
-    if (hostH < 420) return { far: 0.5, near: 0.58 };
-    if (hostH < 520) return { far: 0.58, near: 0.66 };
+    // 短井（手机）填充率上调，减少井内上下空黑
+    if (hostH < 420) return { far: 0.58, near: 0.66 };
+    if (hostH < 520) return { far: 0.62, near: 0.7 };
     if (hostH < 640) return { far: 0.64, near: 0.72 };
     if (hostH < 780) return { far: 0.68, near: 0.78 };
     return { far: 0.72, near: 0.82 };
@@ -82,6 +95,10 @@ export function createIsoHubWebGL(host, opts = {}) {
   const FRONT_DIR = new THREE.Vector3(0, 0.1, 1).normalize();
   let viewBlend = 0;
 
+  // renderer.setSize 会重建 drawing buffer，只在 host 真变尺寸时做；
+  // 滚动缩放（frustum 变化）只动相机投影
+  let renderW = 0;
+  let renderH = 0;
   function layoutCamera() {
     const { w, h } = hostSize();
     const aspect = w / h;
@@ -91,7 +108,11 @@ export function createIsoHubWebGL(host, opts = {}) {
     camera.top = f / 2;
     camera.bottom = -f / 2;
     camera.updateProjectionMatrix();
-    renderer.setSize(w, h, false);
+    if (w !== renderW || h !== renderH) {
+      renderW = w;
+      renderH = h;
+      renderer.setSize(w, h, false);
+    }
   }
 
   function updateCamera() {
@@ -543,6 +564,17 @@ export function createIsoHubWebGL(host, opts = {}) {
   let termDone = false;
   let termDoneAt = 0;
 
+  // 正文字体固定，逐字符宽度缓存（每帧几百次 measureText 是热点）
+  const termCharW = new Map();
+  function termCharWidth(ch) {
+    let w = termCharW.get(ch);
+    if (w === undefined) {
+      w = tctx.measureText(ch).width;
+      termCharW.set(ch, w);
+    }
+    return w;
+  }
+
   function drawTerminal() {
     tctx.clearRect(0, 0, TW, TH);
 
@@ -654,7 +686,7 @@ export function createIsoHubWebGL(host, opts = {}) {
           continue;
         }
         tctx.fillText(ch, x, y);
-        x += tctx.measureText(ch).width;
+        x += termCharWidth(ch);
       }
     }
 
@@ -780,8 +812,11 @@ export function createIsoHubWebGL(host, opts = {}) {
     return 48;
   }
 
+  // 布局只在 resize 时变，缓存测量结果，别逐帧 getBoundingClientRect
+  let rightRoomCached = null;
   function rightExt() {
-    return Math.min(CALLOUT_RIGHT_MAX, measureRightRoom());
+    if (rightRoomCached == null) rightRoomCached = measureRightRoom();
+    return Math.min(CALLOUT_RIGHT_MAX, rightRoomCached);
   }
 
   function projectToCanvas(worldVec, out) {
@@ -1035,27 +1070,39 @@ export function createIsoHubWebGL(host, opts = {}) {
   const _scr = { x: 0, y: 0, visible: true };
 
   function resizeCalloutCanvas() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, MOBILE ? 3 : 2);
     const { w, h } = calloutSize();
     const pw = Math.max(2, Math.floor(w * dpr));
     const ph = Math.max(2, Math.floor(h * dpr));
     if (calloutCanvas.width !== pw || calloutCanvas.height !== ph) {
       calloutCanvas.width = pw;
       calloutCanvas.height = ph;
+      // CSS width follows measured room; transform resets with the buffer
+      calloutCanvas.style.width = `${w}px`;
+      cctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
-    // keep CSS width in sync with measured room (varies with layout)
-    calloutCanvas.style.width = `${w}px`;
-    cctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
+
+  let calloutsBlank = false;
 
   function drawCallouts(reveal) {
     calloutReveal = reveal;
+    if (reveal < 0.01) {
+      // 隐藏态只清一次，不逐帧清屏
+      if (!calloutsBlank) {
+        resizeCalloutCanvas();
+        const { w: bw, h: bh } = calloutSize();
+        cctx.clearRect(0, 0, bw, bh);
+        calloutsBlank = true;
+      }
+      return;
+    }
+    calloutsBlank = false;
     resizeCalloutCanvas();
     const { w, h } = calloutSize();
     const { w: hostW, h: hostH } = hostSize();
     const ext = rightExt();
     cctx.clearRect(0, 0, w, h);
-    if (reveal < 0.01) return;
 
     callouts.forEach((c, i) => {
       const t0 = 0.06 + i * 0.16;
@@ -1172,9 +1219,13 @@ export function createIsoHubWebGL(host, opts = {}) {
 
   const clock = new THREE.Clock();
   let lastT = 0;
+  let running = false;
+  let lastTermChars = -1;
+  let lastTermBlink = -1;
+  let lastTermP = -1;
 
   function animate() {
-    if (disposed) return;
+    if (disposed || !running) return;
     raf = requestAnimationFrame(animate);
     const t = clock.getElapsedTime();
     const dt = Math.min(0.1, t - lastT);
@@ -1240,36 +1291,78 @@ export function createIsoHubWebGL(host, opts = {}) {
     terminalGroup.rotation.set(-0.28 * (1 - viewBlend), 0, 0);
 
     stepTerminal(dt, t);
-    drawTerminal();
+    // 终端画面没变（打字暂停期、滚动静止）就不重绘、不上传纹理
+    const termChars = Math.floor(termProgress);
+    const termBlink = Math.floor(performance.now() / 500) % 2;
+    if (
+      termChars !== lastTermChars ||
+      termBlink !== lastTermBlink ||
+      Math.abs(progress - lastTermP) > 0.0005
+    ) {
+      lastTermChars = termChars;
+      lastTermBlink = termBlink;
+      lastTermP = progress;
+      drawTerminal();
+    }
 
     renderer.render(scene, camera);
     // 2D callouts after 3D (project current frame anchors)
     drawCallouts(calloutReveal);
   }
 
+  function startLoop() {
+    if (running || disposed) return;
+    running = true;
+    lastT = clock.getElapsedTime();
+    raf = requestAnimationFrame(animate);
+  }
+
+  function stopLoop() {
+    running = false;
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+  }
+
   const ro = new ResizeObserver(() => {
     if (!disposed) {
+      measureHost();
+      rightRoomCached = null;
       layoutCamera();
       updateCamera();
     }
   });
   ro.observe(host);
 
+  // 滚出可视区就停 rAF —— 场景/终端/描线全部停画，滚回来无缝续播
+  const vio = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) startLoop();
+        else stopLoop();
+      });
+    },
+    { threshold: 0, rootMargin: "120px" }
+  );
+  vio.observe(host);
+
   setProgress(0.15);
-  raf = requestAnimationFrame(animate);
+  startLoop();
   opts.onReady?.();
 
   return {
     canvas: renderer.domElement,
     setProgress,
     resize() {
+      measureHost();
+      rightRoomCached = null;
       layoutCamera();
       updateCamera();
     },
     destroy() {
       disposed = true;
-      cancelAnimationFrame(raf);
+      stopLoop();
       ro.disconnect();
+      vio.disconnect();
       scene.traverse((obj) => {
         if (obj.geometry) obj.geometry.dispose();
         if (obj.material) {

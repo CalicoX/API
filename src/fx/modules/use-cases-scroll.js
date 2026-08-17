@@ -68,18 +68,24 @@ export function mount() {
     section.style.setProperty("--uc-globe-r", `${(0.72 * Math.min(cvr.width, cvr.height)).toFixed(1)}px`);
   }
 
+  let lastApplied = -1;
+
   function apply(p) {
+    // setProgress 必须每次都发：WebGL 可能在 p 稳定后才挂载完，跳过会让它收不到进度
+    const api = window.__isoHubWebGL;
+    if (api && typeof api.setProgress === "function") {
+      api.setProgress(p);
+    }
+
+    // 整页滚动都会触发；进度没变（离屏时钳在 0/1）就不做 DOM 写入
+    if (Math.abs(p - lastApplied) < 0.0001) return;
+    lastApplied = p;
     section.style.setProperty("--uc-p", p.toFixed(4));
     const gridIn = reduce ? 1 : Math.max(0, Math.min(1, (p - 0.03) / 0.2));
     section.style.setProperty("--uc-grid", gridIn.toFixed(3));
     updateGlobeMask();
     section.dataset.ucStep = String(Math.min(3, Math.floor(p * 3.001)));
     section.classList.toggle("is-uc-active", p > 0.02 && p < 0.98);
-
-    const api = window.__isoHubWebGL;
-    if (api && typeof api.setProgress === "function") {
-      api.setProgress(p);
-    }
 
     // thin top progress fill
     const fill =

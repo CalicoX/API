@@ -27,13 +27,12 @@ export function UseCasesStage() {
         if (cancelled || !hostRef.current) return;
         gl = createIsoHubWebGL(hostRef.current, {
           assetBase: "/assets/webgl-hub",
-          onReady: () => {
-            const section = document.getElementById("use-cases");
-            const p = parseFloat(section?.style?.getPropertyValue("--uc-p") || "0.15");
-            if (gl) gl.setProgress(Number.isFinite(p) ? Math.max(p, 0.12) : 0.15);
-          },
         });
         window.__isoHubWebGL = gl;
+        // 挂载完立刻用当前滚动进度做种子（onReady 闭包里 gl 还没赋值，之前是空转）
+        const section = document.getElementById("use-cases");
+        const p = parseFloat(section?.style?.getPropertyValue("--uc-p") || "0.15");
+        gl.setProgress(Number.isFinite(p) ? Math.max(p, 0.12) : 0.15);
       });
     };
 
