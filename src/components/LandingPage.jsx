@@ -41,7 +41,8 @@ export default function LandingPage() {
       </div>
       <canvas id="glass-source" aria-hidden="true" />
       <canvas id="glass-output" aria-hidden="true" />
-      {/* ProductDock hidden for now */}
+      {/* dock outside #glass-content — same as static index */}
+      <ProductDock />
     </div>
   );
 }
