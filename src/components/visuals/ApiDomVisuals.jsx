@@ -79,18 +79,27 @@ const S4_MAINS_INNER = [
 ];
 
 function StatusOrbitRing({ items, tone }) {
+  const base = tone === "inner" ? 45 : 0;
   return (
     <ul className={`api-s4-orbit-ring api-s4-orbit-ring--${tone}`} style={{ "--n": items.length }}>
-      {items.map((item, i) => (
-        <li key={item.label} style={{ "--i": i }}>
-          <span className="api-s4-orbit-chip is-named" data-icon={item.icon}>
-            <span className="api-s4-orbit-dot">
-              <img src={item.src} alt="" />
+      {items.map((item, i) => {
+        const deg = (((i * 360) / items.length + base) % 360 + 360) % 360;
+        const onRight = deg > 20 && deg < 160;
+        const flip = tone === "outer" ? onRight : !onRight;
+        return (
+          <li key={item.label} style={{ "--i": i }}>
+            <span
+              className={`api-s4-orbit-chip is-named${flip ? " is-flip" : ""}`}
+              data-icon={item.icon}
+            >
+              <span className="api-s4-orbit-dot">
+                <img src={item.src} alt="" />
+              </span>
+              <em>{item.label}</em>
             </span>
-            <em>{item.label}</em>
-          </span>
-        </li>
-      ))}
+          </li>
+        );
+      })}
     </ul>
   );
 }
