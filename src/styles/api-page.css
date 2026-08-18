@@ -3448,7 +3448,7 @@
   overflow: hidden;
 }
 
-/* 1. Status — light hub (white dots/chips + purple pill), Image-2 style */
+/* 1. Status — File Transfer layout, 17 logo hub + official status colors */
 .api-s4-illus:has(.api-s4-vig--status) > *,
 .api-s4-illus--status > * {
   width: 100%;
@@ -3468,22 +3468,23 @@
   align-items: center;
   justify-content: center;
   padding: 0;
+  container-type: size;
 }
 
 .api-s4-xfer {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100cqmin;
+  height: 100cqmin;
 }
 
 .api-s4-xfer-ring {
   position: absolute;
   left: 50%;
-  top: 46%;
-  width: calc(64px + var(--r) * 76px);
-  height: calc(64px + var(--r) * 76px);
-  border: 1.5px solid rgba(255, 255, 255, 0.98);
-  background: rgba(255, 255, 255, 0.16);
+  top: 50%;
+  width: calc(72px + var(--r) * 72px);
+  height: calc(72px + var(--r) * 72px);
+  border: 0;
+  background: rgba(255, 255, 255, calc(0.48 - var(--r) * 0.055));
   border-radius: 50%;
   pointer-events: none;
   translate: -50% -50%;
@@ -3508,7 +3509,7 @@
 .api-s4-xfer-core {
   position: absolute;
   left: 50%;
-  top: 46%;
+  top: 50%;
   z-index: 3;
   display: grid;
   place-items: center;
@@ -3519,39 +3520,68 @@
 .api-s4-xfer-core::before {
   content: "";
   position: absolute;
-  width: 220px;
-  height: 96px;
-  background: #c4a0ff;
-  filter: blur(32px);
-  opacity: 0.38;
+  width: 148px;
+  height: 148px;
+  background: #5eb0ff;
+  filter: blur(28px);
+  opacity: 0.32;
+  border-radius: 50%;
   pointer-events: none;
   transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.api-s4-xfer-pill {
+.api-s4-xfer-logo {
   position: relative;
   z-index: 1;
-  padding: 12px 30px;
-  border-radius: 999px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 650;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  background: linear-gradient(165deg, #c9a6ff 0%, #a06bff 40%, #7c4dff 100%);
-  box-shadow:
-    0 10px 28px rgba(124, 77, 255, 0.28),
-    0 2px 8px rgba(124, 77, 255, 0.16);
+  width: 64px;
+  height: 64px;
+  filter:
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.85))
+    drop-shadow(0 8px 18px rgba(47, 125, 255, 0.22));
+}
+
+.api-s4-xfer-logo-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.api-s4-xfer-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #1b57e0;
+  border-radius: 32%;
+  corner-shape: superellipse(2);
+  clip-path: url(#api-s4-logo-squircle);
 }
 
 .api-s4-xfer-ico {
-  display: block;
-  width: 15px;
-  height: 15px;
+  --chip: #2196f3;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
   flex: 0 0 auto;
-  background: #8b95a5;
-  -webkit-mask: var(--ico) center / contain no-repeat;
-  mask: var(--ico) center / contain no-repeat;
+  border-radius: 6px;
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--chip) 62%, #fff) 0%,
+    var(--chip) 48%,
+    color-mix(in srgb, var(--chip) 78%, #151b28) 100%
+  );
+  box-shadow:
+    0 0 0 1px var(--chip),
+    inset 0 0 0 1px color-mix(in srgb, var(--chip) 62%, #151b28),
+    inset 0 1px 0 color-mix(in srgb, var(--chip) 28%, #fff);
+}
+
+.api-s4-xfer-ico img {
+  display: block;
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
 }
 
 .api-s4-xfer-dot,
@@ -3605,7 +3635,7 @@
 }
 
 .api-s4-card:hover .api-s4-xfer-core::before {
-  opacity: 0.42;
+  opacity: 0.55;
 }
 
 .api-s4-card:hover .api-s4-xfer-dot,
@@ -5299,9 +5329,9 @@
     aspect-ratio: 1;
   }
 
-  .api-s4-xfer-pill {
-    font-size: 13px;
-    padding: 10px 22px;
+  .api-s4-xfer-logo {
+    width: 52px;
+    height: 52px;
   }
 
   .api-s4-xfer-dot {
@@ -5314,8 +5344,8 @@
   }
 
   .api-s4-xfer-ring {
-    width: calc(52px + var(--r) * 58px);
-    height: calc(52px + var(--r) * 58px);
+    width: calc(56px + var(--r) * 56px);
+    height: calc(56px + var(--r) * 56px);
   }
 
   .api-s4-hub {

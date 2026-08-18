@@ -22,7 +22,7 @@ Park 在这个仓库里直接改代码、看效果。Agent 用简体中文回复
 
 - How-it-works / Data Operations 插图：浅灰井 `#f7f8fa` + 点阵，白 UI 碎片，8–11px 字，细描边。不要实拍、不要 3D 开盖。
 - 四张 Data Operations 卡必须**四种构图**，不要同一套铺满双栏。
-  1. Tracking data：浅灰井 + 白圈涟漪，中心紫药丸 Tracking，四周白圆钮 + 两条白芯片，虚线相连（参考 File Transfer 构图）。官方状态图标用灰色 mask，不要彩色方砖、不要深色井、不要双环公转。
+  1. Tracking data：File Transfer 构图（白圆钮 + 芯片 + 虚线 + 无描边涟漪），中心必须是 17 logo，状态图标必须用官方色方砖。涟漪圈以 logo 为圆心、不要描边。
   2. Carriers：中心 3400+ + 两侧 logo **连线**。
   3. Visibility：两张重叠卡拆开（运单号 → 自动识别）。
   4. Dashboard：井中小卡，**环形图描边**动画。
