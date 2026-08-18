@@ -63,20 +63,35 @@ export function UseCasesStage() {
   );
 }
 
-const S4_MAINS_OUTER = [
-  { label: "Info Received", on: true, icon: "info", src: "/assets/status/info-received.svg" },
-  { label: "In Transit", on: true, icon: "transit", src: "/assets/status/in-transit.svg" },
-  { label: "Out For Delivery", on: false, icon: "out", src: "/assets/status/out-for-delivery.svg" },
-  { label: "Pick Up", on: false, icon: "pickup", src: "/assets/status/pickup.svg" },
-  { label: "Delivered", on: false, icon: "done", src: "/assets/status/delivered.svg" },
+const S4_XFER_DOTS = [
+  { id: "done", src: "/assets/status/delivered.svg", x: 50, y: 20 },
+  { id: "info", src: "/assets/status/info-received.svg", x: 86, y: 46 },
+  { id: "pickup", src: "/assets/status/pickup.svg", x: 50, y: 73 },
+  { id: "out", src: "/assets/status/out-for-delivery.svg", x: 14, y: 46 },
 ];
 
-const S4_MAINS_INNER = [
-  { label: "Alert", on: false, icon: "alert", src: "/assets/status/alert.svg" },
-  { label: "Expired", on: false, icon: "expired", src: "/assets/status/expired.svg" },
-  { label: "Undelivered", on: false, icon: "fail", src: "/assets/status/undelivered.svg" },
-  { label: "Not Found", on: false, icon: "missing", src: "/assets/status/not-found.svg" },
+const S4_XFER_CHIPS = [
+  {
+    id: "transit",
+    src: "/assets/status/in-transit.svg",
+    x: 71,
+    y: 29,
+    title: "In Transit",
+    meta: "UPS · Sept 25 8:43pm",
+  },
+  {
+    id: "alert",
+    src: "/assets/status/alert.svg",
+    x: 29,
+    y: 63,
+    title: "Alert",
+    meta: "DHL · Sept 25 6:43pm",
+  },
 ];
+
+function XferIco({ src }) {
+  return <i className="api-s4-xfer-ico" style={{ "--ico": `url("${src}")` }} />;
+}
 
 const S4_HUB_NODES = [
   { src: "/assets/carriers/dhl.svg", name: "DHL", x: 128, y: 188 },
@@ -108,42 +123,44 @@ const S4_ARCS = [
   [0.05, "#06b6d4", "Out For Delivery"],
 ];
 
-function StatusOrbitRing({ items, tone }) {
-  return (
-    <ul className={`api-s4-orbit-ring api-s4-orbit-ring--${tone}`} style={{ "--n": items.length }}>
-      {items.map((item, i) => (
-        <li key={item.label} style={{ "--i": i }}>
-          <span
-            className={`api-s4-orbit-chip is-icon${item.on ? " is-on" : ""}`}
-            data-icon={item.icon}
-          >
-            <img src={item.src} alt="" />
-          </span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 export function DataStatusStage() {
   return (
     <div className="api-s4-vig api-s4-vig--status" aria-hidden="true">
-      <span className="api-s4-status-light" />
-      <div className="api-s4-orbit">
-        <span className="api-s4-orbit-track api-s4-orbit-track--outer" />
-        <span className="api-s4-orbit-track api-s4-orbit-track--inner" />
-        <StatusOrbitRing items={S4_MAINS_OUTER} tone="outer" />
-        <StatusOrbitRing items={S4_MAINS_INNER} tone="inner" />
-        <div className="api-s4-orbit-core">
-          <div className="api-s4-logo">
-            <svg className="api-s4-logo-defs" width="0" height="0" aria-hidden="true">
-              <clipPath id="api-s4-logo-squircle" clipPathUnits="objectBoundingBox">
-                <path d="M0.6456,0.0034Q0.7912,0.0069 0.8351,0.0174Q0.8789,0.0280 0.9071,0.0463Q0.9353,0.0647 0.9537,0.0929Q0.9720,0.1211 0.9826,0.1649Q0.9931,0.2088 0.9966,0.3544Q1.0000,0.5000 0.9966,0.6456Q0.9931,0.7912 0.9826,0.8351Q0.9720,0.8789 0.9537,0.9071Q0.9353,0.9353 0.9071,0.9537Q0.8789,0.9720 0.8351,0.9826Q0.7912,0.9931 0.6456,0.9966Q0.5000,1.0000 0.3544,0.9966Q0.2088,0.9931 0.1649,0.9826Q0.1211,0.9720 0.0929,0.9537Q0.0647,0.9353 0.0463,0.9071Q0.0280,0.8789 0.0174,0.8351Q0.0069,0.7912 0.0034,0.6456Q0.0000,0.5000 0.0034,0.3544Q0.0069,0.2088 0.0174,0.1649Q0.0280,0.1211 0.0463,0.0929Q0.0647,0.0647 0.0929,0.0463Q0.1211,0.0280 0.1649,0.0174Q0.2088,0.0069 0.3544,0.0034Q0.5000,0.0000 0.6456,0.0034Z" />
-              </clipPath>
-            </svg>
-            <img src="/assets/logo-17-mark.png" alt="" />
-          </div>
+      <div className="api-s4-xfer">
+        {[0, 1, 2, 3, 4, 5].map((i) => (
+          <span key={i} className="api-s4-xfer-ring" style={{ "--r": i }} />
+        ))}
+        <svg className="api-s4-xfer-wires" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+          <line x1="200" y1="158" x2="200" y2="98" />
+          <line x1="236" y1="184" x2="326" y2="184" />
+          <line x1="200" y1="210" x2="200" y2="274" />
+          <line x1="164" y1="184" x2="74" y2="184" />
+        </svg>
+        <div className="api-s4-xfer-core">
+          <span className="api-s4-xfer-pill">Tracking</span>
         </div>
+        {S4_XFER_DOTS.map((dot, i) => (
+          <span
+            key={dot.id}
+            className="api-s4-xfer-dot"
+            style={{ left: `${dot.x}%`, top: `${dot.y}%`, "--i": i }}
+          >
+            <XferIco src={dot.src} />
+          </span>
+        ))}
+        {S4_XFER_CHIPS.map((chip, i) => (
+          <span
+            key={chip.id}
+            className="api-s4-xfer-chip"
+            style={{ left: `${chip.x}%`, top: `${chip.y}%`, "--i": i + 4 }}
+          >
+            <XferIco src={chip.src} />
+            <span className="api-s4-xfer-chip-copy">
+              <b>{chip.title}</b>
+              <em>{chip.meta}</em>
+            </span>
+          </span>
+        ))}
       </div>
     </div>
   );
