@@ -65,14 +65,14 @@ export function UseCasesStage() {
 
 const S4_MAINS_OUTER = [
   { label: "Info Received", icon: "info", src: "/assets/status/info-received.svg" },
-  { label: "In Transit", icon: "transit", src: "/assets/status/in-transit.svg" },
+  { label: "In Transit", icon: "transit", src: "/assets/status/in-transit.svg", named: true },
   { label: "Out For Delivery", icon: "out", src: "/assets/status/out-for-delivery.svg" },
   { label: "Pick Up", icon: "pickup", src: "/assets/status/pickup.svg" },
-  { label: "Delivered", icon: "done", src: "/assets/status/delivered.svg" },
+  { label: "Delivered", icon: "done", src: "/assets/status/delivered.svg", named: true },
 ];
 
 const S4_MAINS_INNER = [
-  { label: "Alert", icon: "alert", src: "/assets/status/alert.svg" },
+  { label: "Alert", icon: "alert", src: "/assets/status/alert.svg", named: true },
   { label: "Expired", icon: "expired", src: "/assets/status/expired.svg" },
   { label: "Undelivered", icon: "fail", src: "/assets/status/undelivered.svg" },
   { label: "Not Found", icon: "missing", src: "/assets/status/not-found.svg" },
@@ -83,8 +83,14 @@ function StatusOrbitRing({ items, tone }) {
     <ul className={`api-s4-orbit-ring api-s4-orbit-ring--${tone}`} style={{ "--n": items.length }}>
       {items.map((item, i) => (
         <li key={item.label} style={{ "--i": i }}>
-          <span className="api-s4-orbit-chip is-icon" data-icon={item.icon}>
-            <img src={item.src} alt="" />
+          <span
+            className={`api-s4-orbit-chip${item.named ? " is-named" : ""}`}
+            data-icon={item.icon}
+          >
+            <span className="api-s4-orbit-dot">
+              <img src={item.src} alt="" />
+            </span>
+            {item.named ? <em>{item.label}</em> : null}
           </span>
         </li>
       ))}
@@ -125,12 +131,12 @@ const S4_ARCS = [
 export function DataStatusStage() {
   return (
     <div className="api-s4-vig api-s4-vig--status" aria-hidden="true">
-      <svg className="api-s4-orbit-field" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        {[56, 88, 120, 152, 184, 216, 248].map((r, i) => (
-          <circle key={r} cx="200" cy="200" r={r} style={{ "--i": i }} />
-        ))}
-      </svg>
       <div className="api-s4-orbit">
+        <div className="api-s4-orbit-field" aria-hidden="true">
+          {[5, 4, 3, 2, 1, 0].map((i) => (
+            <span key={i} className="api-s4-orbit-wash" style={{ "--r": i }} />
+          ))}
+        </div>
         <StatusOrbitRing items={S4_MAINS_OUTER} tone="outer" />
         <StatusOrbitRing items={S4_MAINS_INNER} tone="inner" />
         <div className="api-s4-orbit-core">
