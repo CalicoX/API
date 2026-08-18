@@ -125,7 +125,11 @@ const S4_ARCS = [
 export function DataStatusStage() {
   return (
     <div className="api-s4-vig api-s4-vig--status" aria-hidden="true">
-      <span className="api-s4-orbit-field" />
+      <svg className="api-s4-orbit-field" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        {[56, 88, 120, 152, 184, 216, 248].map((r, i) => (
+          <circle key={r} cx="200" cy="200" r={r} style={{ "--i": i }} />
+        ))}
+      </svg>
       <div className="api-s4-orbit">
         <StatusOrbitRing items={S4_MAINS_OUTER} tone="outer" />
         <StatusOrbitRing items={S4_MAINS_INNER} tone="inner" />
