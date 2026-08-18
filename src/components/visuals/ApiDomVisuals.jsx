@@ -65,14 +65,14 @@ export function UseCasesStage() {
 
 const S4_MAINS_OUTER = [
   { label: "Info Received", icon: "info", src: "/assets/status/info-received.svg" },
-  { label: "In Transit", icon: "transit", src: "/assets/status/in-transit.svg", named: true },
+  { label: "In Transit", icon: "transit", src: "/assets/status/in-transit.svg" },
   { label: "Out For Delivery", icon: "out", src: "/assets/status/out-for-delivery.svg" },
   { label: "Pick Up", icon: "pickup", src: "/assets/status/pickup.svg" },
-  { label: "Delivered", icon: "done", src: "/assets/status/delivered.svg", named: true },
+  { label: "Delivered", icon: "done", src: "/assets/status/delivered.svg" },
 ];
 
 const S4_MAINS_INNER = [
-  { label: "Alert", icon: "alert", src: "/assets/status/alert.svg", named: true },
+  { label: "Alert", icon: "alert", src: "/assets/status/alert.svg" },
   { label: "Expired", icon: "expired", src: "/assets/status/expired.svg" },
   { label: "Undelivered", icon: "fail", src: "/assets/status/undelivered.svg" },
   { label: "Not Found", icon: "missing", src: "/assets/status/not-found.svg" },
@@ -83,14 +83,11 @@ function StatusOrbitRing({ items, tone }) {
     <ul className={`api-s4-orbit-ring api-s4-orbit-ring--${tone}`} style={{ "--n": items.length }}>
       {items.map((item, i) => (
         <li key={item.label} style={{ "--i": i }}>
-          <span
-            className={`api-s4-orbit-chip${item.named ? " is-named" : ""}`}
-            data-icon={item.icon}
-          >
+          <span className="api-s4-orbit-chip is-named" data-icon={item.icon}>
             <span className="api-s4-orbit-dot">
               <img src={item.src} alt="" />
             </span>
-            {item.named ? <em>{item.label}</em> : null}
+            <em>{item.label}</em>
           </span>
         </li>
       ))}
@@ -131,12 +128,12 @@ const S4_ARCS = [
 export function DataStatusStage() {
   return (
     <div className="api-s4-vig api-s4-vig--status" aria-hidden="true">
+      <div className="api-s4-orbit-field" aria-hidden="true">
+        {[5, 4, 3, 2, 1, 0].map((i) => (
+          <span key={i} className="api-s4-orbit-wash" style={{ "--r": i }} />
+        ))}
+      </div>
       <div className="api-s4-orbit">
-        <div className="api-s4-orbit-field" aria-hidden="true">
-          {[5, 4, 3, 2, 1, 0].map((i) => (
-            <span key={i} className="api-s4-orbit-wash" style={{ "--r": i }} />
-          ))}
-        </div>
         <StatusOrbitRing items={S4_MAINS_OUTER} tone="outer" />
         <StatusOrbitRing items={S4_MAINS_INNER} tone="inner" />
         <div className="api-s4-orbit-core">

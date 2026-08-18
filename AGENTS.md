@@ -22,7 +22,7 @@ Park 在这个仓库里直接改代码、看效果。Agent 用简体中文回复
 
 - How-it-works / Data Operations 插图：浅灰井 `#f7f8fa` + 点阵，白 UI 碎片，8–11px 字，细描边。不要实拍、不要 3D 开盖。
 - 四张 Data Operations 卡必须**四种构图**，不要同一套铺满双栏。
-  1. Tracking data：双环 9 态绕 17 logo 公转（外 5 / 内 4，hover 反向）。涟漪是叠层白圆 + 淡阴影，不要描边。状态圆官方纯色；个别（In Transit / Delivered / Alert）用白胶囊标名称。
+  1. Tracking data：双环 9 态绕 17 logo 公转（外 5 / 内 4，hover 反向）。涟漪铺满整井，叠层白圆 + 很淡阴影，不要描边。9 个状态全部白胶囊。轨道要散开（约 38 / 22 cqmin），内外错开 45°。
   2. Carriers：中心 3400+ + 两侧 logo **连线**。
   3. Visibility：两张重叠卡拆开（运单号 → 自动识别）。
   4. Dashboard：井中小卡，**环形图描边**动画。
