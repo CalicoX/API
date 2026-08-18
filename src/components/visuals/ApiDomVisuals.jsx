@@ -63,39 +63,32 @@ export function UseCasesStage() {
   );
 }
 
-const S4_XFER_DOTS = [
-  { id: "done", src: "/assets/status/delivered.svg", color: "#43a047", x: 50, y: 18 },
-  { id: "info", src: "/assets/status/info-received.svg", color: "#00bcd4", x: 86, y: 50 },
-  { id: "pickup", src: "/assets/status/pickup.svg", color: "#0d47a1", x: 50, y: 82 },
-  { id: "out", src: "/assets/status/out-for-delivery.svg", color: "#2962ff", x: 14, y: 50 },
+const S4_MAINS_OUTER = [
+  { label: "Info Received", icon: "info", src: "/assets/status/info-received.svg" },
+  { label: "In Transit", icon: "transit", src: "/assets/status/in-transit.svg" },
+  { label: "Out For Delivery", icon: "out", src: "/assets/status/out-for-delivery.svg" },
+  { label: "Pick Up", icon: "pickup", src: "/assets/status/pickup.svg" },
+  { label: "Delivered", icon: "done", src: "/assets/status/delivered.svg" },
 ];
 
-const S4_XFER_CHIPS = [
-  {
-    id: "transit",
-    src: "/assets/status/in-transit.svg",
-    color: "#2196f3",
-    x: 72,
-    y: 30,
-    title: "In Transit",
-    meta: "UPS · Sept 25 8:43pm",
-  },
-  {
-    id: "alert",
-    src: "/assets/status/alert.svg",
-    color: "#ff6f00",
-    x: 28,
-    y: 70,
-    title: "Alert",
-    meta: "DHL · Sept 25 6:43pm",
-  },
+const S4_MAINS_INNER = [
+  { label: "Alert", icon: "alert", src: "/assets/status/alert.svg" },
+  { label: "Expired", icon: "expired", src: "/assets/status/expired.svg" },
+  { label: "Undelivered", icon: "fail", src: "/assets/status/undelivered.svg" },
+  { label: "Not Found", icon: "missing", src: "/assets/status/not-found.svg" },
 ];
 
-function XferIco({ src, color }) {
+function StatusOrbitRing({ items, tone }) {
   return (
-    <span className="api-s4-xfer-ico" style={{ "--chip": color }}>
-      <img src={src} alt="" />
-    </span>
+    <ul className={`api-s4-orbit-ring api-s4-orbit-ring--${tone}`} style={{ "--n": items.length }}>
+      {items.map((item, i) => (
+        <li key={item.label} style={{ "--i": i }}>
+          <span className="api-s4-orbit-chip is-icon" data-icon={item.icon}>
+            <img src={item.src} alt="" />
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -132,19 +125,15 @@ const S4_ARCS = [
 export function DataStatusStage() {
   return (
     <div className="api-s4-vig api-s4-vig--status" aria-hidden="true">
-      <div className="api-s4-xfer">
-        {[0, 1, 2, 3, 4, 5].map((i) => (
-          <span key={i} className="api-s4-xfer-ring" style={{ "--r": i }} />
+      <div className="api-s4-orbit">
+        {[0, 1, 2, 3, 4].map((i) => (
+          <span key={i} className="api-s4-orbit-wash" style={{ "--r": i }} />
         ))}
-        <svg className="api-s4-xfer-wires" viewBox="0 0 400 400" fill="none" aria-hidden="true">
-          <line x1="200" y1="168" x2="200" y2="90" />
-          <line x1="232" y1="200" x2="326" y2="200" />
-          <line x1="200" y1="232" x2="200" y2="310" />
-          <line x1="168" y1="200" x2="74" y2="200" />
-        </svg>
-        <div className="api-s4-xfer-core">
-          <div className="api-s4-xfer-logo">
-            <svg className="api-s4-xfer-logo-defs" width="0" height="0" aria-hidden="true">
+        <StatusOrbitRing items={S4_MAINS_OUTER} tone="outer" />
+        <StatusOrbitRing items={S4_MAINS_INNER} tone="inner" />
+        <div className="api-s4-orbit-core">
+          <div className="api-s4-logo">
+            <svg className="api-s4-logo-defs" width="0" height="0" aria-hidden="true">
               <clipPath id="api-s4-logo-squircle" clipPathUnits="objectBoundingBox">
                 <path d="M0.6456,0.0034Q0.7912,0.0069 0.8351,0.0174Q0.8789,0.0280 0.9071,0.0463Q0.9353,0.0647 0.9537,0.0929Q0.9720,0.1211 0.9826,0.1649Q0.9931,0.2088 0.9966,0.3544Q1.0000,0.5000 0.9966,0.6456Q0.9931,0.7912 0.9826,0.8351Q0.9720,0.8789 0.9537,0.9071Q0.9353,0.9353 0.9071,0.9537Q0.8789,0.9720 0.8351,0.9826Q0.7912,0.9931 0.6456,0.9966Q0.5000,1.0000 0.3544,0.9966Q0.2088,0.9931 0.1649,0.9826Q0.1211,0.9720 0.0929,0.9537Q0.0647,0.9353 0.0463,0.9071Q0.0280,0.8789 0.0174,0.8351Q0.0069,0.7912 0.0034,0.6456Q0.0000,0.5000 0.0034,0.3544Q0.0069,0.2088 0.0174,0.1649Q0.0280,0.1211 0.0463,0.0929Q0.0647,0.0647 0.0929,0.0463Q0.1211,0.0280 0.1649,0.0174Q0.2088,0.0069 0.3544,0.0034Q0.5000,0.0000 0.6456,0.0034Z" />
               </clipPath>
@@ -152,28 +141,6 @@ export function DataStatusStage() {
             <img src="/assets/logo-17-mark.png" alt="" />
           </div>
         </div>
-        {S4_XFER_DOTS.map((dot, i) => (
-          <span
-            key={dot.id}
-            className="api-s4-xfer-dot"
-            style={{ left: `${dot.x}%`, top: `${dot.y}%`, "--i": i }}
-          >
-            <XferIco src={dot.src} color={dot.color} />
-          </span>
-        ))}
-        {S4_XFER_CHIPS.map((chip, i) => (
-          <span
-            key={chip.id}
-            className="api-s4-xfer-chip"
-            style={{ left: `${chip.x}%`, top: `${chip.y}%`, "--i": i + 4 }}
-          >
-            <XferIco src={chip.src} color={chip.color} />
-            <span className="api-s4-xfer-chip-copy">
-              <b>{chip.title}</b>
-              <em>{chip.meta}</em>
-            </span>
-          </span>
-        ))}
       </div>
     </div>
   );
