@@ -125,10 +125,8 @@ const S4_ARCS = [
 export function DataStatusStage() {
   return (
     <div className="api-s4-vig api-s4-vig--status" aria-hidden="true">
+      <span className="api-s4-orbit-field" />
       <div className="api-s4-orbit">
-        {[0, 1, 2, 3, 4].map((i) => (
-          <span key={i} className="api-s4-orbit-wash" style={{ "--r": i }} />
-        ))}
         <StatusOrbitRing items={S4_MAINS_OUTER} tone="outer" />
         <StatusOrbitRing items={S4_MAINS_INNER} tone="inner" />
         <div className="api-s4-orbit-core">

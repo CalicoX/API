@@ -20,7 +20,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - How-it-works 三张卡：白卡 20px 圆角、8px 内边距；插图井浅灰点阵、overflow hidden。
 - Data Operations 四张卡插图要各不相同，不能都顶满井。
 - Dashboard 卡（2026-08-17 重做）：井里是「圆形半透明遮罩 + 仪表盘拼贴」。遮罩 `api-s4-dash-disc`：白色半透明圆盘（min(84%,320px)，径向白 0.92→0.22 + 淡蓝晕），1px `rgba(15,23,42,0.06)` 发丝描边，垫在点阵上、拼贴下，与拼贴中心对位。拼贴 `api-s4-dashgrid` min(88%,336px) 两列 `grid-template-rows: auto 1fr`，左右两列**上下齐平**（Park 嫌右列下沉重心歪，别加 margin-top 错位）：左 donut 主卡（Status distribution，donut 118px，图例单列 4 项——不要两列会换行）、右列 Carrier time performance 迷你条形（4 承运商 ×天数，条色 #2962ff/#2196f3/#00bcd4/#43a047）+ Tracking function status LED 行（绿绿橙 + 右对齐 %，1fr 拉伸 + `padding-bottom: 42px` 留空）；Webhook push alert toast 锚在网格右下角（bottom -10 / right -8，压在 fn 卡的留白区上，不悬空、不盖行），铃铛橙块 #fff7ed/#ff6f00。hover 全部 3.2s cubic-bezier(0.22,1,0.36,1) infinite：donut 重描（原有）、条形 scaleX 重涨（delay --i×0.09s）、LED box-shadow 呼吸、toast 从右滑入左滑出（位移只走水平）。≤900px：donut 96px、grid 94%、toast 改 static 入流占整行靠右（绝对定位会压行或被井底裁）。reduce-motion 全停。仪表盘微字 8–9px 是插图微文案，不算产品文案。
-- Tracking data 卡（2026-08-18）：浅灰井。中心 17 logo。9 个官方状态全部回来，外 5 / 内 4，hover 内外反向公转。状态图标**直接画成圆**（`border-radius: 50%`），官方色体积渐变，**不要描边**、不要白圈包裹、不要轨道描边圈。背景涟漪只做半透明白填、居中、无描边。
+- Tracking data 卡（2026-08-18）：浅灰井。中心 17 logo。9 态圆形公转（外 5 / 内 4）。状态圆是官方纯色平涂，**不要渐变、不要高光、不要描边**。涟漪用一层 `repeating-radial-gradient` + blur，中心留白、边缘淡出。logo 光用白+淡蓝。
 - 承运商井是蓝色 + 第二屏同款 WebGL 点状地球；Visibility / Dashboard 仍浅灰点阵。
 - 承运商卡：底排 5 个淡出 logo 去掉，只留上两排（3+5）。井是蓝色（`#4a86ff` → `#1b57e0` → `#143eb4`），不要浅灰点阵。背景是第二屏 Use Cases 同款 WebGL 点状地球（公共模块 `src/fx/lib/particle-earth.js`），不是 SVG 点、不是井点阵。地球要淡、往下放、井口只切出上半颗：`scale: 1.3`，`offset [0,-1.05]`（赤道贴井底，下半被 overflow 裁掉，两侧略出血），`alphaMul: 0.62`（2026-08-17 Park 要再大再淡）。自转是 hover 驱动：平时定格零重绘（引擎 `getAnimating` 返回 false 时不排 rAF，`onApi.wake` 唤醒），整卡 `.api-s4-card` mouseenter 缓动加速到 0.18 rad/s、mouseleave 缓动刹停（速度因子指数逼近，dt 钳 0.1s）；reduce-motion / 触屏（`hover: none`）不挂监听、保持静态。不要用 absolute+aspect-ratio 空槽当 WebGL host（高度容易是 0，地球就没了）。不要铺成 124% 全幅。z-index 低于 3400+ / logo；蓝底上用白/浅蓝点；横向 sticky + `overflow-x: clip` 时不要只靠 IntersectionObserver 才 start，用 getBoundingClientRect 判可见。卡滚出可视区停画。3400+ 视觉写成 `3,400+`（+ 略小、偏蓝），字重 700、tabular，carriers 大写字距。枢轴白卡约 132px 宽。logo 构图铺满井，地球不铺满。第二排 logo 在 y=300（2026-08-17 从 268 下移拉开两排），`hubWirePath` 自动跟随，但 `stroke-dasharray`/keyframes 要 ≥300 盖住最长连线，否则线中间断。白卡顶部有三层机架服务器 SVG（76×46，细描边 `#d5deec`、白底、蓝 LED + 浅蓝通风条/活动条），hover 时三颗蓝 LED 错峰闪（`api-s4-led`，delay `--i`×0.38s），reduce-motion 关。服务器在数字上方，卡 padding 收成 15/14。
 - Visibility 卡（2026-08-17 重做，Park 要「和文案匹配 + 彩色」）：仍是两张重叠卡拆开的构图，但故事讲全、上色。上卡 Add Number：标题前蓝点 kicker；Carrier 字段是蓝底药丸盒（`#eff6ff` + 蓝描边），idle 放大镜 + 蓝字 Auto-detect，hover 换成 DHL 小 logo + DHL Express，且盒内有蓝色扫光（`api-s4-scan`，同 3.2s 曲线）。橙色连接线不变。下卡 Auto-identified：标题前绿点；识别行 = DHL logo + 名称 + 运单号（LV123242CN 复现上卡的号，串起叙事）+ 绿色 `80%+ match` 药丸（`rgba(67,160,71)` 系）；下面新增同步条 `api-s4-sync`：4 个官方状态色圆点（Info `#00bcd4` → Transit `#2196f3` → Out `#2962ff` → Delivered `#43a047`）+ 细线相连，caption「Auto-sync · non-stop until fulfilled」，hover 圆点按 `--i` 依次脉冲（延迟 0.5s 起步、间隔 0.14s）。idle 态就把完整故事亮出来，不能只有 hover 才见结果。reduce-motion 关扫光和脉冲、直接显示识别结果。
@@ -41,11 +41,12 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 ## 未完成
 
 - 2026-08-14 先停在这里。
-- Tracking data：9 态圆形公转已恢复。Park 再看。
+- Tracking data：质感已按参考图加软涟漪和玻璃圆。Park 再看。
 - 承运商卡已改成从上往下散开。Visibility 已按彩色叙事重做（2026-08-17）；Dashboard 还没按同一轮重做。
 
 ## 日志
 
+- 2026-08-18 19:28 — memory.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-18 19:18 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-18 19:05 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-18 18:52 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css
