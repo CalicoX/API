@@ -3760,6 +3760,10 @@
   background: #f7f8fa;
 }
 
+.api-s4-illus--carriers::before {
+  display: none;
+}
+
 .api-s4-vig--carriers {
   position: relative;
   align-items: center;
@@ -3796,8 +3800,8 @@
 
 .api-s4-hub-wires path {
   fill: none;
-  stroke: rgba(100, 130, 180, 0.42);
-  stroke-width: 1.35;
+  stroke: rgba(140, 165, 205, 0.22);
+  stroke-width: 1.15;
   stroke-linecap: round;
   /* 第二排下移后最长连线约 260+，dash 必须盖过全长，否则线中间会断 */
   stroke-dasharray: 300;
