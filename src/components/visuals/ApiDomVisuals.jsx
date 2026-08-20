@@ -105,9 +105,9 @@ function StatusOrbitRing({ items, tone }) {
 }
 
 const S4_HUB_NODES = [
-  { src: "/assets/carriers/dhl.svg", name: "DHL", x: 128, y: 188 },
-  { src: "/assets/carriers/ups.svg", name: "UPS", x: 200, y: 188 },
-  { src: "/assets/carriers/usps.svg", name: "USPS", x: 272, y: 188 },
+  { src: "/assets/carriers/dhl.svg", name: "DHL", x: 128, y: 212 },
+  { src: "/assets/carriers/ups.svg", name: "UPS", x: 200, y: 212 },
+  { src: "/assets/carriers/usps.svg", name: "USPS", x: 272, y: 212 },
   { src: "/assets/carriers/fedex.svg", name: "FedEx", x: 56, y: 300 },
   { src: "/assets/carriers/tnt.svg", name: "TNT", x: 128, y: 300 },
   { src: "/assets/carriers/gls.svg", name: "GLS", x: 200, y: 300 },
