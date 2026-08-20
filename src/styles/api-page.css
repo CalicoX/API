@@ -3757,12 +3757,7 @@
 }
 
 .api-s4-illus--carriers {
-  background:
-    radial-gradient(circle at 50% 42%, #4a86ff 0%, #1b57e0 48%, #143eb4 100%);
-}
-
-.api-s4-illus--carriers::before {
-  display: none;
+  background: #f7f8fa;
 }
 
 .api-s4-vig--carriers {
@@ -3801,7 +3796,7 @@
 
 .api-s4-hub-wires path {
   fill: none;
-  stroke: rgba(210, 230, 255, 0.55);
+  stroke: rgba(100, 130, 180, 0.42);
   stroke-width: 1.35;
   stroke-linecap: round;
   /* 第二排下移后最长连线约 260+，dash 必须盖过全长，否则线中间会断 */
@@ -3839,11 +3834,11 @@
   padding: 0;
   box-sizing: border-box;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   background: #fff;
   overflow: hidden;
   transform: translate(-50%, -50%);
-  box-shadow: 0 6px 16px rgba(8, 28, 90, 0.22);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
 }
 
 .api-s4-hub-logo img {
@@ -3878,12 +3873,12 @@
   padding: 15px 14px 14px;
   box-sizing: border-box;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   background: #fff;
   transform: translateX(-50%);
   box-shadow:
-    0 0 0 6px rgba(255, 255, 255, 0.12),
-    0 12px 28px rgba(8, 28, 90, 0.22);
+    0 0 0 6px rgba(255, 255, 255, 0.72),
+    0 12px 28px rgba(15, 23, 42, 0.08);
 }
 
 .api-s4-hub-server {

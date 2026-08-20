@@ -119,14 +119,14 @@ export const USE_CASES_THEME = {
   alphaMul: 1,
 };
 
-/** White / ice-blue dots on the carriers blue well. */
+/** Slate-blue dots on the carriers gray well. */
 export const CARRIERS_THEME = {
-  land: [0.88, 0.93, 1],
-  landHi: [0.96, 0.98, 1],
-  ocean: [0.62, 0.76, 0.96],
-  oceanHi: [0.78, 0.88, 1],
-  violet: [0.75, 0.86, 1],
-  alphaMul: 0.62,
+  land: [0.38, 0.5, 0.74],
+  landHi: [0.48, 0.62, 0.88],
+  ocean: [0.62, 0.7, 0.82],
+  oceanHi: [0.74, 0.8, 0.9],
+  violet: [0.52, 0.56, 0.78],
+  alphaMul: 0.72,
 };
 
 function landWeight(lon, lat) {
