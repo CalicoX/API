@@ -3749,7 +3749,7 @@
   }
 }
 
-/* 2. Carriers — hub on top, logos fan downward */
+/* 2. Carriers — hub + constellation of logos, flow light on hover */
 .api-s4-illus:has(.api-s4-vig--carriers) > *,
 .api-s4-illus--carriers > * {
   width: 100%;
@@ -3798,29 +3798,44 @@
   overflow: visible;
 }
 
-.api-s4-hub-wires path {
+.api-s4-hub-wires .base path {
   fill: none;
-  stroke: rgba(140, 165, 205, 0.22);
+  stroke: rgba(140, 165, 205, 0.28);
   stroke-width: 1.15;
   stroke-linecap: round;
-  /* 第二排下移后最长连线约 280+，dash 必须盖过全长，否则线中间会断 */
-  stroke-dasharray: 340;
-  stroke-dashoffset: 0;
 }
 
-.api-s4-card:hover .api-s4-hub-wires path {
-  animation: api-s4-wire-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--i, 0) * 0.12s);
+.api-s4-hub-wires .flow-tail path,
+.api-s4-hub-wires .flow-head path {
+  fill: none;
+  stroke-linecap: round;
+  opacity: 0;
+  pointer-events: none;
 }
 
-@keyframes api-s4-wire-in {
-  from {
-    stroke-dashoffset: 340;
-    opacity: 0;
-  }
+.api-s4-hub-wires .flow-tail path {
+  stroke-width: 2.55;
+  stroke-dasharray: 58 392;
+  filter: drop-shadow(0 0 5px rgba(91, 140, 255, 0.55));
+}
+
+.api-s4-hub-wires .flow-head path {
+  stroke: #fff;
+  stroke-width: 1.85;
+  stroke-dasharray: 14 436;
+  filter: drop-shadow(0 0 6px rgba(191, 219, 254, 0.95));
+}
+
+.api-s4-card:hover .api-s4-hub-wires .flow-tail path,
+.api-s4-card:hover .api-s4-hub-wires .flow-head path {
+  opacity: 1;
+  animation: api-s4-wire-flow 1.9s linear infinite;
+  animation-delay: calc(var(--i, 0) * 0.05s);
+}
+
+@keyframes api-s4-wire-flow {
   to {
-    stroke-dashoffset: 0;
-    opacity: 1;
+    stroke-dashoffset: -450;
   }
 }
 
@@ -3829,8 +3844,8 @@
   left: var(--x);
   top: var(--y);
   z-index: 2;
-  width: 46px;
-  height: 46px;
+  width: var(--s, 46px);
+  height: var(--s, 46px);
   padding: 0;
   box-sizing: border-box;
   border-radius: 12px;
@@ -3848,21 +3863,7 @@
   object-fit: cover;
 }
 
-.api-s4-card:hover .api-s4-hub-logo {
-  animation: api-s4-hub-pop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--i, 0) * 0.12s);
-}
 
-@keyframes api-s4-hub-pop {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.78);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
 
 .api-s4-hub-core {
   position: absolute;
@@ -4601,8 +4602,6 @@
     animation: none;
   }
 
-  .api-s4-card:hover .api-s4-hub-wires path,
-  .api-s4-card:hover .api-s4-hub-logo,
   .api-s4-card:hover .api-s4-hub-core,
   .api-s4-card:hover .api-s4-hub-server .led,
   .api-s4-card:hover .api-s4-codewin,
@@ -4615,8 +4614,10 @@
     stroke-dashoffset: var(--off, 0);
   }
 
-  .api-s4-card:hover .api-s4-hub-logo {
-    transform: translate(-50%, -50%);
+  .api-s4-card:hover .api-s4-hub-wires .flow-tail path,
+  .api-s4-card:hover .api-s4-hub-wires .flow-head path {
+    animation: none;
+    opacity: 0;
   }
 
   .api-s4-detect-auto { display: none; }
@@ -5457,8 +5458,8 @@
   }
 
   .api-s4-hub-logo {
-    width: 40px;
-    height: 40px;
+    width: calc(var(--s, 46px) * 0.84);
+    height: calc(var(--s, 46px) * 0.84);
   }
 
   .api-s4-hub-core {
