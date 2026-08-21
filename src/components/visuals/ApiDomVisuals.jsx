@@ -563,19 +563,44 @@ export function DataHubStage() {
 }
 
 /* Dashboard collage — 17TRACK 按物流主状态 + 近90天线（真实后台） */
-const DONUT_R = 38;
-const DONUT_C = 2 * Math.PI * DONUT_R;
 const S4_DASH_ARCS = [
   [0.22, "#9aa3af", "Not Found"],
   [0.04, "#22d3ee", "Info Received"],
   [0.05, "#60a5fa", "In Transit"],
   [0.03, "#2563eb", "Pick Up"],
-  [0.58, "#43a047", "Delivered"],
-  [0.03, "#3b82f6", "Out For Delivery"],
-  [0.02, "#ef4444", "Undelivered"],
-  [0.02, "#f97316", "Alert"],
-  [0.01, "#b91c1c", "Expired"],
+  [0.55, "#43a047", "Delivered"],
+  [0.04, "#3b82f6", "Out For Delivery"],
+  [0.03, "#ef4444", "Undelivered"],
+  [0.025, "#f97316", "Alert"],
+  [0.015, "#b91c1c", "Expired"],
 ];
+
+const DONUT_CX = 50;
+const DONUT_R_IN = 31;
+const DONUT_R_OUT = 46.5;
+
+/** Filled annular sector. Tiny stroke-dashes look like radial ticks — don't use those. */
+function donutSlicePath(a0, a1) {
+  const delta = a1 - a0;
+  if (delta < 1e-4) return "";
+  const large = delta > Math.PI ? 1 : 0;
+  const pt = (r, a) => [DONUT_CX + r * Math.cos(a), DONUT_CX + r * Math.sin(a)];
+  const [ox0, oy0] = pt(DONUT_R_OUT, a0);
+  const [ox1, oy1] = pt(DONUT_R_OUT, a1);
+  const [ix1, iy1] = pt(DONUT_R_IN, a1);
+  const [ix0, iy0] = pt(DONUT_R_IN, a0);
+  return `M${ox0.toFixed(3)} ${oy0.toFixed(3)} A${DONUT_R_OUT} ${DONUT_R_OUT} 0 ${large} 1 ${ox1.toFixed(3)} ${oy1.toFixed(3)} L${ix1.toFixed(3)} ${iy1.toFixed(3)} A${DONUT_R_IN} ${DONUT_R_IN} 0 ${large} 0 ${ix0.toFixed(3)} ${iy0.toFixed(3)} Z`;
+}
+
+const S4_DONUT_SLICES = (() => {
+  let a = -Math.PI / 2;
+  return S4_DASH_ARCS.map(([part, color, label], i) => {
+    const a1 = a + part * Math.PI * 2;
+    const slice = { d: donutSlicePath(a, a1 + 0.012), color, label, i };
+    a = a1;
+    return slice;
+  });
+})();
 
 const S4_TREND_XS = ["08-14", "08-15", "08-16", "08-17", "08-18", "08-19", "08-20"];
 const S4_TREND_YS = [0, 0, 0, 0, 0, 2100, 2100];
@@ -602,7 +627,6 @@ const S4_CURVE_FILL = `${S4_CURVE_LINE} L480 260 L0 260 Z`;
 
 export function DataChartStage() {
   const fillId = `s4-dash-fill-${useId().replace(/:/g, "")}`;
-  let acc = 0;
   const tipX = s4TrendX(1);
   const tipY = s4TrendY(0);
   return (
@@ -625,34 +649,16 @@ export function DataChartStage() {
           <div className="api-s4-donut-row">
             <div className="api-s4-donut-wrap">
               <svg viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r={DONUT_R} fill="none" stroke="#eef2f7" strokeWidth="13" />
-                <g transform="rotate(-90 50 50)">
-                  {S4_DASH_ARCS.map(([part, color, label], i) => {
-                    const len = part * DONUT_C;
-                    const off = -acc;
-                    acc += len;
-                    return (
-                      <circle
-                        key={label}
-                        className="api-s4-donut-seg"
-                        cx="50"
-                        cy="50"
-                        r={DONUT_R}
-                        fill="none"
-                        stroke={color}
-                        strokeWidth="13"
-                        strokeDasharray={`${len} ${DONUT_C - len}`}
-                        strokeDashoffset={off}
-                        style={{
-                          "--len": len,
-                          "--rest": DONUT_C - len,
-                          "--off": off,
-                          "--delay": `${i * 0.07}s`,
-                        }}
-                      />
-                    );
-                  })}
-                </g>
+                <circle cx="50" cy="50" r="38.75" fill="none" stroke="#eef2f7" strokeWidth="15.5" />
+                {S4_DONUT_SLICES.map((slice) => (
+                  <path
+                    key={slice.label}
+                    className="api-s4-donut-seg"
+                    d={slice.d}
+                    fill={slice.color}
+                    style={{ "--delay": `${slice.i * 0.07}s` }}
+                  />
+                ))}
               </svg>
             </div>
             <ul className="api-s4-legend">
@@ -708,24 +714,23 @@ export function DataChartStage() {
             </g>
           </svg>
         </article>
-
-        <div className="api-s4-dashtoast">
-          <span className="api-s4-dashtoast-ico">
-            <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path
-                d="M7 1.6a3.6 3.6 0 0 0-3.6 3.6c0 2.6-.9 3.6-1.4 4.1h10c-.5-.5-1.4-1.5-1.4-4.1A3.6 3.6 0 0 0 7 1.6Z"
-                stroke="currentColor"
-                strokeWidth="1.2"
-                strokeLinejoin="round"
-              />
-              <path d="M5.8 11.6a1.3 1.3 0 0 0 2.4 0" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-            </svg>
-          </span>
-          <span className="api-s4-dashtoast-txt">
-            <b>Webhook push alert</b>
-            <em>Endpoint retry · 200 OK</em>
-          </span>
-        </div>
+      </div>
+      <div className="api-s4-dashtoast">
+        <span className="api-s4-dashtoast-ico">
+          <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path
+              d="M7 1.6a3.6 3.6 0 0 0-3.6 3.6c0 2.6-.9 3.6-1.4 4.1h10c-.5-.5-1.4-1.5-1.4-4.1A3.6 3.6 0 0 0 7 1.6Z"
+              stroke="currentColor"
+              strokeWidth="1.2"
+              strokeLinejoin="round"
+            />
+            <path d="M5.8 11.6a1.3 1.3 0 0 0 2.4 0" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+          </svg>
+        </span>
+        <span className="api-s4-dashtoast-txt">
+          <b>Webhook push alert</b>
+          <em>Endpoint retry · 200 OK</em>
+        </span>
       </div>
     </div>
   );

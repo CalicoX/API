@@ -4234,7 +4234,7 @@
   position: relative;
   align-items: flex-start;
   justify-content: center;
-  padding: 10% 4% 0;
+  padding: 4.5% 3.5% 58px;
 }
 
 /* 圆形半透明遮罩：白色磨砂圆盘 + 发丝描边，聚焦仪表盘；底部淡出让曲线露出来 */
@@ -4313,17 +4313,17 @@
 .api-s4-dashgrid {
   position: relative;
   z-index: 2;
-  width: min(94%, 428px);
+  width: min(92%, 440px);
   display: grid;
-  grid-template-columns: 1.22fr 1.14fr;
-  gap: 10px;
+  grid-template-columns: 1fr;
+  gap: 12px;
   align-items: stretch;
 }
 
 .api-s4-dashtile {
   box-sizing: border-box;
-  padding: 10px 10px 9px;
-  border-radius: 12px;
+  padding: 14px 16px 12px;
+  border-radius: 14px;
   border: 1px solid rgba(15, 23, 42, 0.09);
   background: #fff;
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
@@ -4337,8 +4337,8 @@
 
 .api-s4-chart-kicker {
   display: block;
-  margin-bottom: 8px;
-  font-size: 8.5px;
+  margin-bottom: 10px;
+  font-size: 11px;
   font-weight: 650;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -4348,19 +4348,19 @@
 .api-s4-donut-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 18px;
   min-height: 0;
 }
 
 .api-s4-trend {
   display: block;
   width: 100%;
-  height: 118px;
+  height: 148px;
   overflow: visible;
 }
 
 .api-s4-trend text {
-  font-size: 7px;
+  font-size: 8.5px;
   fill: #94a3b8;
   font-variant-numeric: tabular-nums;
 }
@@ -4397,7 +4397,7 @@
 
 .api-s4-trend-tip text {
   fill: #fff;
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 650;
   text-anchor: middle;
 }
@@ -4407,13 +4407,12 @@
   fill: #e5e7eb;
 }
 
-/* webhook toast sits under the two tiles, on the growth-curve wash */
+/* webhook toast floats on the well, not in the card stack */
 .api-s4-dashtoast {
-  position: static;
-  grid-column: 1 / -1;
-  justify-self: end;
-  z-index: 2;
-  margin-top: 2px;
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  z-index: 3;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -4475,8 +4474,8 @@
 
 .api-s4-donut-wrap {
   position: relative;
-  width: 102px;
-  height: 102px;
+  width: 152px;
+  height: 152px;
   margin: 0;
   flex-shrink: 0;
 }
@@ -4489,25 +4488,24 @@
 }
 
 .api-s4-donut-seg {
-  stroke-dasharray: var(--len) var(--rest);
-  stroke-dashoffset: var(--off);
   transform-origin: 50px 50px;
 }
 
 .api-s4-card:hover .api-s4-donut-seg {
-  animation: api-s4-donut-draw 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation: api-s4-donut-fill 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   animation-delay: var(--delay, 0s);
 }
 
-@keyframes api-s4-donut-draw {
+@keyframes api-s4-donut-fill {
   0% {
-    stroke-dasharray: 0 239;
+    opacity: 0;
   }
-  26%, 64% {
-    stroke-dasharray: var(--len) var(--rest);
+  22%,
+  68% {
+    opacity: 1;
   }
   100% {
-    stroke-dasharray: 0 239;
+    opacity: 0;
   }
 }
 
@@ -4517,7 +4515,7 @@
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3px;
+  gap: 6px;
   min-width: 0;
   flex: 1;
 }
@@ -4525,22 +4523,23 @@
 .api-s4-legend li {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 8px;
+  gap: 7px;
+  font-size: 11px;
   line-height: 1.2;
   color: #475569;
   white-space: nowrap;
 }
 
 .api-s4-legend li i {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 2px;
   flex-shrink: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .api-s4-card:hover .api-s4-trend-line,
+  .api-s4-card:hover .api-s4-donut-seg,
   .api-s4-card:hover .api-s4-dashtoast,
   .api-s4-card:hover .api-s4-dash-curve-line,
   .api-s4-card:hover .api-s4-dash-curve-fill {
@@ -4552,11 +4551,11 @@
 
 @media (max-width: 900px) {
   .api-s4-vig--dash {
-    padding: 8% 3% 0;
+    padding: 3.5% 3% 50px;
   }
 
   .api-s4-dash-curve {
-    height: 52%;
+    height: 46%;
   }
 
   .api-s4-dashgrid {
@@ -4564,13 +4563,34 @@
     gap: 8px;
   }
 
+  .api-s4-dashtile {
+    padding: 10px 12px 9px;
+  }
+
+  .api-s4-chart-kicker {
+    font-size: 9.5px;
+    margin-bottom: 8px;
+  }
+
   .api-s4-donut-wrap {
-    width: 78px;
-    height: 78px;
+    width: 108px;
+    height: 108px;
+  }
+
+  .api-s4-donut-row {
+    gap: 12px;
+  }
+
+  .api-s4-legend {
+    gap: 4px;
+  }
+
+  .api-s4-legend li {
+    font-size: 9px;
   }
 
   .api-s4-trend {
-    height: 100px;
+    height: 112px;
   }
 }
 
@@ -4587,7 +4607,6 @@
   .api-s4-card:hover .api-s4-donut-seg {
     animation: none;
     opacity: 1;
-    stroke-dashoffset: var(--off, 0);
   }
 
   .api-s4-card:hover .api-s4-codewin,
