@@ -121,12 +121,12 @@ export const USE_CASES_THEME = {
 
 /** Blue globe on the carriers gray well — continents must read, keep it quiet. */
 export const CARRIERS_THEME = {
-  land: [0.22, 0.38, 0.72],
-  landHi: [0.3, 0.48, 0.82],
-  ocean: [0.28, 0.4, 0.6],
-  oceanHi: [0.36, 0.5, 0.7],
-  violet: [0.36, 0.46, 0.76],
-  alphaMul: 0.7,
+  land: [0.16, 0.3, 0.52],
+  landHi: [0.22, 0.38, 0.62],
+  ocean: [0.2, 0.3, 0.44],
+  oceanHi: [0.26, 0.36, 0.52],
+  violet: [0.24, 0.32, 0.52],
+  alphaMul: 0.32,
 };
 
 function landWeight(lon, lat) {
@@ -822,7 +822,7 @@ export function mountCarriersEarth(host, canvas) {
     particleCount: narrow ? 4200 : 7200,
     dprMax: narrow ? 1.25 : 1.5,
     scale: 1.3,
-    size: 2.2,
+    size: 1.55,
     followScroll: false,
     staticMode: reduce,
     manualVis: true,
