@@ -369,67 +369,198 @@ export function DataCarriersStage() {
   );
 }
 
+const S4_NUMBER = "LV123242CN";
+const S4_TRACK_EVENTS = [
+  { time: "2022/8/18 10:22:00", text: "SHINGLE SPRINGS CA 95682, Delivered", live: true },
+  { time: "2022/8/18 08:14:00", text: "Out for Delivery, USPS" },
+  { time: "2022/8/17 21:06:00", text: "Arrived at Post Office" },
+  { time: "2022/8/16 14:40:00", text: "Picked Up by Shipping Partner" },
+];
+
 export function DataHubStage() {
+  const vigRef = useRef(null);
+  const [typed, setTyped] = useState("");
+  const [typing, setTyping] = useState(false);
+  const [scanning, setScanning] = useState(false);
+  const [detected, setDetected] = useState(false);
+  const [panel, setPanel] = useState(false);
+
+  useEffect(() => {
+    const vig = vigRef.current;
+    const card = vig?.closest(".api-s4-card");
+    if (!vig || !card) return undefined;
+
+    const reduce = prefersReducedMotion();
+    let cancelled = false;
+    let timer = 0;
+
+    const finish = () => {
+      setTyped(S4_NUMBER);
+      setTyping(false);
+      setScanning(false);
+      setDetected(true);
+      setPanel(true);
+    };
+
+    const reset = () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+      setTyped("");
+      setTyping(false);
+      setScanning(false);
+      setDetected(false);
+      setPanel(false);
+    };
+
+    const wait = (ms) =>
+      new Promise((resolve) => {
+        timer = window.setTimeout(resolve, ms);
+      });
+
+    const play = async () => {
+      cancelled = false;
+      if (reduce) {
+        finish();
+        return;
+      }
+      setTyped("");
+      setTyping(true);
+      setScanning(false);
+      setDetected(false);
+      setPanel(false);
+      for (let i = 1; i <= S4_NUMBER.length; i++) {
+        if (cancelled) return;
+        setTyped(S4_NUMBER.slice(0, i));
+        await wait(70);
+      }
+      if (cancelled) return;
+      setTyping(false);
+      setScanning(true);
+      await wait(780);
+      if (cancelled) return;
+      setDetected(true);
+      await wait(160);
+      if (cancelled) return;
+      setScanning(false);
+      setPanel(true);
+    };
+
+    const onEnter = () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+      play();
+    };
+    const onLeave = () => {
+      reset();
+      cancelled = false;
+    };
+
+    card.addEventListener("mouseenter", onEnter);
+    card.addEventListener("mouseleave", onLeave);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+      card.removeEventListener("mouseenter", onEnter);
+      card.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+
+  const cls = [
+    "api-s4-vig api-s4-vig--auto",
+    scanning ? "is-scanning" : "",
+    detected ? "is-detected" : "",
+    panel ? "is-panel" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div className="api-s4-vig api-s4-vig--auto" aria-hidden="true">
+    <div className={cls} ref={vigRef} aria-hidden="true">
       <div className="api-s4-flow">
-        <div className="api-s4-pile">
-          <div className="api-s4-codewin">
-            <div className="api-vig-float-h">
-              <strong>Add Number</strong>
-              <span>×</span>
-            </div>
-            <div className="api-vig-field">
-              <span>Tracking number*</span>
-              <b>LV123242CN</b>
-            </div>
-            <div className="api-vig-field">
-              <span>Carrier*</span>
-              <b className="api-s4-carrier-box">
-                <i className="api-s4-detect-auto">
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                    <circle cx="5.2" cy="5.2" r="3.4" stroke="currentColor" strokeWidth="1.4" />
-                    <path d="M7.9 7.9l2.3 2.3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                  </svg>
-                  Auto-detect
-                </i>
-                <i className="api-s4-detect-hit">
-                  <img src="/assets/carriers/dhl.svg" alt="" />
-                  DHL Express
-                </i>
-              </b>
+        <div className="api-s4-codewin">
+          <div className="api-vig-float-h">
+            <strong>Add Number</strong>
+            <span>×</span>
+          </div>
+          <div className="api-vig-field">
+            <span>Tracking number*</span>
+            <b className="api-s4-numtype">
+              {typed}
+              {typing ? <span className="api-vig-caret" /> : null}
+            </b>
+          </div>
+          <div className="api-vig-field">
+            <span>Carrier*</span>
+            <b className="api-s4-carrier-box">
+              <i className="api-s4-detect-auto">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <circle cx="5.2" cy="5.2" r="3.4" stroke="currentColor" strokeWidth="1.4" />
+                  <path d="M7.9 7.9l2.3 2.3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+                Auto-detect
+              </i>
+              <i className="api-s4-detect-hit">
+                <img src="/assets/carriers/dhl.svg" alt="" />
+                DHL Express
+              </i>
+            </b>
+          </div>
+        </div>
+        <div className="api-s4-link" aria-hidden="true">
+          <i className="api-vig-link-dot" />
+          <i className="api-vig-link-line" />
+          <i className="api-vig-link-arrow" />
+        </div>
+        <div className="api-s4-trackpane api-vig-track">
+          <div className="api-vig-track-bar">
+            <span className="api-vig-track-id">{S4_NUMBER}</span>
+            <span className="api-vig-toggle">
+              View JSON
+              <i />
+            </span>
+            <span className="api-vig-close" aria-hidden="true">
+              ×
+            </span>
+          </div>
+          <div className="api-vig-status">
+            <i className="api-vig-check" />
+            <div>
+              <strong>Delivered</strong>
+              <em>China(WUYOUEXP) → United States</em>
+              <span>Time of delivery: 2022/8/18</span>
             </div>
           </div>
-          <div className="api-s4-link" aria-hidden="true">
-            <i className="api-vig-link-dot" />
-            <i className="api-vig-link-line" />
-            <i className="api-vig-link-arrow" />
+          <div className="api-vig-timeinfo">
+            <b>Time Info</b>
+            <ul>
+              <li>
+                <span>Days after the first event</span>
+                <em>12 Day(s)</em>
+              </li>
+              <li>
+                <span>Days after in transit</span>
+                <em>12 Day(s)</em>
+              </li>
+              <li>
+                <span>Days after update stopped</span>
+                <em>0 Day(s)</em>
+              </li>
+            </ul>
           </div>
-          <div className="api-s4-float">
-            <div className="api-vig-float-h">
-              <strong>Auto-identified</strong>
-              <span>×</span>
-            </div>
-            <div className="api-s4-idhit">
-              <img src="/assets/carriers/dhl.svg" alt="" />
-              <div>
-                <b>DHL Express</b>
-                <em>LV123242CN</em>
-              </div>
-              <span className="api-s4-match">80%+ match</span>
-            </div>
-            <div className="api-s4-sync">
-              <div className="api-s4-sync-track">
-                <i className="api-s4-sync-dot" style={{ "--c": "#00bcd4", "--i": 0 }} />
-                <i className="api-s4-sync-seg" style={{ "--i": 0 }} />
-                <i className="api-s4-sync-dot" style={{ "--c": "#2196f3", "--i": 1 }} />
-                <i className="api-s4-sync-seg" style={{ "--i": 1 }} />
-                <i className="api-s4-sync-dot" style={{ "--c": "#2962ff", "--i": 2 }} />
-                <i className="api-s4-sync-seg" style={{ "--i": 2 }} />
-                <i className="api-s4-sync-dot is-live" style={{ "--c": "#43a047", "--i": 3 }} />
-              </div>
-              <em>Auto-sync · non-stop until fulfilled</em>
-            </div>
+          <div className="api-vig-events">
+            <b>Shipping Events</b>
+            <p className="api-vig-carrier">WUYOUEXP · China</p>
+            <ul className="api-vig-rows">
+              {S4_TRACK_EVENTS.map((row) => (
+                <li key={row.time} className={row.live ? "is-live is-in" : "is-in"}>
+                  <b />
+                  <div>
+                    <strong>{row.time}</strong>
+                    <span>{row.text}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
