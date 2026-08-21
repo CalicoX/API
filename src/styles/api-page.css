@@ -3803,39 +3803,31 @@
   stroke: rgba(140, 165, 205, 0.28);
   stroke-width: 1.15;
   stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
 }
 
-.api-s4-hub-wires .flow-tail path,
-.api-s4-hub-wires .flow-head path {
+/* same language as Use Cases / iso-hub pulse: 1px packet, slow */
+.api-s4-hub-wires .flow path {
   fill: none;
+  stroke: rgba(56, 189, 248, 0.5);
+  stroke-width: 1.25;
   stroke-linecap: round;
+  stroke-dasharray: 5 90;
+  stroke-dashoffset: 0;
   opacity: 0;
   pointer-events: none;
+  vector-effect: non-scaling-stroke;
 }
 
-.api-s4-hub-wires .flow-tail path {
-  stroke-width: 2.55;
-  stroke-dasharray: 58 392;
-  filter: drop-shadow(0 0 5px rgba(91, 140, 255, 0.55));
-}
-
-.api-s4-hub-wires .flow-head path {
-  stroke: #fff;
-  stroke-width: 1.85;
-  stroke-dasharray: 14 436;
-  filter: drop-shadow(0 0 6px rgba(191, 219, 254, 0.95));
-}
-
-.api-s4-card:hover .api-s4-hub-wires .flow-tail path,
-.api-s4-card:hover .api-s4-hub-wires .flow-head path {
+.api-s4-card:hover .api-s4-hub-wires .flow path {
   opacity: 1;
-  animation: api-s4-wire-flow 1.9s linear infinite;
-  animation-delay: calc(var(--i, 0) * 0.05s);
+  animation: api-s4-wire-flow 8s linear infinite;
+  animation-delay: calc(var(--i, 0) * 0.45s);
 }
 
 @keyframes api-s4-wire-flow {
   to {
-    stroke-dashoffset: -450;
+    stroke-dashoffset: -95;
   }
 }
 
@@ -3868,7 +3860,7 @@
 .api-s4-hub-core {
   position: absolute;
   left: 50%;
-  top: 10px;
+  top: 50%;
   z-index: 3;
   display: flex;
   flex-direction: column;
@@ -3882,7 +3874,7 @@
   border-radius: 20px;
   border: 0;
   background: #fff;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   /* 无外描边：1px 亮顶 + 1px 暗底做体积 */
   box-shadow:
     0 -1px 0 #fff,
@@ -4610,12 +4602,17 @@
   .api-s4-card:hover .api-s4-donut-seg {
     animation: none;
     opacity: 1;
-    transform: none;
     stroke-dashoffset: var(--off, 0);
   }
 
-  .api-s4-card:hover .api-s4-hub-wires .flow-tail path,
-  .api-s4-card:hover .api-s4-hub-wires .flow-head path {
+  .api-s4-card:hover .api-s4-codewin,
+  .api-s4-card:hover .api-s4-float,
+  .api-s4-card:hover .api-s4-link,
+  .api-s4-card:hover .api-s4-donut-seg {
+    transform: none;
+  }
+
+  .api-s4-card:hover .api-s4-hub-wires .flow path {
     animation: none;
     opacity: 0;
   }

@@ -104,27 +104,24 @@ function StatusOrbitRing({ items, tone }) {
   );
 }
 
-const S4_HUB = { x: 200, y: 78 };
+const S4_HUB = { x: 200, y: 180 };
 
 const S4_HUB_NODES = [
-  { src: "/assets/carriers/dhl.svg", name: "DHL", x: 56, y: 102, s: 44 },
-  { src: "/assets/carriers/ups.svg", name: "UPS", x: 122, y: 200, s: 48 },
-  { src: "/assets/carriers/usps.svg", name: "USPS", x: 346, y: 98, s: 44 },
-  { src: "/assets/carriers/fedex.svg", name: "FedEx", x: 46, y: 250, s: 42 },
-  { src: "/assets/carriers/tnt.svg", name: "TNT", x: 156, y: 308, s: 46 },
-  { src: "/assets/carriers/gls.svg", name: "GLS", x: 240, y: 280, s: 40 },
-  { src: "/assets/carriers/dpd.svg", name: "DPD", x: 316, y: 186, s: 42 },
-  { src: "/assets/carriers/royal-mail.svg", name: "Royal Mail", x: 348, y: 318, s: 44 },
+  { src: "/assets/carriers/dhl.svg", name: "DHL", x: 124, y: 42, s: 44 },
+  { src: "/assets/carriers/usps.svg", name: "USPS", x: 278, y: 48, s: 44 },
+  { src: "/assets/carriers/fedex.svg", name: "FedEx", x: 40, y: 124, s: 42 },
+  { src: "/assets/carriers/tnt.svg", name: "TNT", x: 48, y: 236, s: 46 },
+  { src: "/assets/carriers/dpd.svg", name: "DPD", x: 360, y: 120, s: 42 },
+  { src: "/assets/carriers/gls.svg", name: "GLS", x: 348, y: 228, s: 40 },
+  { src: "/assets/carriers/ups.svg", name: "UPS", x: 112, y: 318, s: 48 },
+  { src: "/assets/carriers/royal-mail.svg", name: "Royal Mail", x: 288, y: 324, s: 44 },
 ];
 
 const S4_HUB_LINKS = [
-  ["DHL", "UPS"],
-  ["UPS", "FedEx"],
+  ["DHL", "USPS"],
   ["FedEx", "TNT"],
-  ["TNT", "GLS"],
-  ["GLS", "Royal Mail"],
-  ["USPS", "DPD"],
-  ["DPD", "Royal Mail"],
+  ["DPD", "GLS"],
+  ["UPS", "Royal Mail"],
 ];
 
 function hubWirePath(x, y) {
@@ -265,40 +262,14 @@ export function DataCarriersStage() {
           fill="none"
           aria-hidden="true"
         >
-          <defs>
-            <linearGradient
-              id="api-s4-wire-flow"
-              gradientUnits="userSpaceOnUse"
-              x1="36"
-              y1="48"
-              x2="364"
-              y2="332"
-            >
-              <stop offset="0%" stopColor="#2563eb" />
-              <stop offset="42%" stopColor="#7dd3fc" />
-              <stop offset="50%" stopColor="#fff" />
-              <stop offset="58%" stopColor="#a5b4fc" />
-              <stop offset="100%" stopColor="#4f46e5" />
-            </linearGradient>
-          </defs>
           <g className="base">
             {S4_HUB_WIRES.map((wire) => (
               <path key={wire.key} d={wire.d} style={{ "--i": wire.i }} />
             ))}
           </g>
-          <g className="flow-tail">
+          <g className="flow">
             {S4_HUB_WIRES.map((wire) => (
-              <path
-                key={`${wire.key}-t`}
-                d={wire.d}
-                stroke="url(#api-s4-wire-flow)"
-                style={{ "--i": wire.i }}
-              />
-            ))}
-          </g>
-          <g className="flow-head">
-            {S4_HUB_WIRES.map((wire) => (
-              <path key={`${wire.key}-h`} d={wire.d} style={{ "--i": wire.i }} />
+              <path key={`${wire.key}-f`} d={wire.d} style={{ "--i": wire.i }} />
             ))}
           </g>
         </svg>
