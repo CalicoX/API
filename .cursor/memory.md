@@ -19,7 +19,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 内容区 1440px，注意 wrap 的 24px padding；不要负 margin 撑出外壳。
 - How-it-works 三张卡：白卡 20px 圆角、8px 内边距；插图井浅灰点阵、overflow hidden。
 - Data Operations 四张卡插图要各不相同，不能都顶满井。
-- Dashboard 卡（2026-08-17 重做）：井里是「圆形半透明遮罩 + 仪表盘拼贴」。遮罩 `api-s4-dash-disc`：白色半透明圆盘（min(84%,320px)，径向白 0.92→0.22 + 淡蓝晕），1px `rgba(15,23,42,0.06)` 发丝描边，垫在点阵上、拼贴下，与拼贴中心对位。拼贴 `api-s4-dashgrid` min(88%,336px) 两列 `grid-template-rows: auto 1fr`，左右两列**上下齐平**（Park 嫌右列下沉重心歪，别加 margin-top 错位）：左 donut 主卡（Status distribution，donut 118px，图例单列 4 项——不要两列会换行）、右列 Carrier time performance 迷你条形（4 承运商 ×天数，条色 #2962ff/#2196f3/#00bcd4/#43a047）+ Tracking function status LED 行（绿绿橙 + 右对齐 %，1fr 拉伸 + `padding-bottom: 42px` 留空）；Webhook push alert toast 锚在网格右下角（bottom -10 / right -8，压在 fn 卡的留白区上，不悬空、不盖行），铃铛橙块 #fff7ed/#ff6f00。hover 全部 3.2s cubic-bezier(0.22,1,0.36,1) infinite：donut 重描（原有）、条形 scaleX 重涨（delay --i×0.09s）、LED box-shadow 呼吸、toast 从右滑入左滑出（位移只走水平）。≤900px：donut 96px、grid 94%、toast 改 static 入流占整行靠右（绝对定位会压行或被井底裁）。reduce-motion 全停。仪表盘微字 8–9px 是插图微文案，不算产品文案。
+- Dashboard 卡（2026-08-21）：井底加 **增长曲线 + 紫色面积**（Park 对照真实后台「最近消耗」）。曲线 SVG `.api-s4-dash-curve` 铺满井宽、高约 58%，z 在 disc 上、拼贴下；描边 `#6e56f5` 1.7px `non-scaling-stroke`；填色竖向渐变紫 `#7B5CFF` 0.38 → 全透明。形状：左平、中微凹、右抬升（不要针状尖刺）。白圆盘底部 mask 淡出，别挡住曲线。拼贴仍三卡+toast，左右**上下齐平**。Donut 按真实「按物流主状态查看」：顺时针 Not Found 灰 22% / 小片青蓝 / Delivered 绿 58%（`#43a047`），图例 4 项 Delivered→Not Found→In Transit→Info Received（不要两列）。右列条形 + LED + toast 不变。井 100% 铺满（`well: dash`）。hover 3.2s：曲线描边重画 + 面积呼吸，其余同前。reduce-motion 全停。
 - Tracking data 卡（2026-08-18）：浅灰井 `#eef1f5`，**overflow hidden**，胶囊不许探出井边。9 态全部白胶囊。外环文字朝中心、内环文字朝外，圆点钉在轨道上（`is-flip`）。`--r-out: 42cqmin` / `--r-in: 26cqmin`。涟漪铺满井，淡阴影，不要描边。状态圆官方纯色、不要渐变。
 - 承运商井浅灰 `#f7f8fa`、**不要点阵**（2026-08-20 Park：矩阵把地球糊没了）。Visibility / Dashboard 仍浅灰点阵。
 - 承运商卡：8 个 logo 网状散点，不要再排成 3+5 两排。井是浅灰 `#f7f8fa`，`::before` 点阵关掉，不要蓝渐变。背景是第二屏 Use Cases 同款 WebGL 点状地球（公共模块 `src/fx/lib/particle-earth.js`），不是 SVG 点、不是井点阵。地球要能读出半球：`scale: 1.3`，`offset [0,-1.28]`（2026-08-21 再往下挪，少盖枢纽）。2026-08-21 四轮压暗：`size: 1.55`，`alphaMul: 0.08`，大陆 `[0.16,0.3,0.52]`，必须是蓝。叠点会发亮，别把 alpha 拉回去。自转是 hover 驱动：平时定格零重绘（引擎 `getAnimating` 返回 false 时不排 rAF，`onApi.wake` 唤醒），整卡 `.api-s4-card` mouseenter 缓动加速到 0.18 rad/s、mouseleave 缓动刹停（速度因子指数逼近，dt 钳 0.1s）；reduce-motion / 触屏（`hover: none`）不挂监听、保持静态。不要用 absolute+aspect-ratio 空槽当 WebGL host（高度容易是 0，地球就没了）。不要铺成 124% 全幅。z-index 低于 3400+ / logo；横向 sticky + `overflow-x: clip` 时不要只靠 IntersectionObserver 才 start，用 getBoundingClientRect 判可见。卡滚出可视区停画。3400+ 视觉写成 `3,400+`（+ 略小、偏蓝），字重 700、tabular，carriers 大写字距。枢轴白卡约 132px 宽。logo 构图铺满井，地球不铺满。3400+ 白卡**居中**，8 个 logo **规整四向、互不连接**：上 DHL/USPS (122/278, y=42)，左 FedEx/TNT (x=44, y=128/232)，右 DPD/GLS (x=356, y=128/232)，下 UPS/RM (122/278, y=318)，一律 44px。连线只从枢纽边到 logo，**直角折线 + 14px 圆角**（垂直先走上下、水平先走左右）。idle 淡 `rgba(140,165,205,0.32)` 1.15px。**hover 光效 = Use Cases 网格游走柔光**：pathLength 100，三层 14/7/2.4 渐隐包叠在 1.15px 线上，青系、8s、无光晕无白头。白卡边框：**绕圈流动光**（conic-gradient `--hub-beam`，1.5px，7s；hover 3.8s）。底下一圈淡 1px。不要连接点半圆。`3,400+` **整卡 hover** 从 0 滚到 3400，leave 回到终值。reduce-motion 关光、数字直接 3400。机架 SVG 仍是三层无外框、1px 亮/暗。logo 常驻。hover 只播游走光 + LED + 白卡呼吸。reduce-motion 关光效。
@@ -42,7 +42,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - 2026-08-14 先停在这里。
 - Tracking data：质感已按参考图加软涟漪和玻璃圆。Park 再看。
-- 承运商卡已改成从上往下散开。Visibility 已按彩色叙事重做（2026-08-17）；Dashboard 还没按同一轮重做。
+- 承运商卡已改成从上往下散开。Visibility / Dashboard 都已按真实产品页微调。
 
 ## 日志
 

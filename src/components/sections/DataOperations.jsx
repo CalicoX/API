@@ -47,6 +47,7 @@ const CARDS = [
   },
   {
     Visual: DataChartStage,
+    well: "dash",
     title: "Dashboard report done right",
     body: "All data you care about, in one dashboard. Package status distribution, carrier time performance, tracking function status, webhook push alert, and more.",
   },

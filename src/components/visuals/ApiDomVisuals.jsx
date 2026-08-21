@@ -3,7 +3,7 @@
  * Terminal typewriter / explode / orbit animations live inside iso-hub-webgl.
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { observeVisibility, prefersReducedMotion } from "../../fx/utils.js";
 
 /**
@@ -219,20 +219,6 @@ function RackShelf({ y, children }) {
 }
 
 
-
-const DONUT_R = 38;
-const DONUT_C = 2 * Math.PI * DONUT_R;
-const S4_ARCS = [
-  [0.08, "#ef4444", "Not Found"],
-  [0.1, "#3b82f6", "Info Received"],
-  [0.24, "#6366f1", "In Transit"],
-  [0.08, "#f59e0b", "Pick Up"],
-  [0.26, "#22c55e", "Delivered"],
-  [0.06, "#94a3b8", "Expired"],
-  [0.07, "#fb7185", "Undelivered"],
-  [0.06, "#f97316", "Alert"],
-  [0.05, "#06b6d4", "Out For Delivery"],
-];
 
 export function DataStatusStage() {
   return (
@@ -576,7 +562,22 @@ export function DataHubStage() {
   );
 }
 
-/* Dashboard collage — bars: carrier avg transit days, part of well width */
+/* Dashboard collage — 17TRACK 按物流主状态 clockwise from 12 o'clock */
+const DONUT_R = 38;
+const DONUT_C = 2 * Math.PI * DONUT_R;
+const S4_DASH_ARCS = [
+  [0.22, "#9aa3af", "Not Found"],
+  [0.04, "#22d3ee", "Info Received"],
+  [0.05, "#60a5fa", "In Transit"],
+  [0.03, "#2563eb", "Pick Up"],
+  [0.58, "#43a047", "Delivered"],
+  [0.03, "#3b82f6", "Out For Delivery"],
+  [0.02, "#ef4444", "Undelivered"],
+  [0.02, "#f97316", "Alert"],
+  [0.01, "#b91c1c", "Expired"],
+];
+const S4_DASH_LEGEND = ["Delivered", "Not Found", "In Transit", "Info Received"];
+
 const S4_PERF_BARS = [
   ["USPS", "3.2d", 0.86, "#2962ff"],
   ["UPS", "2.4d", 0.64, "#2196f3"],
@@ -590,11 +591,28 @@ const S4_FN_ROWS = [
   ["Carrier sync", "97.2%", "#ff6f00"],
 ];
 
+const S4_CURVE_LINE =
+  "M0 176 C70 186 128 192 180 180 C232 168 278 140 328 112 C368 92 424 78 480 76";
+const S4_CURVE_FILL = `${S4_CURVE_LINE} L480 260 L0 260 Z`;
+
 export function DataChartStage() {
+  const fillId = `s4-dash-fill-${useId().replace(/:/g, "")}`;
+  const colorOf = Object.fromEntries(S4_DASH_ARCS.map(([, c, l]) => [l, c]));
   let acc = 0;
   return (
     <div className="api-s4-vig api-s4-vig--dash" aria-hidden="true">
       <i className="api-s4-dash-disc" />
+      <svg className="api-s4-dash-curve" viewBox="0 0 480 260" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id={fillId} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#7B5CFF" stopOpacity="0.38" />
+            <stop offset="46%" stopColor="#8B74FF" stopOpacity="0.14" />
+            <stop offset="100%" stopColor="#7B5CFF" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path className="api-s4-dash-curve-fill" d={S4_CURVE_FILL} fill={`url(#${fillId})`} />
+        <path className="api-s4-dash-curve-line" d={S4_CURVE_LINE} pathLength="100" />
+      </svg>
       <div className="api-s4-dashgrid">
         <article className="api-s4-dashtile api-s4-dashtile--donut">
           <span className="api-s4-chart-kicker">Status distribution</span>
@@ -602,7 +620,7 @@ export function DataChartStage() {
             <svg viewBox="0 0 100 100">
               <circle cx="50" cy="50" r={DONUT_R} fill="none" stroke="#eef2f7" strokeWidth="11" />
               <g transform="rotate(-90 50 50)">
-                {S4_ARCS.map(([part, color, label], i) => {
+                {S4_DASH_ARCS.map(([part, color, label], i) => {
                   const len = part * DONUT_C;
                   const off = -acc;
                   acc += len;
@@ -635,9 +653,9 @@ export function DataChartStage() {
             </div>
           </div>
           <ul className="api-s4-legend">
-            {S4_ARCS.slice(0, 4).map(([, color, label]) => (
+            {S4_DASH_LEGEND.map((label) => (
               <li key={label}>
-                <i style={{ background: color }} />
+                <i style={{ background: colorOf[label] }} />
                 {label}
               </li>
             ))}

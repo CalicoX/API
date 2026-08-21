@@ -4223,19 +4223,26 @@
   user-select: none;
 }
 
-/* 4. Dashboard — tile collage over a circular translucent plate */
+/* 4. Dashboard — tile collage over growth-curve wash */
+.api-s4-illus:has(.api-s4-vig--dash) > *,
+.api-s4-illus--dash > * {
+  width: 100%;
+  max-width: 100%;
+}
+
 .api-s4-vig--dash {
   position: relative;
   align-items: center;
   justify-content: center;
-  padding: 0;
+  padding: 0 0 6%;
 }
 
-/* 圆形半透明遮罩：白色磨砂圆盘 + 发丝描边，聚焦仪表盘 */
+/* 圆形半透明遮罩：白色磨砂圆盘 + 发丝描边，聚焦仪表盘；底部淡出让曲线露出来 */
 .api-s4-dash-disc {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 46%;
+  z-index: 0;
   width: min(84%, 320px);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
@@ -4244,12 +4251,68 @@
   background:
     radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.5) 58%, rgba(255, 255, 255, 0.22) 100%),
     radial-gradient(circle at 50% 62%, rgba(41, 98, 255, 0.05) 0%, transparent 72%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 52%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 52%, transparent 92%);
   pointer-events: none;
+}
+
+/* 井底增长曲线：描边 + 紫色半透明→透明面积 */
+.api-s4-dash-curve {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  height: 58%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.api-s4-dash-curve-line {
+  fill: none;
+  stroke: #6e56f5;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.api-s4-card:hover .api-s4-dash-curve-line {
+  animation: api-s4-curve-draw 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.api-s4-card:hover .api-s4-dash-curve-fill {
+  animation: api-s4-curve-fill 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes api-s4-curve-draw {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+  28%,
+  68% {
+    stroke-dasharray: 100 0;
+  }
+  100% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+@keyframes api-s4-curve-fill {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  28%,
+  68% {
+    opacity: 1;
+  }
 }
 
 .api-s4-dashgrid {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: min(88%, 336px);
   display: grid;
   grid-template-columns: 1.08fr 1fr;
@@ -4551,7 +4614,9 @@
 @media (prefers-reduced-motion: reduce) {
   .api-s4-card:hover .api-s4-bar-track i,
   .api-s4-card:hover .api-s4-fnlist li i,
-  .api-s4-card:hover .api-s4-dashtoast {
+  .api-s4-card:hover .api-s4-dashtoast,
+  .api-s4-card:hover .api-s4-dash-curve-line,
+  .api-s4-card:hover .api-s4-dash-curve-fill {
     animation: none;
     transform: none;
     opacity: 1;
@@ -4559,6 +4624,14 @@
 }
 
 @media (max-width: 900px) {
+  .api-s4-vig--dash {
+    padding: 0;
+  }
+
+  .api-s4-dash-curve {
+    height: 52%;
+  }
+
   .api-s4-dashgrid {
     width: min(94%, 336px);
     gap: 10px;
