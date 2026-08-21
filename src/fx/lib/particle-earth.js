@@ -119,14 +119,14 @@ export const USE_CASES_THEME = {
   alphaMul: 1,
 };
 
-/** Blue globe on the carriers gray well — continents must read, ocean not a grid. */
+/** Blue globe on the carriers gray well — continents must read, keep it quiet. */
 export const CARRIERS_THEME = {
-  land: [0.26, 0.46, 0.9],
-  landHi: [0.4, 0.62, 1],
-  ocean: [0.4, 0.56, 0.84],
-  oceanHi: [0.52, 0.7, 0.96],
-  violet: [0.42, 0.54, 0.92],
-  alphaMul: 1.2,
+  land: [0.22, 0.38, 0.72],
+  landHi: [0.3, 0.48, 0.82],
+  ocean: [0.28, 0.4, 0.6],
+  oceanHi: [0.36, 0.5, 0.7],
+  violet: [0.36, 0.46, 0.76],
+  alphaMul: 0.7,
 };
 
 function landWeight(lon, lat) {
@@ -822,7 +822,7 @@ export function mountCarriersEarth(host, canvas) {
     particleCount: narrow ? 4200 : 7200,
     dprMax: narrow ? 1.25 : 1.5,
     scale: 1.3,
-    size: 2.55,
+    size: 2.2,
     followScroll: false,
     staticMode: reduce,
     manualVis: true,
