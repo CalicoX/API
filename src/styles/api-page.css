@@ -3943,45 +3943,6 @@
   animation-duration: 3.8s;
 }
 
-.api-s4-hub-port {
-  position: absolute;
-  z-index: 4;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #38bdf8;
-  pointer-events: none;
-}
-
-.api-s4-hub-port[data-side="t"] {
-  top: -1.5px;
-  transform: translate(-50%, -50%);
-  clip-path: inset(0 0 50% 0);
-}
-.api-s4-hub-port[data-side="b"] {
-  bottom: -1.5px;
-  transform: translate(-50%, 50%);
-  clip-path: inset(50% 0 0 0);
-}
-.api-s4-hub-port[data-side="l"] {
-  left: -1.5px;
-  transform: translate(-50%, -50%);
-  clip-path: inset(0 50% 0 0);
-}
-.api-s4-hub-port[data-side="r"] {
-  right: -1.5px;
-  transform: translate(50%, -50%);
-  clip-path: inset(0 0 0 50%);
-}
-.api-s4-hub-port[data-side="t"][data-n="0"],
-.api-s4-hub-port[data-side="b"][data-n="0"] { left: 32%; }
-.api-s4-hub-port[data-side="t"][data-n="1"],
-.api-s4-hub-port[data-side="b"][data-n="1"] { left: 68%; }
-.api-s4-hub-port[data-side="l"][data-n="0"],
-.api-s4-hub-port[data-side="r"][data-n="0"] { top: 32%; }
-.api-s4-hub-port[data-side="l"][data-n="1"],
-.api-s4-hub-port[data-side="r"][data-n="1"] { top: 68%; }
-
 .api-s4-hub-server {
   display: block;
   width: 76px;

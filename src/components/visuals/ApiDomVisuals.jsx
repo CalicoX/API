@@ -316,14 +316,6 @@ export function DataCarriersStage() {
           ))}
         </svg>
         <div className="api-s4-hub-core">
-          <i className="api-s4-hub-port" data-side="t" data-n="0" />
-          <i className="api-s4-hub-port" data-side="t" data-n="1" />
-          <i className="api-s4-hub-port" data-side="b" data-n="0" />
-          <i className="api-s4-hub-port" data-side="b" data-n="1" />
-          <i className="api-s4-hub-port" data-side="l" data-n="0" />
-          <i className="api-s4-hub-port" data-side="l" data-n="1" />
-          <i className="api-s4-hub-port" data-side="r" data-n="0" />
-          <i className="api-s4-hub-port" data-side="r" data-n="1" />
           <svg className="api-s4-hub-server" viewBox="0 0 76 46" fill="none" aria-hidden="true">
             <RackShelf y={1.5}>
               <circle className="led" style={{ "--i": 0 }} cx="10" cy="7.5" r="1.7" fill="#2563eb" />
