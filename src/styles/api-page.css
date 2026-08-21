@@ -3887,10 +3887,10 @@
   padding: 15px 14px 14px;
   box-sizing: border-box;
   border-radius: 20px;
-  border: 1.5px solid transparent;
+  border: 1px solid transparent;
   background:
     linear-gradient(#fff, #fff) padding-box,
-    linear-gradient(145deg, #a5f3fc 0%, #38bdf8 32%, #2563eb 62%, #2dd4bf 100%) border-box;
+    linear-gradient(145deg, #d7f3fb 0%, #d5e8f8 38%, #d5def4 68%, #d8f4ee 100%) border-box;
   transform: translate(-50%, -50%);
   overflow: visible;
   box-shadow:
@@ -3946,6 +3946,8 @@
   letter-spacing: -0.048em;
   line-height: 0.92;
   font-variant-numeric: tabular-nums;
+  min-width: 5.2ch;
+  text-align: center;
   color: #0b1b4a;
 }
 

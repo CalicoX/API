@@ -841,7 +841,7 @@ export function mountCarriersEarth(host, canvas) {
     onApi: (a) => {
       api = a;
     },
-    getNdcOffset: () => [0, -1.05],
+    getNdcOffset: () => [0, -1.28],
     theme: CARRIERS_THEME,
     logPrefix: "[carriers-earth]",
     fallback2d: true,

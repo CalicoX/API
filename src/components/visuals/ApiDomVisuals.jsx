@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
-import { observeVisibility } from "../../fx/utils.js";
+import { observeVisibility, prefersReducedMotion } from "../../fx/utils.js";
 
 /**
  * Full-bleed WebGL hub; scroll progress via window.__isoHubWebGL.setProgress
@@ -144,6 +144,60 @@ const S4_HUB_WIRES = S4_HUB_NODES.map((node, i) => ({
   sx: node.sx,
   sy: node.sy,
 }));
+
+function HubCarrierCount() {
+  const ref = useRef(null);
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+    if (prefersReducedMotion()) {
+      setN(3400);
+      return undefined;
+    }
+    let raf = 0;
+    let playing = false;
+    const play = () => {
+      if (playing) return;
+      playing = true;
+      const t0 = performance.now();
+      const dur = 1500;
+      const tick = (now) => {
+        const p = Math.min(1, (now - t0) / dur);
+        const e = 1 - (1 - p) ** 3;
+        setN(Math.round(3400 * e));
+        if (p < 1) raf = requestAnimationFrame(tick);
+        else playing = false;
+      };
+      setN(0);
+      raf = requestAnimationFrame(tick);
+    };
+    const stop = observeVisibility(
+      el,
+      (on) => {
+        if (on) play();
+        else {
+          playing = false;
+          cancelAnimationFrame(raf);
+          setN(3400);
+        }
+      },
+      { threshold: 0.4, rootMargin: "0px" }
+    );
+    return () => {
+      stop();
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return (
+    <b ref={ref}>
+      {n.toLocaleString("en-US")}
+      <span>+</span>
+    </b>
+  );
+}
 
 /** One chassis shelf: fill only, 1px light top + 1px dark bottom (no outer stroke). */
 function RackShelf({ y, children }) {
@@ -308,9 +362,7 @@ export function DataCarriersStage() {
               <rect x="56" y="35.6" width="12" height="3.8" rx="1.9" fill="#e8eef8" />
             </RackShelf>
           </svg>
-          <b>
-            3,400<span>+</span>
-          </b>
+          <HubCarrierCount />
           <em>carriers</em>
         </div>
         {S4_HUB_NODES.map((node, i) => (
