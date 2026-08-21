@@ -4141,13 +4141,13 @@
   height: 22px;
   margin: 2px 0 0;
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
   transform: none;
   pointer-events: none;
 }
 
-.api-s4-vig--auto.is-panel .api-s4-link {
-  opacity: 1;
+.api-s4-vig--auto:not(.is-panel) .api-s4-link {
+  opacity: 0;
 }
 
 .api-s4-trackpane.api-vig-track {
@@ -4162,9 +4162,14 @@
   min-height: 0;
   margin-top: 0;
   box-shadow: none;
+  opacity: 1;
+  transform: none;
+  pointer-events: none;
+}
+
+.api-s4-vig--auto:not(.is-panel) .api-s4-trackpane {
   opacity: 0;
   transform: translateY(16px);
-  pointer-events: none;
 }
 
 .api-s4-vig--auto.is-panel .api-s4-trackpane {

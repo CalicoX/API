@@ -379,11 +379,11 @@ const S4_TRACK_EVENTS = [
 
 export function DataHubStage() {
   const vigRef = useRef(null);
-  const [typed, setTyped] = useState("");
+  const [typed, setTyped] = useState(S4_NUMBER);
   const [typing, setTyping] = useState(false);
   const [scanning, setScanning] = useState(false);
-  const [detected, setDetected] = useState(false);
-  const [panel, setPanel] = useState(false);
+  const [detected, setDetected] = useState(true);
+  const [panel, setPanel] = useState(true);
 
   useEffect(() => {
     const vig = vigRef.current;
@@ -405,11 +405,7 @@ export function DataHubStage() {
     const reset = () => {
       cancelled = true;
       window.clearTimeout(timer);
-      setTyped("");
-      setTyping(false);
-      setScanning(false);
-      setDetected(false);
-      setPanel(false);
+      finish();
     };
 
     const wait = (ms) =>
