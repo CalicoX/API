@@ -147,20 +147,19 @@ const S4_HUB_WIRES = S4_HUB_NODES.map((node, i) => ({
 
 function HubCarrierCount() {
   const ref = useRef(null);
-  const [n, setN] = useState(0);
+  const [n, setN] = useState(3400);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return undefined;
+    const card = el?.closest(".api-s4-card");
+    if (!el || !card) return undefined;
     if (prefersReducedMotion()) {
       setN(3400);
       return undefined;
     }
     let raf = 0;
-    let playing = false;
     const play = () => {
-      if (playing) return;
-      playing = true;
+      cancelAnimationFrame(raf);
       const t0 = performance.now();
       const dur = 1500;
       const tick = (now) => {
@@ -168,25 +167,19 @@ function HubCarrierCount() {
         const e = 1 - (1 - p) ** 3;
         setN(Math.round(3400 * e));
         if (p < 1) raf = requestAnimationFrame(tick);
-        else playing = false;
       };
       setN(0);
       raf = requestAnimationFrame(tick);
     };
-    const stop = observeVisibility(
-      el,
-      (on) => {
-        if (on) play();
-        else {
-          playing = false;
-          cancelAnimationFrame(raf);
-          setN(3400);
-        }
-      },
-      { threshold: 0.4, rootMargin: "0px" }
-    );
+    const reset = () => {
+      cancelAnimationFrame(raf);
+      setN(3400);
+    };
+    card.addEventListener("mouseenter", play);
+    card.addEventListener("mouseleave", reset);
     return () => {
-      stop();
+      card.removeEventListener("mouseenter", play);
+      card.removeEventListener("mouseleave", reset);
       cancelAnimationFrame(raf);
     };
   }, []);
