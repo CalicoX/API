@@ -3995,11 +3995,12 @@
     0 12px 28px rgba(37, 99, 235, 0.08);
 }
 
-/* 3. Visibility — type number → auto-detect scan → tracking panel */
+/* 3. Visibility — centered add-number, then lift + tracking pane */
 .api-s4-vig--auto {
   align-items: stretch;
   justify-content: flex-start;
   padding: 22px 18px 0;
+  container-type: size;
 }
 
 .api-s4-flow {
@@ -4007,18 +4008,13 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  justify-content: center;
+  justify-content: flex-start;
   width: min(88%, 300px);
   max-width: 300px;
   margin: 0 auto;
-  padding: 0 0 28px;
+  padding: 0;
   box-sizing: border-box;
   min-height: 100%;
-}
-
-.api-s4-vig--auto.is-panel .api-s4-flow {
-  justify-content: flex-start;
-  padding-bottom: 0;
 }
 
 .api-s4-codewin {
@@ -4033,6 +4029,15 @@
   border: 1px solid rgba(15, 23, 42, 0.1);
   background: #fff;
   transform: none;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.api-s4-vig--auto:not(.is-panel) .api-s4-codewin {
+  transform: translateY(calc((100cqh - 100%) / 2 - 6px));
+}
+
+.api-s4-vig--auto.is-snap .api-s4-codewin {
+  transition: none;
 }
 
 .api-s4-codewin .api-vig-field {
@@ -4147,6 +4152,11 @@
 }
 
 .api-s4-vig--auto:not(.is-panel) .api-s4-link {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 12px;
+  margin: 0 0 0 -6px;
   opacity: 0;
 }
 
@@ -4168,15 +4178,40 @@
 }
 
 .api-s4-vig--auto:not(.is-panel) .api-s4-trackpane {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(20px);
 }
 
-.api-s4-vig--auto.is-panel .api-s4-trackpane {
+.api-s4-vig--auto.is-playing.is-panel .api-s4-trackpane {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
   opacity: 1;
   transform: none;
-  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: api-s4-pane-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.08s;
+}
+
+.api-s4-vig--auto.is-panel:not(.is-playing) .api-s4-trackpane {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+@keyframes api-s4-pane-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .api-s4-trackpane .api-vig-events {
@@ -4565,8 +4600,15 @@
   }
 
   .api-s4-trackpane,
-  .api-s4-vig--auto.is-panel .api-s4-trackpane {
+  .api-s4-vig--auto.is-panel .api-s4-trackpane,
+  .api-s4-vig--auto.is-playing.is-panel .api-s4-trackpane {
     opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+
+  .api-s4-vig--auto:not(.is-panel) .api-s4-codewin {
     transform: none;
     transition: none;
   }

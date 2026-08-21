@@ -384,6 +384,8 @@ export function DataHubStage() {
   const [scanning, setScanning] = useState(false);
   const [detected, setDetected] = useState(true);
   const [panel, setPanel] = useState(true);
+  const [playing, setPlaying] = useState(false);
+  const [snap, setSnap] = useState(false);
 
   useEffect(() => {
     const vig = vigRef.current;
@@ -400,6 +402,8 @@ export function DataHubStage() {
       setScanning(false);
       setDetected(true);
       setPanel(true);
+      setPlaying(false);
+      setSnap(false);
     };
 
     const reset = () => {
@@ -419,11 +423,16 @@ export function DataHubStage() {
         finish();
         return;
       }
+      setPlaying(true);
+      setSnap(true);
       setTyped("");
       setTyping(true);
       setScanning(false);
       setDetected(false);
       setPanel(false);
+      await wait(40);
+      if (cancelled) return;
+      setSnap(false);
       for (let i = 1; i <= S4_NUMBER.length; i++) {
         if (cancelled) return;
         setTyped(S4_NUMBER.slice(0, i));
@@ -435,9 +444,9 @@ export function DataHubStage() {
       await wait(780);
       if (cancelled) return;
       setDetected(true);
-      await wait(160);
-      if (cancelled) return;
       setScanning(false);
+      await wait(220);
+      if (cancelled) return;
       setPanel(true);
     };
 
@@ -466,6 +475,8 @@ export function DataHubStage() {
     scanning ? "is-scanning" : "",
     detected ? "is-detected" : "",
     panel ? "is-panel" : "",
+    playing ? "is-playing" : "",
+    snap ? "is-snap" : "",
   ]
     .filter(Boolean)
     .join(" ");
