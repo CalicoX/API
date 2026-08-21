@@ -605,7 +605,7 @@ const S4_DONUT_SLICES = (() => {
 const S4_TREND_XS = ["08-14", "08-15", "08-16", "08-17", "08-18", "08-19", "08-20"];
 const S4_TREND_YS = [0, 0, 0, 0, 0, 2100, 2100];
 const S4_TREND_MAX = 2500;
-const S4_TREND_BOX = { l: 30, r: 212, t: 12, b: 88 };
+const S4_TREND_BOX = { l: 24, r: 248, t: 8, b: 92 };
 
 function s4TrendX(i) {
   const { l, r } = S4_TREND_BOX;
@@ -674,7 +674,7 @@ export function DataChartStage() {
 
         <article className="api-s4-dashtile api-s4-dashtile--trend">
           <span className="api-s4-chart-kicker">Not Found · 90d</span>
-          <svg className="api-s4-trend" viewBox="0 0 220 118">
+          <svg className="api-s4-trend" viewBox="0 0 256 118" preserveAspectRatio="none">
             {S4_TREND_GRID.map((v) => {
               const y = s4TrendY(v);
               return (
@@ -688,7 +688,7 @@ export function DataChartStage() {
                     strokeWidth="1"
                   />
                   {v % 1000 === 0 || v === 2500 ? (
-                    <text x={S4_TREND_BOX.l - 4} y={y + 2.5} textAnchor="end">
+                    <text x={S4_TREND_BOX.l - 3} y={y + 2.5} textAnchor="end">
                       {v === 0 ? "0" : v === 2500 ? "2.5k" : `${v / 1000}k`}
                     </text>
                   ) : null}
@@ -698,7 +698,7 @@ export function DataChartStage() {
             <path className="api-s4-trend-line" d={S4_TREND_LINE} pathLength="100" />
             {S4_TREND_XS.map((d, i) =>
               i % 2 === 0 ? (
-                <text key={d} x={s4TrendX(i)} y={102} textAnchor="middle">
+                <text key={d} x={s4TrendX(i)} y={108} textAnchor="middle">
                   {d}
                 </text>
               ) : null
