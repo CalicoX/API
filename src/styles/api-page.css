@@ -4232,9 +4232,9 @@
 
 .api-s4-vig--dash {
   position: relative;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 0 0 6%;
+  padding: 10% 4% 0;
 }
 
 /* 圆形半透明遮罩：白色磨砂圆盘 + 发丝描边，聚焦仪表盘；底部淡出让曲线露出来 */
@@ -4313,159 +4313,107 @@
 .api-s4-dashgrid {
   position: relative;
   z-index: 2;
-  width: min(88%, 336px);
+  width: min(94%, 428px);
   display: grid;
-  grid-template-columns: 1.08fr 1fr;
-  grid-template-rows: auto 1fr;
-  gap: 12px;
+  grid-template-columns: 1.22fr 1.14fr;
+  gap: 10px;
+  align-items: stretch;
 }
 
 .api-s4-dashtile {
   box-sizing: border-box;
-  padding: 11px 12px 10px;
+  padding: 10px 10px 9px;
   border-radius: 12px;
   border: 1px solid rgba(15, 23, 42, 0.09);
   background: #fff;
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
 }
 
-.api-s4-dashtile--donut {
-  grid-row: 1 / 3;
-}
-
-/* 底部留空给 toast 锚角，行内容不被盖 */
-.api-s4-dashtile--fn {
-  padding-bottom: 42px;
+.api-s4-dashtile--trend {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .api-s4-chart-kicker {
   display: block;
-  margin-bottom: 9px;
-  font-size: 9px;
+  margin-bottom: 8px;
+  font-size: 8.5px;
   font-weight: 650;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #94a3b8;
 }
 
-/* — carrier time performance: mini bars — */
-.api-s4-bars {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 7px;
-}
-
-.api-s4-bars li {
-  display: grid;
-  grid-template-columns: 32px 1fr 24px;
-  align-items: center;
-  gap: 6px;
-  font-size: 8px;
-}
-
-.api-s4-bars em {
-  font-style: normal;
-  font-weight: 600;
-  color: #475569;
-}
-
-.api-s4-bars b {
-  font-weight: 650;
-  font-variant-numeric: tabular-nums;
-  color: #0f172a;
-  text-align: right;
-}
-
-.api-s4-bar-track {
-  height: 5px;
-  border-radius: 999px;
-  background: #eef2f7;
-  overflow: hidden;
-}
-
-.api-s4-bar-track i {
-  display: block;
-  width: var(--w);
-  height: 100%;
-  border-radius: inherit;
-  background: var(--c);
-  transform-origin: left center;
-}
-
-.api-s4-card:hover .api-s4-bar-track i {
-  animation: api-s4-bar-draw 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-  animation-delay: calc(var(--i, 0) * 0.09s);
-}
-
-@keyframes api-s4-bar-draw {
-  0% {
-    transform: scaleX(0);
-  }
-  26%,
-  64% {
-    transform: scaleX(1);
-  }
-  100% {
-    transform: scaleX(0);
-  }
-}
-
-/* — tracking function status: LED rows — */
-.api-s4-fnlist {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 7px;
-}
-
-.api-s4-fnlist li {
+.api-s4-donut-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 8.5px;
-  font-weight: 550;
-  color: #475569;
+  gap: 8px;
+  min-height: 0;
 }
 
-.api-s4-fnlist li i {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  background: var(--c);
+.api-s4-trend {
+  display: block;
+  width: 100%;
+  height: 118px;
+  overflow: visible;
 }
 
-.api-s4-fnlist li b {
-  margin-left: auto;
-  font-weight: 650;
+.api-s4-trend text {
+  font-size: 7px;
+  fill: #94a3b8;
   font-variant-numeric: tabular-nums;
-  color: #0f172a;
 }
 
-.api-s4-card:hover .api-s4-fnlist li i {
-  animation: api-s4-fn-pulse 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-  animation-delay: calc(var(--i, 0) * 0.35s);
+.api-s4-trend-line {
+  fill: none;
+  stroke: #5b9cf5;
+  stroke-width: 1.7;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
 }
 
-@keyframes api-s4-fn-pulse {
-  0%,
+.api-s4-card:hover .api-s4-trend-line {
+  animation: api-s4-trend-draw 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes api-s4-trend-draw {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+  28%,
+  68% {
+    stroke-dasharray: 100 0;
+  }
   100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--c) 40%, transparent);
-  }
-  30% {
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 0%, transparent);
+    stroke-dasharray: 0 100;
   }
 }
 
-/* — webhook push alert toast: floats over bottom-right — */
+.api-s4-trend-tip rect {
+  fill: #3d3d3d;
+}
+
+.api-s4-trend-tip text {
+  fill: #fff;
+  font-size: 7px;
+  font-weight: 650;
+  text-anchor: middle;
+}
+
+.api-s4-trend-tip text.is-sub {
+  font-weight: 500;
+  fill: #e5e7eb;
+}
+
+/* webhook toast sits under the two tiles, on the growth-curve wash */
 .api-s4-dashtoast {
-  position: absolute;
-  right: -8px;
-  bottom: -10px;
+  position: static;
+  grid-column: 1 / -1;
+  justify-self: end;
   z-index: 2;
+  margin-top: 2px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -4527,9 +4475,10 @@
 
 .api-s4-donut-wrap {
   position: relative;
-  width: 118px;
-  height: 118px;
-  margin: 2px auto 12px;
+  width: 102px;
+  height: 102px;
+  margin: 0;
+  flex-shrink: 0;
 }
 
 .api-s4-donut-wrap svg {
@@ -4562,58 +4511,36 @@
   }
 }
 
-.api-s4-donut-label {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.api-s4-donut-label b {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  color: #0f172a;
-}
-
-.api-s4-donut-label em {
-  margin-top: 2px;
-  font-size: 10px;
-  font-style: normal;
-  color: #94a3b8;
-}
-
 .api-s4-legend {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 5px;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
 }
 
 .api-s4-legend li {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 9px;
+  gap: 5px;
+  font-size: 8px;
+  line-height: 1.2;
   color: #475569;
+  white-space: nowrap;
 }
 
 .api-s4-legend li i {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
   flex-shrink: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .api-s4-card:hover .api-s4-bar-track i,
-  .api-s4-card:hover .api-s4-fnlist li i,
+  .api-s4-card:hover .api-s4-trend-line,
   .api-s4-card:hover .api-s4-dashtoast,
   .api-s4-card:hover .api-s4-dash-curve-line,
   .api-s4-card:hover .api-s4-dash-curve-fill {
@@ -4625,7 +4552,7 @@
 
 @media (max-width: 900px) {
   .api-s4-vig--dash {
-    padding: 0;
+    padding: 8% 3% 0;
   }
 
   .api-s4-dash-curve {
@@ -4633,25 +4560,17 @@
   }
 
   .api-s4-dashgrid {
-    width: min(94%, 336px);
-    gap: 10px;
-  }
-
-  .api-s4-dashtile--fn {
-    padding-bottom: 10px;
+    width: min(94%, 360px);
+    gap: 8px;
   }
 
   .api-s4-donut-wrap {
-    width: 96px;
-    height: 96px;
+    width: 78px;
+    height: 78px;
   }
 
-  /* 手机端 toast 入流放到网格底部，避免压行或被井底裁掉 */
-  .api-s4-dashtoast {
-    position: static;
-    grid-column: 1 / -1;
-    justify-self: end;
-    margin-top: 2px;
+  .api-s4-trend {
+    height: 100px;
   }
 }
 
