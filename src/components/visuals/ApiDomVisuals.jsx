@@ -619,6 +619,17 @@ const S4_TREND_LINE = S4_TREND_YS.map((v, i) => {
   const cmd = i === 0 ? "M" : "L";
   return `${cmd}${s4TrendX(i).toFixed(1)} ${s4TrendY(v).toFixed(1)}`;
 }).join(" ");
+const S4_TREND_FLAT = (() => {
+  const pts = S4_TREND_YS.map((v, i) => [s4TrendX(i), s4TrendY(v)]);
+  let total = 0;
+  let flat = 0;
+  for (let i = 1; i < pts.length; i += 1) {
+    const len = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+    total += len;
+    if (S4_TREND_YS[i] === 0) flat += len;
+  }
+  return ((flat / total) * 100).toFixed(2);
+})();
 const S4_TREND_GRID = [0, 500, 1000, 1500, 2000, 2500];
 
 const S4_CURVE_LINE =
@@ -695,7 +706,12 @@ export function DataChartStage() {
                 </g>
               );
             })}
-            <path className="api-s4-trend-line" d={S4_TREND_LINE} pathLength="100" />
+            <path
+              className="api-s4-trend-line"
+              d={S4_TREND_LINE}
+              pathLength="100"
+              style={{ "--flat": S4_TREND_FLAT }}
+            />
             {S4_TREND_XS.map((d, i) =>
               i % 2 === 0 ? (
                 <text key={d} x={s4TrendX(i)} y={108} textAnchor="middle">
@@ -714,23 +730,23 @@ export function DataChartStage() {
             </g>
           </svg>
         </article>
-      </div>
-      <div className="api-s4-dashtoast">
-        <span className="api-s4-dashtoast-ico">
-          <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path
-              d="M7 1.6a3.6 3.6 0 0 0-3.6 3.6c0 2.6-.9 3.6-1.4 4.1h10c-.5-.5-1.4-1.5-1.4-4.1A3.6 3.6 0 0 0 7 1.6Z"
-              stroke="currentColor"
-              strokeWidth="1.2"
-              strokeLinejoin="round"
-            />
-            <path d="M5.8 11.6a1.3 1.3 0 0 0 2.4 0" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-          </svg>
-        </span>
-        <span className="api-s4-dashtoast-txt">
-          <b>Webhook push alert</b>
-          <em>Endpoint retry · 200 OK</em>
-        </span>
+        <div className="api-s4-dashtoast">
+          <span className="api-s4-dashtoast-ico">
+            <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path
+                d="M7 1.6a3.6 3.6 0 0 0-3.6 3.6c0 2.6-.9 3.6-1.4 4.1h10c-.5-.5-1.4-1.5-1.4-4.1A3.6 3.6 0 0 0 7 1.6Z"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+              />
+              <path d="M5.8 11.6a1.3 1.3 0 0 0 2.4 0" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+          </span>
+          <span className="api-s4-dashtoast-txt">
+            <b>Webhook push alert</b>
+            <em>Endpoint retry · 200 OK</em>
+          </span>
+        </div>
       </div>
     </div>
   );

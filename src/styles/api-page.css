@@ -4234,7 +4234,7 @@
   position: relative;
   align-items: flex-start;
   justify-content: center;
-  padding: 4.5% 3.5% 58px;
+  padding: 20% 3.5% 6%;
 }
 
 /* 圆形半透明遮罩：白色磨砂圆盘 + 发丝描边，聚焦仪表盘；底部淡出让曲线露出来 */
@@ -4373,6 +4373,8 @@
   stroke-linejoin: round;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
+  /* idle: only the flat-at-zero run; the late spike draws on hover */
+  stroke-dasharray: var(--flat, 56) 100;
 }
 
 .api-s4-card:hover .api-s4-trend-line {
@@ -4381,14 +4383,14 @@
 
 @keyframes api-s4-trend-draw {
   0% {
-    stroke-dasharray: 0 100;
+    stroke-dasharray: var(--flat, 56) 100;
   }
   28%,
   68% {
     stroke-dasharray: 100 0;
   }
   100% {
-    stroke-dasharray: 0 100;
+    stroke-dasharray: var(--flat, 56) 100;
   }
 }
 
@@ -4408,11 +4410,11 @@
   fill: #e5e7eb;
 }
 
-/* webhook toast floats on the well, not in the card stack */
+/* webhook sits on the lower card, not on the well floor */
 .api-s4-dashtoast {
   position: absolute;
-  right: 16px;
-  bottom: 14px;
+  right: -16px;
+  bottom: 64px;
   z-index: 3;
   display: flex;
   align-items: center;
@@ -4539,7 +4541,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .api-s4-card:hover .api-s4-trend-line,
+  .api-s4-trend-line,
+  .api-s4-card:hover .api-s4-trend-line {
+    animation: none;
+    stroke-dasharray: 100 0;
+  }
+
   .api-s4-card:hover .api-s4-donut-seg,
   .api-s4-card:hover .api-s4-dashtoast,
   .api-s4-card:hover .api-s4-dash-curve-line,
@@ -4552,7 +4559,7 @@
 
 @media (max-width: 900px) {
   .api-s4-vig--dash {
-    padding: 3.5% 3% 50px;
+    padding: 12% 3% 6%;
   }
 
   .api-s4-dash-curve {
@@ -4592,6 +4599,11 @@
 
   .api-s4-trend {
     height: 112px;
+  }
+
+  .api-s4-dashtoast {
+    right: -8px;
+    bottom: 16px;
   }
 }
 
