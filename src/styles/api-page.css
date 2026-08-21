@@ -3800,34 +3800,49 @@
 
 .api-s4-hub-wires .base path {
   fill: none;
-  stroke: rgba(140, 165, 205, 0.28);
+  stroke: rgba(140, 165, 205, 0.32);
   stroke-width: 1.15;
   stroke-linecap: round;
+  stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
 
-/* same language as Use Cases / iso-hub pulse: 1px packet, slow */
+/* Use Cases grid sheen: 1px line, faded packet, 8s */
 .api-s4-hub-wires .flow path {
   fill: none;
-  stroke: rgba(56, 189, 248, 0.5);
-  stroke-width: 1.25;
   stroke-linecap: round;
-  stroke-dasharray: 5 90;
+  stroke-linejoin: round;
+  stroke-width: 1.15;
   stroke-dashoffset: 0;
   opacity: 0;
   pointer-events: none;
   vector-effect: non-scaling-stroke;
 }
 
+.api-s4-hub-wires .flow-sheen path {
+  stroke: rgba(96, 140, 210, 0.22);
+  stroke-dasharray: 14 86;
+}
+
+.api-s4-hub-wires .flow-mid path {
+  stroke: rgba(160, 200, 255, 0.32);
+  stroke-dasharray: 7 93;
+}
+
+.api-s4-hub-wires .flow-core path {
+  stroke: rgba(56, 189, 248, 0.42);
+  stroke-dasharray: 2.4 97.6;
+}
+
 .api-s4-card:hover .api-s4-hub-wires .flow path {
   opacity: 1;
   animation: api-s4-wire-flow 8s linear infinite;
-  animation-delay: calc(var(--i, 0) * 0.45s);
+  animation-delay: calc(var(--i, 0) * 0.55s);
 }
 
 @keyframes api-s4-wire-flow {
   to {
-    stroke-dashoffset: -95;
+    stroke-dashoffset: -100;
   }
 }
 
@@ -3872,15 +3887,41 @@
   padding: 15px 14px 14px;
   box-sizing: border-box;
   border-radius: 20px;
-  border: 0;
-  background: #fff;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(145deg, #a5f3fc 0%, #38bdf8 32%, #2563eb 62%, #2dd4bf 100%) border-box;
   transform: translate(-50%, -50%);
-  /* 无外描边：1px 亮顶 + 1px 暗底做体积 */
+  overflow: visible;
   box-shadow:
-    0 -1px 0 #fff,
-    0 1px 0 rgba(15, 23, 42, 0.16),
-    0 10px 22px rgba(15, 23, 42, 0.07);
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1px 0 rgba(15, 23, 42, 0.06),
+    0 14px 32px rgba(15, 23, 42, 0.08),
+    0 4px 12px rgba(37, 99, 235, 0.08);
 }
+
+.api-s4-hub-port {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 0 2px #fff;
+  pointer-events: none;
+}
+
+.api-s4-hub-port[data-side="t"] { top: -4px; transform: translateX(-50%); }
+.api-s4-hub-port[data-side="b"] { bottom: -4px; transform: translateX(-50%); }
+.api-s4-hub-port[data-side="l"] { left: -4px; transform: translateY(-50%); }
+.api-s4-hub-port[data-side="r"] { right: -4px; transform: translateY(-50%); }
+.api-s4-hub-port[data-side="t"][data-n="0"],
+.api-s4-hub-port[data-side="b"][data-n="0"] { left: 32%; }
+.api-s4-hub-port[data-side="t"][data-n="1"],
+.api-s4-hub-port[data-side="b"][data-n="1"] { left: 68%; }
+.api-s4-hub-port[data-side="l"][data-n="0"],
+.api-s4-hub-port[data-side="r"][data-n="0"] { top: 32%; }
+.api-s4-hub-port[data-side="l"][data-n="1"],
+.api-s4-hub-port[data-side="r"][data-n="1"] { top: 68%; }
 
 .api-s4-hub-server {
   display: block;
@@ -3933,15 +3974,17 @@
 @keyframes api-s4-core-pulse {
   0%, 100% {
     box-shadow:
-      0 -1px 0 #fff,
-      0 1px 0 rgba(15, 23, 42, 0.16),
-      0 10px 22px rgba(15, 23, 42, 0.07);
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 1px 0 rgba(15, 23, 42, 0.06),
+      0 14px 32px rgba(15, 23, 42, 0.08),
+      0 4px 12px rgba(37, 99, 235, 0.08);
   }
   28%, 50% {
     box-shadow:
-      0 -1px 0 #fff,
-      0 1px 0 rgba(37, 99, 235, 0.22),
-      0 12px 28px rgba(37, 99, 235, 0.1);
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 1px 0 rgba(37, 99, 235, 0.12),
+      0 16px 36px rgba(37, 99, 235, 0.14),
+      0 0 0 3px rgba(56, 189, 248, 0.14);
   }
 }
 

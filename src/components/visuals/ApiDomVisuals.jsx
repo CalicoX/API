@@ -104,58 +104,46 @@ function StatusOrbitRing({ items, tone }) {
   );
 }
 
-const S4_HUB = { x: 200, y: 180 };
-
 const S4_HUB_NODES = [
-  { src: "/assets/carriers/dhl.svg", name: "DHL", x: 124, y: 42, s: 44 },
-  { src: "/assets/carriers/usps.svg", name: "USPS", x: 278, y: 48, s: 44 },
-  { src: "/assets/carriers/fedex.svg", name: "FedEx", x: 40, y: 124, s: 42 },
-  { src: "/assets/carriers/tnt.svg", name: "TNT", x: 48, y: 236, s: 46 },
-  { src: "/assets/carriers/dpd.svg", name: "DPD", x: 360, y: 120, s: 42 },
-  { src: "/assets/carriers/gls.svg", name: "GLS", x: 348, y: 228, s: 40 },
-  { src: "/assets/carriers/ups.svg", name: "UPS", x: 112, y: 318, s: 48 },
-  { src: "/assets/carriers/royal-mail.svg", name: "Royal Mail", x: 288, y: 324, s: 44 },
+  { src: "/assets/carriers/dhl.svg", name: "DHL", x: 122, y: 42, side: "t", sx: 177, sy: 114 },
+  { src: "/assets/carriers/usps.svg", name: "USPS", x: 278, y: 42, side: "t", sx: 223, sy: 114 },
+  { src: "/assets/carriers/fedex.svg", name: "FedEx", x: 44, y: 128, side: "l", sx: 137, sy: 156 },
+  { src: "/assets/carriers/tnt.svg", name: "TNT", x: 44, y: 232, side: "l", sx: 137, sy: 204 },
+  { src: "/assets/carriers/dpd.svg", name: "DPD", x: 356, y: 128, side: "r", sx: 263, sy: 156 },
+  { src: "/assets/carriers/gls.svg", name: "GLS", x: 356, y: 232, side: "r", sx: 263, sy: 204 },
+  { src: "/assets/carriers/ups.svg", name: "UPS", x: 122, y: 318, side: "b", sx: 177, sy: 246 },
+  { src: "/assets/carriers/royal-mail.svg", name: "Royal Mail", x: 278, y: 318, side: "b", sx: 223, sy: 246 },
 ];
 
-const S4_HUB_LINKS = [
-  ["DHL", "USPS"],
-  ["FedEx", "TNT"],
-  ["DPD", "GLS"],
-  ["UPS", "Royal Mail"],
-];
-
-function hubWirePath(x, y) {
-  const dx = x - S4_HUB.x;
-  const dy = y - S4_HUB.y;
-  const c1x = S4_HUB.x + dx * 0.12;
-  const c1y = S4_HUB.y + dy * 0.42;
-  const c2x = x - dx * 0.16;
-  const c2y = y - dy * 0.22;
-  return `M${S4_HUB.x} ${S4_HUB.y} C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${x} ${y}`;
+/** Rounded right-angle: leave the hub edge, one 90° corner, arrive at the logo. */
+function hubElbowPath(node, r = 14) {
+  const { sx, sy, x: ex, y: ey, side } = node;
+  const dx = ex - sx;
+  const dy = ey - sy;
+  const ax = Math.abs(dx);
+  const ay = Math.abs(dy);
+  if (ax < 0.8) return `M${sx} ${sy} V${ey}`;
+  if (ay < 0.8) return `M${sx} ${sy} H${ex}`;
+  const rr = Math.min(r, ax - 1, ay - 1);
+  const sxn = Math.sign(dx);
+  const syn = Math.sign(dy);
+  if (side === "t" || side === "b") {
+    const vy = ey - syn * rr;
+    const hx = sx + sxn * rr;
+    return `M${sx} ${sy} V${vy.toFixed(1)} Q ${sx} ${ey} ${hx.toFixed(1)} ${ey} H${ex}`;
+  }
+  const hx = ex - sxn * rr;
+  const vy = sy + syn * rr;
+  return `M${sx} ${sy} H${hx.toFixed(1)} Q ${ex} ${sy} ${ex} ${vy.toFixed(1)} V${ey}`;
 }
 
-function hubLinkPath(a, b) {
-  const mx = (a.x + b.x) / 2;
-  const my = (a.y + b.y) / 2;
-  const dx = b.x - a.x;
-  const dy = b.y - a.y;
-  const cx = mx - dy * 0.12;
-  const cy = my + dx * 0.12;
-  return `M${a.x} ${a.y} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${b.x} ${b.y}`;
-}
-
-const S4_HUB_WIRES = [
-  ...S4_HUB_NODES.map((node, i) => ({
-    key: `h-${node.name}`,
-    d: hubWirePath(node.x, node.y),
-    i,
-  })),
-  ...S4_HUB_LINKS.map(([from, to], i) => {
-    const a = S4_HUB_NODES.find((n) => n.name === from);
-    const b = S4_HUB_NODES.find((n) => n.name === to);
-    return { key: `l-${from}-${to}`, d: hubLinkPath(a, b), i: i + S4_HUB_NODES.length };
-  }),
-];
+const S4_HUB_WIRES = S4_HUB_NODES.map((node, i) => ({
+  key: node.name,
+  d: hubElbowPath(node),
+  i,
+  sx: node.sx,
+  sy: node.sy,
+}));
 
 /** One chassis shelf: fill only, 1px light top + 1px dark bottom (no outer stroke). */
 function RackShelf({ y, children }) {
@@ -267,13 +255,28 @@ export function DataCarriersStage() {
               <path key={wire.key} d={wire.d} style={{ "--i": wire.i }} />
             ))}
           </g>
-          <g className="flow">
-            {S4_HUB_WIRES.map((wire) => (
-              <path key={`${wire.key}-f`} d={wire.d} style={{ "--i": wire.i }} />
-            ))}
-          </g>
+          {["sheen", "mid", "core"].map((layer) => (
+            <g key={layer} className={`flow flow-${layer}`}>
+              {S4_HUB_WIRES.map((wire) => (
+                <path
+                  key={`${wire.key}-${layer}`}
+                  d={wire.d}
+                  pathLength="100"
+                  style={{ "--i": wire.i }}
+                />
+              ))}
+            </g>
+          ))}
         </svg>
         <div className="api-s4-hub-core">
+          <i className="api-s4-hub-port" data-side="t" data-n="0" />
+          <i className="api-s4-hub-port" data-side="t" data-n="1" />
+          <i className="api-s4-hub-port" data-side="b" data-n="0" />
+          <i className="api-s4-hub-port" data-side="b" data-n="1" />
+          <i className="api-s4-hub-port" data-side="l" data-n="0" />
+          <i className="api-s4-hub-port" data-side="l" data-n="1" />
+          <i className="api-s4-hub-port" data-side="r" data-n="0" />
+          <i className="api-s4-hub-port" data-side="r" data-n="1" />
           <svg className="api-s4-hub-server" viewBox="0 0 76 46" fill="none" aria-hidden="true">
             <RackShelf y={1.5}>
               <circle className="led" style={{ "--i": 0 }} cx="10" cy="7.5" r="1.7" fill="#2563eb" />
@@ -317,7 +320,7 @@ export function DataCarriersStage() {
             style={{
               "--x": `${(node.x / 400) * 100}%`,
               "--y": `${(node.y / 360) * 100}%`,
-              "--s": `${node.s}px`,
+              "--s": "44px",
               "--i": i,
             }}
           >

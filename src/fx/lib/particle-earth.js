@@ -126,7 +126,7 @@ export const CARRIERS_THEME = {
   ocean: [0.2, 0.3, 0.44],
   oceanHi: [0.26, 0.36, 0.52],
   violet: [0.24, 0.32, 0.52],
-  alphaMul: 0.16,
+  alphaMul: 0.08,
 };
 
 function landWeight(lon, lat) {
