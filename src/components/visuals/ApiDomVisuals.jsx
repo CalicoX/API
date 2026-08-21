@@ -369,12 +369,13 @@ export function DataCarriersStage() {
   );
 }
 
-const S4_NUMBER = "LV123242CN";
+/* DHL Express waybill: 10 digits, last digit = first 9 mod 7 */
+const S4_NUMBER = "8564312072";
 const S4_TRACK_EVENTS = [
-  { time: "2022/8/18 10:22:00", text: "SHINGLE SPRINGS CA 95682, Delivered", live: true },
-  { time: "2022/8/18 08:14:00", text: "Out for Delivery, USPS" },
-  { time: "2022/8/17 21:06:00", text: "Arrived at Post Office" },
-  { time: "2022/8/16 14:40:00", text: "Picked Up by Shipping Partner" },
+  { time: "2022/8/18 10:22:00", text: "NEW YORK NY 10001, Delivered", live: true },
+  { time: "2022/8/18 08:14:00", text: "With delivery courier, DHL Express" },
+  { time: "2022/8/17 21:06:00", text: "Arrived at DHL facility, Los Angeles CA" },
+  { time: "2022/8/16 14:40:00", text: "Shipment picked up, Shanghai CN" },
 ];
 
 export function DataHubStage() {
@@ -533,7 +534,7 @@ export function DataHubStage() {
             <i className="api-vig-check" />
             <div>
               <strong>Delivered</strong>
-              <em>China(WUYOUEXP) → United States</em>
+              <em>China (DHL Express) → United States</em>
               <span>Time of delivery: 2022/8/18</span>
             </div>
           </div>
@@ -556,7 +557,7 @@ export function DataHubStage() {
           </div>
           <div className="api-vig-events">
             <b>Shipping Events</b>
-            <p className="api-vig-carrier">WUYOUEXP · China</p>
+            <p className="api-vig-carrier">DHL Express · China</p>
             <ul className="api-vig-rows">
               {S4_TRACK_EVENTS.map((row) => (
                 <li key={row.time} className={row.live ? "is-live is-in" : "is-in"}>

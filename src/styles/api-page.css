@@ -4218,6 +4218,11 @@
   padding-bottom: 28px;
 }
 
+.api-s4-trackpane .api-vig-track-id {
+  filter: none;
+  user-select: none;
+}
+
 /* 4. Dashboard — tile collage over a circular translucent plate */
 .api-s4-vig--dash {
   position: relative;
