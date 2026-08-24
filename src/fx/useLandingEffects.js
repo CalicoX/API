@@ -27,6 +27,7 @@ const FX_LOADERS = {
   aiTitleParticles: () => import("./modules/ai-title-particles.js"),
   bottomCta: () => import("./modules/bottom-cta-shader.js"),
   roiPointWaves: () => import("./modules/roi-point-waves.js"),
+  btnSwitch: () => import("./modules/btn-switch.js"),
 };
 
 /**
@@ -78,6 +79,10 @@ export function useLandingEffects() {
       await mountNamed("borderBeam");
       // Always-on: topbar opacity when over dark sections (no #ai-lab required)
       await mountNamed("topbarOnDark");
+      // Tracking 同款 CTA（API 页无 #ai-lab，不能指望 ai-lab.js）
+      if (document.querySelector(".btn-switch")) {
+        await mountNamed("btnSwitch");
+      }
       // Use Cases full-screen sticky scroll chapters + bg light wash
       if (document.getElementById("use-cases-scroll")) {
         await mountNamed("useCasesScroll");

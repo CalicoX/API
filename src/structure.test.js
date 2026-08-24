@@ -107,6 +107,16 @@ describe("API landing structure (gating)", () => {
     expect(mod).toMatch(/return function dispose|return \(\)\s*=>/);
   });
 
+  it("Applications CTA is Tracking btn-switch", () => {
+    const apps = read("components/sections/Applications.jsx");
+    expect(apps).toMatch(/btn-switch/);
+    expect(apps).toMatch(/Start My Free Trial/);
+    expect(apps).not.toMatch(/api-s5-cta[\s\S]*api-btn-primary/);
+    const fx = read("fx/useLandingEffects.js");
+    expect(fx).toMatch(/btnSwitch|btn-switch/);
+    expect(read("fx/modules/btn-switch.js")).toMatch(/export function mount/);
+  });
+
   it("Applications mounts Returns ROI point-waves background", () => {
     const fx = read("fx/useLandingEffects.js");
     expect(fx).toMatch(/roiPointWaves|roi-point-waves/);
