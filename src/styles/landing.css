@@ -6718,13 +6718,11 @@
       .brands-track.is-right { animation-duration: 44s; }
     }
 
-    /* Explore — solid green / blue cards + mouse-inverse 3D tilt */
+    /* Explore — solid green / blue cards; flat (no 3D board tilt) */
     .explore-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
-      perspective: 1600px;
-      perspective-origin: 50% 45%;
     }
     .explore-card {
       --explore-accent: #fff;
@@ -6738,9 +6736,6 @@
       --r-outer: 24px;
       --r-inner: 12px; /* = r_outer - 12px effective nested gap */
       --r-nested: 10px; /* glass cards inside returns stage */
-      --rx: 0deg;
-      --ry: 0deg;
-      --tz: 0px;
       --spot-x: 50%;
       --spot-y: 35%;
       --spot-opacity: 0;
@@ -6755,22 +6750,15 @@
       grid-template-columns: minmax(0, 0.88fr) minmax(280px, 1.2fr);
       gap: 16px 20px;
       align-items: stretch;
-      /* glass removed — visible so 3D/parallax mock is not edge-clipped */
       overflow: visible;
       outline: none;
       text-decoration: none;
       color: #fff;
-      transform-style: preserve-3d;
-      transform:
-        translate3d(0, var(--tz), 0)
-        rotateX(var(--rx))
-        rotateY(var(--ry));
       /* no default drop shadow — only soft hover */
       box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset;
       transition:
         box-shadow 0.4s ease,
         border-color 0.35s ease;
-      will-change: transform;
     }
     .explore-card:hover,
     .explore-card.is-tilting {
@@ -6782,9 +6770,7 @@
       transition: box-shadow 0.4s ease, border-color 0.35s ease;
     }
     .explore-card.is-leaving {
-      transition:
-        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.45s ease;
+      transition: box-shadow 0.45s ease, border-color 0.35s ease;
     }
     /* Mouse spotlight + soft top sheen */
     .explore-card::before {
@@ -6907,16 +6893,6 @@
       flex-direction: column;
       min-height: 0;
       height: auto;
-      /* reverse parallax vs outer board tilt */
-      --layer-x: 0px;
-      --layer-y: 0px;
-      transform: translate3d(var(--layer-x), var(--layer-y), 16px);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
-      transform-style: preserve-3d;
-    }
-    .explore-card.is-tilting .explore-card-copy {
-      transition: transform 0.1s ease-out;
     }
     .explore-card h3 {
       margin: 0 0 8px;
@@ -7094,7 +7070,7 @@
         0 8px 24px rgba(37, 99, 235, 0.4);
     }
 
-    /* Returns — solid #20B195 family; board tilt same as API (base .explore-card) */
+    /* Returns — solid #20B195 family */
     .explore-card-returns {
       --returns-accent: #20b195;
       --explore-glow: rgba(32, 177, 149, 0.32);
@@ -7151,15 +7127,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      --layer-x: 0px;
-      --layer-y: 0px;
-      transform: translate3d(var(--layer-x), var(--layer-y), 10px);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
-      transform-style: preserve-3d;
-    }
-    .explore-card-tracking.is-tilting .tracking-ui {
-      transition: transform 0.08s linear;
     }
     .explore-card-tracking .tracking-ui-blobs {
       display: none;
@@ -7169,19 +7136,6 @@
       width: 100%;
       max-width: 280px;
       min-height: 200px;
-    }
-    .tracking-ui-card,
-    .tracking-ui-float {
-      --layer-x: 0px;
-      --layer-y: 0px;
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
-      transform-style: preserve-3d;
-      transform: translate3d(var(--layer-x), var(--layer-y), 0);
-    }
-    .explore-card-tracking.is-tilting .tracking-ui-card,
-    .explore-card-tracking.is-tilting .tracking-ui-float {
-      transition: transform 0.08s linear;
     }
     .tracking-ui-card {
       position: relative;
@@ -7316,7 +7270,6 @@
         0 1px 0 rgba(255, 255, 255, 0.2) inset,
         0 6px 16px rgba(16, 100, 85, 0.18);
     }
-    /* stage = reverse parallax layer (same pattern as .explore-api-visual) */
     .explore-card-returns .returns-ui {
       background: linear-gradient(
         165deg,
@@ -7332,17 +7285,8 @@
       max-height: none;
       align-self: stretch;
       border-radius: var(--r-inner);
-      --layer-x: 0px;
-      --layer-y: 0px;
-      transform: translate3d(var(--layer-x), var(--layer-y), 8px);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
-      transform-style: preserve-3d;
       color: #0f172a !important;
       -webkit-text-fill-color: #0f172a;
-    }
-    .explore-card-returns.is-tilting .returns-ui {
-      transition: transform 0.08s linear;
     }
     /* explicit dark type on every mock text node (beats inherit white) */
     .explore-card-returns .returns-ui-brand,
@@ -7381,19 +7325,7 @@
       display: none;
     }
 
-    /* stack cards: fixed top/left layout + reverse-parallax transform (like API code-window) */
-    .returns-ui-card,
-    .returns-method {
-      --layer-x: 0px;
-      --layer-y: 0px;
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
-      transform-style: preserve-3d;
-    }
-    .explore-card-returns.is-tilting .returns-ui-card,
-    .explore-card-returns.is-tilting .returns-method {
-      transition: transform 0.08s linear;
-    }
+    /* stack cards: fixed top/left layout */
 
     /* API = deep charcoal; hover light = purple only */
     .explore-card-api {
@@ -7532,12 +7464,6 @@
       min-height: 288px;
       max-height: 288px;
       overflow: hidden;
-      /* reverse to board: opposite XY of outer tilt (mild Z so edges stay inside) */
-      --layer-x: 0px;
-      --layer-y: 0px;
-      transform: translate3d(var(--layer-x), var(--layer-y), 18px);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
       filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.32));
     }
     .explore-card-api .code-window-body {
@@ -7563,28 +7489,6 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       background: linear-gradient(180deg, #2a3140 0%, #222836 100%);
     }
-    .explore-card-api .api-carriers {
-      --layer-x: 0px;
-      --layer-y: 0px;
-      transform: translate3d(var(--layer-x), var(--layer-y), 22px);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
-    }
-    /* snappy while tracking pointer; ease-out when leaving */
-    .explore-card-api.is-tilting .code-window,
-    .explore-card-api.is-tilting .api-carriers {
-      transition: transform 0.08s linear;
-    }
-    .explore-card-api .explore-api-visual {
-      --layer-x: 0px;
-      --layer-y: 0px;
-      transform: translate3d(var(--layer-x), var(--layer-y), 8px);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
-    }
-    .explore-card-api.is-tilting .explore-api-visual {
-      transition: transform 0.08s linear;
-    }
     .explore-card-api .api-carrier-name {
       color: rgba(255, 255, 255, 0.72);
     }
@@ -7605,7 +7509,6 @@
       height: auto;
       min-height: 0;
       overflow: visible;
-      transform-style: preserve-3d;
     }
     .api-carriers {
       position: relative;
@@ -7913,7 +7816,7 @@
       }
     }
 
-    /* Returns mock — roomy stack + solid cards (no glass); 3D via board tilt */
+    /* Returns mock — roomy stack + solid cards (no glass) */
     .returns-ui {
       position: relative;
       width: 100%;
@@ -7940,14 +7843,13 @@
       max-width: 340px;
       height: 380px;
       min-height: 380px;
-      transform-style: preserve-3d;
       animation: returns-ui-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
     @keyframes returns-ui-in {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-    /* product card — solid white, reverse-parallax transform (no glass) */
+    /* product card — solid white (no glass) */
     .returns-ui-card {
       position: absolute;
       top: 8px;
@@ -7967,7 +7869,6 @@
       box-shadow:
         0 1px 0 rgba(255, 255, 255, 1) inset,
         0 16px 40px -12px rgba(15, 23, 42, 0.16);
-      transform: translate3d(var(--layer-x), var(--layer-y), 14px);
     }
     .returns-ui-card > * {
       position: relative;
@@ -7992,7 +7893,6 @@
         0 1px 0 rgba(255, 255, 255, 1) inset,
         0 18px 44px -14px rgba(15, 23, 42, 0.18),
         0 8px 20px rgba(15, 118, 90, 0.08);
-      transform: translate3d(var(--layer-x), var(--layer-y), 22px);
     }
     .returns-method > * {
       position: relative;

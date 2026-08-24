@@ -42,6 +42,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Land the Integration Together（2026-08-24）：官网原模块，Applications 后、ExploreMore 前。标题粉蓝渐变；五张价卡。Onboard 四步：按官网构图用 DOM 白碎片，**不要浅灰井外框、不要动画**。颜色收成灰蓝+一点橙。头像和 XLS 图标用 Imagine 生成的图（`src/assets/onboard/`）。产品原文不改。
 - BottomCta（2026-08-24）：footer 上、ExploreMore 下。Returns 暗底粒子海。标题+按钮**水平居中、上下排列**。文案 Efficient Solution of Value and Possibility；按钮 Tracking `.btn-switch`，文案 Contact Us，链 17track contact-us。
 - tracking-foundation（2026-08-24 Park「对齐一下」）：只对齐建议修，不动产品覆盖。`.api-h1` → `--fs-display` / 700 / 1.1；`.api-h2` → `clamp(28px, 3.2vw, 40px)` / 700 / `--track-title`；`.api-lead` 17px + `--track-body` + `--sec-title-desc`；How-it-works `--sec-y` / `--sec-head-gap` / head 760；ExploreMore 去掉外层 80 竖向 padding（只留 `--bg-subtle`）。**不动**：Hero 副标 24.8/600/`#3352b3`、lead 42ch、Use Cases 48/800、Data Ops head 72、Applications 100vh、Land 渐变 56、Onboard 32、Bottom CTA 展示级、表单 `.api-btn-primary`、品牌蓝。
+- Explore 卡（2026-08-24 Park「去掉 3d hover」）：不要板子 rotateX/Y、不要内层 reverse parallax。仍保留跟手 spotlight、底光、箭头、图标描线。`landing-inline.js` 只写 `--spot-*`。
 
 ## 未完成
 

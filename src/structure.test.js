@@ -99,6 +99,14 @@ describe("API landing structure (gating)", () => {
     expect(explore).not.toMatch(/explore-card-api/);
   });
 
+  it("Explore cards stay flat (no 3D board tilt)", () => {
+    const fx = read("fx/modules/landing-inline.js");
+    expect(fx).not.toMatch(/setTilt|setCardLayers|--rx|--ry|--tz|--layer-x/);
+    const css = read("styles/landing.css");
+    expect(css).not.toMatch(/\.explore-card \{[\s\S]*?rotateX\(var\(--rx\)\)/);
+    expect(css).not.toMatch(/\.explore-grid \{[\s\S]*?perspective:\s*1600px/);
+  });
+
   it("page copy recipes follow tracking-foundation", () => {
     const css = read("styles/api-page.css");
     expect(css).toMatch(/\.api-h1 \{[\s\S]*?font-size: var\(--fs-display\)/);
