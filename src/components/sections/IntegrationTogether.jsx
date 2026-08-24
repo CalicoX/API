@@ -1,3 +1,10 @@
+import {
+  IllusOnboardChat,
+  IllusOnboardTrial,
+  IllusOnboardPlans,
+  IllusOnboardLive,
+} from "../visuals/ApiDomVisuals.jsx";
+
 const CDN = "https://static.17track.net/www/2026-08/assets/images/api";
 
 const PLANS = [
@@ -10,22 +17,22 @@ const PLANS = [
 const STEPS = [
   {
     n: "1",
-    img: `${CDN}/Part6_1_en.png`,
+    Visual: IllusOnboardChat,
     text: "Talk with our expert, tell us how we can help.",
   },
   {
     n: "2",
-    img: `${CDN}/Part6_2_en.png`,
+    Visual: IllusOnboardTrial,
     text: "Get a free trial and the integration support.",
   },
   {
     n: "3",
-    img: `${CDN}/Part6_3_ol_en.png`,
+    Visual: IllusOnboardPlans,
     text: "Choose a price plan that suits your volume.",
   },
   {
     n: "4",
-    img: `${CDN}/Part6_4_en.png`,
+    Visual: IllusOnboardLive,
     text: "All green? Go live!",
   },
 ];
@@ -82,7 +89,9 @@ export default function IntegrationTogether() {
             {STEPS.map((step) => (
               <li className="api-onboard-card" key={step.n}>
                 <div className="api-onboard-art">
-                  <img src={step.img} alt={step.text} width="486" height="480" />
+                  <div className="api-onboard-well">
+                    <step.Visual />
+                  </div>
                   <b className="api-onboard-num" aria-hidden="true">
                     {step.n}
                   </b>

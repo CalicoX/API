@@ -39,7 +39,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - `.api-s4-track` 的 `overflow-x: clip` 防横向滚动，不能换成 hidden（会杀 sticky）。
 - Applications（2026-08-24）：**100vh / 100dvh**。图标按标题，底色蓝橙绿紫青。hover 描边画出。卡下 CTA 用 Tracking 同款 `.btn-switch.on-dark`（白钮滑行 + colorful beam），文案仍是 Start My Free Trial，滚回 Hero `#free-trial`。标题 / 卡片 / CTA 再分开一点（head 下 88）。CTA 用 `margin-top: auto` 沉到下半屏，距底 128（Park：72 太贴底，往上挪一点）。产品文案不改。 FX 在 `btn-switch.js`，不依赖 `#ai-lab`。
 - Applications 背景（2026-08-24）：Returns ROI 同款 Point Waves 1（`roi-point-waves.js` 挂 `#applications` / canvas `.api-s5-waves`）。底 `#141414` + 青绿光晕。减动效 / ≤768 / 弱 GPU 不挂 WebGL，留静态底。Park：点波太亮 → `DOT_FADE` 0.30→0.16，高光 `15*0.02`→`15*0.012`。
-- Land the Integration Together（2026-08-24）：官网原模块，Applications 后、ExploreMore 前。标题粉蓝渐变；五张价卡（Basic/Advanced/Pro/Flagship🔥/Custom）；Onboard in 4 Steps 用官网 Part6 图。产品原文不改。
+- Land the Integration Together（2026-08-24）：官网原模块，Applications 后、ExploreMore 前。标题粉蓝渐变；五张价卡。Onboard 四步插图是 DOM（浅灰井 `#f7f8fa` + 点阵，白 UI 碎片 8–11px），不要实拍。Hover 水平位移 3.2s `cubic-bezier(0.22,1,0.36,1)`。产品原文不改。
 - BottomCta（2026-08-24）：footer 上、ExploreMore 下。Returns 暗底粒子海。标题+按钮**水平居中、上下排列**。文案 Efficient Solution of Value and Possibility；按钮 Tracking `.btn-switch`，文案 Contact Us，链 17track contact-us。
 
 ## 未完成

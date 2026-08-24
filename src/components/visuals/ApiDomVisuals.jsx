@@ -1218,3 +1218,184 @@ export function IllusListenPanel() {
     </div>
   );
 }
+
+function ObAva({ tone, label }) {
+  return (
+    <i className={`api-ob-ava tone-${tone}`} aria-hidden="true">
+      {label}
+    </i>
+  );
+}
+
+/** Onboard 1 — support chat, white sheet in gray well. No photos. */
+export function IllusOnboardChat() {
+  return (
+    <div className="api-ob api-ob--chat" aria-hidden="true">
+      <div className="api-ob-sheet">
+        <header className="api-ob-head">
+          <span className="api-ob-mark">
+            <b>17</b>TRACK
+          </span>
+        </header>
+        <div className="api-ob-thread">
+          <div className="api-ob-row is-bot" style={{ "--dx": "-8px" }}>
+            <ObAva tone="blue" label="17" />
+            <p>
+              17TRACK is a logistics tracking platform with a Tracking API that automatically tracks
+              the logistics information of your parcels.
+            </p>
+          </div>
+          <div className="api-ob-row is-me" style={{ "--dx": "8px" }}>
+            <p>I want to understand how the API works.</p>
+            <ObAva tone="sand" label="P" />
+          </div>
+          <div className="api-ob-row is-bot" style={{ "--dx": "-8px" }}>
+            <ObAva tone="blue" label="17" />
+            <p>Well, there are three main steps to using the API.</p>
+          </div>
+          <div className="api-ob-row is-me" style={{ "--dx": "8px" }}>
+            <p>Thank you!</p>
+            <ObAva tone="sand" label="P" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Onboard 2 — code window + help chat, split horizontally on hover. */
+export function IllusOnboardTrial() {
+  return (
+    <div className="api-ob api-ob--trial" aria-hidden="true">
+      <div className="api-ob-code">
+        <div className="api-vig-jsonwin-bar">
+          <span className="api-vig-dots">
+            <i />
+            <i />
+            <i />
+          </span>
+          <span className="api-vig-jsonwin-title">Help</span>
+        </div>
+        <pre className="api-vig-code">
+          <code>
+            <span className="c-cmd">curl -X POST \</span>
+            {"\n"}
+            <span className="c-flag">--header</span>
+            <span className="c-str"> &apos;17token:token&apos; \</span>
+            {"\n"}
+            <span className="c-flag">--header</span>
+            <span className="c-str"> &apos;Content-Type:application/json&apos;</span>
+            {"\n"}
+            <span className="c-flag">--data</span>
+            <span className="c-p"> &apos;[{`{`}</span>
+            {"\n  "}
+            <span className="c-str">&quot;number&quot;</span>
+            <span className="c-p">: </span>
+            <span className="c-str">&quot;RR123456789CN&quot;</span>
+            {"\n"}
+            <span className="c-p">{`}`}]&apos;</span>
+            {"\n"}
+            <span className="c-url">https://api.17track.net/track/v2/register</span>
+          </code>
+        </pre>
+      </div>
+      <div className="api-ob-help">
+        <div className="api-ob-row is-bot">
+          <ObAva tone="mint" label="S" />
+          <p>Hello! How can I help you?</p>
+        </div>
+        <div className="api-ob-row is-me">
+          <p>Can I pass multiple tracking numbers?</p>
+          <ObAva tone="sand" label="P" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Onboard 3 — stacked plan chips, cursor points at Flagship. */
+export function IllusOnboardPlans() {
+  return (
+    <div className="api-ob api-ob--plans" aria-hidden="true">
+      <div className="api-ob-mini">
+        <span>Pro</span>
+        <strong>$2,869</strong>
+        <em>
+          150,000 Quota <i>$0.0191/Quota</i>
+        </em>
+      </div>
+      <div className="api-ob-mini is-flag">
+        <span>
+          Flagship <b>🔥</b>
+        </span>
+        <strong>$9,299</strong>
+        <em>
+          500,000 Quota <i>$0.0185/Quota</i>
+        </em>
+        <abbr>Recommended</abbr>
+      </div>
+      <div className="api-ob-mini">
+        <span>Advanced</span>
+        <strong>$569</strong>
+        <em>
+          25,000 Quota <i>$0.0227/Quota</i>
+        </em>
+      </div>
+      <svg className="api-ob-cursor" viewBox="0 0 24 24" width="18" height="18">
+        <path
+          d="M4.2 3.2 L4.2 19.4 L8.8 14.9 L12.6 22.2 L15.4 20.8 L11.7 13.6 L18.2 13.6 Z"
+          fill="#0a0a0a"
+          stroke="#fff"
+          strokeWidth="2.2"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  );
+}
+
+/** Onboard 4 — delivered board + XLS tile + Add Number. */
+export function IllusOnboardLive() {
+  return (
+    <div className="api-ob api-ob--live" aria-hidden="true">
+      <div className="api-ob-board">
+        <div className="api-ob-board-top">
+          <b>LV123242CN</b>
+          <i className="api-ob-toggle" />
+        </div>
+        <div className="api-ob-deliv">
+          <span>✓</span>
+          Delivered
+        </div>
+        <ul className="api-ob-bars">
+          <li />
+          <li />
+          <li />
+          <li />
+        </ul>
+      </div>
+      <div className="api-ob-xls">
+        <b>.XLS</b>
+        <em>Sheet Import</em>
+      </div>
+      <div className="api-ob-modal">
+        <div className="api-vig-float-h">
+          <strong>Add Number</strong>
+          <span>×</span>
+        </div>
+        <div className="api-vig-field">
+          <span>Tracking Number*</span>
+          <b>8564312072</b>
+        </div>
+        <div className="api-vig-field">
+          <span>Carrier*</span>
+          <b>DHL Express</b>
+        </div>
+        <div className="api-vig-field">
+          <span>Tag</span>
+          <b />
+        </div>
+      </div>
+    </div>
+  );
+}
