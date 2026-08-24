@@ -4280,15 +4280,15 @@
 
 /* 紫面积 + 描边：从左往右擦出，不要 dasharray 对插值 */
 .api-s4-card:hover .api-s4-dash-curve {
-  animation: api-s4-curve-ltr 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation: api-s4-curve-ltr 6.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes api-s4-curve-ltr {
   0% {
     clip-path: inset(0 100% 0 0);
   }
-  32%,
-  72% {
+  58%,
+  78% {
     clip-path: inset(0 0 0 0);
   }
   100% {
@@ -4371,15 +4371,15 @@
 }
 
 .api-s4-card:hover .api-s4-trend-line {
-  animation: api-s4-trend-draw 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  animation: api-s4-trend-draw 6.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes api-s4-trend-draw {
   0% {
     stroke-dashoffset: 100;
   }
-  32%,
-  72% {
+  58%,
+  78% {
     stroke-dashoffset: 0;
   }
   100% {
