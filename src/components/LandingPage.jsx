@@ -7,7 +7,6 @@ import UseCases from "./sections/UseCases.jsx";
 import HowItWorks from "./sections/HowItWorks.jsx";
 import DataOperations from "./sections/DataOperations.jsx";
 import Applications from "./sections/Applications.jsx";
-import BottomCta from "./sections/BottomCta.jsx";
 import ExploreMore from "./sections/ExploreMore.jsx";
 import { useEffect } from "react";
 import { useLandingEffects } from "../fx/useLandingEffects.js";
@@ -33,7 +32,6 @@ export default function LandingPage() {
           <HowItWorks />
           <DataOperations />
           <Applications />
-          <BottomCta />
           {/* Cross-sell: Returns + Tracking (no API self-promo) */}
           <ExploreMore />
         </main>

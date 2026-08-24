@@ -37,8 +37,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Hero shader 已本地化：`hero-wash-shader.js` 纯 WebGL 复刻 shaders.com Undertones 1，npm `shaders` 依赖已删。技术细节见 AGENTS.md「Hero shader」节。墨迹手感只调 `CF_INTENSITY`（1.2）和 `CF_FADE_SCALE`（0.7，2026-08-17 从 0.45 改短，Park 嫌拖尾太长）。
 - Hero 拖尾：紫 `#D042FF` + 蓝 `#5B4FFF` + 一点橙 `#FF3805`（只占 left 一个方向）。绿 `#66FF73` 不要。
 - `.api-s4-track` 的 `overflow-x: clip` 防横向滚动，不能换成 hidden（会杀 sticky）。
-- Applications（2026-08-24）：去掉列表圆点。图标按标题（卡车 / 购物袋 / 卡 / 三点 / 四宫格），底色蓝橙绿紫青。整段加高：section padding 136/148，卡 min-height 268。hover：卡上移 + 扫光；图标 SVG `pathLength=100` **stroke-dashoffset 100→0** 描边画出（0.9s，子路径 staggered）。产品文案不改。
-- BottomCta（2026-08-24）：整段 **100vh / 100dvh** 垂直居中。标题原文保留。只留 **Start My Free Trial**，点击用 Lenis 滚回 Hero `#free-trial`。Contact Us 不再放这。
+- Applications（2026-08-24）：**100vh / 100dvh**。图标按标题，底色蓝橙绿紫青。hover 描边画出。卡下 **Start My Free Trial** 滚回 Hero `#free-trial`。产品文案不改。
+- BottomCta：不渲染（Park：蓝底 Efficient Solution 那一屏去掉）。组件文件保留。
 
 ## 未完成
 

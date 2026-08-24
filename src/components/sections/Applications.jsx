@@ -33,6 +33,17 @@ const APPS = [
   },
 ];
 
+function goToTrial(e) {
+  const el = document.getElementById("free-trial");
+  if (!el) return;
+  e.preventDefault();
+  if (window.__lenis?.scrollTo) {
+    window.__lenis.scrollTo(el, { duration: 1.1, force: true });
+  } else {
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+
 /** Section 5 — Wide range of applications */
 export default function Applications() {
   return (
@@ -53,6 +64,11 @@ export default function Applications() {
             </li>
           ))}
         </ul>
+        <div className="api-s5-cta">
+          <a className="api-btn-primary" href="#free-trial" onClick={goToTrial}>
+            Start My Free Trial
+          </a>
+        </div>
       </div>
     </section>
   );
