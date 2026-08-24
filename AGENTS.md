@@ -29,7 +29,7 @@ BottomCta 在 footer 上：Returns 同款暗底粒子海，文案 Efficient Solu
   3. Visibility：两张重叠卡拆开（运单号 → 自动识别）。
   4. Dashboard：井中小卡，**环形图描边**动画。
 - Hover：整卡触发，约 3.2s，`cubic-bezier(0.22, 1, 0.36, 1)`；位移走水平，不要斜移。
-- Data Operations：浅灰整段、sticky 竖滑横移、标题左对齐、右侧圆形 prev/next。单卡约 800×500。滚动用连续 `--s4-x`，不要整卡跳。
+- Data Operations：浅灰整段、sticky 竖滑横移、标题左对齐、右侧圆形 prev/next。单卡约 1080×500。插图是唯一圆角舞台（copy 不套白框）。滚动用连续 `--s4-x`，不要整卡跳。
 
 ## Hero shader（Undertones 1 本地复刻）
 
