@@ -5,6 +5,11 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { observeVisibility, prefersReducedMotion } from "../../fx/utils.js";
+import avaAgent from "../../assets/onboard/ava-agent.jpg";
+import avaUser from "../../assets/onboard/ava-user.jpg";
+import avaHelp from "../../assets/onboard/ava-help.jpg";
+import avaAsk from "../../assets/onboard/ava-ask.jpg";
+import xlsTile from "../../assets/onboard/xls.jpg";
 
 /**
  * Full-bleed WebGL hub; scroll progress via window.__isoHubWebGL.setProgress
@@ -1219,15 +1224,11 @@ export function IllusListenPanel() {
   );
 }
 
-function ObAva({ tone, label }) {
-  return (
-    <i className={`api-ob-ava tone-${tone}`} aria-hidden="true">
-      {label}
-    </i>
-  );
+function ObAva({ src }) {
+  return <img className="api-ob-ava" src={src} alt="" />;
 }
 
-/** Onboard 1 — support chat, white sheet in gray well. No photos. */
+/** Onboard 1 — support chat, floating white sheet. */
 export function IllusOnboardChat() {
   return (
     <div className="api-ob api-ob--chat" aria-hidden="true">
@@ -1239,20 +1240,23 @@ export function IllusOnboardChat() {
         </header>
         <div className="api-ob-thread">
           <div className="api-ob-row is-bot">
-            <ObAva tone="blue" label="17" />
-            <p>17TRACK Tracking API automatically tracks your parcels.</p>
+            <ObAva src={avaAgent} />
+            <p>
+              17TRACK is a logistics tracking platform with a Tracking API that automatically tracks
+              the logistics information of your parcels.
+            </p>
           </div>
           <div className="api-ob-row is-me">
-            <p>How does the API work?</p>
-            <ObAva tone="sand" label="P" />
+            <p>I want to understand how the API works.</p>
+            <ObAva src={avaUser} />
           </div>
           <div className="api-ob-row is-bot">
-            <ObAva tone="blue" label="17" />
-            <p>Three main steps to get started.</p>
+            <ObAva src={avaAgent} />
+            <p>Well, there are three main steps to using the API.</p>
           </div>
           <div className="api-ob-row is-me">
             <p>Thank you!</p>
-            <ObAva tone="sand" label="P" />
+            <ObAva src={avaUser} />
           </div>
         </div>
       </div>
@@ -1260,37 +1264,35 @@ export function IllusOnboardChat() {
   );
 }
 
-/** Onboard 2 — code window + help chat, offset, static. */
+/** Onboard 2 — navy Help window + overlapping chat. */
 export function IllusOnboardTrial() {
   return (
     <div className="api-ob api-ob--trial" aria-hidden="true">
       <div className="api-ob-code">
-        <div className="api-vig-jsonwin-bar">
+        <div className="api-ob-codebar">
           <span className="api-vig-dots">
             <i />
             <i />
             <i />
           </span>
-          <span className="api-vig-jsonwin-title">Help</span>
+          <span>Help</span>
         </div>
         <pre className="api-vig-code">
           <code>
             <span className="c-cmd">curl -X POST \</span>
             {"\n"}
             <span className="c-flag">--header</span>
-            <span className="c-str"> &apos;17token:token&apos; \</span>
+            {" '17token:token' \\"}
             {"\n"}
             <span className="c-flag">--header</span>
-            <span className="c-str"> &apos;Content-Type:application/json&apos;</span>
+            {" 'Content-Type:application/json' \\"}
             {"\n"}
             <span className="c-flag">--data</span>
-            <span className="c-p"> &apos;[{`{`}</span>
+            {" '[{"}
             {"\n  "}
-            <span className="c-str">&quot;number&quot;</span>
-            <span className="c-p">: </span>
-            <span className="c-str">&quot;RR123456789CN&quot;</span>
+            {'"number": "RR123456789CN"'}
             {"\n"}
-            <span className="c-p">{`}`}]&apos;</span>
+            {"}]' \\"}
             {"\n"}
             <span className="c-url">https://api.17track.net/track/v2/register</span>
           </code>
@@ -1298,12 +1300,12 @@ export function IllusOnboardTrial() {
       </div>
       <div className="api-ob-help">
         <div className="api-ob-row is-bot">
-          <ObAva tone="mint" label="S" />
+          <ObAva src={avaHelp} />
           <p>Hello! How can I help you?</p>
         </div>
         <div className="api-ob-row is-me">
           <p>Can I pass multiple tracking numbers?</p>
-          <ObAva tone="sand" label="P" />
+          <ObAva src={avaAsk} />
         </div>
       </div>
     </div>
@@ -1372,7 +1374,7 @@ export function IllusOnboardLive() {
         </ul>
       </div>
       <div className="api-ob-xls">
-        <b>.XLS</b>
+        <img src={xlsTile} alt="" />
         <em>Sheet Import</em>
       </div>
       <div className="api-ob-modal">

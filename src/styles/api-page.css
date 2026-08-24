@@ -5592,33 +5592,9 @@ html.is-reduce-fx .api-s5::after {
 
 .api-onboard-art {
   position: relative;
-  margin: 0 0 28px;
-}
-
-.api-onboard-well {
-  position: relative;
-  height: 280px;
-  overflow: hidden;
-  border-radius: 16px;
-  background: #f7f8fa;
-}
-
-.api-onboard-well::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.18) 1px, transparent 1.15px);
-  background-size: 11px 11px;
-  background-position: center;
-}
-
-.api-onboard-well > * {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
+  height: 340px;
+  margin: 0 0 32px;
+  overflow: visible;
 }
 
 .api-onboard-num {
@@ -5646,49 +5622,33 @@ html.is-reduce-fx .api-s5::after {
   color: #424242;
 }
 
-/* Onboard DOM illustrations — gray well, white UI chips, 8–11px */
+/* Onboard DOM illustrations — floating white chips, no well */
 .api-ob {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .api-ob-ava {
   flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  width: 18px;
-  height: 18px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  font-size: 7px;
-  font-weight: 700;
-  font-style: normal;
-  color: #fff;
-  letter-spacing: 0;
-}
-
-.api-ob-ava.tone-blue {
-  background: #3736ff;
-}
-
-.api-ob-ava.tone-sand {
-  background: #d97706;
-}
-
-.api-ob-ava.tone-mint {
-  background: #0f766e;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.14);
 }
 
 .api-ob-mark {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: -0.04em;
   color: #0f172a;
 }
 
 .api-ob-mark b {
-  color: #f97316;
+  color: #ea580c;
 }
 
 .api-ob-sheet,
@@ -5698,52 +5658,63 @@ html.is-reduce-fx .api-s5::after {
 .api-ob-board,
 .api-ob-xls,
 .api-ob-modal {
-  border: 1px solid rgba(15, 23, 42, 0.1);
   background: #fff;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
 }
 
 .api-ob--chat {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 28px 36px;
+  padding: 12px 10px 18px;
 }
 
 .api-ob-sheet {
-  width: 68%;
-  max-width: 196px;
+  position: relative;
+  width: 92%;
+  max-width: 250px;
+  border-radius: 16px;
+  overflow: visible;
+}
+
+.api-ob-sheet::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 10px;
+  height: 42px;
   border-radius: 12px;
-  overflow: hidden;
+  background: linear-gradient(180deg, transparent, rgba(226, 232, 240, 0.7));
+  pointer-events: none;
 }
 
 .api-ob-head {
-  padding: 8px 10px 6px;
-  border-bottom: 1px solid #eef1f5;
+  padding: 12px 16px 8px;
+  text-align: center;
 }
 
 .api-ob-thread {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  padding: 8px 8px 10px;
+  gap: 10px;
+  padding: 4px 14px 16px;
 }
 
 .api-ob-row {
   display: flex;
   align-items: flex-end;
-  gap: 5px;
-  max-width: 100%;
+  gap: 8px;
 }
 
 .api-ob-row p {
   margin: 0;
-  max-width: 78%;
-  padding: 6px 8px;
-  border-radius: 8px;
-  font-size: 8.5px;
-  line-height: 1.35;
-  color: #334155;
+  max-width: calc(100% - 40px);
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 9.5px;
+  line-height: 1.4;
+  color: #475569;
   background: #f1f5f9;
 }
 
@@ -5757,74 +5728,117 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-ob--trial {
-  padding: 18px 16px 22px;
+  padding: 8px 8px 16px;
+}
+
+.api-ob--trial::before {
+  content: "";
+  position: absolute;
+  inset: 22% 6% 8% 8%;
+  z-index: 0;
+  border: 1.5px dashed #d0d5dd;
+  border-radius: 18px;
+  pointer-events: none;
 }
 
 .api-ob-code {
   position: relative;
   z-index: 2;
-  width: 64%;
-  margin: 8px 0 0 10px;
-  border-radius: 10px;
+  width: 86%;
+  margin: 0 auto;
+  border-radius: 12px;
   overflow: hidden;
 }
 
+.api-ob-codebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 7px 12px;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.api-ob-codebar .api-vig-dots {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .api-ob-code .api-vig-code {
-  font-size: 7.5px;
-  padding: 6px 8px 8px;
+  font-size: 8px;
+  line-height: 1.5;
+  padding: 10px 12px 36px;
+  color: #64748b;
+}
+
+.api-ob-code .c-cmd,
+.api-ob-code .c-flag,
+.api-ob-code .c-str,
+.api-ob-code .c-p {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.api-ob-code .c-url {
+  color: #334155;
 }
 
 .api-ob-help {
   position: absolute;
-  right: 16px;
+  left: 14%;
+  right: 6%;
   bottom: 28px;
   z-index: 3;
-  width: 48%;
-  padding: 8px;
-  border-radius: 10px;
+  width: auto;
+  padding: 10px 10px 8px;
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .api-ob-help .api-ob-row p {
-  max-width: 100%;
-  font-size: 8px;
+  max-width: calc(100% - 40px);
+  font-size: 9px;
 }
 
 .api-ob--plans {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   justify-content: center;
-  gap: 16px;
-  width: 78%;
+  gap: 10px;
+  width: 92%;
   height: 100%;
   margin: 0 auto;
-  padding: 0;
+  padding: 8px 0 16px;
 }
 
 .api-ob-mini {
   position: relative;
-  padding: 8px 10px 7px;
-  border-radius: 10px;
+  padding: 10px 12px 9px;
+  border-radius: 12px;
 }
 
 .api-ob-mini span {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: #0f172a;
 }
 
 .api-ob-mini strong {
   display: block;
-  margin: 2px 0 2px;
-  font-size: 16px;
+  margin: 2px 0 3px;
+  font-size: 20px;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: #ff7a00;
+  color: #ea580c;
 }
 
 .api-ob-mini em {
@@ -5838,52 +5852,50 @@ html.is-reduce-fx .api-s5::after {
 
 .api-ob-mini.is-flag {
   z-index: 2;
-  border-color: rgba(15, 23, 42, 0.16);
-  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.12);
 }
 
 .api-ob-mini.is-flag span {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   width: auto;
-  padding: 2px 7px;
+  padding: 3px 8px;
   border-radius: 6px;
   background: #0f172a;
   color: #fff;
+  font-size: 10px;
 }
 
 .api-ob-mini abbr {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  padding: 2px 6px;
-  border-radius: 6px;
-  background: #fff;
-  color: #0f172a;
-  font-size: 8px;
+  top: 10px;
+  right: 12px;
+  font-size: 10px;
   font-weight: 700;
+  color: #0f172a;
   text-decoration: none;
 }
 
 .api-ob-cursor {
   position: absolute;
-  right: 34px;
-  top: 52%;
+  right: 22%;
+  top: 58%;
   z-index: 4;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
 }
 
 .api-ob--live {
   position: relative;
-  padding: 20px 16px 18px;
+  padding: 10px 6px 14px;
 }
 
 .api-ob-board {
-  width: 54%;
-  margin: 8px 0 0 8px;
-  padding: 10px 10px 12px;
-  border-radius: 10px;
+  width: 72%;
+  min-height: 210px;
+  margin: 18px 0 0 4px;
+  padding: 12px 12px 14px;
+  border-radius: 14px;
 }
 
 .api-ob-board-top {
@@ -5893,16 +5905,16 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-ob-board-top b {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: #0f172a;
 }
 
 .api-ob-toggle {
-  width: 22px;
-  height: 12px;
+  width: 24px;
+  height: 14px;
   border-radius: 999px;
-  background: #3736ff;
+  background: #2563eb;
   position: relative;
 }
 
@@ -5911,8 +5923,8 @@ html.is-reduce-fx .api-s5::after {
   position: absolute;
   top: 2px;
   right: 2px;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #fff;
 }
@@ -5920,9 +5932,9 @@ html.is-reduce-fx .api-s5::after {
 .api-ob-deliv {
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin: 8px 0 10px;
-  font-size: 10px;
+  gap: 5px;
+  margin: 10px 0 12px;
+  font-size: 11px;
   font-weight: 700;
   color: #15803d;
 }
@@ -5930,12 +5942,12 @@ html.is-reduce-fx .api-s5::after {
 .api-ob-deliv span {
   display: grid;
   place-items: center;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: #16a34a;
   color: #fff;
-  font-size: 8px;
+  font-size: 9px;
 }
 
 .api-ob-bars {
@@ -5943,11 +5955,11 @@ html.is-reduce-fx .api-s5::after {
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 5px;
+  gap: 7px;
 }
 
 .api-ob-bars li {
-  height: 6px;
+  height: 7px;
   border-radius: 4px;
   background: #e2e8f0;
 }
@@ -5962,45 +5974,46 @@ html.is-reduce-fx .api-s5::after {
 
 .api-ob-xls {
   position: absolute;
-  top: 16px;
-  right: 18px;
+  top: 0;
+  right: 4px;
   z-index: 2;
-  width: 56px;
-  padding: 8px 6px 7px;
-  border-radius: 10px;
+  width: 68px;
+  padding: 0 0 8px;
+  border-radius: 16px;
+  overflow: hidden;
   text-align: center;
-  background: #0f172a;
+  background: #1e293b;
   color: #fff;
-  border-color: #0f172a;
 }
 
-.api-ob-xls b {
+.api-ob-xls img {
   display: block;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  width: 100%;
+  height: 68px;
+  object-fit: cover;
+  object-position: 50% 42%;
 }
 
 .api-ob-xls em {
   display: block;
-  margin-top: 4px;
-  font-size: 7px;
+  margin-top: 2px;
+  font-size: 8px;
   font-style: normal;
   color: #cbd5e1;
 }
 
 .api-ob-modal {
   position: absolute;
-  right: 14px;
-  bottom: 22px;
+  right: 0;
+  bottom: 24px;
   z-index: 3;
-  width: 44%;
-  padding: 8px 8px 9px;
-  border-radius: 10px;
+  width: 52%;
+  padding: 10px 10px 11px;
+  border-radius: 12px;
 }
 
 .api-ob-modal .api-vig-field b {
-  min-height: 16px;
+  min-height: 18px;
 }
 
 @media (max-width: 1100px) {

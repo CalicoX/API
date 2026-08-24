@@ -89,9 +89,7 @@ export default function IntegrationTogether() {
             {STEPS.map((step) => (
               <li className="api-onboard-card" key={step.n}>
                 <div className="api-onboard-art">
-                  <div className="api-onboard-well">
-                    <step.Visual />
-                  </div>
+                  <step.Visual />
                   <b className="api-onboard-num" aria-hidden="true">
                     {step.n}
                   </b>

@@ -84,6 +84,7 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Onboard in 4 Steps/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/All green\? Go live!/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/IllusOnboardChat/);
+    expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/api-onboard-well/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/Part6_/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/Efficient Solution of Value and Possibility/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/Contact Us/);
