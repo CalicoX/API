@@ -93,12 +93,7 @@ export default function DataOperations() {
     let idx = 0;
     let lock = 0;
 
-    const maxShift = () => {
-      const list = cards();
-      if (list.length <= 1) return 0;
-      const gap = parseFloat(getComputedStyle(rail).gap) || 0;
-      return (list.length - 1) * (list[0].offsetWidth + gap);
-    };
+    const maxShift = () => Math.max(0, rail.scrollWidth - viewport.clientWidth);
 
     const syncRail = (i, animate) => {
       const list = cards();
