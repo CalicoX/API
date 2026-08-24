@@ -80,7 +80,10 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/Applications.jsx")).toMatch(/Logistics Service/);
     expect(read("components/sections/Applications.jsx")).toMatch(/Various Platforms/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Land the Integration Together/);
-    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Each plan has a valid period of 12 months/);
+    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Each plan is valid for 12 months/);
+    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Get Started/);
+    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Popular/);
+    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/3,400 carriers supported/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Onboard in 4 Steps/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/All green\? Go live!/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/IllusOnboardChat/);
