@@ -80,6 +80,7 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/Applications.jsx")).toMatch(/Various Platforms/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/Efficient Solution of Value and Possibility/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/Contact Us/);
+    expect(read("components/sections/BottomCta.jsx")).toMatch(/btn-switch/);
     expect(read("components/LandingPage.jsx")).toMatch(/<BottomCta/);
   });
 
