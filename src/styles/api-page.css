@@ -5233,21 +5233,78 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .api-app-card {
+  position: relative;
+  overflow: hidden;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 22px 18px 20px;
+  list-style: none;
   backdrop-filter: blur(8px);
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.api-app-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 36%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 64%
+  );
+  transform: translateX(-120%);
 }
 
 .api-app-card:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(147, 197, 253, 0.35);
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(147, 197, 253, 0.42);
+  box-shadow: 0 18px 36px rgba(2, 8, 23, 0.35);
+}
+
+.api-app-card:hover::after {
+  animation: api-app-sheen 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.api-app-card:hover .api-app-ico {
+  transform: scale(1.07);
+}
+
+@keyframes api-app-sheen {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .api-app-card,
+  .api-app-ico {
+    transition: none;
+  }
+
+  .api-app-card:hover {
+    transform: none;
+  }
+
+  .api-app-card:hover::after,
+  .api-app-card:hover .api-app-ico {
+    animation: none;
+    transform: none;
+  }
 }
 
 .api-app-card img {
@@ -5885,19 +5942,88 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   margin-bottom: 14px;
   color: #dbeafe;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: none;
+  transition:
+    color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.api-app-ico[data-kind="logistics"] {
+  color: #bfdbfe;
+  background: rgba(37, 99, 235, 0.32);
+  border-color: rgba(147, 197, 253, 0.28);
+}
+
+.api-app-ico[data-kind="ecommerce"] {
+  color: #fed7aa;
+  background: rgba(234, 88, 12, 0.3);
+  border-color: rgba(253, 186, 116, 0.28);
+}
+
+.api-app-ico[data-kind="finance"] {
+  color: #a7f3d0;
+  background: rgba(5, 150, 105, 0.3);
+  border-color: rgba(110, 231, 183, 0.28);
+}
+
+.api-app-ico[data-kind="integrator"] {
+  color: #ddd6fe;
+  background: rgba(124, 58, 237, 0.32);
+  border-color: rgba(196, 181, 253, 0.28);
+}
+
+.api-app-ico[data-kind="platforms"] {
+  color: #a5f3fc;
+  background: rgba(8, 145, 178, 0.3);
+  border-color: rgba(103, 232, 249, 0.28);
+}
+
+.api-app-card:hover .api-app-ico[data-kind="logistics"] {
+  color: #fff;
+  background: rgba(37, 99, 235, 0.5);
+  border-color: rgba(147, 197, 253, 0.55);
+}
+
+.api-app-card:hover .api-app-ico[data-kind="ecommerce"] {
+  color: #fff;
+  background: rgba(234, 88, 12, 0.48);
+  border-color: rgba(253, 186, 116, 0.55);
+}
+
+.api-app-card:hover .api-app-ico[data-kind="finance"] {
+  color: #fff;
+  background: rgba(5, 150, 105, 0.48);
+  border-color: rgba(110, 231, 183, 0.55);
+}
+
+.api-app-card:hover .api-app-ico[data-kind="integrator"] {
+  color: #fff;
+  background: rgba(124, 58, 237, 0.5);
+  border-color: rgba(196, 181, 253, 0.55);
+}
+
+.api-app-card:hover .api-app-ico[data-kind="platforms"] {
+  color: #fff;
+  background: rgba(8, 145, 178, 0.48);
+  border-color: rgba(103, 232, 249, 0.55);
 }
 
 .api-app-ico svg {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .api-app-card img {

@@ -751,8 +751,54 @@ export function DataChartStage() {
     </div>
   );
 }
-export function AppIcon() {
-  return null;
+const APP_ICONS = {
+  logistics: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M3 7.5h11.5V17H3z" />
+      <path d="M14.5 10.5H19l2.5 3V17h-7" />
+      <circle cx="7.2" cy="18.2" r="1.55" />
+      <circle cx="17.3" cy="18.2" r="1.55" />
+    </svg>
+  ),
+  ecommerce: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M6.2 8.2h11.6L16.7 20H7.3L6.2 8.2Z" />
+      <path d="M9.2 8.2V7.1a2.8 2.8 0 0 1 5.6 0v1.1" />
+    </svg>
+  ),
+  finance: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3.2" y="6.2" width="17.6" height="11.6" rx="2.2" />
+      <path d="M3.2 10.2h17.6" />
+      <path d="M7 15.2h4.2" />
+    </svg>
+  ),
+  integrator: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="6.2" cy="6.4" r="2.15" />
+      <circle cx="17.8" cy="6.4" r="2.15" />
+      <circle cx="12" cy="17.7" r="2.15" />
+      <path d="M8 7.6 10.7 15.8" />
+      <path d="M16 7.6 13.3 15.8" />
+      <path d="M8.4 6.4h7.2" />
+    </svg>
+  ),
+  platforms: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3.2" y="3.2" width="7.6" height="7.6" rx="1.7" />
+      <rect x="13.2" y="3.2" width="7.6" height="7.6" rx="1.7" />
+      <rect x="3.2" y="13.2" width="7.6" height="7.6" rx="1.7" />
+      <rect x="13.2" y="13.2" width="7.6" height="7.6" rx="1.7" />
+    </svg>
+  ),
+};
+
+export function AppIcon({ kind }) {
+  return (
+    <span className="api-app-ico" data-kind={kind} aria-hidden="true">
+      {APP_ICONS[kind] ?? null}
+    </span>
+  );
 }
 
 /* ——— How-it-works: static light UI vignettes (no cursor) ——— */

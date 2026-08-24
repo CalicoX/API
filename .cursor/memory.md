@@ -37,6 +37,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Hero shader 已本地化：`hero-wash-shader.js` 纯 WebGL 复刻 shaders.com Undertones 1，npm `shaders` 依赖已删。技术细节见 AGENTS.md「Hero shader」节。墨迹手感只调 `CF_INTENSITY`（1.2）和 `CF_FADE_SCALE`（0.7，2026-08-17 从 0.45 改短，Park 嫌拖尾太长）。
 - Hero 拖尾：紫 `#D042FF` + 蓝 `#5B4FFF` + 一点橙 `#FF3805`（只占 left 一个方向）。绿 `#66FF73` 不要。
 - `.api-s4-track` 的 `overflow-x: clip` 防横向滚动，不能换成 hidden（会杀 sticky）。
+- Applications（2026-08-24）：去掉列表圆点（`ul` 必须 `list-style:none`）。图标按标题，不是物流状态：Logistics 卡车、E-commerce 购物袋、Finance 银行卡、Integrator 三点相连、Platforms 四宫格。图标底色要五种不同：蓝 / 橙 / 绿 / 紫 / 青。`AppIcon` 不再 return null。整卡 hover：上移、描边变亮、图标放大并加深本色、一层水平扫光。产品文案不改。
 
 ## 未完成
 
