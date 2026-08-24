@@ -619,7 +619,7 @@ const S4_TREND_LINE = S4_TREND_YS.map((v, i) => {
   const cmd = i === 0 ? "M" : "L";
   return `${cmd}${s4TrendX(i).toFixed(1)} ${s4TrendY(v).toFixed(1)}`;
 }).join(" ");
-const S4_TREND_FLAT = (() => {
+const S4_TREND_REST = (() => {
   const pts = S4_TREND_YS.map((v, i) => [s4TrendX(i), s4TrendY(v)]);
   let total = 0;
   let flat = 0;
@@ -628,7 +628,7 @@ const S4_TREND_FLAT = (() => {
     total += len;
     if (S4_TREND_YS[i] === 0) flat += len;
   }
-  return ((flat / total) * 100).toFixed(2);
+  return (100 - (flat / total) * 100).toFixed(2);
 })();
 const S4_TREND_GRID = [0, 500, 1000, 1500, 2000, 2500];
 
@@ -710,7 +710,7 @@ export function DataChartStage() {
               className="api-s4-trend-line"
               d={S4_TREND_LINE}
               pathLength="100"
-              style={{ "--flat": S4_TREND_FLAT }}
+              style={{ "--rest": S4_TREND_REST }}
             />
             {S4_TREND_XS.map((d, i) =>
               i % 2 === 0 ? (

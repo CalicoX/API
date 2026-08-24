@@ -4278,35 +4278,21 @@
   vector-effect: non-scaling-stroke;
 }
 
-.api-s4-card:hover .api-s4-dash-curve-line {
-  animation: api-s4-curve-draw 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+/* 紫面积 + 描边：从左往右擦出，不要 dasharray 对插值 */
+.api-s4-card:hover .api-s4-dash-curve {
+  animation: api-s4-curve-ltr 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-.api-s4-card:hover .api-s4-dash-curve-fill {
-  animation: api-s4-curve-fill 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-}
-
-@keyframes api-s4-curve-draw {
+@keyframes api-s4-curve-ltr {
   0% {
-    stroke-dasharray: 0 100;
+    clip-path: inset(0 100% 0 0);
   }
-  28%,
-  68% {
-    stroke-dasharray: 100 0;
+  32%,
+  72% {
+    clip-path: inset(0 0 0 0);
   }
   100% {
-    stroke-dasharray: 0 100;
-  }
-}
-
-@keyframes api-s4-curve-fill {
-  0%,
-  100% {
-    opacity: 0.2;
-  }
-  28%,
-  68% {
-    opacity: 1;
+    clip-path: inset(0 100% 0 0);
   }
 }
 
@@ -4366,6 +4352,12 @@
   font-variant-numeric: tabular-nums;
 }
 
+@property --rest {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 44;
+}
+
 .api-s4-trend-line {
   fill: none;
   stroke: #5b9cf5;
@@ -4373,8 +4365,9 @@
   stroke-linejoin: round;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
-  /* idle: only the flat-at-zero run; the late spike draws on hover */
-  stroke-dasharray: var(--flat, 56) 100;
+  stroke-dasharray: 100;
+  /* idle: 只露出左侧贴零平段；--rest = 未画出的后半 */
+  stroke-dashoffset: var(--rest, 44);
 }
 
 .api-s4-card:hover .api-s4-trend-line {
@@ -4383,14 +4376,14 @@
 
 @keyframes api-s4-trend-draw {
   0% {
-    stroke-dasharray: var(--flat, 56) 100;
+    stroke-dashoffset: 100;
   }
-  28%,
-  68% {
-    stroke-dasharray: 100 0;
+  32%,
+  72% {
+    stroke-dashoffset: 0;
   }
   100% {
-    stroke-dasharray: var(--flat, 56) 100;
+    stroke-dashoffset: 100;
   }
 }
 
@@ -4544,13 +4537,16 @@
   .api-s4-trend-line,
   .api-s4-card:hover .api-s4-trend-line {
     animation: none;
-    stroke-dasharray: 100 0;
+    stroke-dashoffset: 0;
+  }
+
+  .api-s4-card:hover .api-s4-dash-curve {
+    animation: none;
+    clip-path: none;
   }
 
   .api-s4-card:hover .api-s4-donut-seg,
-  .api-s4-card:hover .api-s4-dashtoast,
-  .api-s4-card:hover .api-s4-dash-curve-line,
-  .api-s4-card:hover .api-s4-dash-curve-fill {
+  .api-s4-card:hover .api-s4-dashtoast {
     animation: none;
     transform: none;
     opacity: 1;
