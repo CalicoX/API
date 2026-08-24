@@ -27,6 +27,7 @@ describe("API landing structure (gating)", () => {
       "HowItWorks",
       "DataOperations",
       "Applications",
+      "IntegrationTogether",
       "ExploreMore",
       "BottomCta",
       "Footer",
@@ -78,6 +79,10 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/DataOperations.jsx")).toMatch(/9 main \+ 27 sub/);
     expect(read("components/sections/Applications.jsx")).toMatch(/Logistics Service/);
     expect(read("components/sections/Applications.jsx")).toMatch(/Various Platforms/);
+    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Land the Integration Together/);
+    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Each plan has a valid period of 12 months/);
+    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Onboard in 4 Steps/);
+    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/All green\? Go live!/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/Efficient Solution of Value and Possibility/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/Contact Us/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/btn-switch/);
