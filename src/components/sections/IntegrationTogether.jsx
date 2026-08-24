@@ -90,10 +90,10 @@ export default function IntegrationTogether() {
               <li className="api-onboard-card" key={step.n}>
                 <div className="api-onboard-art">
                   <step.Visual />
-                  <b className="api-onboard-num" aria-hidden="true">
-                    {step.n}
-                  </b>
                 </div>
+                <b className="api-onboard-num" aria-hidden="true">
+                  {step.n}
+                </b>
                 <span>{step.text}</span>
               </li>
             ))}
