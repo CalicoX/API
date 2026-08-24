@@ -1,25 +1,18 @@
 /** Section 6 — Efficient Solution of Value and Possibility */
-function goToTrial(e) {
-  const el = document.getElementById("free-trial");
-  if (!el) return;
-  e.preventDefault();
-  if (window.__lenis?.scrollTo) {
-    window.__lenis.scrollTo(el, { duration: 1.1, force: true });
-  } else {
-    el.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-}
-
 export default function BottomCta() {
   return (
     <section className="api-s6 bottom-cta" id="bottom-cta" aria-labelledby="api-cta-title">
-      <div className="api-wrap">
-        <h2 className="api-h2" id="api-cta-title">
-          Efficient Solution of Value and Possibility
-        </h2>
-        <div className="api-cta-row">
-          <a className="api-btn-primary" href="#free-trial" onClick={goToTrial}>
-            Start My Free Trial
+      <canvas className="bottom-cta-shader" id="bottom-cta-shader" aria-hidden="true" />
+      <div className="section-inner">
+        <h2 id="api-cta-title">Efficient Solution of Value and Possibility</h2>
+        <div className="cta-row">
+          <a
+            className="api-contact-cta"
+            href="https://www.17track.com/en/contact-us"
+            target="_blank"
+            rel="noopener"
+          >
+            Contact Us
           </a>
         </div>
       </div>

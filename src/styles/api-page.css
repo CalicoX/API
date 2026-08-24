@@ -5441,36 +5441,63 @@ html.is-reduce-fx .api-s5::after {
 }
 
 /* =========================================================
-   Bottom CTA
+   Bottom CTA — Returns 同款暗底粒子海，文案用 API 原句
    ========================================================= */
-.api-s6 {
-  position: relative;
-  box-sizing: border-box;
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
+.api-page .api-s6.bottom-cta {
+  min-height: clamp(420px, 56vh, 640px);
+  padding: 0;
+  text-align: left;
+  background: #000;
+  justify-content: unset;
+}
+
+.api-page .bottom-cta h2 {
+  max-width: 12em;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2rem, 3.6vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+
+.api-page .bottom-cta .cta-row {
+  justify-content: flex-end;
+}
+
+.api-contact-cta {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 0;
-  text-align: center;
-  overflow: hidden;
-  background:
-    radial-gradient(700px 320px at 50% 0%, rgba(59, 130, 246, 0.35), transparent 70%),
-    linear-gradient(180deg, #1e3a8a 0%, #172554 100%);
+  flex: 0 0 auto;
+  width: max-content;
+  min-height: 52px;
+  padding: 0 36px;
+  border: 0;
+  border-radius: 999px;
   color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #4d8dff 0%, #7b6bff 52%, #a855f7 100%);
+  box-shadow: 0 10px 28px rgba(99, 80, 255, 0.38);
+  transition:
+    filter 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.api-s6 .api-h2 {
-  color: #fff;
-  margin: 0 auto 28px;
-  max-width: 18em;
+.api-contact-cta:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(99, 80, 255, 0.46);
 }
 
-.api-s6 .api-cta-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
+.api-contact-cta:focus-visible {
+  outline: 2px solid rgba(167, 139, 250, 0.7);
+  outline-offset: 3px;
 }
 
 /* =========================================================

@@ -28,6 +28,7 @@ describe("API landing structure (gating)", () => {
       "DataOperations",
       "Applications",
       "ExploreMore",
+      "BottomCta",
       "Footer",
       "ProductDock",
     ]) {
@@ -78,6 +79,8 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/Applications.jsx")).toMatch(/Logistics Service/);
     expect(read("components/sections/Applications.jsx")).toMatch(/Various Platforms/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/Efficient Solution of Value and Possibility/);
+    expect(read("components/sections/BottomCta.jsx")).toMatch(/Contact Us/);
+    expect(read("components/LandingPage.jsx")).toMatch(/<BottomCta/);
   });
 
   it("ExploreMore cross-sells Tracking (not API self-promo)", () => {
