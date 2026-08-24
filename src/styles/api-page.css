@@ -36,33 +36,34 @@
   margin: 0 0 12px;
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--api-blue);
 }
 
 .api-h1 {
   margin: 0 0 14px;
-  font-size: clamp(2rem, 4.2vw, 3.15rem);
-  font-weight: 800;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  font-size: var(--fs-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: var(--track-title, -0.03em);
   color: var(--api-ink);
 }
 
 .api-h2 {
-  margin: 0 0 16px;
-  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
-  font-weight: 800;
+  margin: 0;
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 700;
   line-height: 1.15;
-  letter-spacing: -0.025em;
+  letter-spacing: var(--track-title, -0.03em);
   color: var(--api-ink);
 }
 
 .api-lead {
-  margin: 0;
-  font-size: 16px;
+  margin: var(--sec-title-desc) 0 0;
+  font-size: 17px;
   line-height: 1.65;
+  letter-spacing: var(--track-body, -0.015em);
   color: var(--api-muted);
   max-width: 52ch;
 }
@@ -233,7 +234,6 @@
   --h1-x: 50%;
   --h1-y: 42%;
   margin-bottom: 10px;
-  font-size: clamp(2.05rem, 3.6vw, 3.15rem);
   text-wrap: pretty;
   /* 字内光：光斑裁进字形，底层保持墨色。单色相品牌蓝，保持比背景深，不发浅、不发紫 */
   background:
@@ -266,7 +266,8 @@
 
 .api-s1-copy .api-lead {
   max-width: 42ch;
-  font-size: 16px;
+  margin-top: 0;
+  font-size: var(--fs-lead);
   text-wrap: pretty;
 }
 
@@ -1989,7 +1990,7 @@
    ========================================================= */
 .api-s3 {
   position: relative;
-  padding: 96px 0;
+  padding: var(--sec-y) 0;
   background: #fff;
 }
 
@@ -1997,12 +1998,12 @@
   position: relative;
   z-index: 1;
   text-align: center;
-  max-width: 720px;
-  margin: 0 auto 48px;
+  max-width: 760px;
+  margin: 0 auto var(--sec-head-gap);
 }
 
 .api-s3-head .api-lead {
-  margin: 0 auto;
+  margin: var(--sec-title-desc) auto 0;
   max-width: 68ch;
 }
 
@@ -6090,9 +6091,7 @@ html.is-reduce-fx .api-s5::after {
    Explore more (product cross-sell) — keep after main API content
    ========================================================= */
 .api-page .section.alt.api-explore {
-  background: #f8fafc;
-  padding-top: 80px;
-  padding-bottom: 80px;
+  background: var(--bg-subtle, #f7f8fa);
 }
 
 /* =========================================================

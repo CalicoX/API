@@ -99,6 +99,22 @@ describe("API landing structure (gating)", () => {
     expect(explore).not.toMatch(/explore-card-api/);
   });
 
+  it("page copy recipes follow tracking-foundation", () => {
+    const css = read("styles/api-page.css");
+    expect(css).toMatch(/\.api-h1 \{[\s\S]*?font-size: var\(--fs-display\)/);
+    expect(css).toMatch(/\.api-h1 \{[\s\S]*?font-weight: 700/);
+    expect(css).toMatch(/\.api-h1 \{[\s\S]*?line-height: 1\.1/);
+    expect(css).toMatch(/\.api-h2 \{[\s\S]*?font-size: clamp\(28px, 3\.2vw, 40px\)/);
+    expect(css).toMatch(/\.api-h2 \{[\s\S]*?font-weight: 700/);
+    expect(css).toMatch(/\.api-h2 \{[\s\S]*?letter-spacing: var\(--track-title/);
+    expect(css).toMatch(/\.api-lead \{[\s\S]*?font-size: 17px/);
+    expect(css).toMatch(/\.api-kicker \{[\s\S]*?letter-spacing: 0\.04em/);
+    expect(css).toMatch(/\.api-s3 \{[\s\S]*?padding: var\(--sec-y\) 0/);
+    expect(css).toMatch(/\.api-s3-head \{[\s\S]*?max-width: 760px/);
+    expect(css).toMatch(/\.api-s3-head \{[\s\S]*?margin: 0 auto var\(--sec-head-gap\)/);
+    expect(css).not.toMatch(/\.api-page \.section\.alt\.api-explore \{[\s\S]*?padding-top: 80px/);
+  });
+
   it("useLandingEffects is the primary FX path (dock + deferred)", () => {
     const fx = read("fx/useLandingEffects.js");
     expect(fx).toMatch(/useLandingEffects/);
