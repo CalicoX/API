@@ -5199,7 +5199,7 @@
    ========================================================= */
 .api-s5 {
   position: relative;
-  padding: 96px 0;
+  padding: 136px 0 148px;
   overflow: hidden;
   background: linear-gradient(180deg, #0b1220 0%, #111827 55%, #0f172a 100%);
   color: #e2e8f0;
@@ -5220,7 +5220,7 @@
   z-index: 1;
   text-align: center;
   max-width: 820px;
-  margin: 0 auto 48px;
+  margin: 0 auto 64px;
 }
 
 .api-s5-head .api-h2 {
@@ -5244,7 +5244,8 @@
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 22px 18px 20px;
+  min-height: 268px;
+  padding: 28px 20px 32px;
   list-style: none;
   backdrop-filter: blur(8px);
   transition:
@@ -5301,9 +5302,11 @@
   }
 
   .api-app-card:hover::after,
-  .api-app-card:hover .api-app-ico {
+  .api-app-card:hover .api-app-ico,
+  .api-app-card:hover .api-app-ico svg * {
     animation: none;
     transform: none;
+    stroke-dashoffset: 0;
   }
 }
 
@@ -5625,6 +5628,11 @@
   .api-s6 {
     padding-top: 56px;
     padding-bottom: 56px;
+  }
+
+  .api-s5 {
+    padding-top: 72px;
+    padding-bottom: 80px;
   }
 
   .api-s1 {
@@ -6024,6 +6032,40 @@
   stroke-width: 1.7;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.api-app-ico svg * {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+}
+
+.api-app-card:hover .api-app-ico svg * {
+  animation: api-app-stroke 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.api-app-card:hover .api-app-ico svg *:nth-child(2) {
+  animation-delay: 0.05s;
+}
+
+.api-app-card:hover .api-app-ico svg *:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+.api-app-card:hover .api-app-ico svg *:nth-child(4) {
+  animation-delay: 0.14s;
+}
+
+.api-app-card:hover .api-app-ico svg *:nth-child(n + 5) {
+  animation-delay: 0.18s;
+}
+
+@keyframes api-app-stroke {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .api-app-card img {
