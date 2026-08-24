@@ -43,6 +43,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - BottomCta（2026-08-24）：footer 上、ExploreMore 下。Returns 暗底粒子海。标题+按钮**水平居中、上下排列**。文案 Efficient Solution of Value and Possibility；按钮 Tracking `.btn-switch`，文案 Contact Us，链 17track contact-us。
 - tracking-foundation（2026-08-24 Park「对齐一下」）：只对齐建议修，不动产品覆盖。`.api-h1` → `--fs-display` / 700 / 1.1；`.api-h2` → `clamp(28px, 3.2vw, 40px)` / 700 / `--track-title`；`.api-lead` 17px + `--track-body` + `--sec-title-desc`；How-it-works `--sec-y` / `--sec-head-gap` / head 760；ExploreMore 去掉外层 80 竖向 padding（只留 `--bg-subtle`）。**不动**：Hero 副标 24.8/600/`#3352b3`、lead 42ch、Use Cases 48/800、Data Ops head 72、Applications 100vh、Land 渐变 56、Onboard 32、Bottom CTA 展示级、表单 `.api-btn-primary`、品牌蓝。
 - Explore 卡（2026-08-24 Park「去掉 3d hover」）：不要板子 rotateX/Y、不要内层 reverse parallax。仍保留跟手 spotlight、底光、箭头、图标描线。`landing-inline.js` 只写 `--spot-*`。
+- Data Operations 模块（2026-08-24 Park 对照 Cursor 主页「很干净」）：去掉白卡套井。插图是唯一 24px 圆角舞台 + 很淡阴影；copy 坐在页面底上，h3 26/600、p 16/1.65。单卡 1080×500、轨距 40，一次主看一张。`--s4-x` 按卡宽连续平移，末张也左对齐（不要露出上一张文案）。产品文案和四张构图不动。
 
 ## 未完成
 
