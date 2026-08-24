@@ -100,7 +100,7 @@ export function mount() {
     const FAR_CUTOFF = 0.105; // guide 0.09–0.12
     const LIGHTING = 30 * 0.035;
     const GLOSS = 0;
-    const HIGHLIGHTS = 15 * 0.02; // 原 ×0.04；Park：太亮 → 高光减半
+    const HIGHLIGHTS = 15 * 0.012; // Applications：再压近景高光，避免波面发白
     const LIGHT_DIR = [0.4, -0.6, 0.7];
     const FOCAL = 1.5;
     const MARCH_STEPS = 16;
@@ -110,7 +110,7 @@ export function mount() {
 
     const DENSITY = 57;
     const DOT_OUT_MAX = 0.14; // 原预设 0.21；Park：圆点太大 → 缩小
-    const DOT_FADE = 0.3; // Park 三轮：0.62 → 0.38 → 还是亮 → 0.30
+    const DOT_FADE = 0.16; // Applications：0.30 太抢字，压到约一半
     // Park：近景大点会被波面畸变拉歪（不规则团块）→ 屏幕半径封顶，CSS px
     const DOT_MAX_RADIUS_CSS = 2.6;
 

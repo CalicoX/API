@@ -38,7 +38,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Hero 拖尾：紫 `#D042FF` + 蓝 `#5B4FFF` + 一点橙 `#FF3805`（只占 left 一个方向）。绿 `#66FF73` 不要。
 - `.api-s4-track` 的 `overflow-x: clip` 防横向滚动，不能换成 hidden（会杀 sticky）。
 - Applications（2026-08-24）：**100vh / 100dvh**。图标按标题，底色蓝橙绿紫青。hover 描边画出。卡下 **Start My Free Trial** 滚回 Hero `#free-trial`。标题 / 卡片 / CTA 再分开一点（head 下 88、CTA 上 64）。产品文案不改。
-- Applications 背景（2026-08-24）：Returns ROI 同款 Point Waves 1（`roi-point-waves.js` 挂 `#applications` / canvas `.api-s5-waves`）。底 `#141414` + 青绿光晕。减动效 / ≤768 / 弱 GPU 不挂 WebGL，留静态底。
+- Applications 背景（2026-08-24）：Returns ROI 同款 Point Waves 1（`roi-point-waves.js` 挂 `#applications` / canvas `.api-s5-waves`）。底 `#141414` + 青绿光晕。减动效 / ≤768 / 弱 GPU 不挂 WebGL，留静态底。Park：点波太亮 → `DOT_FADE` 0.30→0.16，高光 `15*0.02`→`15*0.012`。
 - BottomCta：不渲染（Park：蓝底 Efficient Solution 那一屏去掉）。组件文件保留。
 
 ## 未完成
