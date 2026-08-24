@@ -259,7 +259,7 @@ export default function DataOperations() {
                       <div className="api-s4-copy">
                         <h3>{title}</h3>
                         <p>{body}</p>
-                        <a className="api-s4-cta" href="#contact">
+                        <a className="api-s4-cta" href="#free-trial">
                           Contact Us
                         </a>
                       </div>

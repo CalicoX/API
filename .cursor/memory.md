@@ -38,6 +38,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Hero 拖尾：紫 `#D042FF` + 蓝 `#5B4FFF` + 一点橙 `#FF3805`（只占 left 一个方向）。绿 `#66FF73` 不要。
 - `.api-s4-track` 的 `overflow-x: clip` 防横向滚动，不能换成 hidden（会杀 sticky）。
 - Applications（2026-08-24）：去掉列表圆点。图标按标题（卡车 / 购物袋 / 卡 / 三点 / 四宫格），底色蓝橙绿紫青。整段加高：section padding 136/148，卡 min-height 268。hover：卡上移 + 扫光；图标 SVG `pathLength=100` **stroke-dashoffset 100→0** 描边画出（0.9s，子路径 staggered）。产品文案不改。
+- BottomCta（2026-08-24 Park：整块去掉）：`Efficient Solution of Value and Possibility` 不再渲染。组件文件保留。Data Ops Contact Us 改跳 `#free-trial`。
 
 ## 未完成
 
