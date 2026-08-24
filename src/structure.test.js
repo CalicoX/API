@@ -107,6 +107,17 @@ describe("API landing structure (gating)", () => {
     expect(mod).toMatch(/return function dispose|return \(\)\s*=>/);
   });
 
+  it("Applications mounts Returns ROI point-waves background", () => {
+    const fx = read("fx/useLandingEffects.js");
+    expect(fx).toMatch(/roiPointWaves|roi-point-waves/);
+    expect(fx).toMatch(/getElementById\([\"']applications[\"']\)/);
+    const waves = read("fx/modules/roi-point-waves.js");
+    expect(waves).toMatch(/export function mount/);
+    expect(waves).toMatch(/getElementById\([\"']applications[\"']\)/);
+    expect(waves).toMatch(/api-s5-waves/);
+    expect(waves).toMatch(/Point Waves 1/);
+  });
+
   it("use-cases sticky scroll drives 3D hub progress", () => {
     const fx = read("fx/useLandingEffects.js");
     expect(fx).toMatch(/useCasesScroll|use-cases-scroll/);
