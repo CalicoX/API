@@ -5580,7 +5580,7 @@ html.is-reduce-fx .api-s5::after {
 .api-onboard-steps {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  gap: 36px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -5597,7 +5597,7 @@ html.is-reduce-fx .api-s5::after {
 
 .api-onboard-well {
   position: relative;
-  height: 240px;
+  height: 280px;
   overflow: hidden;
   border-radius: 16px;
   background: #f7f8fa;
@@ -5707,11 +5707,12 @@ html.is-reduce-fx .api-s5::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px 16px 22px;
+  padding: 32px 28px 36px;
 }
 
 .api-ob-sheet {
-  width: min(100%, 220px);
+  width: 68%;
+  max-width: 196px;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -5755,19 +5756,15 @@ html.is-reduce-fx .api-s5::after {
   color: #f8fafc;
 }
 
-.api-onboard-card:hover .api-ob-row {
-  animation: api-ob-hslide 3.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 .api-ob--trial {
-  padding: 16px 12px 20px;
+  padding: 18px 16px 22px;
 }
 
 .api-ob-code {
   position: relative;
   z-index: 2;
-  width: 78%;
-  margin-left: 6%;
+  width: 64%;
+  margin: 8px 0 0 10px;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -5779,10 +5776,10 @@ html.is-reduce-fx .api-s5::after {
 
 .api-ob-help {
   position: absolute;
-  right: 10px;
-  bottom: 18px;
+  right: 16px;
+  bottom: 28px;
   z-index: 3;
-  width: 58%;
+  width: 48%;
   padding: 8px;
   border-radius: 10px;
   display: flex;
@@ -5795,22 +5792,17 @@ html.is-reduce-fx .api-s5::after {
   font-size: 8px;
 }
 
-.api-onboard-card:hover .api-ob-code {
-  animation: api-ob-shift-l 3.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.api-onboard-card:hover .api-ob-help {
-  animation: api-ob-shift-r 3.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 .api-ob--plans {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  gap: 8px;
-  padding: 22px 28px 24px 22px;
+  gap: 16px;
+  width: 78%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .api-ob-mini {
@@ -5882,21 +5874,14 @@ html.is-reduce-fx .api-s5::after {
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
 }
 
-.api-onboard-card:hover .api-ob-mini.is-flag {
-  animation: api-ob-shift-r 3.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.api-onboard-card:hover .api-ob-cursor {
-  animation: api-ob-cursor 3.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 .api-ob--live {
   position: relative;
-  padding: 18px 14px 16px;
+  padding: 20px 16px 18px;
 }
 
 .api-ob-board {
-  width: 68%;
+  width: 54%;
+  margin: 8px 0 0 8px;
   padding: 10px 10px 12px;
   border-radius: 10px;
 }
@@ -5977,8 +5962,8 @@ html.is-reduce-fx .api-s5::after {
 
 .api-ob-xls {
   position: absolute;
-  top: 18px;
-  right: 14px;
+  top: 16px;
+  right: 18px;
   z-index: 2;
   width: 56px;
   padding: 8px 6px 7px;
@@ -6006,76 +5991,16 @@ html.is-reduce-fx .api-s5::after {
 
 .api-ob-modal {
   position: absolute;
-  right: 12px;
-  bottom: 14px;
+  right: 14px;
+  bottom: 22px;
   z-index: 3;
-  width: 54%;
+  width: 44%;
   padding: 8px 8px 9px;
   border-radius: 10px;
 }
 
 .api-ob-modal .api-vig-field b {
   min-height: 16px;
-}
-
-.api-onboard-card:hover .api-ob-xls {
-  animation: api-ob-shift-r 3.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.api-onboard-card:hover .api-ob-modal {
-  animation: api-ob-shift-l 3.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@keyframes api-ob-hslide {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  40% {
-    transform: translateX(var(--dx, 0));
-  }
-}
-
-@keyframes api-ob-shift-l {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  45% {
-    transform: translateX(-8px);
-  }
-}
-
-@keyframes api-ob-shift-r {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  45% {
-    transform: translateX(8px);
-  }
-}
-
-@keyframes api-ob-cursor {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  45% {
-    transform: translateX(-10px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .api-onboard-card:hover .api-ob-row,
-  .api-onboard-card:hover .api-ob-code,
-  .api-onboard-card:hover .api-ob-help,
-  .api-onboard-card:hover .api-ob-mini.is-flag,
-  .api-onboard-card:hover .api-ob-cursor,
-  .api-onboard-card:hover .api-ob-xls,
-  .api-onboard-card:hover .api-ob-modal {
-    animation: none;
-  }
 }
 
 @media (max-width: 1100px) {

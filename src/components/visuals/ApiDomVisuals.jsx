@@ -1238,22 +1238,19 @@ export function IllusOnboardChat() {
           </span>
         </header>
         <div className="api-ob-thread">
-          <div className="api-ob-row is-bot" style={{ "--dx": "-8px" }}>
+          <div className="api-ob-row is-bot">
             <ObAva tone="blue" label="17" />
-            <p>
-              17TRACK is a logistics tracking platform with a Tracking API that automatically tracks
-              the logistics information of your parcels.
-            </p>
+            <p>17TRACK Tracking API automatically tracks your parcels.</p>
           </div>
-          <div className="api-ob-row is-me" style={{ "--dx": "8px" }}>
-            <p>I want to understand how the API works.</p>
+          <div className="api-ob-row is-me">
+            <p>How does the API work?</p>
             <ObAva tone="sand" label="P" />
           </div>
-          <div className="api-ob-row is-bot" style={{ "--dx": "-8px" }}>
+          <div className="api-ob-row is-bot">
             <ObAva tone="blue" label="17" />
-            <p>Well, there are three main steps to using the API.</p>
+            <p>Three main steps to get started.</p>
           </div>
-          <div className="api-ob-row is-me" style={{ "--dx": "8px" }}>
+          <div className="api-ob-row is-me">
             <p>Thank you!</p>
             <ObAva tone="sand" label="P" />
           </div>
@@ -1263,7 +1260,7 @@ export function IllusOnboardChat() {
   );
 }
 
-/** Onboard 2 — code window + help chat, split horizontally on hover. */
+/** Onboard 2 — code window + help chat, offset, static. */
 export function IllusOnboardTrial() {
   return (
     <div className="api-ob api-ob--trial" aria-hidden="true">
