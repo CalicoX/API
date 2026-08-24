@@ -5340,7 +5340,13 @@
    ========================================================= */
 .api-s6 {
   position: relative;
-  padding: 88px 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
   text-align: center;
   overflow: hidden;
   background:
@@ -5351,7 +5357,8 @@
 
 .api-s6 .api-h2 {
   color: #fff;
-  margin-bottom: 24px;
+  margin: 0 auto 28px;
+  max-width: 18em;
 }
 
 .api-s6 .api-cta-row {
@@ -5624,8 +5631,7 @@
   .api-s2,
   .api-s3,
   .api-s4,
-  .api-s5,
-  .api-s6 {
+  .api-s5 {
     padding-top: 56px;
     padding-bottom: 56px;
   }

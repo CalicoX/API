@@ -27,6 +27,7 @@ describe("API landing structure (gating)", () => {
       "HowItWorks",
       "DataOperations",
       "Applications",
+      "BottomCta",
       "ExploreMore",
       "Footer",
       "ProductDock",

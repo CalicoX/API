@@ -11,9 +11,7 @@ Park 在这个仓库里直接改代码、看效果。Agent 用简体中文回复
 
 ## 页面结构
 
-`LandingPage.jsx`：Hero → TrustBand → UseCases → HowItWorks → DataOperations → Applications → ExploreMore。
-
-BottomCta（Efficient Solution of Value and Possibility）已从页面拿掉，文件仍留着、不渲染。
+`LandingPage.jsx`：Hero → TrustBand → UseCases → HowItWorks → DataOperations → Applications → BottomCta → ExploreMore。
 
 - 内容壳 `.api-wrap`：**1440px**（含约 24px page padding）。
 - 主样式：`src/styles/api-page.css`。
