@@ -12,7 +12,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 ## 决策
 
 - 产品原文不改。
-- 底部产品切换 dock（17 Order Tracking / 17 Returns / Tracking API）：不是被谁删的——从首个提交 f37a0bd 起 `LandingPage.jsx` 里就是 `{/* ProductDock hidden for now */}` 占位、从未渲染（移植时留的坑）。2026-08-17 已恢复：`<ProductDock />` 放在 `#glass-content` 之外（跟 legacy 静态页同构）。FX 全自带：`mountProductDock` 毛玻璃管线、`liquid-glass-dock` 采样背景自动加/去 `dock-on-dark` 反色、`border-beam` 深色底彩色微光。别再注释掉它。
+- 底部产品切换 dock：2026-08-24 Park **暂时隐藏**（Applications 100vh 屏被 dock 挡住）。组件和 `mountProductDock` 仍在，LandingPage 不渲染 `<ProductDock />`。不是误删，要回来再挂回去。
 - Hero H1 字内光：hover 时光斑只在字形内部（`background-clip: text`，底层墨色 + 跟鼠标的径向光斑，中心浅蓝 `#c4deff`、中段蓝紫 `rgba(91,111,255)`，半径 170px）。坐标 `--h1-x/--h1-y` 由 h1 的 onMouseMove 写入；光强 `--h1-glow` 用 `@property` 注册成 number，`:hover` 置 1、0.45s 过渡淡入淡出。不要做成扫光动画，是跟手的。
 - Hero 左栏文案（2026-08-17 定稿）：H2 副标降级不抢 H1——`clamp(1.2rem, 1.8vw, 1.55rem)`、字重 600、色 `#3352b3`（不用 `#1e40af` 粗黑蓝）。lead 去掉 `.api-lead-line` 强制两行 nowrap，自然换行 + `max-width: 42ch`。`3400+` 药丸改浅底：`#dbeafe` 底 + `#1d4ed8` 字，不再实心蓝底白字。checklist 圆点改轻量：`#eff6ff` 底 + `#bfdbfe` 描边 + 蓝勾（不再实心蓝底白勾），行距 gap 10px。copy 区加 `::before` 白色径向 veil（z:-1，压在 shader 上保证可读性）。左栏第五条「View docs」次级 CTA 暂不加。
 - Hero 注册表单：右栏宽 `minmax(420px, 520px)`（原 380/460，Park 要更宽）。不用红星标必填，非必填（Company Website / 留言）label 右侧灰字 `Optional`。留言框默认收成 44px、focus 缓动展开到 96px、`resize: none` 不能拖。输入框白底 `#e2e8f0` 描边 + 浅投影，hover 描边加深。Password 有 show/hide 眼睛。`No credit card required` 徽章在 CTA 按钮正下方居中，不在标题行。法务 checkbox 11px 淡灰。字段间距 15/14px。
@@ -37,7 +37,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Hero shader 已本地化：`hero-wash-shader.js` 纯 WebGL 复刻 shaders.com Undertones 1，npm `shaders` 依赖已删。技术细节见 AGENTS.md「Hero shader」节。墨迹手感只调 `CF_INTENSITY`（1.2）和 `CF_FADE_SCALE`（0.7，2026-08-17 从 0.45 改短，Park 嫌拖尾太长）。
 - Hero 拖尾：紫 `#D042FF` + 蓝 `#5B4FFF` + 一点橙 `#FF3805`（只占 left 一个方向）。绿 `#66FF73` 不要。
 - `.api-s4-track` 的 `overflow-x: clip` 防横向滚动，不能换成 hidden（会杀 sticky）。
-- Applications（2026-08-24）：**100vh / 100dvh**。图标按标题，底色蓝橙绿紫青。hover 描边画出。卡下 **Start My Free Trial** 滚回 Hero `#free-trial`。产品文案不改。
+- Applications（2026-08-24）：**100vh / 100dvh**。图标按标题，底色蓝橙绿紫青。hover 描边画出。卡下 **Start My Free Trial** 滚回 Hero `#free-trial`。标题 / 卡片 / CTA 再分开一点（head 下 88、CTA 上 64）。产品文案不改。
 - BottomCta：不渲染（Park：蓝底 Efficient Solution 那一屏去掉）。组件文件保留。
 
 ## 未完成
