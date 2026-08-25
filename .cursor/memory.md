@@ -43,6 +43,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - BottomCta（2026-08-24）：footer 上、ExploreMore 下。Returns 暗底粒子海。标题+按钮**水平居中、上下排列**。文案 Efficient Solution of Value and Possibility；按钮 Tracking `.btn-switch`，文案 Contact Us，链 17track contact-us。
 - tracking-foundation（2026-08-24 Park「对齐一下」）：只对齐建议修，不动产品覆盖。`.api-h1` → `--fs-display` / 700 / 1.1；`.api-h2` → `clamp(28px, 3.2vw, 40px)` / 700 / `--track-title`；`.api-lead` 17px + `--track-body` + `--sec-title-desc`；How-it-works `--sec-y` / `--sec-head-gap` / head 760；ExploreMore 去掉外层 80 竖向 padding（只留 `--bg-subtle`）。**不动**：Hero 副标 24.8/600/`#3352b3`、lead 42ch、Use Cases 48/800、Data Ops head 72、Applications 100vh、Land 渐变 56、Onboard 32、Bottom CTA 展示级、表单 `.api-btn-primary`、品牌蓝。
 - Explore 卡（2026-08-24 Park「去掉 3d hover」）：不要板子 rotateX/Y、不要内层 reverse parallax。仍保留跟手 spotlight、底光、箭头、图标描线。`landing-inline.js` 只写 `--spot-*`。
+- ExploreMore（2026-08-25 Park「把 tracking 那个拿过来」）：Tracking 放左边。插图用 Returns 页同款 `track-ui`（进度条 + Shipping Events + WISMO + Brand video），不要旧的简易 timeline。Returns 卡仍在右边。不要 3D。产品文案不改。
 - Data Operations（2026-08-24 Park「改回去」）：Cursor 主页那轮（去白框、1080 宽、copy 落页上）**作废**。回到白卡 800×500、8px 井、copy 在卡内。别再拆框。
 - Land 价格卡（2026-08-24 Park：改的是价格，官网 Pricing / API）：白卡黑字价、Get Started、六条功能；Flagship 橙条 Popular + 实心橙钮。标题仍是 Land the Integration Together。Custom 还在。不要加 Order Tracking / Returns 分段开关。
 
@@ -54,6 +55,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-08-25 10:53 — memory.md、ExploreMore.jsx、landing.css
 - 2026-08-18 20:08 — memory.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-18 19:58 — memory.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-18 19:48 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css
@@ -73,12 +75,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-17 13:59 — memory.md、api-page.css
 - 2026-08-17 13:57 — memory.md、Hero.jsx、structure.test.js、api-page.css
 - 2026-08-17 13:45 — api-page.css
-- 2026-08-17 11:09 — memory.md、particle-earth.js
-- 2026-08-17 11:07 — memory.md、ApiDomVisuals.jsx、particle-earth.js、structure.test.js、api-page.css
-- 2026-08-17 10:53 — memory.md、ApiDomVisuals.jsx、particle-earth.js、structure.test.js、api-page.css
-- 2026-08-17 10:50 — memory.md、ApiDomVisuals.jsx、use-cases-bg-shader.js、structure.test.js、api-page.css 等 6 项
-- 2026-08-17 10:46 — memory.md、DataOperations.jsx、ApiDomVisuals.jsx、api-page.css
-- 2026-08-17 10:42 — memory.md、api-page.css
-- 2026-08-17 10:40 — memory.md、api-page.css
-- 2026-08-17 10:37 — memory.md、api-page.css
-- 2026-08-17 10:26 — memory.md、api-page.css
