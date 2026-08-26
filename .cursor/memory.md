@@ -47,7 +47,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Data Operations（2026-08-24 Park「改回去」）：Cursor 主页那轮（去白框、1080 宽、copy 落页上）**作废**。回到白卡 800×500、8px 井、copy 在卡内。别再拆框。
 - Land 价格卡（2026-08-24 Park：改的是价格，官网 Pricing / API）：白卡黑字价、Get Started、六条功能；Flagship 橙条 Popular + 实心橙钮。标题仍是 Land the Integration Together。Custom 还在。不要加 Order Tracking / Returns 分段开关。
 - 毛玻璃（2026-08-26）：Vite 8 默认 lightningcss 压 CSS 时，同一条规则里同时写 `backdrop-filter` + `-webkit-backdrop-filter` 会丢掉标准属性。Chrome 只认标准属性，Vercel 生产上顶栏 / 代码窗 / 玻璃卡全变实底。`vite.config.js` 的 `preserveBackdropFilter` 在产物里补回标准属性，并给 landing.css 加 `--bf-keep` 换哈希（旧文件 immutable 缓存）。源 CSS 两边都留着。不要删 `-webkit-`，也不要用 `cssMinify: 'esbuild'`（Vite 8 没带 esbuild；Rolldown 也不许在 generateBundle 里改 bundle 键）。
-- TrustBand（2026-08-26 Park「老板说不要滚动，做成静态 2 排」）：不要跑马灯、不要复制一组、不要两侧渐隐 mask。8 个 logo **4×2 静态网格**，标题文案仍在上、logo 在下。产品原文不改。`.logos-grid` `repeat(4, minmax(0, 1fr))`，row-gap 20。`.logos-grid` / `.logo-tile` 必须 `min-width: 0`，图 `width:100%` + `object-fit:contain` + `max-width:112px`，否则 flex 子项按 112px 固有宽撑出手机屏。不要再加 `animation: logos-scroll`。
+- TrustBand（2026-08-26 Park「老板说不要滚动，做成静态 2 排」）：不要跑马灯、不要复制一组、不要两侧渐隐 mask。8 个 logo **4×2 静态网格**，标题文案在上、logo 在下。**标题 + 副标居中**（`.trust-copy { text-align: center; width: 100% }`，不要再 `max-width: 560` 左对齐）。产品原文不改。`.logos-grid` `repeat(4, minmax(0, 1fr))`，row-gap 20。`.logos-grid` / `.logo-tile` 必须 `min-width: 0`，图 `width:100%` + `object-fit:contain` + `max-width:112px`，否则 flex 子项按 112px 固有宽撑出手机屏。不要再加 `animation: logos-scroll`。
 
 ## 未完成
 

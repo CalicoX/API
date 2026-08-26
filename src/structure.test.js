@@ -55,6 +55,7 @@ describe("API landing structure (gating)", () => {
     expect(tb).not.toMatch(/aria-hidden/);
     const css = read("styles/landing.css");
     expect(css).toMatch(/\.logos-grid \{[\s\S]*?grid-template-columns: repeat\(4/);
+    expect(css).toMatch(/\.trust-copy \{[\s\S]*?text-align: center/);
     expect(css).not.toMatch(/@keyframes logos-scroll/);
   });
 

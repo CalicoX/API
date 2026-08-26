@@ -2393,8 +2393,10 @@
       gap: var(--sec-head-gap);
     }
     .trust-copy {
-      max-width: 560px;
+      width: 100%;
+      max-width: none;
       min-width: 0;
+      text-align: center;
     }
     .trust strong {
       display: block;
