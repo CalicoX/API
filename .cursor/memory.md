@@ -47,7 +47,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Data Operations（2026-08-24 Park「改回去」）：Cursor 主页那轮（去白框、1080 宽、copy 落页上）**作废**。回到白卡 800×500、8px 井、copy 在卡内。别再拆框。
 - Land 价格卡（2026-08-24 Park：改的是价格，官网 Pricing / API）：白卡黑字价、Get Started、六条功能；Flagship 橙条 Popular + 实心橙钮。标题仍是 Land the Integration Together。Custom 还在。不要加 Order Tracking / Returns 分段开关。
 - 毛玻璃（2026-08-26）：Vite 8 默认 lightningcss 压 CSS 时，同一条规则里同时写 `backdrop-filter` + `-webkit-backdrop-filter` 会丢掉标准属性。Chrome 只认标准属性，Vercel 生产上顶栏 / 代码窗 / 玻璃卡全变实底。`vite.config.js` 的 `preserveBackdropFilter` 在产物里补回标准属性，并给 landing.css 加 `--bf-keep` 换哈希（旧文件 immutable 缓存）。源 CSS 两边都留着。不要删 `-webkit-`，也不要用 `cssMinify: 'esbuild'`（Vite 8 没带 esbuild；Rolldown 也不许在 generateBundle 里改 bundle 键）。
-- TrustBand（2026-08-26 Park 用 Tracking 模块替换）：**12 家静态两排各 6**，跟 Tracking 同一套 logo（AliExpress / baleaf / Cainiao / ANKER / COOFANDY / eufy / XGIMI / SHARGE / totwoo / Vaporesso / GOELIA / PLAUD）。不要 Shopify / SHEIN / Temu。不要跑马灯、不要复制一组、不要 mask。文案+logo 整块居中。产品原文不改（副标仍是 Shipment data infrastructure…）。logo 默认 18px，eufy/Cainiao 22，SHARGE/totwoo/Vaporesso/GOELIA 24；行距 28、列距 48；灰度 grayscale + opacity 0.62。禁止 brightness(0)。`.logos-row` `repeat(6, minmax(0, 1fr))`。不要再加 `animation: logos-scroll`。
+- TrustBand（2026-08-26 Park 用 Tracking 模块替换，随后加大圈出的标）：**12 家静态两排各 6**，跟 Tracking 同一套 logo。不要 Shopify / SHEIN / Temu。不要跑马灯。产品原文不改。默认 18px；AliExpress/Baleaf 22；Cainiao/eufy 26；SHARGE/totwoo/Vaporesso/GOELIA 24。行距 36、列距 **72**。灰度 0.62；eufy 单独 opacity 0.88（蓝标灰化会偏浅）。禁止 brightness(0)。
 
 ## 未完成
 
