@@ -23,6 +23,7 @@ describe("API landing structure (gating)", () => {
       "Topbar",
       "Hero",
       "TrustBand",
+      "BrandsSay",
       "UseCases",
       "HowItWorks",
       "DataOperations",
@@ -41,10 +42,11 @@ describe("API landing structure (gating)", () => {
       expect(existsSync(join(root, sectionPath))).toBe(true);
     }
     // tracking-only sections must not drive this page
-    expect(lp).not.toMatch(/ImpactBand|FeaturesSection|AiLab|BrandsSay|Credentials/);
-    // Hero then TrustBand
+    expect(lp).not.toMatch(/ImpactBand|FeaturesSection|AiLab|Credentials/);
+    // Hero then TrustBand then BrandsSay
     expect(lp.indexOf("Hero")).toBeLessThan(lp.indexOf("TrustBand"));
-    expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("UseCases"));
+    expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("BrandsSay"));
+    expect(lp.indexOf("BrandsSay")).toBeLessThan(lp.indexOf("UseCases"));
   });
 
   it("TrustBand is a static two-row logo grid, not a marquee", () => {
@@ -58,6 +60,14 @@ describe("API landing structure (gating)", () => {
     expect(css).toMatch(/\.logos-row \{[\s\S]*?grid-template-columns: repeat\(6/);
     expect(css).toMatch(/\.trust-copy \{[\s\S]*?text-align: center/);
     expect(css).not.toMatch(/@keyframes logos-scroll/);
+  });
+
+  it("BrandsSay sits on a white band (not the tracking dark slate)", () => {
+    const css = read("styles/landing.css");
+    expect(css).toMatch(/\.brands-say \{[\s\S]*?--bs-bg: #ffffff/);
+    expect(css).toMatch(/\.brands-say-head h2 \{[\s\S]*?color: var\(--text-primary\)/);
+    expect(read("components/sections/BrandsSay.jsx")).toMatch(/btn-switch/);
+    expect(read("components/sections/BrandsSay.jsx")).not.toMatch(/on-dark/);
   });
 
   it("Hero copy matches 17track API hero", () => {

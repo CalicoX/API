@@ -6486,13 +6486,12 @@
 
     /* ——— Brands say — dual-row reverse marquee testimonials ——— */
     .brands-say {
-      --bs-bg: #0f172a;
+      --bs-bg: #ffffff;
       --bs-card: #1e293b;
       position: relative;
-      /* clean slate — no purple glow */
       background: var(--bs-bg);
-      color: #fff;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-default);
       overflow: hidden;
     }
     .brands-say .section-inner {
@@ -6518,13 +6517,13 @@
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      color: #fff;
+      color: var(--text-primary);
       text-wrap: balance;
     }
     .brands-say-head .lead {
       margin: 14px auto 0;
       max-width: 480px;
-      color: rgba(226, 232, 240, 0.72);
+      color: var(--text-secondary);
       font-size: 15px;
       line-height: 1.55;
     }
@@ -6595,18 +6594,7 @@
       gap: 12px;
       margin-top: clamp(36px, 4vw, 48px);
     }
-    /* reuse site-wide CTA; light outline for Book a demo on dark band */
-    .brands-say-cta .btn-demo {
-      border-color: rgba(255, 255, 255, 0.28);
-      color: #fff;
-      background: rgba(255, 255, 255, 0.06);
-    }
-    .brands-say-cta .btn-demo:hover,
-    .brands-say-cta .btn-demo:focus-visible {
-      border-color: rgba(255, 255, 255, 0.5);
-      background: rgba(255, 255, 255, 0.12);
-      color: #fff;
-    }
+    /* CTA uses site-wide light-section .btn-switch / .btn-demo */
     .brand-card {
       position: relative;
       flex: 0 0 auto;

@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- BrandsSay（2026-08-26 Park：截图模块挪到 Trust Band 下面，背景改白）：挂在 TrustBand 后、UseCases 前。段底 `#fff`，标题/副标走深色字，CTA 用浅底 `.btn-switch`（不要 `on-dark`）。卡片仍是照片+暗罩，产品原文不改。
+
 - 产品原文不改。
 - 底部产品切换 dock：2026-08-24 Park **暂时隐藏**（Applications 100vh 屏被 dock 挡住）。组件和 `mountProductDock` 仍在，LandingPage 不渲染 `<ProductDock />`。不是误删，要回来再挂回去。
 - Hero H1 字内光：hover 时光斑只在字形内部（`background-clip: text`，底层墨色 + 跟鼠标的径向光斑，中心浅蓝 `#c4deff`、中段蓝紫 `rgba(91,111,255)`，半径 170px）。坐标 `--h1-x/--h1-y` 由 h1 的 onMouseMove 写入；光强 `--h1-glow` 用 `@property` 注册成 number，`:hover` 置 1、0.45s 过渡淡入淡出。不要做成扫光动画，是跟手的。

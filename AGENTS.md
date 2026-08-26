@@ -11,7 +11,7 @@ Park 在这个仓库里直接改代码、看效果。Agent 用简体中文回复
 
 ## 页面结构
 
-`LandingPage.jsx`：Hero → TrustBand → UseCases → HowItWorks → DataOperations → Applications → IntegrationTogether → ExploreMore → BottomCta。
+`LandingPage.jsx`：Hero → TrustBand → BrandsSay → UseCases → HowItWorks → DataOperations → Applications → IntegrationTogether → ExploreMore → BottomCta。
 
 BottomCta 在 footer 上：Returns 同款暗底粒子海，文案 Efficient Solution of Value and Possibility + Contact Us。Applications 整屏 100vh，底部 Start My Free Trial 滚回 Hero `#free-trial`。背景是 Returns ROI 同款 Point Waves（`src/fx/modules/roi-point-waves.js`）。
 
