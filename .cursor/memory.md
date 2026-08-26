@@ -46,6 +46,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - ExploreMore（2026-08-25 Park「把 tracking 那个拿过来」）：Tracking 放左边。插图用 Returns 页同款 `track-ui`（进度条 + Shipping Events + WISMO + Brand video），不要旧的简易 timeline。Returns 卡仍在右边。不要 3D。产品文案不改。
 - Data Operations（2026-08-24 Park「改回去」）：Cursor 主页那轮（去白框、1080 宽、copy 落页上）**作废**。回到白卡 800×500、8px 井、copy 在卡内。别再拆框。
 - Land 价格卡（2026-08-24 Park：改的是价格，官网 Pricing / API）：白卡黑字价、Get Started、六条功能；Flagship 橙条 Popular + 实心橙钮。标题仍是 Land the Integration Together。Custom 还在。不要加 Order Tracking / Returns 分段开关。
+- 毛玻璃（2026-08-26）：Vite 8 默认 lightningcss 压 CSS 时，同一条规则里同时写 `backdrop-filter` + `-webkit-backdrop-filter` 会丢掉标准属性。Chrome 只认标准属性，Vercel 生产上顶栏 / 代码窗 / 玻璃卡全变实底。`vite.config.js` 的 `preserveBackdropFilter` 在产物里补回标准属性，并给 landing.css 加 `--bf-keep` 换哈希（旧文件 immutable 缓存）。源 CSS 两边都留着。不要删 `-webkit-`，也不要用 `cssMinify: 'esbuild'`（Vite 8 没带 esbuild；Rolldown 也不许在 generateBundle 里改 bundle 键）。
 
 ## 未完成
 
