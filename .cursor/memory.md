@@ -11,7 +11,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- BrandsSay（2026-08-26 Park：截图模块挪到 Trust Band 下面，背景改白）：挂在 TrustBand 后、UseCases 前。段底 `#fff`，标题/副标走深色字，CTA 用浅底 `.btn-switch`（不要 `on-dark`）。卡片仍是照片+暗罩，产品原文不改。
+- BrandsSay（2026-08-26 Park 纠正）：**API 落地页没有 What Top Brands Say**。那是 Tracking 模块。不要挂进 `LandingPage`。组件和暗底样式留在仓库（LegacyLanding / tracking 用），API 顺序仍是 Hero → TrustBand → UseCases。
 
 - 产品原文不改。
 - 底部产品切换 dock：2026-08-24 Park **暂时隐藏**（Applications 100vh 屏被 dock 挡住）。组件和 `mountProductDock` 仍在，LandingPage 不渲染 `<ProductDock />`。不是误删，要回来再挂回去。
