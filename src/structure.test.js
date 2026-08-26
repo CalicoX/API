@@ -28,6 +28,7 @@ describe("API landing structure (gating)", () => {
       "DataOperations",
       "Applications",
       "IntegrationTogether",
+      "Credentials",
       "ExploreMore",
       "BottomCta",
       "Footer",
@@ -41,11 +42,13 @@ describe("API landing structure (gating)", () => {
       expect(existsSync(join(root, sectionPath))).toBe(true);
     }
     // tracking-only sections must not drive this page
-    expect(lp).not.toMatch(/ImpactBand|FeaturesSection|AiLab|BrandsSay|Credentials/);
+    expect(lp).not.toMatch(/ImpactBand|FeaturesSection|AiLab|BrandsSay/);
     expect(lp).not.toMatch(/<BrandsSay/)
-    // Hero then TrustBand
+    // Hero then TrustBand; Credentials then ExploreMore
     expect(lp.indexOf("Hero")).toBeLessThan(lp.indexOf("TrustBand"));
     expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("UseCases"));
+    expect(lp.indexOf("Credentials")).toBeLessThan(lp.indexOf("ExploreMore"));
+    expect(lp.indexOf("ExploreMore")).toBeLessThan(lp.indexOf("BottomCta"));
   });
 
   it("TrustBand is a static two-row logo grid, not a marquee", () => {

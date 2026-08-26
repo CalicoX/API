@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- ExploreMore（2026-08-26 Park：放到 credential 后面）：API 页挂上 Credentials（Our Credentials, Your Confidence），ExploreMore 紧跟其后、BottomCta 之前。顺序 IntegrationTogether → Credentials → ExploreMore → BottomCta。产品原文不改。
+
 - Explore Tracking 插图（2026-08-26 Park：上面间距太小、节点没对齐）：`.track-ui-board` 顶垫 22 / 标题下 18。Shipping Events 竖线与菱形/圆点共用 `--rail`（列中心 10px），不要再写死 `left: 9px`（线会偏左 ~2px）。
 
 - BrandsSay（2026-08-26 Park 纠正）：**API 落地页没有 What Top Brands Say**。那是 Tracking 模块。不要挂进 `LandingPage`。组件和暗底样式留在仓库（LegacyLanding / tracking 用），API 顺序仍是 Hero → TrustBand → UseCases。

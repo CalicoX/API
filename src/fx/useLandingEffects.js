@@ -139,7 +139,9 @@ export function useLandingEffects() {
     const features = document.getElementById("key-features");
     const explore = document.querySelector(".explore-grid");
     const useCases = document.getElementById("use-cases");
-    const featuresOrExplore = features || explore || useCases;
+    const credentials = document.getElementById("credentials");
+    // Credentials sits above Explore — observe it first so cards aren't stuck at opacity 0
+    const featuresOrExplore = credentials || features || explore || useCases;
     if (featuresOrExplore) {
       let loaded = false;
       disposers.push(

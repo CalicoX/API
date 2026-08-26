@@ -8,6 +8,7 @@ import HowItWorks from "./sections/HowItWorks.jsx";
 import DataOperations from "./sections/DataOperations.jsx";
 import Applications from "./sections/Applications.jsx";
 import IntegrationTogether from "./sections/IntegrationTogether.jsx";
+import Credentials from "./sections/Credentials.jsx";
 import ExploreMore from "./sections/ExploreMore.jsx";
 import BottomCta from "./sections/BottomCta.jsx";
 import { useEffect } from "react";
@@ -35,6 +36,7 @@ export default function LandingPage() {
           <DataOperations />
           <Applications />
           <IntegrationTogether />
+          <Credentials />
           {/* Cross-sell: Returns + Tracking (no API self-promo) */}
           <ExploreMore />
           <BottomCta />
