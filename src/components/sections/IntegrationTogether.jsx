@@ -76,7 +76,9 @@ export default function IntegrationTogether() {
         <ul className="api-plans">
           {PLANS.map((plan) => (
             <li className={`api-plan-card${plan.hot ? " is-hot" : ""}`} key={plan.name}>
-              {plan.hot ? <span className="api-plan-popular">Popular</span> : null}
+              <span className="api-plan-popular" aria-hidden={!plan.hot}>
+                {plan.hot ? "Popular" : "\u00a0"}
+              </span>
               <div className="api-plan-inner">
                 <span className="api-plan-name">{plan.name}</span>
                 <span className="api-plan-unit">Unit Price</span>

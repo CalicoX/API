@@ -5480,11 +5480,11 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-plan-card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 36px 1fr;
   min-height: 0;
   padding: 0;
-  border: 1px solid #e5e7eb;
+  border: 2px solid #e5e7eb;
   border-radius: 16px;
   background: #fff;
   list-style: none;
@@ -5494,28 +5494,32 @@ html.is-reduce-fx .api-s5::after {
 .api-plan-inner {
   display: flex;
   flex-direction: column;
-  flex: 1;
   min-height: 0;
-  padding: 28px 22px 24px;
+  padding: 20px 22px 24px;
 }
 
 .api-plan-popular {
-  display: block;
-  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
   text-align: center;
-  background: var(--api-blue);
-  color: #fff;
+  background: transparent;
+  color: transparent;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.01em;
+  line-height: 1;
 }
 
 .api-plan-card.is-hot {
-  border: 2px solid var(--api-blue);
+  border-color: var(--api-blue);
 }
 
-.api-plan-card.is-hot .api-plan-inner {
-  padding-top: 22px;
+.api-plan-card.is-hot .api-plan-popular {
+  background: var(--api-blue);
+  color: #fff;
 }
 
 .api-plan-name {
@@ -5616,7 +5620,7 @@ html.is-reduce-fx .api-s5::after {
   gap: 24px;
   margin-top: 16px;
   padding: 22px 32px;
-  border: 1px solid #e5e7eb;
+  border: 2px solid #e5e7eb;
   border-radius: 16px;
   background: #fff;
   box-sizing: border-box;
