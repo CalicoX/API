@@ -5453,32 +5453,25 @@ html.is-reduce-fx .api-s5::after {
 
 .api-land-head {
   text-align: center;
-  margin: 0 auto 40px;
+  margin: 0 auto var(--sec-head-gap, 40px);
 }
 
-.api-land-title {
-  margin: 0;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  background: linear-gradient(90deg, #ff51ec, #3736ff, #545eff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.api-land-head .api-h2 {
+  color: var(--api-ink);
 }
 
 .api-land-sub {
-  margin: 16px 0 0;
-  font-size: clamp(1.05rem, 1.6vw, 1.5rem);
-  font-weight: 500;
-  line-height: 1.2;
-  color: #424242;
+  margin: var(--sec-title-desc, 16px) auto 0;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: var(--track-body, -0.015em);
+  color: var(--api-muted);
 }
 
 .api-plans {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
   align-items: stretch;
   margin: 0;
@@ -5510,7 +5503,7 @@ html.is-reduce-fx .api-s5::after {
   display: block;
   padding: 10px 16px;
   text-align: center;
-  background: #ff7a00;
+  background: var(--api-blue);
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -5518,7 +5511,7 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-plan-card.is-hot {
-  border: 2px solid #ff7a00;
+  border: 2px solid var(--api-blue);
 }
 
 .api-plan-card.is-hot .api-plan-inner {
@@ -5563,9 +5556,9 @@ html.is-reduce-fx .api-s5::after {
   margin: 28px 0 0;
   padding: 0 16px;
   border-radius: 999px;
-  border: 1.5px solid #ff7a00;
+  border: 1.5px solid var(--api-blue);
   background: #fff;
-  color: #ff7a00;
+  color: var(--api-blue);
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
@@ -5573,17 +5566,17 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-plan-cta:hover {
-  background: #fff7ed;
+  background: #eff6ff;
 }
 
 .api-plan-card.is-hot .api-plan-cta {
-  background: #ff7a00;
+  background: var(--api-blue);
   color: #fff;
-  border-color: #ff7a00;
+  border-color: var(--api-blue);
 }
 
 .api-plan-card.is-hot .api-plan-cta:hover {
-  background: #f97316;
+  background: var(--api-blue-dark);
 }
 
 .api-plan-whats {
@@ -5616,19 +5609,28 @@ html.is-reduce-fx .api-s5::after {
   margin-top: 1px;
 }
 
-.api-plan-card.is-custom {
-  text-align: center;
+.api-plan-custom {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+  margin-top: 16px;
+  padding: 22px 32px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #fff;
+  box-sizing: border-box;
 }
 
-.api-plan-card.is-custom .api-plan-inner {
-  align-items: center;
+.api-plan-custom .api-plan-name {
+  justify-self: start;
 }
 
 .api-plan-illu {
   display: block;
-  width: 128px;
-  height: 128px;
-  margin: 28px auto auto;
+  width: 96px;
+  height: 96px;
+  margin: 0;
   object-fit: contain;
 }
 
@@ -5636,19 +5638,21 @@ html.is-reduce-fx .api-s5::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  justify-self: end;
+  min-height: 44px;
+  min-width: 148px;
   padding: 0 22px;
-  margin-top: 16px;
+  margin: 0;
   border-radius: 999px;
   color: #fff;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
-  background: linear-gradient(90deg, #4d8dff 0%, #a855f7 100%);
+  background: var(--api-blue);
 }
 
 .api-plan-contact:hover {
-  filter: brightness(1.06);
+  background: var(--api-blue-dark);
 }
 
 .api-onboard {
@@ -6102,7 +6106,7 @@ html.is-reduce-fx .api-s5::after {
 
 @media (max-width: 1100px) {
   .api-plans {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .api-onboard-steps {
@@ -6116,18 +6120,25 @@ html.is-reduce-fx .api-s5::after {
   }
 
   .api-plans {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .api-plan-custom {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    padding: 22px 20px;
+    gap: 16px;
+  }
+
+  .api-plan-custom .api-plan-name,
+  .api-plan-contact {
+    justify-self: center;
   }
 
   .api-onboard-steps {
     grid-template-columns: 1fr;
     gap: 28px;
-  }
-}
-
-@media (max-width: 480px) {
-  .api-plans {
-    grid-template-columns: 1fr;
   }
 }
 

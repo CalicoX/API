@@ -68,7 +68,7 @@ export default function IntegrationTogether() {
     <section className="api-land" id="land-together" aria-labelledby="api-land-title">
       <div className="api-wrap">
         <div className="api-land-head">
-          <h2 className="api-land-title" id="api-land-title">
+          <h2 className="api-h2" id="api-land-title">
             Land the Integration Together
           </h2>
           <p className="api-land-sub">Each plan is valid for 12 months.</p>
@@ -97,27 +97,25 @@ export default function IntegrationTogether() {
               </div>
             </li>
           ))}
-          <li className="api-plan-card is-custom">
-            <div className="api-plan-inner">
-              <span className="api-plan-name">Custom</span>
-              <img
-                className="api-plan-illu"
-                src={`${CDN}/illustration.png`}
-                alt="custom model"
-                width="128"
-                height="128"
-              />
-              <a
-                className="api-plan-contact"
-                href="https://www.17track.com/en/contact-us"
-                target="_blank"
-                rel="noopener"
-              >
-                Contact Us
-              </a>
-            </div>
-          </li>
         </ul>
+        <div className="api-plan-custom">
+          <span className="api-plan-name">Custom</span>
+          <img
+            className="api-plan-illu"
+            src={`${CDN}/illustration.png`}
+            alt=""
+            width="96"
+            height="96"
+          />
+          <a
+            className="api-plan-contact"
+            href="https://www.17track.com/en/contact-us"
+            target="_blank"
+            rel="noopener"
+          >
+            Contact Us
+          </a>
+        </div>
         <div className="api-onboard">
           <h3 className="api-onboard-title">Onboard in 4 Steps</h3>
           <ul className="api-onboard-steps">
