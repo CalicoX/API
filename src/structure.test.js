@@ -47,6 +47,17 @@ describe("API landing structure (gating)", () => {
     expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("UseCases"));
   });
 
+  it("TrustBand is a static two-row logo grid, not a marquee", () => {
+    const tb = read("components/sections/TrustBand.jsx");
+    expect(tb).toMatch(/logos-grid/);
+    expect(tb).toMatch(/Trusted by 100,000\+ brands and businesses/);
+    expect(tb).not.toMatch(/logos-marquee|logos-track|logos-scroll/);
+    expect(tb).not.toMatch(/aria-hidden/);
+    const css = read("styles/landing.css");
+    expect(css).toMatch(/\.logos-grid \{[\s\S]*?grid-template-columns: repeat\(4/);
+    expect(css).not.toMatch(/@keyframes logos-scroll/);
+  });
+
   it("Hero copy matches 17track API hero", () => {
     const hero = read("components/sections/Hero.jsx");
     expect(hero).toMatch(/International Package Tracking API/);
