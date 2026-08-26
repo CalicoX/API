@@ -2379,7 +2379,7 @@
     .trust-band {
       background: #fff;
       border-bottom: 1px solid var(--border-default);
-      overflow: hidden;
+      overflow: visible;
     }
     .trust {
       max-width: var(--max);
@@ -2389,13 +2389,14 @@
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      align-items: stretch;
+      align-items: center;
+      text-align: center;
       gap: var(--sec-head-gap);
     }
     .trust-copy {
-      width: 100%;
-      max-width: none;
-      min-width: 0;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
       text-align: center;
     }
     .trust strong {
@@ -2412,24 +2413,38 @@
       font-size: 14px;
       line-height: 1.5;
     }
-    /* Logo 静态两排（4×2），不要跑马灯 */
-    .logos-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      column-gap: 24px;
-      row-gap: 20px;
+    /* Logo strip — static two rows of six, centered (Tracking 同款) */
+    .logos-marquee {
+      overflow: visible;
       width: 100%;
-      min-width: 0;
+    }
+    .logos-track {
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      gap: 28px;
+      width: min(1120px, 100%);
+      margin-inline: auto;
+      overflow: visible;
+    }
+    .logos-row {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      align-items: center;
+      justify-items: center;
+      gap: 20px 48px;
+      width: 100%;
+      overflow: visible;
     }
     .logo-tile {
+      flex: 0 0 auto;
       width: 100%;
       min-width: 0;
-      height: 48px;
+      height: 32px;
       padding: 0;
-      overflow: hidden;
       display: grid;
       place-items: center;
+      overflow: visible;
       border: 0;
       border-radius: 0;
       background: transparent;
@@ -2438,16 +2453,14 @@
     }
     .logo-tile img {
       display: block;
-      /* 完整 wordmark：等高、等比缩放；宽随格子，避免撑破 4 列 */
-      width: 100%;
-      height: 28px;
-      max-width: 112px;
+      height: 18px;
+      width: auto;
+      max-width: 100%;
       object-fit: contain;
       object-position: center;
-      /* 保持品牌原色 */
-      filter: none;
-      opacity: 1;
-      transition: opacity 0.18s, transform 0.18s;
+      filter: grayscale(1);
+      opacity: 0.62;
+      transition: opacity 0.18s;
     }
     .logo-tile:hover {
       border: 0;
@@ -2455,8 +2468,17 @@
       box-shadow: none;
     }
     .logo-tile:hover img {
-      opacity: 0.88;
-      transform: translateY(-1px);
+      opacity: 0.82;
+    }
+    .logo-tile img[alt="eufy"],
+    .logo-tile img[alt="Cainiao"] {
+      height: 22px;
+    }
+    .logo-tile img[alt="SHARGE"],
+    .logo-tile img[alt="totwoo"],
+    .logo-tile img[alt="Vaporesso"],
+    .logo-tile img[alt="GOELIA"] {
+      height: 24px;
     }
 
     /* ——— Sections ——— */
@@ -9342,7 +9364,6 @@
         width: 200px;
       }
       .trust { gap: 22px; padding-top: 36px; padding-bottom: 40px; }
-      .logos-grid { column-gap: 16px; row-gap: 16px; }
       .impact-band { height: auto; }
       .impact-band-sticky {
         position: relative;
@@ -9393,8 +9414,16 @@
         overflow: hidden;
       }
       .tp-head-title { font-size: 15px; }
-      .logo-tile { height: 40px; padding: 0; }
-      .logo-tile img { height: 22px; max-width: 100%; }
+      .logo-tile { height: 28px; }
+      .logo-tile img { height: 16px; }
+      .logo-tile img[alt="eufy"],
+      .logo-tile img[alt="Cainiao"] { height: 18px; }
+      .logo-tile img[alt="SHARGE"],
+      .logo-tile img[alt="totwoo"],
+      .logo-tile img[alt="Vaporesso"],
+      .logo-tile img[alt="GOELIA"] { height: 20px; }
+      .logos-track { gap: 18px; }
+      .logos-row { gap: 12px 20px; }
       .float-card {
         position: static;
         width: auto;

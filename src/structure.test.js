@@ -49,12 +49,13 @@ describe("API landing structure (gating)", () => {
 
   it("TrustBand is a static two-row logo grid, not a marquee", () => {
     const tb = read("components/sections/TrustBand.jsx");
-    expect(tb).toMatch(/logos-grid/);
+    expect(tb).toMatch(/logos-row/);
     expect(tb).toMatch(/Trusted by 100,000\+ brands and businesses/);
-    expect(tb).not.toMatch(/logos-marquee|logos-track|logos-scroll/);
     expect(tb).not.toMatch(/aria-hidden/);
+    expect(tb).not.toMatch(/logos-scroll/);
+    expect(tb).not.toMatch(/shopify\.svg|shein\.svg|temu\.svg/i);
     const css = read("styles/landing.css");
-    expect(css).toMatch(/\.logos-grid \{[\s\S]*?grid-template-columns: repeat\(4/);
+    expect(css).toMatch(/\.logos-row \{[\s\S]*?grid-template-columns: repeat\(6/);
     expect(css).toMatch(/\.trust-copy \{[\s\S]*?text-align: center/);
     expect(css).not.toMatch(/@keyframes logos-scroll/);
   });
