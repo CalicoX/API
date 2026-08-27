@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- Git 提交邮箱（2026-08-27 Park）：本仓库用 `stillpilot <pyh1234576@gmail.com>`，不要 `sam@17track.net`。只改 **local** `user.email` / `user.name`，不改全局、不 rewrite 已推送的历史。
+
 - ExploreMore（2026-08-26 Park：放到 credential 后面）：API 页挂上 Credentials（Our Credentials, Your Confidence），ExploreMore 紧跟其后、BottomCta 之前。顺序 IntegrationTogether → Credentials → ExploreMore → BottomCta。产品原文不改。
 
 - Explore Tracking 插图（2026-08-26 Park：上面间距太小、节点没对齐）：`.track-ui-board` 顶垫 22 / 标题下 18。Shipping Events 竖线与菱形/圆点共用 `--rail`（列中心 10px），不要再写死 `left: 9px`（线会偏左 ~2px）。
