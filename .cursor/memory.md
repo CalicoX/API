@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- Git 工作流（2026-08-27 Park「push+commit 太频繁」）：**默认只 commit 本地，不 push**。push 只在 Park 明确说「push / 推上去 / 部署」时执行（main 连 Vercel，push 即部署）；想推但暂不部署带 `[skip ci]`。攒批提交，不要一笔一小提交。三仓（API/Tracking/Returns）规则一致，Returns 的 AGENTS.md 由 Park 亲改。
+
 - Git 提交邮箱（2026-08-27 Park）：本仓库用 `stillpilot <pyh1234576@gmail.com>`，不要 `sam@17track.net`。只改 **local** `user.email` / `user.name`，不改全局、不 rewrite 已推送的历史。
 
 - ExploreMore（2026-08-26 Park：放到 credential 后面）：API 页挂上 Credentials（Our Credentials, Your Confidence），ExploreMore 紧跟其后、BottomCta 之前。顺序 IntegrationTogether → Credentials → ExploreMore → BottomCta。产品原文不改。

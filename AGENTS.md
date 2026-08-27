@@ -6,8 +6,8 @@ Park 在这个仓库里直接改代码、看效果。Agent 用简体中文回复
 
 1. 先读 `.cursor/memory.md`（当前决策和未完成项）。
 2. 有新的设计取舍、布局数字、或用户纠正时，立刻写回 memory。
-3. 一轮改完后必须落到 GitHub：`commit` + `push` `origin/main`。  
-   项目 hook 会在 agent **stop** 时自动做这件事；如果 hook 没跑，agent 自己做，不要问要不要提交。
+3. 一轮改完后更新 memory，然后 **commit 到本地（默认不 push）**。  
+   push 只在 Park 明确说「push / 推上去 / 部署」时执行（`git push origin main`；main 连着 Vercel，push 即部署）。想推但暂不部署的 commit，message 里带 `[skip ci]`。攒批提交，不要一笔一小提交。不要 `--no-verify`、不要 force push。
 
 ## 页面结构
 
