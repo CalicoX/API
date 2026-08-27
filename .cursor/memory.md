@@ -5,7 +5,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 ## 现在
 
 - 仓库：https://github.com/CalicoX/API.git（`main`）
-- 本地开发：`http://127.0.0.1:5173/`
+- 本地开发：`http://localhost:5174/`（2026-08-27 起 5173 被 returns 项目 dev server 占用；Vite 只绑 IPv6，浏览器用 localhost 访问）
 - 用户：Park，设计师，直接改代码迭代
 - 产品：17TRACK Tracking API 落地页
 
@@ -56,6 +56,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Land 价格卡（2026-08-24 Park：改的是价格，官网 Pricing / API）：白卡黑字价、Get Started、六条功能；Flagship 橙条 Popular + 实心橙钮。标题仍是 Land the Integration Together。Custom 还在。不要加 Order Tracking / Returns 分段开关。
 - 毛玻璃（2026-08-26）：Vite 8 默认 lightningcss 压 CSS 时，同一条规则里同时写 `backdrop-filter` + `-webkit-backdrop-filter` 会丢掉标准属性。Chrome 只认标准属性，Vercel 生产上顶栏 / 代码窗 / 玻璃卡全变实底。`vite.config.js` 的 `preserveBackdropFilter` 在产物里补回标准属性，并给 landing.css 加 `--bf-keep` 换哈希（旧文件 immutable 缓存）。源 CSS 两边都留着。不要删 `-webkit-`，也不要用 `cssMinify: 'esbuild'`（Vite 8 没带 esbuild；Rolldown 也不许在 generateBundle 里改 bundle 键）。
 - TrustBand（2026-08-26 Park 用 Tracking 模块替换，随后加大圈出的标）：**12 家静态两排各 6**，跟 Tracking 同一套 logo。不要 Shopify / SHEIN / Temu。不要跑马灯。产品原文不改。默认 18px；AliExpress/Baleaf 22；Cainiao/eufy 26；SHARGE/totwoo/Vaporesso/GOELIA 24。行距 36、列距 **72**。灰度 0.62；eufy 单独 opacity 0.88（蓝标灰化会偏浅）。禁止 brightness(0)。
+- 流体字号（2026-08-27 Park「移动端字有点大」）：**全站页面文字随视宽连续缩小、触底 12px，API / tracking-react / returns 三站同参**。公式 `clamp(M, calc(A + B·vw), D)`：锚点 1360→桌面现值 D 不变、360→M=`max(12, min(原最深媒体覆盖@360, 0.82×D))`；根 token `--fs-display/-h2/-h3/-lead/-body` 全部曲线化（var 引用处自动生效），≤1024/768/480 里的字号硬切覆盖已删（15/14px 钉死不再有）。`structure.test.js` 的 `.api-h2/.api-lead` 断言同步了新曲线。**不动**：插图/mock 内部小字（井内 UI 碎片 8–11px、`.mock-/.ogl-/.hero-ogl/` 等）、相对单位 em、本来就 <12px 的真实小注（表单 `.opt/.api-form-agree`、eyebrow 11px）。以后新增文字直接用 `var(--fs-*)` 或同款 clamp 模板，**别再往媒体查询里写 font-size 覆盖**（会回到跳变）。坑：批量改字号时按「整串选择器前缀」匹配会漏（`.api-page .bottom-cta h2` 这类长前缀），按「末段标签」匹配又会误伤 mock 的 h2/h3——两层都要查。
 
 ## 未完成
 

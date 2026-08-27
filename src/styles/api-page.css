@@ -52,7 +52,7 @@
 
 .api-h2 {
   margin: 0;
-  font-size: clamp(28px, 3.2vw, 40px);
+  font-size: clamp(28px, calc(23.68px + 1.2vw), 40px);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: var(--track-title, -0.03em);
@@ -61,7 +61,7 @@
 
 .api-lead {
   margin: var(--sec-title-desc) 0 0;
-  font-size: 17px;
+  font-size: clamp(14px, calc(12.92px + 0.3vw), 17px);
   line-height: 1.65;
   letter-spacing: var(--track-body, -0.015em);
   color: var(--api-muted);
@@ -80,7 +80,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: 15px;
+  font-size: clamp(12.5px, calc(11.6px + 0.25vw), 15px);
   line-height: 1.45;
   color: #334155;
   font-weight: 500;
@@ -111,7 +111,7 @@
   border-radius: 10px;
   background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
   color: #fff;
-  font-size: 15px;
+  font-size: clamp(12.5px, calc(11.6px + 0.25vw), 15px);
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
@@ -135,7 +135,7 @@
   border: 1px solid rgba(255, 255, 255, 0.35);
   background: transparent;
   color: #fff;
-  font-size: 15px;
+  font-size: clamp(12.5px, calc(11.6px + 0.25vw), 15px);
   font-weight: 700;
   text-decoration: none;
   transition: background 0.15s ease, border-color 0.15s ease;
@@ -257,7 +257,7 @@
 
 .api-s1-copy .api-h2 {
   margin: 0 0 18px;
-  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  font-size: clamp(19px, calc(16.91px + 0.58vw), 24.8px);
   font-weight: 600;
   line-height: 1.28;
   color: #3352b3;
@@ -345,7 +345,7 @@
 
 .api-form-head h3 {
   margin: 0;
-  font-size: 20px;
+  font-size: clamp(16.5px, calc(15.24px + 0.35vw), 20px);
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -408,7 +408,7 @@
   background: #fff;
   padding: 11px 12px;
   font: inherit;
-  font-size: 14px;
+  font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
   color: var(--api-ink);
   outline: none;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
@@ -733,7 +733,7 @@
 
 .api-s2-title {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(32px, calc(26.24px + 1.6vw), 48px);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -778,7 +778,7 @@
   align-items: flex-start;
   gap: 12px;
   margin: 0;
-  font-size: 15px;
+  font-size: clamp(12.5px, calc(11.6px + 0.25vw), 15px);
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.84);
   font-weight: 500;
@@ -2132,7 +2132,7 @@
 
 .api-s3-card-text h3 {
   margin: 0;
-  font-size: clamp(14px, 1.25vw, 17px);
+  font-size: clamp(14px, calc(12.92px + 0.3vw), 17px);
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.35;
@@ -2165,7 +2165,6 @@
   }
 
   .api-s3-card-text h3 {
-    font-size: 14px;
   }
 
   .api-s3-step {
@@ -3384,14 +3383,14 @@
 
 .api-s4-copy h3 {
   margin: 0 0 8px;
-  font-size: 20px;
+  font-size: clamp(16.5px, calc(15.24px + 0.35vw), 20px);
   font-weight: 800;
   letter-spacing: -0.02em;
 }
 
 .api-s4-copy p {
   margin: 0;
-  font-size: 14px;
+  font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
   line-height: 1.6;
   color: var(--api-muted);
 }
@@ -3402,7 +3401,7 @@
   gap: 6px;
   align-self: flex-start;
   margin-top: 28px;
-  font-size: 14px;
+  font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
   font-weight: 700;
   color: var(--api-blue);
   text-decoration: none;
@@ -5415,7 +5414,7 @@ html.is-reduce-fx .api-s5::after {
 
 .api-app-card h3 {
   margin: 0 0 8px;
-  font-size: 16px;
+  font-size: clamp(13px, calc(11.92px + 0.3vw), 16px);
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.01em;
@@ -5462,7 +5461,7 @@ html.is-reduce-fx .api-s5::after {
 
 .api-land-sub {
   margin: var(--sec-title-desc, 16px) auto 0;
-  font-size: 17px;
+  font-size: clamp(14px, calc(12.92px + 0.3vw), 17px);
   font-weight: 400;
   line-height: 1.65;
   letter-spacing: var(--track-body, -0.015em);
@@ -5507,7 +5506,7 @@ html.is-reduce-fx .api-s5::after {
   text-align: center;
   background: transparent;
   color: transparent;
-  font-size: 14px;
+  font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1;
@@ -5523,7 +5522,7 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-plan-name {
-  font-size: 26px;
+  font-size: clamp(21.5px, calc(19.88px + 0.45vw), 26px);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -5532,14 +5531,14 @@ html.is-reduce-fx .api-s5::after {
 
 .api-plan-unit {
   margin-top: 28px;
-  font-size: 14px;
+  font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
   font-weight: 500;
   color: #9ca3af;
 }
 
 .api-plan-price {
   margin: 6px 0 8px;
-  font-size: clamp(1.85rem, 2.1vw, 2.25rem);
+  font-size: clamp(29.5px, calc(27.16px + 0.65vw), 36px);
   font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 1.1;
@@ -5547,7 +5546,7 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-plan-quota {
-  font-size: 14px;
+  font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
   color: #6b7280;
 }
 
@@ -5563,7 +5562,7 @@ html.is-reduce-fx .api-s5::after {
   border: 1.5px solid var(--api-blue);
   background: #fff;
   color: var(--api-blue);
-  font-size: 15px;
+  font-size: clamp(12.5px, calc(11.6px + 0.25vw), 15px);
   font-weight: 600;
   text-decoration: none;
   box-sizing: border-box;
@@ -5603,7 +5602,7 @@ html.is-reduce-fx .api-s5::after {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-size: 13.5px;
+  font-size: clamp(12px, calc(11.46px + 0.15vw), 13.5px);
   line-height: 1.4;
   color: #111;
 }
@@ -5649,7 +5648,7 @@ html.is-reduce-fx .api-s5::after {
   margin: 0;
   border-radius: 999px;
   color: #fff;
-  font-size: 15px;
+  font-size: clamp(12.5px, calc(11.6px + 0.25vw), 15px);
   font-weight: 600;
   text-decoration: none;
   background: var(--api-blue);
@@ -5666,7 +5665,7 @@ html.is-reduce-fx .api-s5::after {
 .api-onboard-title {
   margin: 0 0 36px;
   text-align: center;
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-size: clamp(24px, calc(21.12px + 0.8vw), 32px);
   font-weight: 800;
   letter-spacing: -0.025em;
   color: #111;
@@ -5705,7 +5704,7 @@ html.is-reduce-fx .api-s5::after {
   border-radius: 50%;
   background: #3736ff;
   color: #fff;
-  font-size: 16px;
+  font-size: clamp(13px, calc(11.92px + 0.3vw), 16px);
   font-weight: 700;
 }
 
@@ -6172,7 +6171,7 @@ html.is-reduce-fx .api-s5::after {
   max-width: 14em;
   margin: 0 auto;
   color: #fff;
-  font-size: clamp(2rem, 3.6vw, 3.25rem);
+  font-size: clamp(32px, calc(24.8px + 2vw), 52px);
   font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 1.12;
@@ -6247,7 +6246,6 @@ html.is-reduce-fx .api-s5::after {
   }
 
   .api-s3-card-text h3 {
-    font-size: 15px;
   }
 
   .api-s3-step {
