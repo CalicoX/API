@@ -66,7 +66,79 @@ const SCENES = [
   },
 ];
 
-const EXIT_MS = 980;
+/* 要盖过最长的进场过渡（--s4-in 1.25s），否则 is-exit 提前摘掉会闪一帧候场态 */
+const EXIT_MS = 1300;
+
+/* 桥的候场逆变换系数：stage 候场是 scale(0.52)、origin 50% 50%（css 同步） */
+const STANDBY_SCALE = 0.52;
+
+/* match-cut 桥按「场对」配置；status>carriers 不设桥——17 logo 由 keel 层原地续住。
+   dur 要与第三场识别时刻（激活后约 2.83s）对齐，DHL 芯片落在识别完成那一刻。 */
+const BRIDGE_PAIRS = {
+  "carriers>auto": { kind: "dhl", dur: "2.9s", ttl: 2950 },
+  "auto>dash": { kind: "core", dur: "1.3s", ttl: EXIT_MS },
+  "dash>status": {
+    kind: "core",
+    dur: "1.3s",
+    ttl: EXIT_MS,
+    toSelector: ".api-s4-keel img",
+  },
+};
+
+function measureBridge(well, fromWell, toWell, id) {
+  const cfg = BRIDGE_PAIRS[`${fromWell}>${toWell}`];
+  if (!well || !cfg) return null;
+  const wr = well.getBoundingClientRect();
+  if (!wr.width || !wr.height) return null;
+  let aEl;
+  if (cfg.kind === "dhl") {
+    aEl = [
+      ...well.querySelectorAll(`.api-s4-illus--${fromWell} .api-s4-hub-logo`),
+    ].find((el) => el.querySelector('img[src*="dhl"]'));
+  } else {
+    aEl = well.querySelector(`.api-s4-illus--${fromWell} [data-s4-core]`);
+  }
+  const bEl = well.querySelector(
+    cfg.toSelector ?? `.api-s4-illus--${toWell} [data-s4-core]`,
+  );
+  if (!aEl || !bEl) return null;
+  const rel = (el) => {
+    const r = el.getBoundingClientRect();
+    return {
+      x: ((r.left - wr.left) / wr.width) * 100,
+      y: ((r.top - wr.top) / wr.height) * 100,
+      w: (r.width / wr.width) * 100,
+      h: (r.height / wr.height) * 100,
+      r: getComputedStyle(el).borderTopLeftRadius,
+    };
+  };
+  const a = rel(aEl);
+  const b0 = rel(bEl);
+  const s = STANDBY_SCALE;
+  const cx = 50 + (b0.x + b0.w / 2 - 50) / s;
+  const cy = 50 + (b0.y + b0.h / 2 - 50) / s;
+  const bw = b0.w / s;
+  const bh = b0.h / s;
+  return {
+    id,
+    kind: cfg.kind,
+    dur: cfg.dur,
+    fx: a.x,
+    fy: a.y,
+    fw: a.w,
+    fh: a.h,
+    fr: a.r,
+    tx: cx - bw / 2,
+    ty: cy - bh / 2,
+    tw: bw,
+    th: bh,
+    tr: b0.r,
+  };
+}
+
+/* squircle 裁切路径：keel 常驻 logo 与第一场共用同一形状 */
+const LOGO_SQUIRCLE_D =
+  "M0.6456,0.0034Q0.7912,0.0069 0.8351,0.0174Q0.8789,0.0280 0.9071,0.0463Q0.9353,0.0647 0.9537,0.0929Q0.9720,0.1211 0.9826,0.1649Q0.9931,0.2088 0.9966,0.3544Q1.0000,0.5000 0.9966,0.6456Q0.9931,0.7912 0.9826,0.8351Q0.9720,0.8789 0.9537,0.9071Q0.9353,0.9353 0.9071,0.9537Q0.8789,0.9720 0.8351,0.9826Q0.7912,0.9931 0.6456,0.9966Q0.5000,1.0000 0.3544,0.9966Q0.2088,0.9931 0.1649,0.9826Q0.1211,0.9720 0.0929,0.9537Q0.0647,0.9353 0.0463,0.9071Q0.0280,0.8789 0.0174,0.8351Q0.0069,0.7912 0.0034,0.6456Q0.0000,0.5000 0.0034,0.3544Q0.0069,0.2088 0.0174,0.1649Q0.0280,0.1211 0.0463,0.0929Q0.0647,0.0647 0.0929,0.0463Q0.1211,0.0280 0.1649,0.0174Q0.2088,0.0069 0.3544,0.0034Q0.5000,0.0000 0.6456,0.0034Z";
 
 function CopyCard({ card }) {
   return (
@@ -81,16 +153,30 @@ function CopyCard({ card }) {
 /** Section 4 — Data Operation Granularized */
 export default function DataOperations() {
   const sectionRef = useRef(null);
+  const wellRef = useRef(null);
+  const seqRef = useRef(0);
   const [idx, setIdx] = useState(0);
   const [prev, setPrev] = useState(null);
   const [bloom, setBloom] = useState(false);
+  const [bridge, setBridge] = useState(null);
+  const [started, setStarted] = useState(false);
+  const [keel, setKeel] = useState("off");
   const idxRef = useRef(0);
   const inViewRef = useRef(false);
 
   const advance = () => {
     const from = idxRef.current;
     const n = (from + 1) % SCENES.length;
-    setBloom(from === 0);
+    seqRef.current += 1;
+    setBloom(true);
+    setBridge(
+      measureBridge(
+        wellRef.current,
+        SCENES[from].well,
+        SCENES[n].well,
+        seqRef.current,
+      ),
+    );
     setPrev(from);
     idxRef.current = n;
     setIdx(n);
@@ -98,12 +184,41 @@ export default function DataOperations() {
 
   useEffect(() => {
     if (prev == null) return undefined;
-    const t = window.setTimeout(() => {
+    const settle = () => {
       setPrev(null);
       setBloom(false);
-    }, EXIT_MS);
-    return () => window.clearTimeout(t);
-  }, [prev]);
+    };
+    const t = window.setTimeout(settle, EXIT_MS);
+    /* DHL 桥要飞 2.9s，不能跟着 1.3s 的退场一起拆 */
+    const bt = bridge
+      ? window.setTimeout(() => setBridge(null), bridge.ttl)
+      : 0;
+    return () => {
+      window.clearTimeout(t);
+      window.clearTimeout(bt);
+    };
+  }, [prev, bridge]);
+
+  /* 滑入视口才开始第一场编排；reduce 直接视为已开始（静态终态） */
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+      setStarted(true);
+  }, []);
+
+  /* keel logo：第一场即它；进第二场原地续住，面板/数字接手后淡出 */
+  useEffect(() => {
+    if (idx === 0) {
+      setKeel(started ? "in" : "off");
+      return undefined;
+    }
+    if (idx === 1) {
+      setKeel("hold");
+      const t = window.setTimeout(() => setKeel("off"), 900);
+      return () => window.clearTimeout(t);
+    }
+    setKeel("off");
+    return undefined;
+  }, [idx, started]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -133,9 +248,11 @@ export default function DataOperations() {
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        inViewRef.current = entry.isIntersecting && entry.intersectionRatio > 0.28;
+        inViewRef.current =
+          entry.isIntersecting && entry.intersectionRatio > 0.28;
+        if (entry.isIntersecting) setStarted(true);
       },
-      { threshold: [0, 0.28, 0.5] }
+      { threshold: [0, 0.28, 0.5] },
     );
     io.observe(section);
 
@@ -183,13 +300,27 @@ export default function DataOperations() {
         <div className="api-s4-head">
           <h2 className="api-h2" id="api-data-title">
             {tintWords("Data Operation Granularized")}
-            <span className="api-s4-h2-sub">{tintWords("Forecast, Monitor, Intervene.", 3)}</span>
+            <span className="api-s4-h2-sub">
+              {tintWords("Forecast, Monitor, Intervene.", 3)}
+            </span>
           </h2>
           <a className="api-s4-pill" href="#free-trial" onClick={goToTrial}>
             <span className="api-s4-pill-knob" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
-                <circle cx="4.2" cy="12" r="1.55" fill="currentColor" opacity="0.42" />
-                <circle cx="8" cy="12" r="1.65" fill="currentColor" opacity="0.68" />
+                <circle
+                  cx="4.2"
+                  cy="12"
+                  r="1.55"
+                  fill="currentColor"
+                  opacity="0.42"
+                />
+                <circle
+                  cx="8"
+                  cy="12"
+                  r="1.65"
+                  fill="currentColor"
+                  opacity="0.68"
+                />
                 <circle cx="11.8" cy="12" r="1.75" fill="currentColor" />
                 <path
                   d="M14.2 8.1L19.4 12 14.2 15.9"
@@ -211,7 +342,12 @@ export default function DataOperations() {
           </div>
 
           <div className="api-s4-stage-card">
-            <div className={`api-s4-well${bloom ? " is-bloom" : ""}`}>
+            <div
+              className={`api-s4-well${bloom ? " is-bloom" : ""}${started ? " is-started" : ""}${
+                bridge ? ` has-bridge--${bridge.kind}` : ""
+              }`}
+              ref={wellRef}
+            >
               <span className="api-s4-bloom" aria-hidden="true" />
               {SCENES.map(({ Visual, well, title }, i) => {
                 const on = i === idx;
@@ -234,6 +370,46 @@ export default function DataOperations() {
                   </div>
                 );
               })}
+              <div className={`api-s4-keel is-${keel}`} aria-hidden="true">
+                <svg
+                  className="api-s4-logo-defs"
+                  width="0"
+                  height="0"
+                  aria-hidden="true"
+                >
+                  <clipPath
+                    id="api-s4-logo-squircle"
+                    clipPathUnits="objectBoundingBox"
+                  >
+                    <path d={LOGO_SQUIRCLE_D} />
+                  </clipPath>
+                </svg>
+                <img src="/assets/logo-17-mark.png" alt="" />
+              </div>
+              {bridge ? (
+                <span
+                  key={bridge.id}
+                  className={`api-s4-bridge api-s4-bridge--${bridge.kind}`}
+                  aria-hidden="true"
+                  style={{
+                    "--fx": `${bridge.fx}%`,
+                    "--fy": `${bridge.fy}%`,
+                    "--fw": `${bridge.fw}%`,
+                    "--fh": `${bridge.fh}%`,
+                    "--fr": bridge.fr,
+                    "--tx": `${bridge.tx}%`,
+                    "--ty": `${bridge.ty}%`,
+                    "--tw": `${bridge.tw}%`,
+                    "--th": `${bridge.th}%`,
+                    "--tr": bridge.tr,
+                    "--bdur": bridge.dur,
+                  }}
+                >
+                  {bridge.kind === "dhl" ? (
+                    <img src="/assets/carriers/dhl.svg" alt="" />
+                  ) : null}
+                </span>
+              ) : null}
             </div>
           </div>
 

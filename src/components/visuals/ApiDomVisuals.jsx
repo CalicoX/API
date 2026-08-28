@@ -28,17 +28,21 @@ export function UseCasesStage() {
     const load = () => {
       if (loaded || cancelled) return;
       loaded = true;
-      import("../../fx/modules/iso-hub-webgl.js").then(({ createIsoHubWebGL }) => {
-        if (cancelled || !hostRef.current) return;
-        gl = createIsoHubWebGL(hostRef.current, {
-          assetBase: "/assets/webgl-hub",
-        });
-        window.__isoHubWebGL = gl;
-        // 挂载完立刻用当前滚动进度做种子（onReady 闭包里 gl 还没赋值，之前是空转）
-        const section = document.getElementById("use-cases");
-        const p = parseFloat(section?.style?.getPropertyValue("--uc-p") || "0.15");
-        gl.setProgress(Number.isFinite(p) ? Math.max(p, 0.12) : 0.15);
-      });
+      import("../../fx/modules/iso-hub-webgl.js").then(
+        ({ createIsoHubWebGL }) => {
+          if (cancelled || !hostRef.current) return;
+          gl = createIsoHubWebGL(hostRef.current, {
+            assetBase: "/assets/webgl-hub",
+          });
+          window.__isoHubWebGL = gl;
+          // 挂载完立刻用当前滚动进度做种子（onReady 闭包里 gl 还没赋值，之前是空转）
+          const section = document.getElementById("use-cases");
+          const p = parseFloat(
+            section?.style?.getPropertyValue("--uc-p") || "0.15",
+          );
+          gl.setProgress(Number.isFinite(p) ? Math.max(p, 0.12) : 0.15);
+        },
+      );
     };
 
     let unvis = () => {};
@@ -50,7 +54,7 @@ export function UseCasesStage() {
           unvis();
         }
       },
-      { threshold: 0.01, rootMargin: "240px" }
+      { threshold: 0.01, rootMargin: "240px" },
     );
 
     return () => {
@@ -69,9 +73,21 @@ export function UseCasesStage() {
 }
 
 const S4_MAINS_OUTER = [
-  { label: "Info Received", icon: "info", src: "/assets/status/info-received.svg" },
-  { label: "In Transit", icon: "transit", src: "/assets/status/in-transit.svg" },
-  { label: "Out For Delivery", icon: "out", src: "/assets/status/out-for-delivery.svg" },
+  {
+    label: "Info Received",
+    icon: "info",
+    src: "/assets/status/info-received.svg",
+  },
+  {
+    label: "In Transit",
+    icon: "transit",
+    src: "/assets/status/in-transit.svg",
+  },
+  {
+    label: "Out For Delivery",
+    icon: "out",
+    src: "/assets/status/out-for-delivery.svg",
+  },
   { label: "Pick Up", icon: "pickup", src: "/assets/status/pickup.svg" },
   { label: "Delivered", icon: "done", src: "/assets/status/delivered.svg" },
 ];
@@ -83,16 +99,19 @@ const S4_MAINS_INNER = [
   { label: "Not Found", icon: "missing", src: "/assets/status/not-found.svg" },
 ];
 
-function StatusOrbitRing({ items, tone }) {
+function StatusOrbitRing({ items, tone, seq = 0 }) {
   const base = tone === "inner" ? 45 : 0;
   return (
-    <ul className={`api-s4-orbit-ring api-s4-orbit-ring--${tone}`} style={{ "--n": items.length }}>
+    <ul
+      className={`api-s4-orbit-ring api-s4-orbit-ring--${tone}`}
+      style={{ "--n": items.length }}
+    >
       {items.map((item, i) => {
-        const deg = (((i * 360) / items.length + base) % 360 + 360) % 360;
+        const deg = ((((i * 360) / items.length + base) % 360) + 360) % 360;
         const onRight = deg > 20 && deg < 160;
         const flip = tone === "outer" ? onRight : !onRight;
         return (
-          <li key={item.label} style={{ "--i": i }}>
+          <li key={item.label} style={{ "--i": i, "--ci": seq + i }}>
             <span
               className={`api-s4-orbit-chip is-named${flip ? " is-flip" : ""}`}
               data-icon={item.icon}
@@ -110,14 +129,78 @@ function StatusOrbitRing({ items, tone }) {
 }
 
 const S4_HUB_NODES = [
-  { src: "/assets/carriers/dhl.svg", name: "DHL", x: 122, y: 42, side: "t", sx: 177, sy: 114 },
-  { src: "/assets/carriers/usps.svg", name: "USPS", x: 278, y: 42, side: "t", sx: 223, sy: 114 },
-  { src: "/assets/carriers/fedex.svg", name: "FedEx", x: 44, y: 128, side: "l", sx: 137, sy: 156 },
-  { src: "/assets/carriers/tnt.svg", name: "TNT", x: 44, y: 232, side: "l", sx: 137, sy: 204 },
-  { src: "/assets/carriers/dpd.svg", name: "DPD", x: 356, y: 128, side: "r", sx: 263, sy: 156 },
-  { src: "/assets/carriers/gls.svg", name: "GLS", x: 356, y: 232, side: "r", sx: 263, sy: 204 },
-  { src: "/assets/carriers/ups.svg", name: "UPS", x: 122, y: 318, side: "b", sx: 177, sy: 246 },
-  { src: "/assets/carriers/royal-mail.svg", name: "Royal Mail", x: 278, y: 318, side: "b", sx: 223, sy: 246 },
+  {
+    src: "/assets/carriers/dhl.svg",
+    name: "DHL",
+    x: 122,
+    y: 42,
+    side: "t",
+    sx: 177,
+    sy: 114,
+  },
+  {
+    src: "/assets/carriers/usps.svg",
+    name: "USPS",
+    x: 278,
+    y: 42,
+    side: "t",
+    sx: 223,
+    sy: 114,
+  },
+  {
+    src: "/assets/carriers/fedex.svg",
+    name: "FedEx",
+    x: 44,
+    y: 128,
+    side: "l",
+    sx: 137,
+    sy: 156,
+  },
+  {
+    src: "/assets/carriers/tnt.svg",
+    name: "TNT",
+    x: 44,
+    y: 232,
+    side: "l",
+    sx: 137,
+    sy: 204,
+  },
+  {
+    src: "/assets/carriers/dpd.svg",
+    name: "DPD",
+    x: 356,
+    y: 128,
+    side: "r",
+    sx: 263,
+    sy: 156,
+  },
+  {
+    src: "/assets/carriers/gls.svg",
+    name: "GLS",
+    x: 356,
+    y: 232,
+    side: "r",
+    sx: 263,
+    sy: 204,
+  },
+  {
+    src: "/assets/carriers/ups.svg",
+    name: "UPS",
+    x: 122,
+    y: 318,
+    side: "b",
+    sx: 177,
+    sy: 246,
+  },
+  {
+    src: "/assets/carriers/royal-mail.svg",
+    name: "Royal Mail",
+    x: 278,
+    y: 318,
+    side: "b",
+    sx: 223,
+    sy: 246,
+  },
 ];
 
 /** Rounded right-angle: leave the hub edge, one 90° corner, arrive at the logo. */
@@ -189,34 +272,6 @@ function HubCarrierCount({ active = false }) {
   );
 }
 
-/** One chassis shelf: fill only, 1px light top + 1px dark bottom (no outer stroke). */
-function RackShelf({ y, children }) {
-  const x = 2.5;
-  const w = 71;
-  const h = 12;
-  const r = 3.5;
-  return (
-    <g>
-      <rect x={x} y={y} width={w} height={h} rx={r} fill="#f4f7fb" />
-      <path
-        d={`M${x + r} ${y + 1}H${x + w - r}`}
-        stroke="#fff"
-        strokeWidth="1"
-        strokeLinecap="round"
-      />
-      <path
-        d={`M${x + r} ${y + h - 1}H${x + w - r}`}
-        stroke="#c3cedd"
-        strokeWidth="1"
-        strokeLinecap="round"
-      />
-      {children}
-    </g>
-  );
-}
-
-
-
 export function DataStatusStage() {
   return (
     <div className="api-s4-vig api-s4-vig--status" aria-hidden="true">
@@ -226,18 +281,9 @@ export function DataStatusStage() {
         ))}
       </div>
       <div className="api-s4-orbit">
-        <StatusOrbitRing items={S4_MAINS_OUTER} tone="outer" />
-        <StatusOrbitRing items={S4_MAINS_INNER} tone="inner" />
-        <div className="api-s4-orbit-core">
-          <div className="api-s4-logo">
-            <svg className="api-s4-logo-defs" width="0" height="0" aria-hidden="true">
-              <clipPath id="api-s4-logo-squircle" clipPathUnits="objectBoundingBox">
-                <path d="M0.6456,0.0034Q0.7912,0.0069 0.8351,0.0174Q0.8789,0.0280 0.9071,0.0463Q0.9353,0.0647 0.9537,0.0929Q0.9720,0.1211 0.9826,0.1649Q0.9931,0.2088 0.9966,0.3544Q1.0000,0.5000 0.9966,0.6456Q0.9931,0.7912 0.9826,0.8351Q0.9720,0.8789 0.9537,0.9071Q0.9353,0.9353 0.9071,0.9537Q0.8789,0.9720 0.8351,0.9826Q0.7912,0.9931 0.6456,0.9966Q0.5000,1.0000 0.3544,0.9966Q0.2088,0.9931 0.1649,0.9826Q0.1211,0.9720 0.0929,0.9537Q0.0647,0.9353 0.0463,0.9071Q0.0280,0.8789 0.0174,0.8351Q0.0069,0.7912 0.0034,0.6456Q0.0000,0.5000 0.0034,0.3544Q0.0069,0.2088 0.0174,0.1649Q0.0280,0.1211 0.0463,0.0929Q0.0647,0.0647 0.0929,0.0463Q0.1211,0.0280 0.1649,0.0174Q0.2088,0.0069 0.3544,0.0034Q0.5000,0.0000 0.6456,0.0034Z" />
-              </clipPath>
-            </svg>
-            <img src="/assets/logo-17-mark.png" alt="" />
-          </div>
-        </div>
+        <StatusOrbitRing items={S4_MAINS_OUTER} tone="outer" seq={0} />
+        <StatusOrbitRing items={S4_MAINS_INNER} tone="inner" seq={5} />
+        <div className="api-s4-orbit-core" />
       </div>
     </div>
   );
@@ -270,7 +316,11 @@ export function DataCarriersStage({ active = false }) {
   }, []);
 
   return (
-    <div className="api-s4-vig api-s4-vig--carriers" ref={hostRef} aria-hidden="true">
+    <div
+      className="api-s4-vig api-s4-vig--carriers"
+      ref={hostRef}
+      aria-hidden="true"
+    >
       <canvas className="api-s4-carriers-earth" aria-hidden="true" />
       <div className="api-s4-hub">
         <svg
@@ -282,7 +332,12 @@ export function DataCarriersStage({ active = false }) {
         >
           <g className="base">
             {S4_HUB_WIRES.map((wire) => (
-              <path key={wire.key} d={wire.d} style={{ "--i": wire.i }} />
+              <path
+                key={wire.key}
+                d={wire.d}
+                pathLength="100"
+                style={{ "--i": wire.i }}
+              />
             ))}
           </g>
           {["sheen", "mid", "core"].map((layer) => (
@@ -298,38 +353,7 @@ export function DataCarriersStage({ active = false }) {
             </g>
           ))}
         </svg>
-        <div className="api-s4-hub-core">
-          <svg className="api-s4-hub-server" viewBox="0 0 76 46" fill="none" aria-hidden="true">
-            <RackShelf y={1.5}>
-              <circle className="led" style={{ "--i": 0 }} cx="10" cy="7.5" r="1.7" fill="#2563eb" />
-              <circle cx="15.5" cy="7.5" r="1.7" fill="#bfdbfe" />
-              <path
-                d="M27 4.8v5.4M31.5 4.8v5.4M36 4.8v5.4M40.5 4.8v5.4M45 4.8v5.4"
-                stroke="#dbe4f0"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-              />
-              <rect x="56" y="5.6" width="12" height="3.8" rx="1.9" fill="#e8eef8" />
-            </RackShelf>
-            <RackShelf y={16.5}>
-              <circle className="led" style={{ "--i": 1 }} cx="10" cy="22.5" r="1.7" fill="#2563eb" />
-              <circle cx="15.5" cy="22.5" r="1.7" fill="#bfdbfe" />
-              <rect x="27" y="20.8" width="8" height="3.4" rx="1.4" fill="#93c5fd" />
-              <rect x="37" y="20.8" width="8" height="3.4" rx="1.4" fill="#bfdbfe" />
-              <rect x="47" y="20.8" width="8" height="3.4" rx="1.4" fill="#dbeafe" />
-            </RackShelf>
-            <RackShelf y={31.5}>
-              <circle className="led" style={{ "--i": 2 }} cx="10" cy="37.5" r="1.7" fill="#2563eb" />
-              <circle cx="15.5" cy="37.5" r="1.7" fill="#bfdbfe" />
-              <path
-                d="M27 34.8v5.4M31.5 34.8v5.4M36 34.8v5.4M40.5 34.8v5.4M45 34.8v5.4"
-                stroke="#dbe4f0"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-              />
-              <rect x="56" y="35.6" width="12" height="3.8" rx="1.9" fill="#e8eef8" />
-            </RackShelf>
-          </svg>
+        <div className="api-s4-hub-core" data-s4-core>
           <HubCarrierCount active={active} />
           <em>carriers</em>
         </div>
@@ -355,9 +379,16 @@ export function DataCarriersStage({ active = false }) {
 /* DHL Express waybill: 10 digits, last digit = first 9 mod 7 */
 const S4_NUMBER = "8564312072";
 const S4_TRACK_EVENTS = [
-  { time: "2022/8/18 10:22:00", text: "NEW YORK NY 10001, Delivered", live: true },
+  {
+    time: "2022/8/18 10:22:00",
+    text: "NEW YORK NY 10001, Delivered",
+    live: true,
+  },
   { time: "2022/8/18 08:14:00", text: "With delivery courier, DHL Express" },
-  { time: "2022/8/17 21:06:00", text: "Arrived at DHL facility, Los Angeles CA" },
+  {
+    time: "2022/8/17 21:06:00",
+    text: "Arrived at DHL facility, Los Angeles CA",
+  },
   { time: "2022/8/16 14:40:00", text: "Shipment picked up, Shanghai CN" },
 ];
 
@@ -375,6 +406,7 @@ export function DataHubStage({ active = false }) {
     const reduce = prefersReducedMotion();
     let cancelled = false;
     let timer = 0;
+    let startTimer = 0;
 
     const finish = () => {
       setTyped(S4_NUMBER);
@@ -396,16 +428,12 @@ export function DataHubStage({ active = false }) {
         finish();
         return;
       }
+      /* 保持终态布局原地重播：DHL 桥按 standby 实测几何飞行，面板不能中途移位 */
       setPlaying(true);
-      setSnap(true);
       setTyped("");
       setTyping(true);
       setScanning(false);
       setDetected(false);
-      setPanel(false);
-      await wait(40);
-      if (cancelled) return;
-      setSnap(false);
       for (let i = 1; i <= S4_NUMBER.length; i++) {
         if (cancelled) return;
         setTyped(S4_NUMBER.slice(0, i));
@@ -414,20 +442,20 @@ export function DataHubStage({ active = false }) {
       if (cancelled) return;
       setTyping(false);
       setScanning(true);
-      await wait(780);
+      await wait(680);
       if (cancelled) return;
       setDetected(true);
       setScanning(false);
-      await wait(220);
-      if (cancelled) return;
-      setPanel(true);
     };
 
-    if (active) play();
-    else finish();
+    if (active) {
+      /* 桥飞行/落位约 1.3s，等它收尾再开播打字序列，否则面板会在桥到达前移位 */
+      startTimer = window.setTimeout(play, reduce ? 0 : 1450);
+    } else finish();
 
     return () => {
       cancelled = true;
+      window.clearTimeout(startTimer);
       window.clearTimeout(timer);
     };
   }, [active]);
@@ -446,7 +474,7 @@ export function DataHubStage({ active = false }) {
   return (
     <div className={cls} ref={vigRef} aria-hidden="true">
       <div className="api-s4-flow">
-        <div className="api-s4-codewin">
+        <div className="api-s4-codewin" data-s4-core>
           <div className="api-vig-float-h">
             <strong>Add Number</strong>
             <span>×</span>
@@ -462,13 +490,30 @@ export function DataHubStage({ active = false }) {
             <span>Carrier*</span>
             <b className="api-s4-carrier-box">
               <i className="api-s4-detect-auto">
-                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <circle cx="5.2" cy="5.2" r="3.4" stroke="currentColor" strokeWidth="1.4" />
-                  <path d="M7.9 7.9l2.3 2.3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="5.2"
+                    cy="5.2"
+                    r="3.4"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                  />
+                  <path
+                    d="M7.9 7.9l2.3 2.3"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                  />
                 </svg>
                 Auto-detect
               </i>
-              <i className="api-s4-detect-hit">
+              <i className="api-s4-detect-hit" data-s4-dhl-target>
                 <img src="/assets/carriers/dhl.svg" alt="" />
                 DHL Express
               </i>
@@ -521,7 +566,10 @@ export function DataHubStage({ active = false }) {
             <p className="api-vig-carrier">DHL Express · China</p>
             <ul className="api-vig-rows">
               {S4_TRACK_EVENTS.map((row) => (
-                <li key={row.time} className={row.live ? "is-live is-in" : "is-in"}>
+                <li
+                  key={row.time}
+                  className={row.live ? "is-live is-in" : "is-in"}
+                >
                   <b />
                   <div>
                     <strong>{row.time}</strong>
@@ -577,7 +625,15 @@ const S4_DONUT_SLICES = (() => {
   });
 })();
 
-const S4_TREND_XS = ["08-14", "08-15", "08-16", "08-17", "08-18", "08-19", "08-20"];
+const S4_TREND_XS = [
+  "08-14",
+  "08-15",
+  "08-16",
+  "08-17",
+  "08-18",
+  "08-19",
+  "08-20",
+];
 const S4_TREND_YS = [0, 0, 0, 0, 0, 2100, 2100];
 const S4_TREND_MAX = 2500;
 const S4_TREND_BOX = { l: 24, r: 248, t: 8, b: 92 };
@@ -599,7 +655,10 @@ const S4_TREND_REST = (() => {
   let total = 0;
   let flat = 0;
   for (let i = 1; i < pts.length; i += 1) {
-    const len = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+    const len = Math.hypot(
+      pts[i][0] - pts[i - 1][0],
+      pts[i][1] - pts[i - 1][1],
+    );
     total += len;
     if (S4_TREND_YS[i] === 0) flat += len;
   }
@@ -617,8 +676,11 @@ export function DataChartStage() {
   const tipY = s4TrendY(0);
   return (
     <div className="api-s4-vig api-s4-vig--dash" aria-hidden="true">
-      <i className="api-s4-dash-disc" />
-      <svg className="api-s4-dash-curve" viewBox="0 0 480 260" preserveAspectRatio="none">
+      <svg
+        className="api-s4-dash-curve"
+        viewBox="0 0 480 260"
+        preserveAspectRatio="none"
+      >
         <defs>
           <linearGradient id={fillId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#7B5CFF" stopOpacity="0.38" />
@@ -626,16 +688,34 @@ export function DataChartStage() {
             <stop offset="100%" stopColor="#7B5CFF" stopOpacity="0" />
           </linearGradient>
         </defs>
-        <path className="api-s4-dash-curve-fill" d={S4_CURVE_FILL} fill={`url(#${fillId})`} />
-        <path className="api-s4-dash-curve-line" d={S4_CURVE_LINE} pathLength="100" />
+        <path
+          className="api-s4-dash-curve-fill"
+          d={S4_CURVE_FILL}
+          fill={`url(#${fillId})`}
+        />
+        <path
+          className="api-s4-dash-curve-line"
+          d={S4_CURVE_LINE}
+          pathLength="100"
+        />
       </svg>
       <div className="api-s4-dashgrid">
-        <article className="api-s4-dashtile api-s4-dashtile--donut">
+        <article
+          className="api-s4-dashtile api-s4-dashtile--donut"
+          data-s4-core
+        >
           <span className="api-s4-chart-kicker">Status distribution</span>
           <div className="api-s4-donut-row">
             <div className="api-s4-donut-wrap">
               <svg viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="38.75" fill="none" stroke="#eef2f7" strokeWidth="15.5" />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="38.75"
+                  fill="none"
+                  stroke="#eef2f7"
+                  strokeWidth="15.5"
+                />
                 {S4_DONUT_SLICES.map((slice) => (
                   <path
                     key={slice.label}
@@ -660,7 +740,11 @@ export function DataChartStage() {
 
         <article className="api-s4-dashtile api-s4-dashtile--trend">
           <span className="api-s4-chart-kicker">Not Found · 90d</span>
-          <svg className="api-s4-trend" viewBox="0 0 256 118" preserveAspectRatio="none">
+          <svg
+            className="api-s4-trend"
+            viewBox="0 0 256 118"
+            preserveAspectRatio="none"
+          >
             {S4_TREND_GRID.map((v) => {
               const y = s4TrendY(v);
               return (
@@ -692,9 +776,12 @@ export function DataChartStage() {
                 <text key={d} x={s4TrendX(i)} y={108} textAnchor="middle">
                   {d}
                 </text>
-              ) : null
+              ) : null,
             )}
-            <g className="api-s4-trend-tip" transform={`translate(${tipX}, ${tipY - 22})`}>
+            <g
+              className="api-s4-trend-tip"
+              transform={`translate(${tipX}, ${tipY - 22})`}
+            >
               <rect x="-27" y="-15" width="54" height="26" rx="4" />
               <text x="0" y="-4">
                 08-15
@@ -707,14 +794,25 @@ export function DataChartStage() {
         </article>
         <div className="api-s4-dashtoast">
           <span className="api-s4-dashtoast-ico">
-            <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 14 14"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M7 1.6a3.6 3.6 0 0 0-3.6 3.6c0 2.6-.9 3.6-1.4 4.1h10c-.5-.5-1.4-1.5-1.4-4.1A3.6 3.6 0 0 0 7 1.6Z"
                 stroke="currentColor"
                 strokeWidth="1.2"
                 strokeLinejoin="round"
               />
-              <path d="M5.8 11.6a1.3 1.3 0 0 0 2.4 0" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+              <path
+                d="M5.8 11.6a1.3 1.3 0 0 0 2.4 0"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+              />
             </svg>
           </span>
           <span className="api-s4-dashtoast-txt">
@@ -743,7 +841,14 @@ const APP_ICONS = {
   ),
   finance: (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="3.2" y="6.2" width="17.6" height="11.6" rx="2.2" pathLength="100" />
+      <rect
+        x="3.2"
+        y="6.2"
+        width="17.6"
+        height="11.6"
+        rx="2.2"
+        pathLength="100"
+      />
       <path d="M3.2 10.2h17.6" pathLength="100" />
       <path d="M7 15.2h4.2" pathLength="100" />
     </svg>
@@ -760,10 +865,38 @@ const APP_ICONS = {
   ),
   platforms: (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="3.2" y="3.2" width="7.6" height="7.6" rx="1.7" pathLength="100" />
-      <rect x="13.2" y="3.2" width="7.6" height="7.6" rx="1.7" pathLength="100" />
-      <rect x="3.2" y="13.2" width="7.6" height="7.6" rx="1.7" pathLength="100" />
-      <rect x="13.2" y="13.2" width="7.6" height="7.6" rx="1.7" pathLength="100" />
+      <rect
+        x="3.2"
+        y="3.2"
+        width="7.6"
+        height="7.6"
+        rx="1.7"
+        pathLength="100"
+      />
+      <rect
+        x="13.2"
+        y="3.2"
+        width="7.6"
+        height="7.6"
+        rx="1.7"
+        pathLength="100"
+      />
+      <rect
+        x="3.2"
+        y="13.2"
+        width="7.6"
+        height="7.6"
+        rx="1.7"
+        pathLength="100"
+      />
+      <rect
+        x="13.2"
+        y="13.2"
+        width="7.6"
+        height="7.6"
+        rx="1.7"
+        pathLength="100"
+      />
     </svg>
   ),
 };
@@ -798,7 +931,12 @@ export function IllusWebhookPanel() {
   const saveRef = useRef(null);
   const [hover, setHover] = useState(false);
   const [on, setOn] = useState(() => new Set(["Info Received", "In Transit"]));
-  const [cursor, setCursor] = useState({ x: 48, y: 80, show: false, press: false });
+  const [cursor, setCursor] = useState({
+    x: 48,
+    y: 80,
+    show: false,
+    press: false,
+  });
   const [toast, setToast] = useState(false);
 
   useEffect(() => {
@@ -888,8 +1026,8 @@ export function IllusWebhookPanel() {
           </span>
         </header>
         <p className="api-vig-desc">
-          Enter the URL for receiving tracking info. We will send a POST request with a JSON body
-          to the URL once the tracking is updated.
+          Enter the URL for receiving tracking info. We will send a POST request
+          with a JSON body to the URL once the tracking is updated.
         </p>
         <span className="api-vig-k">URL</span>
         <div className="api-vig-input">
@@ -901,7 +1039,11 @@ export function IllusWebhookPanel() {
             <li
               key={label}
               ref={
-                label === "Info Received" ? infoRef : label === "In Transit" ? transitRef : undefined
+                label === "Info Received"
+                  ? infoRef
+                  : label === "In Transit"
+                    ? transitRef
+                    : undefined
               }
               className={on.has(label) ? "is-on" : ""}
             >
@@ -921,7 +1063,12 @@ export function IllusWebhookPanel() {
         style={{ left: cursor.x, top: cursor.y }}
         aria-hidden="true"
       >
-        <svg className="api-vig-pointer-arrow" viewBox="0 0 24 24" width="22" height="22">
+        <svg
+          className="api-vig-pointer-arrow"
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+        >
           <path
             d="M4.2 3.2 L4.2 19.4 L8.8 14.9 L12.6 22.2 L15.4 20.8 L11.7 13.6 L18.2 13.6 Z"
             fill="#0a0a0a"
@@ -932,7 +1079,10 @@ export function IllusWebhookPanel() {
           />
         </svg>
       </span>
-      <div className={`api-vig-toast${toast ? " is-on" : ""}`} aria-hidden="true">
+      <div
+        className={`api-vig-toast${toast ? " is-on" : ""}`}
+        aria-hidden="true"
+      >
         Webhook saved
       </div>
     </div>
@@ -952,7 +1102,9 @@ export function IllusRegisterPanel() {
                 <i />
                 <i />
               </span>
-              <span className="api-vig-jsonwin-title">&lt;/17track.api&gt;</span>
+              <span className="api-vig-jsonwin-title">
+                &lt;/17track.api&gt;
+              </span>
             </div>
             <pre className="api-vig-code">
               <code>
@@ -962,7 +1114,10 @@ export function IllusRegisterPanel() {
                 <span className="c-str"> &apos;17token:token&apos; \</span>
                 {"\n"}
                 <span className="c-flag">--header</span>
-                <span className="c-str"> &apos;Content-Type:application/json&apos; \</span>
+                <span className="c-str">
+                  {" "}
+                  &apos;Content-Type:application/json&apos; \
+                </span>
                 {"\n"}
                 <span className="c-flag">--data</span>
                 <span className="c-p"> &apos;[</span>
@@ -977,7 +1132,9 @@ export function IllusRegisterPanel() {
                 {"\n"}
                 <span className="c-p">]&apos; \</span>
                 {"\n"}
-                <span className="c-url">https://api.17track.net/track/v2/register</span>
+                <span className="c-url">
+                  https://api.17track.net/track/v2/register
+                </span>
               </code>
             </pre>
           </div>
@@ -1025,7 +1182,11 @@ const LISTEN_JSON = `{
 }`;
 
 const LISTEN_EVENTS = [
-  { time: "2022/8/18 10:22:00", text: "SHINGLE SPRINGS CA 95682, Delivered", live: true },
+  {
+    time: "2022/8/18 10:22:00",
+    text: "SHINGLE SPRINGS CA 95682, Delivered",
+    live: true,
+  },
   { time: "2022/8/18 08:14:00", text: "Out for Delivery, USPS" },
   { time: "2022/8/17 21:06:00", text: "Arrived at Post Office" },
   { time: "2022/8/16 14:40:00", text: "Picked Up by Shipping Partner" },
@@ -1212,8 +1373,8 @@ export function IllusOnboardChat() {
           <div className="api-ob-row is-bot">
             <ObAva src={avaAgent} />
             <p>
-              17TRACK is a logistics tracking platform with a Tracking API that automatically tracks
-              the logistics information of your parcels.
+              17TRACK is a logistics tracking platform with a Tracking API that
+              automatically tracks the logistics information of your parcels.
             </p>
           </div>
           <div className="api-ob-row is-me">
@@ -1264,7 +1425,9 @@ export function IllusOnboardTrial() {
             {"\n"}
             {"}]' \\"}
             {"\n"}
-            <span className="c-url">https://api.17track.net/track/v2/register</span>
+            <span className="c-url">
+              https://api.17track.net/track/v2/register
+            </span>
           </code>
         </pre>
       </div>

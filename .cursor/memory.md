@@ -11,7 +11,16 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- Data Operations（2026-08-28 Park）：**不要** sticky / 滚轮横移 / `--s4-x` / 中间白卡外框。左 [01][02] 静态白文案卡 + 中间方形井 + 右 [03][04]。四卡无选中态、不点选、**无 Contact Us**。标题左、渐变胶囊 CTA 右（白圆 + `···→` + 白字 Start My Free Trial），横向蓝渐变 + 细亮蓝描边 + 底边高光，不要 `.api-btn-primary`、不要 Applications 暗底白钮。点了 `__lenis.scrollTo` `#free-trial`。井底蓝/紫/绿 liquid gradient + 淡 film grain（`src/fx/modules/s4-liquid-grain.js`），DOM 插图叠上面；减动效 / ≤768 / 弱 GPU 留同色系静态渐变，不要 Hero Undertones 白底灰条纹/橙。四段一条连续动画：Tracking 收束到 17 logo + 涟漪扩开带出 Carriers；枢纽/地球 magnify 径向擦出 Visibility；轨迹上推/溶解带出 Dashboard；面积/donut 收回回 Tracking。重叠过渡 scale / clip-path / 径向 mask / 模糊，0.98s `cubic-bezier(0.22, 1, 0.36, 1)`。循环；离屏不计时。触发看井内 `.api-s4-stage.is-on`。地球跟当前场。reduce-motion 定格第一场。其余产品原文不改。≤900px：井置顶，文案竖叠。
+- Data Operations 四场编排（2026-08-29 Park）：过渡要有「相同元素衔接」，不要硬切。
+  - 场1入场（滑入视口才开播，well `is-started` 门控，IO 首次相交置位）：涟漪依次（`api-s4-wash-in` 按 `--r` 错峰）→ 17 logo 放大渐显（`api-s4-keel` 常驻层，squircle 裁切 + 蓝底，从场1 JSX 移到 DataOperations 井层）→ 9 状态依次（`api-s4-chip-in` 按 `--ci`，外5内4 全局序号）→ 1.75s 后才开始转（环动画挂在 is-on 上，每次重场重启）。
+  - 场1→2 **无白桥**：keel logo 原地不动（is-hold），900ms 后淡出让 `3,400+` 数字滚动接手（滚动本身已有）。枢纽白卡 `hub-in` 缩放浮现；服务器插图已删；基线线条 `wire-draw` 依次生长（base path 加了 pathLength=100）；承运商 logo `hublogo-in` 逐个出现；流光延迟 2s 等线条长完。
+  - 场2→3 **DHL 桥**（BRIDGE_PAIRS kind:"dhl"，dur 2.9s/ttl 2950）：hub 的 DHL 节点飞向 `detect-hit`（data-s4-dhl-target），落在识别完成那一刻（激活后 ~2.83s）。第三场播放简化成「终态布局原地重播」（不再收拢面板移位，否则桥落点会错位），播放入场延迟 1450ms 等桥起飞。
+  - 场3→4 白核桥 codewin→donut；**背景大圆 dash-disc 已删**（DOM+CSS）。场4→1 白核桥 donut→`.api-s4-keel img`。核心隐没/浮现规则只作用于 `has-bridge--core`，DHL 桥不碰两端核心。
+  - 候场 transform 必须纯 `scale(0.52)`、origin 50% 50%——桥的逆变换按这个算（orbit-core 原来的 0.84 候场缩放已删）。
+  - **大坑**：CSS 注释里写「`--f*/--t*`」这类含 `*/` 的文本会把注释提前终结，后面的注释文字变成垃圾选择器，整条规则被静默丢弃（桥 0×0 的根因）。
+
+- Data Operations（2026-08-28 Park）：**不要** sticky / 滚轮横移 / `--s4-x` / 中间白卡外框。左 [01][02] 静态白文案卡 + 中间方形井 + 右 [03][04]。四卡无选中态、不点选、**无 Contact Us**。标题左、渐变胶囊 CTA 右（白圆 + `···→` + 白字 Start My Free Trial），横向蓝渐变 + 细亮蓝描边 + 底边高光，不要 `.api-btn-primary`、不要 Applications 暗底白钮。点了 `__lenis.scrollTo` `#free-trial`。井底蓝/紫/绿 liquid gradient + 淡 film grain（`src/fx/modules/s4-liquid-grain.js`），DOM 插图叠上面；减动效 / ≤768 / 弱 GPU 留同色系静态渐变，不要 Hero Undertones 白底灰条纹/橙。四段一条连续动画，循环；离屏不计时。触发看井内 `.api-s4-stage.is-on`。其余产品原文不改。≤900px：井置顶，文案竖叠。
+- 场间舞台过渡（2026-08-29）：统一「向前穿越」——候场在井深处 scale(.52)+blur，is-on 迎面飞抵 1.25s，is-exit 继续放大 1.9x 贴脸掠过 0.85s、z 在新场之上（近景遮远景）；无 iris/clip-path 擦除。
 
 - Git 工作流（2026-08-27 Park「push+commit 太频繁」）：**默认只 commit 本地，不 push**。push 只在 Park 明确说「push / 推上去 / 部署」时执行（main 连 Vercel，push 即部署）；想推但暂不部署带 `[skip ci]`。攒批提交，不要一笔一小提交。三仓（API/Tracking/Returns）规则一致，Returns 的 AGENTS.md 由 Park 亲改。
 
@@ -69,6 +78,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-08-29 01:2x — memory.md、DataOperations.jsx、ApiDomVisuals.jsx、api-page.css（四场 match-cut 编排）
 - 2026-08-28 17:50 — AGENTS.md、DataOperations.jsx、structure.test.js、api-page.css
 - 2026-08-25 10:53 — memory.md、ExploreMore.jsx、landing.css
 - 2026-08-18 20:08 — memory.md、ApiDomVisuals.jsx、api-page.css

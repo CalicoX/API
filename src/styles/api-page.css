@@ -3331,76 +3331,56 @@
   opacity: 0;
   background: radial-gradient(
     circle at 50% 48%,
-    rgba(255, 255, 255, 0.62) 0%,
-    rgba(219, 234, 254, 0.28) 26%,
-    transparent 64%
+    rgba(255, 255, 255, 0.52) 0%,
+    rgba(219, 234, 254, 0.22) 28%,
+    transparent 62%
   );
-  transform: scale(0.18);
+  transform: scale(0.2);
 }
 
 .api-s4-well.is-bloom .api-s4-bloom {
-  animation: api-s4-bloom 0.98s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: api-s4-bloom 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes api-s4-bloom {
   0% {
-    opacity: 0.9;
-    transform: scale(0.16);
+    opacity: 0;
+    transform: scale(0.24);
   }
-  48% {
-    opacity: 0.38;
+  36% {
+    opacity: 0.34;
   }
   100% {
     opacity: 0;
-    transform: scale(1.38);
+    transform: scale(1.55);
   }
 }
 
+/* 四场共用一条「向前穿越」轨道：候场在井深处（小、糊、透明），
+   is-on 迎面飞抵，is-exit 继续放大贴脸掠过镜头。
+   退场必须比进场先结束、且 z 在新场之上（近景遮远景）。
+   候场 transform 必须是纯 scale(0.52)、origin 50% 50%——
+   DataOperations.jsx 的桥逆变换按这个算，别加位移/偏 origin。 */
 .api-s4-stage {
   --s4-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --s4-morph: 0.98s;
+  --s4-in: 1.25s;
+  --s4-out: 0.85s;
   position: absolute;
   inset: 0;
   z-index: 0;
   opacity: 0;
   pointer-events: none;
   transition: none;
-}
-
-.api-s4-stage.api-s4-illus--status:not(.is-on):not(.is-exit) {
-  transform: scale(0.56);
-  filter: blur(8px);
-  clip-path: circle(0% at 50% 50%);
-}
-
-.api-s4-stage.api-s4-illus--carriers:not(.is-on):not(.is-exit) {
-  transform: scale(1.22);
-  filter: blur(10px);
-  clip-path: circle(0% at 50% 52%);
-}
-
-.api-s4-stage.api-s4-illus--auto:not(.is-on):not(.is-exit) {
-  transform: translateY(16%);
-  filter: blur(8px);
-  clip-path: inset(20% 0 0 0);
-}
-
-.api-s4-stage.api-s4-illus--dash:not(.is-on):not(.is-exit) {
-  transform: scale(0.82);
-  filter: blur(8px);
-  clip-path: circle(0% at 50% 58%);
-}
-
-.api-s4-stage.is-on,
-.api-s4-stage.is-exit {
-  transition:
-    opacity var(--s4-morph) var(--s4-ease),
-    transform var(--s4-morph) var(--s4-ease),
-    filter var(--s4-morph) var(--s4-ease),
-    clip-path var(--s4-morph) var(--s4-ease);
+  will-change: transform, opacity, filter;
+  transform: scale(0.52);
+  filter: blur(12px);
 }
 
 .api-s4-stage.is-on {
+  transition:
+    opacity var(--s4-in) var(--s4-ease),
+    transform var(--s4-in) var(--s4-ease),
+    filter var(--s4-in) var(--s4-ease);
   opacity: 1;
   transform: none;
   filter: blur(0);
@@ -3408,43 +3388,221 @@
   z-index: 2;
 }
 
-.api-s4-stage.api-s4-illus--status.is-on,
-.api-s4-stage.api-s4-illus--carriers.is-on,
-.api-s4-stage.api-s4-illus--dash.is-on {
-  clip-path: circle(150% at 50% 50%);
-}
-
-.api-s4-stage.api-s4-illus--auto.is-on {
-  clip-path: inset(0);
-}
-
 .api-s4-stage.is-exit {
+  transition:
+    opacity var(--s4-out) var(--s4-ease),
+    transform var(--s4-out) var(--s4-ease),
+    filter var(--s4-out) var(--s4-ease);
   opacity: 0;
-  z-index: 1;
+  z-index: 3;
+  transform: scale(1.9) translateY(-5%);
+  filter: blur(15px);
 }
 
-.api-s4-stage.api-s4-illus--status.is-exit {
-  transform: scale(0.4);
-  filter: blur(7px);
-  clip-path: circle(6% at 50% 50%);
+/* match-cut 桥：两场之间连续不断的「同一个元素」。
+   白核从 A 场核心的几何 morph 到 B 场核心的几何（几何由 JS 实读后注入 f 与 t 两组变量），
+   到站时与 B 核交叉淡接；两端核心在桥存续期由下方规则隐没/浮现。
+   注意：注释里不要写「星号+斜杠」序列，会把注释提前终结、废掉整条规则。 */
+.api-s4-bridge {
+  position: absolute;
+  z-index: 4;
+  left: var(--fx);
+  top: var(--fy);
+  width: var(--fw);
+  height: var(--fh);
+  border-radius: var(--fr);
+  background: #fff;
+  box-shadow: 0 14px 38px rgba(93, 112, 158, 0.16);
+  pointer-events: none;
+  opacity: 0;
+  animation: api-s4-bridge-run var(--bdur, 1.3s) cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.api-s4-stage.api-s4-illus--carriers.is-exit {
-  transform: scale(1.36);
-  filter: blur(12px);
-  clip-path: circle(0% at 50% 50%);
+@keyframes api-s4-bridge-run {
+  0% {
+    left: var(--fx);
+    top: var(--fy);
+    width: var(--fw);
+    height: var(--fh);
+    border-radius: var(--fr);
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  76% {
+    opacity: 1;
+  }
+  100% {
+    left: var(--tx);
+    top: var(--ty);
+    width: var(--tw);
+    height: var(--th);
+    border-radius: var(--tr);
+    opacity: 0;
+  }
 }
 
-.api-s4-stage.api-s4-illus--auto.is-exit {
-  transform: translateY(-18%);
-  filter: blur(10px);
-  clip-path: inset(0 0 38% 0);
+/* 核心隐没/浮现只属于白核桥（core）；DHL 桥不碰两端核心 */
+.api-s4-well.has-bridge--core .api-s4-stage.is-exit [data-s4-core] {
+  opacity: 0;
 }
 
-.api-s4-stage.api-s4-illus--dash.is-exit {
-  transform: scale(0.68);
-  filter: blur(8px);
-  clip-path: circle(0% at 50% 58%);
+.api-s4-well.has-bridge--core .api-s4-stage.is-on [data-s4-core] {
+  animation: api-s4-core-in 1.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes api-s4-core-in {
+  0%,
+  74% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* DHL 桥：第二场的 DHL logo 芯片飞向第三场承运商盒，落在识别完成那一刻 */
+.api-s4-bridge--dhl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 26px rgba(93, 112, 158, 0.2);
+}
+
+.api-s4-bridge--dhl img {
+  width: 58%;
+  height: 58%;
+  object-fit: contain;
+}
+
+/* —— 17 logo 常驻层：第一场即中心本体；进第二场原地不动，面板/数字接手后淡出 —— */
+.api-s4-keel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 5;
+  width: 64px;
+  height: 64px;
+  translate: -50% -50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.api-s4-keel img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #1b57e0;
+  clip-path: url(#api-s4-logo-squircle);
+  filter: drop-shadow(0 16px 32px rgba(27, 87, 224, 0.3))
+    drop-shadow(0 4px 10px rgba(15, 23, 42, 0.14));
+}
+
+.api-s4-keel.is-in {
+  animation: api-s4-keel-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+.api-s4-keel.is-hold {
+  opacity: 1;
+}
+
+@keyframes api-s4-keel-in {
+  from {
+    opacity: 0;
+    scale: 0.45;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/* —— 第一场入场编排：涟漪依次 → logo 渐显 → 状态依次 → 开始转（滑入视口才开播） —— */
+.api-s4-well:not(.is-started) .api-s4-orbit-wash,
+.api-s4-well:not(.is-started) .api-s4-orbit-chip {
+  opacity: 0;
+}
+
+.api-s4-well.is-started .api-s4-stage.api-s4-illus--status.is-on .api-s4-orbit-wash {
+  animation: api-s4-wash-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(0.15s + var(--r, 0) * 0.11s);
+}
+
+@keyframes api-s4-wash-in {
+  from {
+    opacity: 0;
+    scale: 0.62;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.api-s4-well.is-started .api-s4-stage.api-s4-illus--status.is-on .api-s4-orbit-chip {
+  animation: api-s4-chip-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(1s + var(--ci, 0) * 0.09s);
+}
+
+@keyframes api-s4-chip-in {
+  from {
+    opacity: 0;
+    scale: 0.6;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/* —— 第二场编排：面板浮现，线条按序生长，承运商逐个出现（数字滚动在 JSX） —— */
+.api-s4-well.is-started .api-s4-stage.api-s4-illus--carriers.is-on .api-s4-hub-core {
+  animation: api-s4-hub-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+@keyframes api-s4-hub-in {
+  from {
+    opacity: 0;
+    scale: 0.72;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.api-s4-well.is-started .api-s4-stage.api-s4-illus--carriers.is-on .api-s4-hub-wires .base path {
+  stroke-dasharray: 100;
+  animation: api-s4-wire-draw 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(1.1s + var(--i, 0) * 0.1s);
+}
+
+@keyframes api-s4-wire-draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.api-s4-well.is-started .api-s4-stage.api-s4-illus--carriers.is-on .api-s4-hub-logo {
+  animation: api-s4-hublogo-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(1.65s + var(--i, 0) * 0.12s);
+}
+
+@keyframes api-s4-hublogo-in {
+  from {
+    opacity: 0;
+    scale: 0.5;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
 }
 
 .api-s4-illus {
@@ -3505,18 +3663,29 @@
 @media (prefers-reduced-motion: reduce) {
   .api-s4-stage,
   .api-s4-stage.is-on,
-  .api-s4-stage.is-exit,
-  .api-s4-stage.api-s4-illus--status:not(.is-on):not(.is-exit),
-  .api-s4-stage.api-s4-illus--carriers:not(.is-on):not(.is-exit),
-  .api-s4-stage.api-s4-illus--auto:not(.is-on):not(.is-exit),
-  .api-s4-stage.api-s4-illus--dash:not(.is-on):not(.is-exit) {
+  .api-s4-stage.is-exit {
     transition: none;
     transform: none;
     filter: none;
   }
 
-  .api-s4-stage.is-on {
-    clip-path: none;
+  .api-s4-bridge {
+    display: none;
+  }
+
+  .api-s4-well.has-bridge--core .api-s4-stage.is-on [data-s4-core] {
+    animation: none;
+  }
+
+  .api-s4-well:not(.is-started) .api-s4-orbit-wash,
+  .api-s4-well:not(.is-started) .api-s4-orbit-chip {
+    opacity: 1;
+  }
+
+  .api-s4-keel.is-in,
+  .api-s4-keel.is-hold {
+    animation: none;
+    opacity: 1;
   }
 
   .api-s4-well.is-bloom .api-s4-bloom {
@@ -3664,14 +3833,10 @@
   padding: 0;
   list-style: none;
   --orbit-base: 0deg;
-  animation: api-s4-orbit-cw var(--spin-out) linear infinite;
-  animation-play-state: paused;
 }
 
 .api-s4-orbit-ring--inner {
   --orbit-base: 45deg;
-  animation-name: api-s4-orbit-ccw;
-  animation-duration: var(--spin-in);
 }
 
 .api-s4-orbit-ring li {
@@ -3728,8 +3893,14 @@
 .api-s4-orbit-chip[data-icon="fail"] { --chip: #f44336; }
 .api-s4-orbit-chip[data-icon="missing"] { --chip: #757575; }
 
+/* 转动在状态胶囊依次出现完（约 1.75s）后才开始；is-on 每次重挂都重新起拍 */
 .api-s4-stage.is-on .api-s4-orbit-ring {
-  animation-play-state: running;
+  animation: api-s4-orbit-cw var(--spin-out) linear 1.75s infinite;
+}
+
+.api-s4-stage.is-on .api-s4-orbit-ring--inner {
+  animation-name: api-s4-orbit-ccw;
+  animation-duration: var(--spin-in);
 }
 
 .api-s4-orbit-core {
@@ -3739,19 +3910,6 @@
   display: grid;
   place-items: center;
   pointer-events: none;
-  transform: scale(0.84);
-  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.api-s4-stage.is-on .api-s4-orbit-core {
-  transform: scale(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .api-s4-orbit-core {
-    transform: none;
-    transition: none;
-  }
 }
 
 .api-s4-orbit-core::before,
@@ -3787,40 +3945,10 @@
   opacity: 0.9;
 }
 
-.api-s4-logo {
-  width: var(--logo);
-  height: var(--logo);
-  position: relative;
-  z-index: 1;
-  overflow: visible;
-  background: transparent;
-  filter:
-    drop-shadow(0 14px 28px rgba(27, 87, 224, 0.22))
-    drop-shadow(0 4px 10px rgba(15, 23, 42, 0.12));
-  transition: filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.api-s4-stage.is-on .api-s4-logo {
-  filter:
-    drop-shadow(0 16px 32px rgba(27, 87, 224, 0.3))
-    drop-shadow(0 4px 10px rgba(15, 23, 42, 0.14));
-}
-
 .api-s4-logo-defs {
   position: absolute;
   width: 0;
   height: 0;
-}
-
-.api-s4-logo img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: #1b57e0;
-  border-radius: 32%;
-  corner-shape: superellipse(2);
-  clip-path: url(#api-s4-logo-squircle);
 }
 
 @keyframes api-s4-orbit-cw {
@@ -3923,7 +4051,8 @@
 .api-s4-stage.is-on .api-s4-hub-wires .flow path {
   opacity: 1;
   animation: api-s4-wire-flow 8s linear infinite;
-  animation-delay: calc(var(--i, 0) * 0.55s);
+  /* 等基线线条按序生长完（约 2s）再开始游走 */
+  animation-delay: calc(2s + var(--i, 0) * 0.55s);
 }
 
 @keyframes api-s4-wire-flow {
@@ -4027,23 +4156,6 @@
 
 .api-s4-stage.is-on .api-s4-hub-core::before {
   animation-duration: 3.8s;
-}
-
-.api-s4-hub-server {
-  display: block;
-  width: 76px;
-  height: auto;
-  margin-bottom: 9px;
-}
-
-.api-s4-stage.is-on .api-s4-hub-server .led {
-  animation: api-s4-led 3.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-  animation-delay: calc(var(--i, 0) * 0.38s);
-}
-
-@keyframes api-s4-led {
-  0%, 100% { opacity: 1; }
-  30%, 46% { opacity: 0.22; }
 }
 
 .api-s4-hub-core b {
@@ -4324,24 +4436,6 @@
 }
 
 /* 圆形半透明遮罩：白色磨砂圆盘 + 发丝描边，聚焦仪表盘；底部淡出让曲线露出来 */
-.api-s4-dash-disc {
-  position: absolute;
-  left: 50%;
-  top: 46%;
-  z-index: 0;
-  width: min(84%, 320px);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  background:
-    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.5) 58%, rgba(255, 255, 255, 0.22) 100%),
-    radial-gradient(circle at 50% 62%, rgba(41, 98, 255, 0.05) 0%, transparent 72%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 52%, transparent 92%);
-  mask-image: linear-gradient(to bottom, #000 52%, transparent 92%);
-  pointer-events: none;
-}
-
 /* 井底增长曲线：描边 + 紫色半透明→透明面积 */
 .api-s4-dash-curve {
   position: absolute;
@@ -4682,7 +4776,6 @@
   }
 
   .api-s4-stage.is-on .api-s4-hub-core,
-  .api-s4-stage.is-on .api-s4-hub-server .led,
   .api-s4-stage.is-on .api-s4-codewin,
   .api-s4-stage.is-on .api-s4-link,
   .api-s4-stage.is-on .api-s4-donut-seg {
@@ -6407,11 +6500,6 @@ html.is-reduce-fx .api-s5::after {
     width: 112px;
     min-height: 92px;
     padding: 12px 10px 11px;
-  }
-
-  .api-s4-hub-server {
-    width: 62px;
-    margin-bottom: 7px;
   }
 
   .api-s4-hub-core b {
