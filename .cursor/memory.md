@@ -48,6 +48,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Hero 拖尾：紫 `#D042FF` + 蓝 `#5B4FFF` + 一点橙 `#FF3805`（只占 left 一个方向）。绿 `#66FF73` 不要。
 - `.api-s4-track` 的 `overflow-x: clip` 防横向滚动，不能换成 hidden（会杀 sticky）。
 - Applications（2026-08-24）：**100vh / 100dvh**。图标按标题，底色蓝橙绿紫青。hover 描边画出。卡下 CTA 用 Tracking 同款 `.btn-switch.on-dark`（白钮滑行 + colorful beam），文案仍是 Start My Free Trial，滚回 Hero `#free-trial`。标题 / 卡片 / CTA 再分开一点（head 下 88）。CTA 用 `margin-top: auto` 沉到下半屏，距底 128（Park：72 太贴底，往上挪一点）。产品文案不改。 FX 在 `btn-switch.js`，不依赖 `#ai-lab`。
+- Applications 超大屏间距（2026-08-28 Park「超大屏没居中、三段间距不一致」）：head 底距 88 → `clamp(56px, 11vh, 120px)`；CTA `padding-top: 72` → 同款 `clamp(56px, 11vh, 120px)`。`margin-top:auto` 只吃超出部分，三段（标题→卡片 / 卡片→CTA / CTA→屏底）始终同档。
 - Applications 背景（2026-08-24）：Returns ROI 同款 Point Waves 1（`roi-point-waves.js` 挂 `#applications` / canvas `.api-s5-waves`）。底 `#141414` + 青绿光晕。减动效 / ≤768 / 弱 GPU 不挂 WebGL，留静态底。Park：点波太亮 → `DOT_FADE` 0.30→0.16，高光 `15*0.02`→`15*0.012`。
 - Land the Integration Together（2026-08-26 Park）：标题跟其他板块一样 — `.api-h2` 黑字 `clamp(28px, 3.2vw, 40px)`，不要粉蓝渐变。四张价卡一排，**Custom 单独横条放下面**（名左 / 图中 / Contact Us 右）。着重色不要橙：Popular / Flagship 边 / Get Started / Contact Us 一律 `--api-blue`（#2563eb）。价卡 **Unit Price / 金额同一水平线**：每张卡都留 36px Popular 槽（非 Flagship 透明），边框一律 2px，inner padding 相同。产品原文不改。Onboard 四步仍是 DOM 白碎片，不要浅灰井、不要动画。
 - BottomCta（2026-08-24）：footer 上、ExploreMore 下。Returns 暗底粒子海。标题+按钮**水平居中、上下排列**。文案 Efficient Solution of Value and Possibility；按钮 Tracking `.btn-switch`，文案 Contact Us，链 17track contact-us。
