@@ -181,13 +181,27 @@ export default function DataOperations() {
     >
       <div className="api-wrap">
         <div className="api-s4-head">
-          <a className="api-btn-primary api-s4-head-cta" href="#free-trial" onClick={goToTrial}>
-            Start My Free Trial
-          </a>
           <h2 className="api-h2" id="api-data-title">
             {tintWords("Data Operation Granularized")}
             <span className="api-s4-h2-sub">{tintWords("Forecast, Monitor, Intervene.", 3)}</span>
           </h2>
+          <a className="api-s4-pill" href="#free-trial" onClick={goToTrial}>
+            <span className="api-s4-pill-knob" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="4.2" cy="12" r="1.55" fill="currentColor" opacity="0.42" />
+                <circle cx="8" cy="12" r="1.65" fill="currentColor" opacity="0.68" />
+                <circle cx="11.8" cy="12" r="1.75" fill="currentColor" />
+                <path
+                  d="M14.2 8.1L19.4 12 14.2 15.9"
+                  stroke="currentColor"
+                  strokeWidth="1.9"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <span className="api-s4-pill-label">Start My Free Trial</span>
+          </a>
         </div>
 
         <div className="api-s4-board">

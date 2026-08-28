@@ -101,11 +101,14 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/DataOperations.jsx")).toMatch(/idx: \"01\"/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/\[\{card\.idx\}\]/);
     expect(read("components/sections/DataOperations.jsx")).not.toMatch(/api-s4-rail|--s4-x|data-s4-dir/);
-    expect(read("components/sections/DataOperations.jsx")).not.toMatch(/Contact Us/);
-    expect(read("components/sections/DataOperations.jsx")).not.toMatch(/api-s4-cta/);
-    expect(read("components/sections/DataOperations.jsx")).toMatch(/Start My Free Trial/);
-    expect(read("components/sections/DataOperations.jsx")).toMatch(/#free-trial/);
-    expect(read("components/sections/DataOperations.jsx")).toMatch(/api-s4-head-cta/);
+    const s4 = read("components/sections/DataOperations.jsx");
+    expect(s4).not.toMatch(/Contact Us/);
+    expect(s4).not.toMatch(/api-s4-cta/);
+    expect(s4).not.toMatch(/api-btn-primary/);
+    expect(s4).not.toMatch(/onPick|onHold|aria-current/);
+    expect(s4).toMatch(/Start My Free Trial/);
+    expect(s4).toMatch(/#free-trial/);
+    expect(s4).toMatch(/api-s4-pill/);
     expect(read("components/sections/Applications.jsx")).toMatch(/Logistics Service/);
     expect(read("components/sections/Applications.jsx")).toMatch(/Various Platforms/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Land the Integration Together/);
@@ -188,6 +191,17 @@ describe("API landing structure (gating)", () => {
     expect(read("fx/modules/btn-switch.js")).toMatch(/export function mount/);
   });
 
+  it("Data Operations mounts liquid grain well background", () => {
+    const fx = read("fx/useLandingEffects.js");
+    expect(fx).toMatch(/s4LiquidGrain|s4-liquid-grain/);
+    expect(fx).toMatch(/getElementById\([\"']data-operations[\"']\)/);
+    const grain = read("fx/modules/s4-liquid-grain.js");
+    expect(grain).toMatch(/export function mount/);
+    expect(grain).toMatch(/api-s4-grain/);
+    expect(grain).toMatch(/#6B8CFF|#9B7CFF|#4FD6A0/);
+    expect(grain).not.toMatch(/#FF3805/);
+  });
+
   it("Applications mounts Returns ROI point-waves background", () => {
     const fx = read("fx/useLandingEffects.js");
     expect(fx).toMatch(/roiPointWaves|roi-point-waves/);
@@ -249,6 +263,7 @@ describe("API landing structure (gating)", () => {
       "impact-bg-shader.js",
       "use-cases-bg-shader.js",
       "hero-wash-shader.js",
+      "s4-liquid-grain.js",
       "bottom-cta-shader.js",
       "thinking-orb.js",
       "ai-title-particles.js",

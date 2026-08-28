@@ -11,7 +11,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- Data Operations（2026-08-28 Park：取消横滑、四动画合并、三栏白底）：**不要** sticky / 滚轮横移 / `--s4-x` / prev-next。布局左 [01][02] 文案卡 + 中间方形白卡动画井 + 右 [03][04]，浅灰段底、卡仍白。四段构图按 Tracking → Carriers → Visibility → Dashboard 在同一口井里先后出场，水平滑出 0.72s `cubic-bezier(0.22, 1, 0.36, 1)`。点侧卡跳场；鼠标停在板块上暂停轮播；离屏不计时。动画触发看 `.api-s4-stage.is-on`（不再 `.api-s4-card:hover`）。地球自转跟 `is-on`，不是整卡 mouseenter。产品文案不改，Contact Us 仍在四张文案卡上。≤900px：井置顶，四张文案卡竖叠。
+- Data Operations（2026-08-28 Park）：**不要** sticky / 滚轮横移 / `--s4-x` / 中间白卡外框。左 [01][02] 静态白文案卡 + 中间方形井 + 右 [03][04]。四卡无选中态、不点选、**无 Contact Us**。标题左、渐变胶囊 CTA 右（白圆 + `···→` + 白字 Start My Free Trial），横向蓝渐变 + 细亮蓝描边 + 底边高光，不要 `.api-btn-primary`、不要 Applications 暗底白钮。点了 `__lenis.scrollTo` `#free-trial`。井底蓝/紫/绿 liquid gradient + 淡 film grain（`src/fx/modules/s4-liquid-grain.js`），DOM 插图叠上面；减动效 / ≤768 / 弱 GPU 留同色系静态渐变，不要 Hero Undertones 白底灰条纹/橙。四段一条连续动画：Tracking 收束到 17 logo + 涟漪扩开带出 Carriers；枢纽/地球 magnify 径向擦出 Visibility；轨迹上推/溶解带出 Dashboard；面积/donut 收回回 Tracking。重叠过渡 scale / clip-path / 径向 mask / 模糊，0.98s `cubic-bezier(0.22, 1, 0.36, 1)`。循环；离屏不计时。触发看井内 `.api-s4-stage.is-on`。地球跟当前场。reduce-motion 定格第一场。其余产品原文不改。≤900px：井置顶，文案竖叠。
 
 - Git 工作流（2026-08-27 Park「push+commit 太频繁」）：**默认只 commit 本地，不 push**。push 只在 Park 明确说「push / 推上去 / 部署」时执行（main 连 Vercel，push 即部署）；想推但暂不部署带 `[skip ci]`。攒批提交，不要一笔一小提交。三仓（API/Tracking/Returns）规则一致，Returns 的 AGENTS.md 由 Park 亲改。
 
@@ -40,7 +40,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Use Cases 进度驱动的坑：`use-cases-scroll` 的 `apply()` 里 `setProgress` 必须每次滚动都发、放在「p 没变就 return」之前——WebGL 是懒加载的，p 稳定后才挂载完就再也收不到进度。挂载种子在 `window.__isoHubWebGL = gl` 赋值后立刻做（onReady 闭包里 gl 未赋值，是空转的，别再用）。≤768px `__reduceFx=true`，该屏直接定格 p=1 终态（正视图+标签），这是有意的。
 - Use Cases 手机端（≤900px）：iso 线条糊的根源是 renderer DPR 被钳 1.5、3x 屏上 1px 线放大成 2 物理像素——手机端 DPR 放开到原生（≤3，canvas 小所以开销可控），桌面仍 1.5。callout canvas 手机同理 ≤3。井加高：`min(96vw, 375px)`、min 300 / max 390（原 88vw/340/280/360）；短井填充率上调（hostFit h<420 → far 0.58 / near 0.66）。`.api-s2-cross` 十字准星 ≤900px 隐藏（会压到文案）。
 - 标题单词亮度跟滚动走（`--on`），不是进场自动播。
-- Contact Us 在四张文案卡都有；当前卡箭头 `api-s4-cta-nudge`。
+- Data Ops 四张文案卡不再有 Contact Us；标题左侧 Start My Free Trial 滚回 `#free-trial`。
 - 手机 ≤900px：井置顶，四张文案卡竖叠。
 - 手机插图井高度：Use Cases 的 `.api-s2-visual` 必须 `flex: 0 0 auto` + 实高（现 96vw/375，min 300 / max 390）。`.api-iso-host` 是 absolute，copy 若 `height:100%` 会把井压成 0。手机藏 tickbar。
 - How-it-works 井不要锁 260：`min(90vw, 340)` / min 300，webhook 仍可底裁。
