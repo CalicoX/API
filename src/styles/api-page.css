@@ -5205,7 +5205,8 @@
   min-height: 100dvh;
   display: flex;
   align-items: stretch;
-  padding: 88px 0 128px;
+  /* 超大屏上下居中：弹性垫间距（约 7vh，每屏自适应），小屏最低留 64/80 兜底 */
+  padding: clamp(64px, 7vh, 140px) 0 clamp(80px, 8vh, 160px);
   overflow: hidden;
   background:
     radial-gradient(ellipse 70% 55% at 18% 20%, rgba(13, 148, 136, 0.07), transparent 58%),
@@ -5293,6 +5294,8 @@ html.is-reduce-fx .api-s5::after {
   z-index: 1;
   display: flex;
   flex-direction: column;
+  /* 内容块（标题→卡片→CTA）在 100vh 里垂直居中，多余空间上下均分 */
+  justify-content: center;
   flex: 1;
   width: 100%;
 }
@@ -5433,9 +5436,8 @@ html.is-reduce-fx .api-s5::after {
   z-index: 1;
   display: flex;
   justify-content: center;
-  margin-top: auto;
-  /* 卡片→CTA 与 标题→卡片 同档；margin-top:auto 只吃多出的部分，不再无限拉大 */
-  padding-top: clamp(56px, 11vh, 120px);
+  /* 卡片→CTA 与 标题→卡片 同档；整组垂直居中由 .api-s5 .api-wrap 的 justify-content:center 负责 */
+  margin-top: clamp(56px, 11vh, 120px);
 }
 
 .api-s5-cta .btn-switch {
