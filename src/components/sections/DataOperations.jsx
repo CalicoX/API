@@ -20,7 +20,18 @@ function tintWords(text, start = 0) {
   });
 }
 
-const CARDS = [
+function goToTrial(e) {
+  const el = document.getElementById("free-trial");
+  if (!el) return;
+  e.preventDefault();
+  if (window.__lenis?.scrollTo) {
+    window.__lenis.scrollTo(el, { duration: 1.1, force: true });
+  } else {
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+
+const SCENES = [
   {
     Visual: DataStatusStage,
     well: "status",
@@ -55,36 +66,14 @@ const CARDS = [
   },
 ];
 
-const EXIT_MS = 720;
+const EXIT_MS = 980;
 
-function stepDir(from, to, n = CARDS.length) {
-  const fwd = (to - from + n) % n;
-  const back = (from - to + n) % n;
-  return fwd <= back ? 1 : -1;
-}
-
-function CopyCard({ card, i, on, onPick, onHold }) {
+function CopyCard({ card }) {
   return (
-    <article
-      className={`api-s4-copy-card${on ? " is-on" : ""}`}
-      aria-current={on ? "true" : undefined}
-      tabIndex={0}
-      onClick={() => onPick(i)}
-      onMouseEnter={() => onHold(true)}
-      onMouseLeave={() => onHold(false)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onPick(i);
-        }
-      }}
-    >
+    <article className="api-s4-copy-card">
       <span className="api-s4-idx">[{card.idx}]</span>
       <h3>{card.title}</h3>
       <p>{card.body}</p>
-      <a className="api-s4-cta" href="#free-trial" onClick={(e) => e.stopPropagation()}>
-        Contact Us
-      </a>
     </article>
   );
 }
@@ -94,19 +83,14 @@ export default function DataOperations() {
   const sectionRef = useRef(null);
   const [idx, setIdx] = useState(0);
   const [prev, setPrev] = useState(null);
-  const [dir, setDir] = useState(1);
+  const [bloom, setBloom] = useState(false);
   const idxRef = useRef(0);
-  const pauseRef = useRef(false);
   const inViewRef = useRef(false);
-  const hold = (v) => {
-    pauseRef.current = v;
-  };
 
-  const goTo = (next) => {
-    const n = ((next % CARDS.length) + CARDS.length) % CARDS.length;
+  const advance = () => {
     const from = idxRef.current;
-    if (n === from) return;
-    setDir(stepDir(from, n));
+    const n = (from + 1) % SCENES.length;
+    setBloom(from === 0);
     setPrev(from);
     idxRef.current = n;
     setIdx(n);
@@ -114,7 +98,10 @@ export default function DataOperations() {
 
   useEffect(() => {
     if (prev == null) return undefined;
-    const t = window.setTimeout(() => setPrev(null), EXIT_MS);
+    const t = window.setTimeout(() => {
+      setPrev(null);
+      setBloom(false);
+    }, EXIT_MS);
     return () => window.clearTimeout(t);
   }, [prev]);
 
@@ -175,11 +162,11 @@ export default function DataOperations() {
     let timer = 0;
     const arm = () => {
       window.clearTimeout(timer);
-      if (pauseRef.current || !inViewRef.current) {
+      if (!inViewRef.current) {
         timer = window.setTimeout(arm, 360);
         return;
       }
-      timer = window.setTimeout(() => goTo(idxRef.current + 1), CARDS[idxRef.current].dwell);
+      timer = window.setTimeout(advance, SCENES[idxRef.current].dwell);
     };
     arm();
     return () => window.clearTimeout(timer);
@@ -194,6 +181,9 @@ export default function DataOperations() {
     >
       <div className="api-wrap">
         <div className="api-s4-head">
+          <a className="api-btn-primary api-s4-head-cta" href="#free-trial" onClick={goToTrial}>
+            Start My Free Trial
+          </a>
           <h2 className="api-h2" id="api-data-title">
             {tintWords("Data Operation Granularized")}
             <span className="api-s4-h2-sub">{tintWords("Forecast, Monitor, Intervene.", 3)}</span>
@@ -202,25 +192,14 @@ export default function DataOperations() {
 
         <div className="api-s4-board">
           <div className="api-s4-col">
-            <CopyCard
-              card={CARDS[0]}
-              i={0}
-              on={idx === 0}
-              onPick={goTo}
-              onHold={hold}
-            />
-            <CopyCard
-              card={CARDS[1]}
-              i={1}
-              on={idx === 1}
-              onPick={goTo}
-              onHold={hold}
-            />
+            <CopyCard card={SCENES[0]} />
+            <CopyCard card={SCENES[1]} />
           </div>
 
           <div className="api-s4-stage-card">
-            <div className="api-s4-well" data-dir={dir}>
-              {CARDS.map(({ Visual, well, title }, i) => {
+            <div className={`api-s4-well${bloom ? " is-bloom" : ""}`}>
+              <span className="api-s4-bloom" aria-hidden="true" />
+              {SCENES.map(({ Visual, well, title }, i) => {
                 const on = i === idx;
                 const exiting = i === prev;
                 return (
@@ -235,7 +214,6 @@ export default function DataOperations() {
                     ]
                       .filter(Boolean)
                       .join(" ")}
-                    data-dir={exiting ? dir : undefined}
                     aria-hidden={!on}
                   >
                     <Visual active={on} />
@@ -246,20 +224,8 @@ export default function DataOperations() {
           </div>
 
           <div className="api-s4-col">
-            <CopyCard
-              card={CARDS[2]}
-              i={2}
-              on={idx === 2}
-              onPick={goTo}
-              onHold={hold}
-            />
-            <CopyCard
-              card={CARDS[3]}
-              i={3}
-              on={idx === 3}
-              onPick={goTo}
-              onHold={hold}
-            />
+            <CopyCard card={SCENES[2]} />
+            <CopyCard card={SCENES[3]} />
           </div>
         </div>
       </div>

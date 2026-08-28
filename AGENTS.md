@@ -28,7 +28,7 @@ BottomCta 在 footer 上：Returns 同款暗底粒子海，文案 Efficient Solu
   2. Carriers：浅灰井（不要蓝底、不要点阵）；中心 3400+ + 两侧 logo **淡连线**；底半颗蓝点地球。Hover 时 logo+连线按 `--i` 逐个出现（只播一次）。
   3. Visibility：两张重叠卡拆开（运单号 → 自动识别）。
   4. Dashboard：井中小卡，**环形图描边**动画。
-- Data Operations：浅灰整段、**不要** sticky / 滚轮横滑。三栏白底：左 [01][02]、中间方形动画井、右 [03][04]。四段构图仍要四种，合并进一口井按序出场（Tracking → Carriers → Visibility → Dashboard），水平滑出过渡 0.72s `cubic-bezier(0.22, 1, 0.36, 1)`。点侧卡可跳场。动画触发看 `.api-s4-stage.is-on`，不要整卡 hover。
+- Data Operations：浅灰整段、**不要** sticky / 滚轮横滑 / 中间白卡外框。三栏：左 [01][02] 静态白文案卡、中间方形浅灰井（直接是动画）、右 [03][04]。四卡**无**选中态、不点选切场、**无** Contact Us。标题行 `[Start My Free Trial] [标题组]`，按钮滚到 `#free-trial`。四段构图仍要四种，同一口井连续演完 Tracking → Carriers → Visibility → Dashboard，重叠过渡（径向 mask / scale / clip-path / 模糊，0.8–1.1s `cubic-bezier(0.22, 1, 0.36, 1)`），不要横滑换片、不要淡入淡出切卡、不要斜移/3D。动画触发看井内 `.api-s4-stage.is-on`。地球自转跟当前场。reduce-motion 定格第一场。
 
 ## Hero shader（Undertones 1 本地复刻）
 

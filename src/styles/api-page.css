@@ -3133,13 +3133,23 @@
 }
 
 .api-s4-head {
+  display: flex;
+  align-items: center;
+  gap: 22px;
   width: 100%;
   max-width: none;
   margin: 0 0 var(--sec-head-gap);
   text-align: left;
 }
 
+.api-s4-head-cta {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 .api-s4-head .api-h2 {
+  flex: 1 1 auto;
+  min-width: 0;
   margin: 0;
 }
 
@@ -3182,28 +3192,10 @@
   min-height: 0;
   padding: 28px 24px 24px;
   text-align: left;
-  appearance: none;
-  -webkit-appearance: none;
-  border: none;
   border-radius: var(--s4-r);
   background: #fff;
   box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08);
-  cursor: pointer;
   color: inherit;
-  font: inherit;
-  transition:
-    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.api-s4-copy-card:hover {
-  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.28);
-}
-
-.api-s4-copy-card.is-on {
-  box-shadow:
-    0 0 0 2px #2563eb,
-    0 16px 36px rgba(37, 99, 235, 0.08);
 }
 
 .api-s4-idx {
@@ -3214,10 +3206,6 @@
   letter-spacing: 0.04em;
   color: #94a3b8;
   font-variant-numeric: tabular-nums;
-}
-
-.api-s4-copy-card.is-on .api-s4-idx {
-  color: #2563eb;
 }
 
 .api-s4-copy-card h3 {
@@ -3235,17 +3223,15 @@
 }
 
 .api-s4-stage-card {
-  --s4-r: 18px;
-  --s4-pad: 8px;
-  --s4-inner-r: calc(var(--s4-r) - var(--s4-pad));
+  --s4-r: 20px;
+  --s4-inner-r: var(--s4-r);
   position: relative;
   aspect-ratio: 1;
   min-width: 0;
-  border-radius: var(--s4-r);
-  background: #fff;
-  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08);
-  padding: var(--s4-pad);
-  box-sizing: border-box;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
 }
 
 .api-s4-well {
@@ -3255,34 +3241,102 @@
   overflow: hidden;
   border-radius: var(--s4-inner-r);
   container-type: size;
+  background: #f7f8fa;
+}
+
+.api-s4-bloom {
+  position: absolute;
+  inset: -12%;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    circle at 50% 48%,
+    rgba(255, 255, 255, 0.62) 0%,
+    rgba(219, 234, 254, 0.28) 26%,
+    transparent 64%
+  );
+  transform: scale(0.18);
+}
+
+.api-s4-well.is-bloom .api-s4-bloom {
+  animation: api-s4-bloom 0.98s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes api-s4-bloom {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.16);
+  }
+  48% {
+    opacity: 0.38;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.38);
+  }
 }
 
 .api-s4-stage {
+  --s4-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --s4-morph: 0.98s;
   position: absolute;
   inset: 0;
   z-index: 0;
   opacity: 0;
-  transform: translateX(28px);
   pointer-events: none;
   transition: none;
 }
 
-.api-s4-well[data-dir="-1"] .api-s4-stage:not(.is-on):not(.is-exit) {
-  transform: translateX(-28px);
+.api-s4-stage.api-s4-illus--status:not(.is-on):not(.is-exit) {
+  transform: scale(0.56);
+  filter: blur(8px);
+  clip-path: circle(0% at 50% 50%);
+}
+
+.api-s4-stage.api-s4-illus--carriers:not(.is-on):not(.is-exit) {
+  transform: scale(1.22);
+  filter: blur(10px);
+  clip-path: circle(0% at 50% 52%);
+}
+
+.api-s4-stage.api-s4-illus--auto:not(.is-on):not(.is-exit) {
+  transform: translateY(16%);
+  filter: blur(8px);
+  clip-path: inset(20% 0 0 0);
+}
+
+.api-s4-stage.api-s4-illus--dash:not(.is-on):not(.is-exit) {
+  transform: scale(0.82);
+  filter: blur(8px);
+  clip-path: circle(0% at 50% 58%);
 }
 
 .api-s4-stage.is-on,
 .api-s4-stage.is-exit {
   transition:
-    opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity var(--s4-morph) var(--s4-ease),
+    transform var(--s4-morph) var(--s4-ease),
+    filter var(--s4-morph) var(--s4-ease),
+    clip-path var(--s4-morph) var(--s4-ease);
 }
 
 .api-s4-stage.is-on {
   opacity: 1;
   transform: none;
+  filter: blur(0);
   pointer-events: auto;
   z-index: 2;
+}
+
+.api-s4-stage.api-s4-illus--status.is-on,
+.api-s4-stage.api-s4-illus--carriers.is-on,
+.api-s4-stage.api-s4-illus--dash.is-on {
+  clip-path: circle(150% at 50% 50%);
+}
+
+.api-s4-stage.api-s4-illus--auto.is-on {
+  clip-path: inset(0);
 }
 
 .api-s4-stage.is-exit {
@@ -3290,12 +3344,28 @@
   z-index: 1;
 }
 
-.api-s4-stage.is-exit[data-dir="1"] {
-  transform: translateX(-28px);
+.api-s4-stage.api-s4-illus--status.is-exit {
+  transform: scale(0.4);
+  filter: blur(7px);
+  clip-path: circle(6% at 50% 50%);
 }
 
-.api-s4-stage.is-exit[data-dir="-1"] {
-  transform: translateX(28px);
+.api-s4-stage.api-s4-illus--carriers.is-exit {
+  transform: scale(1.36);
+  filter: blur(12px);
+  clip-path: circle(0% at 50% 50%);
+}
+
+.api-s4-stage.api-s4-illus--auto.is-exit {
+  transform: translateY(-18%);
+  filter: blur(10px);
+  clip-path: inset(0 0 38% 0);
+}
+
+.api-s4-stage.api-s4-illus--dash.is-exit {
+  transform: scale(0.68);
+  filter: blur(8px);
+  clip-path: circle(0% at 50% 58%);
 }
 
 .api-s4-illus {
@@ -3353,53 +3423,26 @@
   height: 100%;
 }
 
-.api-s4-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  align-self: flex-start;
-  margin-top: auto;
-  padding-top: 28px;
-  font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
-  font-weight: 700;
-  color: var(--api-blue);
-  text-decoration: none;
-}
-
-.api-s4-cta::after {
-  content: "→";
-  display: inline-block;
-  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.api-s4-copy-card.is-on .api-s4-cta::after {
-  animation: api-s4-cta-nudge 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-}
-
-.api-s4-cta:hover {
-  color: #1d4ed8;
-}
-
-@keyframes api-s4-cta-nudge {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(6px);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .api-s4-copy-card.is-on .api-s4-cta::after {
-    animation: none;
-  }
-
   .api-s4-stage,
   .api-s4-stage.is-on,
-  .api-s4-stage.is-exit {
+  .api-s4-stage.is-exit,
+  .api-s4-stage.api-s4-illus--status:not(.is-on):not(.is-exit),
+  .api-s4-stage.api-s4-illus--carriers:not(.is-on):not(.is-exit),
+  .api-s4-stage.api-s4-illus--auto:not(.is-on):not(.is-exit),
+  .api-s4-stage.api-s4-illus--dash:not(.is-on):not(.is-exit) {
     transition: none;
     transform: none;
+    filter: none;
+  }
+
+  .api-s4-stage.is-on {
+    clip-path: none;
+  }
+
+  .api-s4-well.is-bloom .api-s4-bloom {
+    animation: none;
+    opacity: 0;
   }
 }
 
@@ -6296,8 +6339,14 @@ html.is-reduce-fx .api-s5::after {
     font-size: 26px;
   }
 
-  .api-s4-cta {
-    padding-top: 18px;
+  .api-s4-head {
+    flex-wrap: wrap;
+    gap: 14px 16px;
+  }
+
+  .api-s4-head-cta {
+    min-height: 44px;
+    padding: 0 16px;
   }
 
   .api-mb-laptop {
