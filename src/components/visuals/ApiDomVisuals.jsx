@@ -150,14 +150,11 @@ const S4_HUB_WIRES = S4_HUB_NODES.map((node, i) => ({
   sy: node.sy,
 }));
 
-function HubCarrierCount() {
+function HubCarrierCount({ active = false }) {
   const ref = useRef(null);
   const [n, setN] = useState(3400);
 
   useEffect(() => {
-    const el = ref.current;
-    const card = el?.closest(".api-s4-card");
-    if (!el || !card) return undefined;
     if (prefersReducedMotion()) {
       setN(3400);
       return undefined;
@@ -176,18 +173,13 @@ function HubCarrierCount() {
       setN(0);
       raf = requestAnimationFrame(tick);
     };
-    const reset = () => {
+    if (active) play();
+    else {
       cancelAnimationFrame(raf);
       setN(3400);
-    };
-    card.addEventListener("mouseenter", play);
-    card.addEventListener("mouseleave", reset);
-    return () => {
-      card.removeEventListener("mouseenter", play);
-      card.removeEventListener("mouseleave", reset);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
+    }
+    return () => cancelAnimationFrame(raf);
+  }, [active]);
 
   return (
     <b ref={ref}>
@@ -251,7 +243,7 @@ export function DataStatusStage() {
   );
 }
 
-export function DataCarriersStage() {
+export function DataCarriersStage({ active = false }) {
   const hostRef = useRef(null);
 
   useEffect(() => {
@@ -338,7 +330,7 @@ export function DataCarriersStage() {
               <rect x="56" y="35.6" width="12" height="3.8" rx="1.9" fill="#e8eef8" />
             </RackShelf>
           </svg>
-          <HubCarrierCount />
+          <HubCarrierCount active={active} />
           <em>carriers</em>
         </div>
         {S4_HUB_NODES.map((node, i) => (
@@ -369,7 +361,7 @@ const S4_TRACK_EVENTS = [
   { time: "2022/8/16 14:40:00", text: "Shipment picked up, Shanghai CN" },
 ];
 
-export function DataHubStage() {
+export function DataHubStage({ active = false }) {
   const vigRef = useRef(null);
   const [typed, setTyped] = useState(S4_NUMBER);
   const [typing, setTyping] = useState(false);
@@ -380,10 +372,6 @@ export function DataHubStage() {
   const [snap, setSnap] = useState(false);
 
   useEffect(() => {
-    const vig = vigRef.current;
-    const card = vig?.closest(".api-s4-card");
-    if (!vig || !card) return undefined;
-
     const reduce = prefersReducedMotion();
     let cancelled = false;
     let timer = 0;
@@ -398,19 +386,12 @@ export function DataHubStage() {
       setSnap(false);
     };
 
-    const reset = () => {
-      cancelled = true;
-      window.clearTimeout(timer);
-      finish();
-    };
-
     const wait = (ms) =>
       new Promise((resolve) => {
         timer = window.setTimeout(resolve, ms);
       });
 
     const play = async () => {
-      cancelled = false;
       if (reduce) {
         finish();
         return;
@@ -442,25 +423,14 @@ export function DataHubStage() {
       setPanel(true);
     };
 
-    const onEnter = () => {
-      cancelled = true;
-      window.clearTimeout(timer);
-      play();
-    };
-    const onLeave = () => {
-      reset();
-      cancelled = false;
-    };
+    if (active) play();
+    else finish();
 
-    card.addEventListener("mouseenter", onEnter);
-    card.addEventListener("mouseleave", onLeave);
     return () => {
       cancelled = true;
       window.clearTimeout(timer);
-      card.removeEventListener("mouseenter", onEnter);
-      card.removeEventListener("mouseleave", onLeave);
     };
-  }, []);
+  }, [active]);
 
   const cls = [
     "api-s4-vig api-s4-vig--auto",

@@ -850,7 +850,7 @@ export function mountCarriersEarth(host, canvas) {
     rootMargin: "80px",
   });
 
-  let hoverEl = null;
+  const stage = host.closest(".api-s4-stage") || host;
   const onEnter = () => {
     speedTarget = 1;
     lastT = null;
@@ -859,17 +859,16 @@ export function mountCarriersEarth(host, canvas) {
   const onLeave = () => {
     speedTarget = 0;
   };
-  if (canHover) {
-    hoverEl = host.closest(".api-s4-card") || host;
-    hoverEl.addEventListener("mouseenter", onEnter);
-    hoverEl.addEventListener("mouseleave", onLeave);
-  }
+  const syncSpin = () => {
+    if (stage.classList.contains("is-on") && canHover) onEnter();
+    else onLeave();
+  };
+  const mo = new MutationObserver(syncSpin);
+  mo.observe(stage, { attributes: true, attributeFilter: ["class"] });
+  syncSpin();
 
   return function disposeCarriersEarth() {
-    if (hoverEl) {
-      hoverEl.removeEventListener("mouseenter", onEnter);
-      hoverEl.removeEventListener("mouseleave", onLeave);
-    }
+    mo.disconnect();
     dispose();
   };
 }

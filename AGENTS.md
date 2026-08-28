@@ -28,8 +28,7 @@ BottomCta 在 footer 上：Returns 同款暗底粒子海，文案 Efficient Solu
   2. Carriers：浅灰井（不要蓝底、不要点阵）；中心 3400+ + 两侧 logo **淡连线**；底半颗蓝点地球。Hover 时 logo+连线按 `--i` 逐个出现（只播一次）。
   3. Visibility：两张重叠卡拆开（运单号 → 自动识别）。
   4. Dashboard：井中小卡，**环形图描边**动画。
-- Hover：整卡触发，约 3.2s，`cubic-bezier(0.22, 1, 0.36, 1)`；位移走水平，不要斜移。
-- Data Operations：浅灰整段、sticky 竖滑横移、标题左对齐、右侧圆形 prev/next。单卡约 800×500。滚动用连续 `--s4-x`，不要整卡跳。
+- Data Operations：浅灰整段、**不要** sticky / 滚轮横滑。三栏白底：左 [01][02]、中间方形动画井、右 [03][04]。四段构图仍要四种，合并进一口井按序出场（Tracking → Carriers → Visibility → Dashboard），水平滑出过渡 0.72s `cubic-bezier(0.22, 1, 0.36, 1)`。点侧卡可跳场。动画触发看 `.api-s4-stage.is-on`，不要整卡 hover。
 
 ## Hero shader（Undertones 1 本地复刻）
 
@@ -52,8 +51,7 @@ BottomCta 在 footer 上：Returns 同款暗底粒子海，文案 Efficient Solu
 - **设计微调**（偏离原版，故意的）：`CF_INTENSITY 1.2`（原 0.85），`CF_FADE_SCALE 0.7`
  （衰减 `1-dt` → `1-dt*0.7`，拖尾约 1.4 倍寿命；2026-08-17 从 0.45 缩短，Park 嫌太长）。拖尾色：紫 `#D042FF` + 蓝 `#5B4FFF`
   + left 一点橙 `#FF3805`（绿不要）。想调手感只动 intensity / fade。
-- 布局：`.api-s4-track` 有 `overflow-x: clip`（不是 hidden，hidden 会杀 sticky）——
-  用例轮播的探出卡片不能撑宽文档，删了会回归横向滚动条。
+- Data Operations 不再用 `.api-s4-track` / sticky；Use Cases 探出卡片仍不要撑宽文档。
 
 ## Git
 

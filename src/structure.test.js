@@ -97,6 +97,10 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/HowItWorks.jsx")).toMatch(/How Does the API Work/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/Data Operation Granularized/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/9 main \+ 27 sub/);
+    expect(read("components/sections/DataOperations.jsx")).toMatch(/api-s4-board/);
+    expect(read("components/sections/DataOperations.jsx")).toMatch(/idx: \"01\"/);
+    expect(read("components/sections/DataOperations.jsx")).toMatch(/\[\{card\.idx\}\]/);
+    expect(read("components/sections/DataOperations.jsx")).not.toMatch(/api-s4-rail|--s4-x|data-s4-dir/);
     expect(read("components/sections/Applications.jsx")).toMatch(/Logistics Service/);
     expect(read("components/sections/Applications.jsx")).toMatch(/Various Platforms/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Land the Integration Together/);
