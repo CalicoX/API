@@ -3,6 +3,7 @@ import Footer from "./layout/Footer.jsx";
 import ProductDock from "./layout/ProductDock.jsx";
 import Hero from "./sections/Hero.jsx";
 import TrustBand from "./sections/TrustBand.jsx";
+import BrandsSay from "./sections/BrandsSay.jsx";
 import UseCases from "./sections/UseCases.jsx";
 import HowItWorks from "./sections/HowItWorks.jsx";
 import DataOperations from "./sections/DataOperations.jsx";
@@ -31,6 +32,7 @@ export default function LandingPage() {
         <main>
           <Hero />
           <TrustBand />
+          <BrandsSay />
           <UseCases />
           <HowItWorks />
           <DataOperations />

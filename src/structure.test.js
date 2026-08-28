@@ -23,6 +23,7 @@ describe("API landing structure (gating)", () => {
       "Topbar",
       "Hero",
       "TrustBand",
+      "BrandsSay",
       "UseCases",
       "HowItWorks",
       "DataOperations",
@@ -42,10 +43,12 @@ describe("API landing structure (gating)", () => {
       expect(existsSync(join(root, sectionPath))).toBe(true);
     }
     // tracking-only sections must not drive this page
-    expect(lp).not.toMatch(/ImpactBand|FeaturesSection|AiLab|BrandsSay/);
-    expect(lp).not.toMatch(/<BrandsSay/)
-    // Hero then TrustBand; Credentials then ExploreMore
+    // (BrandsSay joined 2026-08-28: Park 同步进 API，TrustBand 后白底单排)
+    expect(lp).not.toMatch(/ImpactBand|FeaturesSection|AiLab/);
+    // Hero then TrustBand; TrustBand then BrandsSay; Credentials then ExploreMore
     expect(lp.indexOf("Hero")).toBeLessThan(lp.indexOf("TrustBand"));
+    expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("BrandsSay"));
+    expect(lp.indexOf("BrandsSay")).toBeLessThan(lp.indexOf("UseCases"));
     expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("UseCases"));
     expect(lp.indexOf("Credentials")).toBeLessThan(lp.indexOf("ExploreMore"));
     expect(lp.indexOf("ExploreMore")).toBeLessThan(lp.indexOf("BottomCta"));
