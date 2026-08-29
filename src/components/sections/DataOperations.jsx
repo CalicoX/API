@@ -136,6 +136,28 @@ function measureBridge(well, fromWell, toWell, id) {
   };
 }
 
+/* keel 落进枢纽卡 logo 槽位的落点：槽位在候场（scale s）里实测，按中心逆映射回终态 */
+function measureKeelSlot(well) {
+  if (!well) return null;
+  const wr = well.getBoundingClientRect();
+  if (!wr.width || !wr.height) return null;
+  const el = well.querySelector("[data-s4-keel-slot]");
+  if (!el) return null;
+  const r = el.getBoundingClientRect();
+  if (!r.width || !r.height) return null;
+  const s = STANDBY_SCALE;
+  const lw = (r.width / wr.width) * 100 * (1 / s);
+  const lh = (r.height / wr.height) * 100 * (1 / s);
+  const rawCx = ((r.left + r.width / 2 - wr.left) / wr.width) * 100;
+  const rawCy = ((r.top + r.height / 2 - wr.top) / wr.height) * 100;
+  return {
+    lx: 50 + (rawCx - 50) / s - lw / 2,
+    ly: 50 + (rawCy - 50) / s - lh / 2,
+    lw,
+    lh,
+  };
+}
+
 /* squircle 裁切路径：keel 常驻 logo 与第一场共用同一形状 */
 const LOGO_SQUIRCLE_D =
   "M0.6456,0.0034Q0.7912,0.0069 0.8351,0.0174Q0.8789,0.0280 0.9071,0.0463Q0.9353,0.0647 0.9537,0.0929Q0.9720,0.1211 0.9826,0.1649Q0.9931,0.2088 0.9966,0.3544Q1.0000,0.5000 0.9966,0.6456Q0.9931,0.7912 0.9826,0.8351Q0.9720,0.8789 0.9537,0.9071Q0.9353,0.9353 0.9071,0.9537Q0.8789,0.9720 0.8351,0.9826Q0.7912,0.9931 0.6456,0.9966Q0.5000,1.0000 0.3544,0.9966Q0.2088,0.9931 0.1649,0.9826Q0.1211,0.9720 0.0929,0.9537Q0.0647,0.9353 0.0463,0.9071Q0.0280,0.8789 0.0174,0.8351Q0.0069,0.7912 0.0034,0.6456Q0.0000,0.5000 0.0034,0.3544Q0.0069,0.2088 0.0174,0.1649Q0.0280,0.1211 0.0463,0.0929Q0.0647,0.0647 0.0929,0.0463Q0.1211,0.0280 0.1649,0.0174Q0.2088,0.0069 0.3544,0.0034Q0.5000,0.0000 0.6456,0.0034Z";
@@ -161,6 +183,7 @@ export default function DataOperations() {
   const [bridge, setBridge] = useState(null);
   const [started, setStarted] = useState(false);
   const [keel, setKeel] = useState("off");
+  const [keelSlot, setKeelSlot] = useState(null);
   const idxRef = useRef(0);
   const inViewRef = useRef(false);
 
@@ -177,6 +200,8 @@ export default function DataOperations() {
         seqRef.current,
       ),
     );
+    /* 进第二场时按枢纽卡 logo 槽位终态定 keel 落点，其余场清掉 */
+    setKeelSlot(n === 1 ? measureKeelSlot(wellRef.current) : null);
     setPrev(from);
     idxRef.current = n;
     setIdx(n);
@@ -205,18 +230,20 @@ export default function DataOperations() {
       setStarted(true);
   }, []);
 
-  /* keel logo：第一场即它；进第二场原地续住，面板/数字接手后淡出 */
+  /* keel logo：第一场即它；进第二场原地续住并落进枢纽卡槽位（落点见 keelSlot，
+     settle 由 CSS 延迟过渡完成），之后 logo 就是卡的一部分，随场进出 */
   useEffect(() => {
     if (idx === 0) {
       setKeel(started ? "in" : "off");
+      setKeelSlot(null);
       return undefined;
     }
     if (idx === 1) {
       setKeel("hold");
-      const t = window.setTimeout(() => setKeel("off"), 900);
-      return () => window.clearTimeout(t);
+      return undefined;
     }
     setKeel("off");
+    setKeelSlot(null);
     return undefined;
   }, [idx, started]);
 
@@ -370,7 +397,20 @@ export default function DataOperations() {
                   </div>
                 );
               })}
-              <div className={`api-s4-keel is-${keel}`} aria-hidden="true">
+              <div
+                className={`api-s4-keel is-${keel}${keelSlot ? " is-settle" : ""}`}
+                style={
+                  keelSlot
+                    ? {
+                        left: `${keelSlot.lx}%`,
+                        top: `${keelSlot.ly}%`,
+                        width: `${keelSlot.lw}%`,
+                        height: `${keelSlot.lh}%`,
+                      }
+                    : undefined
+                }
+                aria-hidden="true"
+              >
                 <svg
                   className="api-s4-logo-defs"
                   width="0"

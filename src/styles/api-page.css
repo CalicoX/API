@@ -3479,7 +3479,8 @@
   object-fit: contain;
 }
 
-/* —— 17 logo 常驻层：第一场即中心本体；进第二场原地不动，面板/数字接手后淡出 —— */
+/* —— 17 logo 常驻层：第一场即中心本体；进第二场原地起步，面板浮现后
+   平滑落进枢纽卡的 logo 槽位（落点由 JS 按槽位终态实测注入），与数字同卡 —— */
 .api-s4-keel {
   position: absolute;
   left: 50%;
@@ -3491,6 +3492,25 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.api-s4-keel.is-settle {
+  translate: 0 0;
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
+    left 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
+    top 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
+    width 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
+    height 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s;
+}
+
+/* 枢纽卡顶部的 logo 槽位：占位让卡内布局稳定，logo 由 keel 层落进来 */
+.api-s4-keel-slot {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 7px;
 }
 
 .api-s4-keel img {
@@ -3662,6 +3682,11 @@
   .api-s4-keel.is-hold {
     animation: none;
     opacity: 1;
+  }
+
+  .api-s4-keel.is-settle,
+  .api-s4-keel {
+    transition: none;
   }
 
   .api-s4-well.is-bloom .api-s4-bloom {
@@ -4090,7 +4115,7 @@
   padding: 15px 14px 14px;
   box-sizing: border-box;
   border-radius: 20px;
-  border: 1px solid rgba(186, 206, 232, 0.28);
+  border: 1px solid rgba(15, 23, 42, 0.1);
   background: #fff;
   transform: translate(-50%, -50%);
   overflow: visible;

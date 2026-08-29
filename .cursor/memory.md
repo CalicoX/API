@@ -13,7 +13,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - Data Operations 四场编排（2026-08-29 Park）：过渡要有「相同元素衔接」，不要硬切。
   - 场1入场（滑入视口才开播，well `is-started` 门控，IO 首次相交置位）：涟漪依次（`api-s4-wash-in` 按 `--r` 错峰）→ 17 logo 放大渐显（`api-s4-keel` 常驻层，squircle 裁切 + 蓝底，从场1 JSX 移到 DataOperations 井层）→ 9 状态依次（`api-s4-chip-in` 按 `--ci`，外5内4 全局序号）→ 1.75s 后才开始转（环动画挂在 is-on 上，每次重场重启）。
-  - 场1→2 **无白桥**：keel logo 原地不动（is-hold），900ms 后淡出让 `3,400+` 数字滚动接手（滚动本身已有）。枢纽白卡 `hub-in` 缩放浮现；服务器插图已删；基线线条 `wire-draw` 依次生长（base path 加了 pathLength=100）；承运商 logo `hublogo-in` 逐个出现；流光延迟 2s 等线条长完。
+  - 场1→2 **无白桥**：keel logo 原地起步，面板浮现后（CSS 延迟 0.5s）**平滑落进枢纽卡顶部的 logo 槽位**（`api-s4-keel-slot` 30px 占位 + `data-s4-keel-slot`；落点由 `measureKeelSlot` 按槽位终态实测注入 keel inline style，`is-settle` 过渡 left/top/width/height/translate 0.6s）——之后 logo 就是卡的一部分，**不淡出**（2026-08-29 Park：logo 要和数字包在一起，不许消失）。枢纽白卡描边已加强（`rgba(15,23,42,0.1)`，和 codewin/dashtile 同档）。注意 keel 基态是 `translate:-50% -50%`，settle 必须归零 `translate:0 0`，否则落点偏半个身位。数字滚动已有（HubCarrierCount 0→3400）；基线线条 `wire-draw` 依次生长（base path pathLength=100）；承运商 `hublogo-in` 逐个出现；流光延迟 2s。
   - 场2→3 **DHL 桥**（BRIDGE_PAIRS kind:"dhl"，dur 2.9s/ttl 2950）：hub 的 DHL 节点飞向 `detect-hit`（data-s4-dhl-target），落在识别完成那一刻（激活后 ~2.83s）。第三场播放简化成「终态布局原地重播」（不再收拢面板移位，否则桥落点会错位），播放入场延迟 1450ms 等桥起飞。
   - 场3→4 白核桥 codewin→donut；**背景大圆 dash-disc 已删**（DOM+CSS）。场4→1 白核桥 donut→`.api-s4-keel img`。核心隐没/浮现规则只作用于 `has-bridge--core`，DHL 桥不碰两端核心。
   - 候场 transform 必须纯 `scale(0.52)`、origin 50% 50%——桥的逆变换按这个算（orbit-core 原来的 0.84 候场缩放已删）。

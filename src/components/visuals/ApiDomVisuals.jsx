@@ -354,6 +354,11 @@ export function DataCarriersStage({ active = false }) {
           ))}
         </svg>
         <div className="api-s4-hub-core" data-s4-core>
+          <span
+            className="api-s4-keel-slot"
+            data-s4-keel-slot
+            aria-hidden="true"
+          />
           <HubCarrierCount active={active} />
           <em>carriers</em>
         </div>
