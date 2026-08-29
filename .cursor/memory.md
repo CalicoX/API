@@ -14,8 +14,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - Data Operations 四场编排（2026-08-29 Park）：过渡要有「相同元素衔接」，不要硬切。
   - 场1入场（滑入视口才开播，well `is-started` 门控，IO 首次相交置位）：涟漪依次（`api-s4-wash-in` 按 `--r` 错峰）→ 17 logo 放大渐显（`api-s4-keel` 常驻层，squircle 裁切 + 蓝底，从场1 JSX 移到 DataOperations 井层）→ 9 状态依次（`api-s4-chip-in` 按 `--ci`，外5内4 全局序号）→ 1.75s 后才开始转（环动画挂在 is-on 上，每次重场重启）。
   - 场1→2 **无白桥**：keel logo 原地起步，面板浮现后（CSS 延迟 0.5s）**平滑落进枢纽卡顶部的 logo 槽位**（`api-s4-keel-slot` 30px 占位 + `data-s4-keel-slot`；落点由 `measureKeelSlot` 按槽位终态实测注入 keel inline style，`is-settle` 过渡 left/top/width/height/translate 0.6s）——之后 logo 就是卡的一部分，**不淡出**（2026-08-29 Park：logo 要和数字包在一起，不许消失）。枢纽白卡描边已加强（`rgba(15,23,42,0.1)`，和 codewin/dashtile 同档）。注意 keel 基态是 `translate:-50% -50%`，settle 必须归零 `translate:0 0`，否则落点偏半个身位。数字滚动已有（HubCarrierCount 0→3400）；基线线条 `wire-draw` 依次生长（base path pathLength=100）；承运商 `hublogo-in` 逐个出现；流光延迟 2s。
-  - 场2→3 **DHL 桥**（BRIDGE_PAIRS kind:"dhl"，dur 2.9s/ttl 2950）：hub 的 DHL 节点飞向 `detect-hit`（data-s4-dhl-target），落在识别完成那一刻（激活后 ~2.83s）。第三场播放简化成「终态布局原地重播」（不再收拢面板移位，否则桥落点会错位），播放入场延迟 1450ms 等桥起飞。
-  - 场3→4 白核桥 codewin→donut；**背景大圆 dash-disc 已删**（DOM+CSS）。场4→1 白核桥 donut→`.api-s4-keel img`。核心隐没/浮现规则只作用于 `has-bridge--core`，DHL 桥不碰两端核心。
+  - 场2→3 **DHL 桥**（唯一保留的桥；2026-08-29 Park：没有关联元素就别强行同元素过渡，3→4 / 4→1 的白核 morph 已删）：hub 的 DHL 节点飞向 `detect-hit`（data-s4-dhl-target），dur 2.1s / ttl 2150。第三场时序：**激活即清空** typed/detected（空表单入场，内容只出现一次——之前入场先显终态全量再清空重打，Park 看到「卡片出现两次」），700ms 起打字、扫 680ms → 识别 ~2.08s，与桥落点对齐。面板不位移。
+  - **二三四场元素级进出场**（2026-08-29 Park「没有进出场动画」）：共享 `api-s4-el-in / el-out`（translate+opacity）。场2 退场：卡 hub-out 收拢、8 个承运商 logo 逐个弹没、线按序褪去（入场 hub-in/wire-draw/hublogo-in 已有）。场3 入场 codewin 0.15s 先起、link+trackpane 0.38s 跟进，退场整组上飘；trackpane 原来的 is-playing pane-in 重播已不触发（激活即清空后只走新入场）。场4 入场 donut 卡 0.2s → 趋势卡 0.38s（donut 扇区/trend 画线本身已有），退场整组上飘；toast 保留原 toast-in。reduce/touch 静态兜底已扩展。has-bridge--core 的 core-in/hide CSS 已随白核桥删除（[data-s4-core] 属性留着无害）。
   - 候场 transform 必须纯 `scale(0.52)`、origin 50% 50%——桥的逆变换按这个算（orbit-core 原来的 0.84 候场缩放已删）。
   - **大坑**：CSS 注释里写「`--f*/--t*`」这类含 `*/` 的文本会把注释提前终结，后面的注释文字变成垃圾选择器，整条规则被静默丢弃（桥 0×0 的根因）。
 

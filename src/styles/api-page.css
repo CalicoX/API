@@ -3446,23 +3446,96 @@
   }
 }
 
-/* 核心隐没/浮现只属于白核桥（core）；DHL 桥不碰两端核心 */
-.api-s4-well.has-bridge--core .api-s4-stage.is-exit [data-s4-core] {
-  opacity: 0;
+/* —— 二三四场元素级进出场（2026-08-29 Park）：每场内容自己有戏，
+   白核桥已删（没有关联元素不强行同元素过渡），只在 DHL 桥时保留飞芯 —— */
+@keyframes api-s4-el-in {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
 }
 
-.api-s4-well.has-bridge--core .api-s4-stage.is-on [data-s4-core] {
-  animation: api-s4-core-in 1.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+@keyframes api-s4-el-out {
+  to {
+    opacity: 0;
+    translate: 0 -26px;
+  }
 }
 
-@keyframes api-s4-core-in {
-  0%,
-  74% {
+/* 第二场退场：卡收拢、logo 逐个弹没、线按序褪去 */
+.api-s4-stage.api-s4-illus--carriers.is-exit .api-s4-hub-core {
+  animation: api-s4-hub-out 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes api-s4-hub-out {
+  to {
+    opacity: 0;
+    scale: 0.8;
+  }
+}
+
+.api-s4-stage.api-s4-illus--carriers.is-exit .api-s4-hub-logo {
+  animation: api-s4-hublogo-out 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.04s);
+}
+
+@keyframes api-s4-hublogo-out {
+  to {
+    opacity: 0;
+    scale: 0.5;
+  }
+}
+
+.api-s4-stage.api-s4-illus--carriers.is-exit .api-s4-hub-wires .base path {
+  animation: api-s4-wire-out 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.03s);
+}
+
+@keyframes api-s4-wire-out {
+  to {
     opacity: 0;
   }
-  100% {
-    opacity: 1;
-  }
+}
+
+/* 第三场入场：单号卡先起，连接线与轨迹面板跟进（内容激活时已清空，只出现一次） */
+.api-s4-well.is-started .api-s4-stage.api-s4-illus--auto.is-on .api-s4-codewin {
+  animation: api-s4-el-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.api-s4-well.is-started .api-s4-stage.api-s4-illus--auto.is-on .api-s4-link,
+.api-s4-well.is-started .api-s4-stage.api-s4-illus--auto.is-on .api-s4-trackpane {
+  animation: api-s4-el-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
+}
+
+.api-s4-stage.api-s4-illus--auto.is-exit .api-s4-codewin {
+  animation: api-s4-el-out 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.api-s4-stage.api-s4-illus--auto.is-exit .api-s4-link,
+.api-s4-stage.api-s4-illus--auto.is-exit .api-s4-trackpane {
+  animation: api-s4-el-out 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.07s both;
+}
+
+/* 第四场入场：donut 卡→趋势卡→toast 依次起；退场整组上飘 */
+.api-s4-well.is-started .api-s4-stage.api-s4-illus--dash.is-on .api-s4-dashtile--donut {
+  animation: api-s4-el-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.api-s4-well.is-started .api-s4-stage.api-s4-illus--dash.is-on .api-s4-dashtile--trend {
+  animation: api-s4-el-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
+}
+
+.api-s4-stage.api-s4-illus--dash.is-exit .api-s4-dashtile--donut,
+.api-s4-stage.api-s4-illus--dash.is-exit .api-s4-dashtile--trend {
+  animation: api-s4-el-out 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.api-s4-stage.api-s4-illus--dash.is-exit .api-s4-dashtoast {
+  animation: api-s4-el-out 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* DHL 桥：第二场的 DHL logo 芯片飞向第三场承运商盒，落在识别完成那一刻 */
@@ -3669,8 +3742,31 @@
     display: none;
   }
 
-  .api-s4-well.has-bridge--core .api-s4-stage.is-on [data-s4-core] {
+  .api-s4-well.is-started .api-s4-stage.is-on .api-s4-codewin,
+  .api-s4-well.is-started .api-s4-stage.is-on .api-s4-trackpane,
+  .api-s4-well.is-started .api-s4-stage.is-on .api-s4-link,
+  .api-s4-well.is-started .api-s4-stage.is-on .api-s4-dashtile,
+  .api-s4-well.is-started .api-s4-stage.is-on .api-s4-hub-core,
+  .api-s4-well.is-started .api-s4-stage.is-on .api-s4-hub-logo,
+  .api-s4-well.is-started .api-s4-stage.is-on .api-s4-hub-wires .base path {
     animation: none;
+    opacity: 1;
+    translate: none;
+    scale: none;
+  }
+
+  .api-s4-stage.is-exit .api-s4-codewin,
+  .api-s4-stage.is-exit .api-s4-trackpane,
+  .api-s4-stage.is-exit .api-s4-link,
+  .api-s4-stage.is-exit .api-s4-dashtile,
+  .api-s4-stage.is-exit .api-s4-dashtoast,
+  .api-s4-stage.is-exit .api-s4-hub-core,
+  .api-s4-stage.is-exit .api-s4-hub-logo,
+  .api-s4-stage.is-exit .api-s4-hub-wires .base path {
+    animation: none;
+    opacity: 1;
+    translate: none;
+    scale: none;
   }
 
   .api-s4-well:not(.is-started) .api-s4-orbit-wash,

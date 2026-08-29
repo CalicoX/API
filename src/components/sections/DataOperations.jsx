@@ -72,17 +72,12 @@ const EXIT_MS = 1300;
 /* 桥的候场逆变换系数：stage 候场是 scale(0.52)、origin 50% 50%（css 同步） */
 const STANDBY_SCALE = 0.52;
 
-/* match-cut 桥按「场对」配置；status>carriers 不设桥——17 logo 由 keel 层原地续住。
-   dur 要与第三场识别时刻（激活后约 2.83s）对齐，DHL 芯片落在识别完成那一刻。 */
+/* match-cut 桥只保留真有关联的场对（2026-08-29 Park：没有关联元素就别强行同元素过渡）：
+   2→3 的 DHL 徽标是真关联（同一承运商），3→4 / 4→1 的白卡 morph 已删，
+   那两段靠各场自己的进出场编排衔接。
+   dur 与第三场识别时刻对齐：激活即清空、700ms 起打字 700ms、扫 680ms → 识别 ~2.08s。 */
 const BRIDGE_PAIRS = {
-  "carriers>auto": { kind: "dhl", dur: "2.9s", ttl: 2950 },
-  "auto>dash": { kind: "core", dur: "1.3s", ttl: EXIT_MS },
-  "dash>status": {
-    kind: "core",
-    dur: "1.3s",
-    ttl: EXIT_MS,
-    toSelector: ".api-s4-keel img",
-  },
+  "carriers>auto": { kind: "dhl", dur: "2.1s", ttl: 2150 },
 };
 
 function measureBridge(well, fromWell, toWell, id) {

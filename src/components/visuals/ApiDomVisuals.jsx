@@ -433,12 +433,9 @@ export function DataHubStage({ active = false }) {
         finish();
         return;
       }
-      /* 保持终态布局原地重播：DHL 桥按 standby 实测几何飞行，面板不能中途移位 */
+      /* 激活时已清空，这里只负责打字→扫描→识别；面板不位移，DHL 桥落点才准 */
       setPlaying(true);
-      setTyped("");
       setTyping(true);
-      setScanning(false);
-      setDetected(false);
       for (let i = 1; i <= S4_NUMBER.length; i++) {
         if (cancelled) return;
         setTyped(S4_NUMBER.slice(0, i));
@@ -454,8 +451,13 @@ export function DataHubStage({ active = false }) {
     };
 
     if (active) {
-      /* 桥飞行/落位约 1.3s，等它收尾再开播打字序列，否则面板会在桥到达前移位 */
-      startTimer = window.setTimeout(play, reduce ? 0 : 1450);
+      /* 激活即清空：进出场期间卡是空表单，内容只出现一次，不会先全量再重播 */
+      setTyped("");
+      setTyping(false);
+      setScanning(false);
+      setDetected(false);
+      setPanel(true);
+      startTimer = window.setTimeout(play, reduce ? 0 : 700);
     } else finish();
 
     return () => {
