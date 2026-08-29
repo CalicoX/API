@@ -1247,6 +1247,11 @@
   .api-s2-tickbar {
     display: none;
   }
+
+  /* 手机上滚动编排定格 p=1，顶部彩虹进度线永远满宽挂着——纯噪音，隐藏 */
+  .api-s2-progress {
+    display: none;
+  }
 }
 
 /* —— Hub: logos | server | terminal fill the left column —— */
