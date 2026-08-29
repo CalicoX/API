@@ -10866,7 +10866,7 @@ body.ai-case-lightbox-active {
     width: 354px;
     height: 435px;
     min-height: 0;
-    transform: scale(0.87);
+    transform: scale(0.87) !important;
     transform-origin: 50% 0;
     margin-left: calc((100% - 354px) / 2);
     margin-bottom: -57px;
@@ -10894,7 +10894,7 @@ body.ai-case-lightbox-active {
     height: 435px;
     min-height: 0;
     padding: 18px 10px 36px;
-    transform: scale(0.87);
+    transform: scale(0.87) !important;
     transform-origin: 50% 0;
     margin-left: calc((100% - 354px) / 2);
     margin-bottom: -57px;
@@ -10908,7 +10908,7 @@ body.ai-case-lightbox-active {
   @media (max-width: 360px) {
     .explore-card-tracking .track-ui,
     .explore-card-returns .returns-ui {
-      transform: scale(0.7);
+      transform: scale(0.7) !important;
       margin-bottom: -130px;
     }
   }
