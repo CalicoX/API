@@ -10866,7 +10866,7 @@ body.ai-case-lightbox-active {
     height: 231px;
     min-height: 0;
     transform: scale(0.55);
-    transform-origin: top left;
+    transform-origin: 50% 0;
     margin-left: calc((100% - 560px) / 2);
   }
   .explore-card-tracking .track-ui .track-ui-board {
@@ -10893,7 +10893,7 @@ body.ai-case-lightbox-active {
     min-height: 0;
     padding: 18px 10px 36px;
     transform: scale(0.55);
-    transform-origin: top left;
+    transform-origin: 50% 0;
     margin-left: calc((100% - 560px) / 2);
   }
   .explore-card-returns .returns-ui-stack {
