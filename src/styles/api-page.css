@@ -5950,6 +5950,46 @@ html.is-reduce-fx .api-s5::after {
   list-style: none;
 }
 
+/* 移动端（≤480）tab 切换：桌面隐藏，手机显示 */
+.api-plan-tabs {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .api-plan-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 0 0 18px;
+  }
+
+  .api-plan-tabs button {
+    flex: 1 1 0;
+    padding: 9px 4px;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    background: #fff;
+    color: #64748b;
+    font-size: clamp(11px, calc(10.6px + 0.16vw), 13px);
+    font-weight: 650;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .api-plan-tabs button.is-active {
+    border-color: var(--api-blue);
+    background: var(--api-blue);
+    color: #fff;
+  }
+
+  .api-plans li {
+    display: none;
+  }
+
+  .api-plans li.is-active {
+    display: block;
+  }
+}
+
 .api-plan-card {
   display: grid;
   grid-template-rows: 36px 1fr;
@@ -6881,6 +6921,12 @@ html.is-reduce-fx .api-s5::after {
 @media (max-width: 480px) {
   .api-apps {
     grid-template-columns: 1fr;
+  }
+
+  /* 卡片高度自适应内容（2026-08-29 Park） */
+  .api-app-card {
+    min-height: 0;
+    padding: 22px 18px 24px;
   }
 }
 

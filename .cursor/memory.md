@@ -11,6 +11,12 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- 移动端修正范围（2026-08-29 Park「这是 <480 的，不是单纯的小于900」）：这批 5 项全按 **≤480 手机档**做，别扩到 900。
+  - Applications 卡 `.api-app-card`：≤480 `min-height: 0`（自适应内容高度）+ padding 收紧（22/18/24），别再把空隙拉满。
+  - pricing（IntegrationTogether）：≤480 **tab 切换**（`.api-plan-tabs` 四个 plan 按钮 + `is-active`，`.api-plans > li:not(.is-active) { display:none }`），桌面平铺不变；JSX 加了 `useState(planIdx)`。
+  - Explore 卡 `.explore-link`：≤480 `margin-top: 20px`（desktop 的 `margin-top:auto` 在单列布局里失效导致贴着正文）。
+  - ④⑤ track-ui / returns-ui 插图：≤480 **PC 版整体缩放**——固定 560px 宽 + `transform: scale(0.55)`（origin top left + `margin-left: calc((100% - 560px)/2)` 居中），行高按 420×0.55=231 收；恢复 PC 版板位（video 164/-8/132、wismo 168/-8/208、第4条事件 display:block）。这是做在 landing.css 末尾的独立 ≤480 块，覆盖 ≤680 块里的手机自定义布局。别给插图做移动端重排，Park 明确要「PC 版直接缩放即可」。
+
 - Data Operations 四场编排（2026-08-29 Park）：过渡要有「相同元素衔接」，不要硬切。
   - 场1入场（滑入视口才开播，well `is-started` 门控，IO 首次相交置位）：涟漪依次（`api-s4-wash-in` 按 `--r` 错峰）→ 17 logo 放大渐显（`api-s4-keel` 常驻层，squircle 裁切 + 蓝底，从场1 JSX 移到 DataOperations 井层）→ 9 状态依次（`api-s4-chip-in` 按 `--ci`，外5内4 全局序号）→ 1.75s 后才开始转（环动画挂在 is-on 上，每次重场重启）。
   - 场1→2 **无白桥**：keel logo 原地起步，面板浮现后（CSS 延迟 0.5s）**平滑落进枢纽卡顶部的 logo 槽位**（`api-s4-keel-slot` 30px 占位 + `data-s4-keel-slot`；落点由 `measureKeelSlot` 按槽位终态实测注入 keel inline style，`is-settle` 过渡 left/top/width/height/translate 0.6s）——之后 logo 就是卡的一部分，**不淡出**（2026-08-29 Park：logo 要和数字包在一起，不许消失）。枢纽白卡描边已加强（`rgba(15,23,42,0.1)`，和 codewin/dashtile 同档）。注意 keel 基态是 `translate:-50% -50%`，settle 必须归零 `translate:0 0`，否则落点偏半个身位。数字滚动已有（HubCarrierCount 0→3400）；基线线条 `wire-draw` 依次生长（base path pathLength=100）；承运商 `hublogo-in` 逐个出现；流光延迟 2s。

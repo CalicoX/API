@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   IllusOnboardChat,
   IllusOnboardTrial,
@@ -20,7 +21,12 @@ const PLANS = [
   { name: "Basic", price: "$ 0.0238", quota: "5,000 quota / $ 119" },
   { name: "Advanced", price: "$ 0.0227", quota: "25,000 quota / $ 569" },
   { name: "Pro", price: "$ 0.0191", quota: "150,000 quota / $ 2,869" },
-  { name: "Flagship", price: "$ 0.0185", quota: "500,000 quota / $ 9,299", hot: true },
+  {
+    name: "Flagship",
+    price: "$ 0.0185",
+    quota: "500,000 quota / $ 9,299",
+    hot: true,
+  },
 ];
 
 function PlanCheck() {
@@ -64,8 +70,13 @@ const STEPS = [
 
 /** Official 17track.net/en/api — Land the Integration Together */
 export default function IntegrationTogether() {
+  const [planIdx, setPlanIdx] = useState(0);
   return (
-    <section className="api-land" id="land-together" aria-labelledby="api-land-title">
+    <section
+      className="api-land"
+      id="land-together"
+      aria-labelledby="api-land-title"
+    >
       <div className="api-wrap">
         <div className="api-land-head">
           <h2 className="api-h2" id="api-land-title">
@@ -73,9 +84,33 @@ export default function IntegrationTogether() {
           </h2>
           <p className="api-land-sub">Each plan is valid for 12 months.</p>
         </div>
+        {/* 移动端（≤480）：tab 切换，不是平铺（2026-08-29 Park） */}
+        <div
+          className="api-plan-tabs"
+          role="tablist"
+          aria-label="Pricing plans"
+        >
+          {PLANS.map((plan, i) => (
+            <button
+              key={plan.name}
+              type="button"
+              role="tab"
+              aria-selected={i === planIdx}
+              className={i === planIdx ? "is-active" : ""}
+              onClick={() => setPlanIdx(i)}
+            >
+              {plan.name}
+            </button>
+          ))}
+        </div>
         <ul className="api-plans">
-          {PLANS.map((plan) => (
-            <li className={`api-plan-card${plan.hot ? " is-hot" : ""}`} key={plan.name}>
+          {PLANS.map((plan, i) => (
+            <li
+              className={`api-plan-card${plan.hot ? " is-hot" : ""}${
+                i === planIdx ? " is-active" : ""
+              }`}
+              key={plan.name}
+            >
               <span className="api-plan-popular" aria-hidden={!plan.hot}>
                 {plan.hot ? "Popular" : "\u00a0"}
               </span>
