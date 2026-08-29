@@ -12,6 +12,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 ## 决策
 
 - 移动端修正范围（2026-08-29 Park「这是 <480 的，不是单纯的小于900」）：这批 5 项全按 **≤480 手机档**做，别扩到 900。
+  - Use Cases 顶部「彩虹线」（Park 问是什么）：是 `.api-s2-progress` 滚动进度条（贴 sticky 舞台顶 2px、彩虹渐变随滚动填充）。手机 ≤768 滚动编排定格 p=1，它永远满宽挂着像凭空彩线 → ≤900 已 `display:none`，桌面保留。
   - Applications 卡 `.api-app-card`：≤480 `min-height: 0`（自适应内容高度）+ padding 收紧（22/18/24），别再把空隙拉满。
   - pricing（IntegrationTogether）：≤480 **tab 切换**（`.api-plan-tabs` 四个 plan 按钮 + `is-active`，`.api-plans > li:not(.is-active) { display:none }`），桌面平铺不变；JSX 加了 `useState(planIdx)`。
   - Explore 卡 `.explore-link`：≤480 `margin-top: 20px`（desktop 的 `margin-top:auto` 在单列布局里失效导致贴着正文）。
