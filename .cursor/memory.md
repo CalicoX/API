@@ -15,8 +15,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
   - Applications 卡 `.api-app-card`：≤480 `min-height: 0`（自适应内容高度）+ padding 收紧（22/18/24），别再把空隙拉满。
   - pricing（IntegrationTogether）：≤480 **tab 切换**（`.api-plan-tabs` 四个 plan 按钮 + `is-active`，`.api-plans > li:not(.is-active) { display:none }`），桌面平铺不变；JSX 加了 `useState(planIdx)`。
   - Explore 卡 `.explore-link`：≤480 `margin-top: 20px`（desktop 的 `margin-top:auto` 在单列布局里失效导致贴着正文）。
-  - ④⑤ track-ui / returns-ui 插图：≤480 **PC 版整体缩放**——固定 560px 宽 + `transform: scale(0.55)` + `margin-left: calc((100% - 560px)/2)` 居中，行高按 420×0.55=231 收；恢复 PC 版板位（video 164/-8/132、wismo 168/-8/208、第4条事件 display:block）。这是做在 landing.css 末尾的独立 ≤480 块，覆盖 ≤680 块里的手机自定义布局。别给插图做移动端重排，Park 明确要「PC 版直接缩放即可」。
-  - **坑**：负 margin 居中的盒子 + `transform-origin: top left` 会把缩放的视觉钉在盒子左上角，视觉偏出卡片一侧（Park 截图：插图切左/右边空蓝）。必须 `transform-origin: 50% 0`（水平中心缩放）。验证法：量 mock 的 getBoundingClientRect 相对卡片是否左右对称。
+  - ④⑤ track-ui / returns-ui 插图：≤480 **PC 版整体缩放**——按**本页桌面实测尺寸 354×435** 冻结布局（别拍脑袋写 560×420，那是别的页面的尺寸；量法：1440 视口下 getBoundingClientRect），`transform: scale(0.87)` + `margin-left: calc((100% - 354px)/2)` 居中 + `margin-bottom: -57px` 抵消余高；恢复 PC 版板位（video 164/-8/132、wismo 168/-8/208、第4条事件 display:block）。这是做在 landing.css 末尾的独立 ≤480 块，覆盖 ≤680 块里的手机自定义布局；≤360 再降一档 scale 0.7 / margin-bottom -130px。别给插图做移动端重排，Park 明确要「PC 版直接缩放即可」。
+  - **坑**：负 margin 居中的盒子 + `transform-origin: top left` 会把缩放的视觉钉在盒子左上角，视觉偏出卡片一侧（Park 截图：插图切左/右边空蓝）。必须 `transform-origin: 50% 0`（水平中心缩放）。另一个坑：**transform 只缩渲染不缩布局**——把盒子高度改成缩放后的高度会把内部 absolute 子元素全裁掉（Park 截图：WISMO 只剩标签），盒子必须保持 PC 原始布局尺寸，多余高度用负 margin-bottom 抵消。验证法：量 mock 的 getBoundingClientRect 相对卡片是否左右对称 + 子元素 bottom 是否在卡内。
 
 - Data Operations 四场编排（2026-08-29 Park）：过渡要有「相同元素衔接」，不要硬切。
   - 场1入场（滑入视口才开播，well `is-started` 门控，IO 首次相交置位）：涟漪依次（`api-s4-wash-in` 按 `--r` 错峰）→ 17 logo 放大渐显（`api-s4-keel` 常驻层，squircle 裁切 + 蓝底，从场1 JSX 移到 DataOperations 井层）→ 9 状态依次（`api-s4-chip-in` 按 `--ci`，外5内4 全局序号）→ 1.75s 后才开始转（环动画挂在 is-on 上，每次重场重启）。

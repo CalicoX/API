@@ -10860,16 +10860,16 @@ body.ai-case-lightbox-active {
     margin-top: 20px;
   }
 
-  /* ④ track-ui 插图：PC 版整体缩放——盒子保持 PC 原始 560×420 布局，
-     transform 只缩渲染；负 margin-bottom 抵消缩放后多出的高度 */
+  /* ④ track-ui 插图：PC 版整体缩放——按本页桌面真实尺寸 354×435 冻结布局，
+     transform 只缩渲染；负 margin-bottom 抵消缩放余高 */
   .explore-card-tracking .track-ui {
-    width: 560px;
-    height: 420px;
+    width: 354px;
+    height: 435px;
     min-height: 0;
-    transform: scale(0.55);
+    transform: scale(0.87);
     transform-origin: 50% 0;
-    margin-left: calc((100% - 560px) / 2);
-    margin-bottom: -189px;
+    margin-left: calc((100% - 354px) / 2);
+    margin-bottom: -57px;
   }
   .explore-card-tracking .track-ui .track-ui-board {
     top: 14px;
@@ -10888,19 +10888,28 @@ body.ai-case-lightbox-active {
     display: block;
   }
 
-  /* ⑤ returns-ui 插图：同样整体缩放（盒子 560×434 = 栈 380 + 上下 padding） */
+  /* ⑤ returns-ui 插图：同样按 354×435 整体缩放 */
   .explore-card-returns .returns-ui {
-    width: 560px;
-    height: 434px;
+    width: 354px;
+    height: 435px;
     min-height: 0;
     padding: 18px 10px 36px;
-    transform: scale(0.55);
+    transform: scale(0.87);
     transform-origin: 50% 0;
-    margin-left: calc((100% - 560px) / 2);
-    margin-bottom: -195px;
+    margin-left: calc((100% - 354px) / 2);
+    margin-bottom: -57px;
   }
   .explore-card-returns .returns-ui-stack {
     height: 380px;
     min-height: 380px;
+  }
+
+  /* ≤360 窄机再小一档 */
+  @media (max-width: 360px) {
+    .explore-card-tracking .track-ui,
+    .explore-card-returns .returns-ui {
+      transform: scale(0.7);
+      margin-bottom: -130px;
+    }
   }
 }
