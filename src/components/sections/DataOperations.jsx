@@ -337,34 +337,34 @@ export default function DataOperations() {
               {tintWords("Forecast, Monitor, Intervene.", 3)}
             </span>
           </h2>
-          <a className="api-s4-pill" href="#free-trial" onClick={goToTrial}>
-            <span className="api-s4-pill-knob" aria-hidden="true">
+          <a className="btn-switch" href="#free-trial" onClick={goToTrial}>
+            <span className="btn-switch-knob" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <circle
-                  cx="4.2"
+                  cx="5"
                   cy="12"
-                  r="1.55"
+                  r="1.4"
                   fill="currentColor"
-                  opacity="0.42"
+                  opacity="0.35"
                 />
                 <circle
-                  cx="8"
+                  cx="8.2"
                   cy="12"
-                  r="1.65"
+                  r="1.5"
                   fill="currentColor"
-                  opacity="0.68"
+                  opacity="0.55"
                 />
-                <circle cx="11.8" cy="12" r="1.75" fill="currentColor" />
+                <circle cx="11.5" cy="12" r="1.6" fill="currentColor" opacity="0.8" />
                 <path
-                  d="M14.2 8.1L19.4 12 14.2 15.9"
+                  d="M13 7.5L18.5 12 13 16.5"
                   stroke="currentColor"
-                  strokeWidth="1.9"
+                  strokeWidth="1.8"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
               </svg>
             </span>
-            <span className="api-s4-pill-label">Start My Free Trial</span>
+            <span className="btn-switch-label">Start My Free Trial</span>
           </a>
         </div>
 

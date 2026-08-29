@@ -3329,83 +3329,6 @@
   margin: 0;
 }
 
-.api-s4-pill {
-  --s4-pill-h: 44px;
-  --s4-pill-knob: 36px;
-  flex: 0 0 auto;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: var(--s4-pill-h);
-  min-height: var(--s4-pill-h);
-  padding: 4px 18px 4px 4px;
-  box-sizing: border-box;
-  border-radius: 999px;
-  border: 1px solid rgba(170, 210, 255, 0.62);
-  background: linear-gradient(
-    90deg,
-    #5eb0ff 0%,
-    #3b82f6 46%,
-    #2563eb 74%,
-    #1e3a8a 100%
-  );
-  color: #fff;
-  text-decoration: none;
-  isolation: isolate;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.42),
-    inset 0 -1px 0 rgba(15, 40, 120, 0.22),
-    0 1px 3px rgba(37, 99, 235, 0.18);
-  transition:
-    filter 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.api-s4-pill:hover,
-.api-s4-pill:focus-visible {
-  filter: brightness(1.06);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(15, 40, 120, 0.2),
-    0 4px 14px rgba(37, 99, 235, 0.24);
-}
-
-.api-s4-pill:focus-visible {
-  outline: 2px solid rgba(37, 99, 235, 0.4);
-  outline-offset: 3px;
-}
-
-.api-s4-pill-knob {
-  width: var(--s4-pill-knob);
-  height: var(--s4-pill-knob);
-  flex: 0 0 var(--s4-pill-knob);
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(180deg, #fff 0%, #eef4ff 100%);
-  color: #2563eb;
-  box-shadow:
-    0 1px 3px rgba(15, 40, 120, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.api-s4-pill-knob svg {
-  width: 20px;
-  height: 20px;
-  display: block;
-}
-
-.api-s4-pill-label {
-  position: relative;
-  z-index: 1;
-  font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(15, 40, 120, 0.28);
-}
-
 .api-s4-h2-sub {
   display: block;
   font-size: 0.82em;
@@ -6890,10 +6813,6 @@ html.is-reduce-fx .api-s5::after {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 14px 16px;
-  }
-
-  .api-s4-pill {
-    margin-left: auto;
   }
 
   .api-mb-laptop {

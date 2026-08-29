@@ -108,7 +108,7 @@ describe("API landing structure (gating)", () => {
     expect(s4).not.toMatch(/onPick|onHold|aria-current/);
     expect(s4).toMatch(/Start My Free Trial/);
     expect(s4).toMatch(/#free-trial/);
-    expect(s4).toMatch(/api-s4-pill/);
+    expect(s4).toMatch(/btn-switch/);
     expect(read("components/sections/Applications.jsx")).toMatch(/Logistics Service/);
     expect(read("components/sections/Applications.jsx")).toMatch(/Various Platforms/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Land the Integration Together/);
