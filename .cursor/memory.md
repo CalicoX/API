@@ -19,7 +19,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
   - 候场 transform 必须纯 `scale(0.52)`、origin 50% 50%——桥的逆变换按这个算（orbit-core 原来的 0.84 候场缩放已删）。
   - **大坑**：CSS 注释里写「`--f*/--t*`」这类含 `*/` 的文本会把注释提前终结，后面的注释文字变成垃圾选择器，整条规则被静默丢弃（桥 0×0 的根因）。
 
-- Data Operations（2026-08-28 Park）：**不要** sticky / 滚轮横移 / `--s4-x` / 中间白卡外框。左 [01][02] 静态白文案卡 + 中间方形井 + 右 [03][04]。四卡无选中态、不点选、**无 Contact Us**。标题左、渐变胶囊 CTA 右（白圆 + `···→` + 白字 Start My Free Trial），横向蓝渐变 + 细亮蓝描边 + 底边高光，不要 `.api-btn-primary`、不要 Applications 暗底白钮。点了 `__lenis.scrollTo` `#free-trial`。井底蓝/紫/绿 liquid gradient + 淡 film grain（`src/fx/modules/s4-liquid-grain.js`），DOM 插图叠上面；减动效 / ≤768 / 弱 GPU 留同色系静态渐变，不要 Hero Undertones 白底灰条纹/橙。四段一条连续动画，循环；离屏不计时。触发看井内 `.api-s4-stage.is-on`。其余产品原文不改。≤900px：井置顶，文案竖叠。
+- Data Operations（2026-08-28 Park）：**不要** sticky / 滚轮横移 / `--s4-x` / 中间白卡外框。左 [01][02] 静态白文案卡 + 中间方形井 + 右 [03][04]。四卡无选中态、不点选、**无 Contact Us**。标题左、渐变胶囊 CTA 右（白圆 + `···→` + 白字 Start My Free Trial），横向蓝渐变 + 细亮蓝描边 + 底边高光，不要 `.api-btn-primary`、不要 Applications 暗底白钮。点了 `__lenis.scrollTo` `#free-trial`。循环；离屏不计时。触发看井内 `.api-s4-stage.is-on`。其余产品原文不改。≤900px：井置顶，文案竖叠。
+- 井底背景（2026-08-29 Park「纯白+淡点阵」）：`.api-s4-well` 底 `#fff` + `well::before` 淡点阵（12px 网格 rgba(148,163,184,0.16)，静态、不随场飞）。WebGL liquid grain（s4-liquid-grain.js）已卸载——模块文件留在仓库，useLandingEffects 不再挂，`api-s4-grain` CSS 已删；每场自带的 `illus::before` 点阵也删了（避免与井点阵叠加）。白底适配：涟漪 wash 改 `rgb(203 213 225 / calc(0.42 - r*0.06))` 圈内深外浅；orbit-core 光晕与 bloom 改 `#dbeafe` 淡蓝系；白卡（hub/codewin/dashtile/hub-logo）靠自身描边+阴影站住，别再给它们加白底白圈。
 - 场间舞台过渡（2026-08-29）：统一「向前穿越」——候场在井深处 scale(.52)+blur，is-on 迎面飞抵 1.25s，is-exit 继续放大 1.9x 贴脸掠过 0.85s、z 在新场之上（近景遮远景）；无 iris/clip-path 擦除。
 
 - Git 工作流（2026-08-27 Park「push+commit 太频繁」）：**默认只 commit 本地，不 push**。push 只在 Park 明确说「push / 推上去 / 部署」时执行（main 连 Vercel，push 即部署）；想推但暂不部署带 `[skip ci]`。攒批提交，不要一笔一小提交。三仓（API/Tracking/Returns）规则一致，Returns 的 AGENTS.md 由 Park 亲改。
@@ -78,6 +79,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-08-29 14:1x — memory.md、useLandingEffects.js、api-page.css、structure.test.js（井底纯白+点阵）
 - 2026-08-29 01:2x — memory.md、DataOperations.jsx、ApiDomVisuals.jsx、api-page.css（四场 match-cut 编排）
 - 2026-08-28 17:50 — AGENTS.md、DataOperations.jsx、structure.test.js、api-page.css
 - 2026-08-25 10:53 — memory.md、ExploreMore.jsx、landing.css

@@ -27,7 +27,6 @@ const FX_LOADERS = {
   aiTitleParticles: () => import("./modules/ai-title-particles.js"),
   bottomCta: () => import("./modules/bottom-cta-shader.js"),
   roiPointWaves: () => import("./modules/roi-point-waves.js"),
-  s4LiquidGrain: () => import("./modules/s4-liquid-grain.js"),
   btnSwitch: () => import("./modules/btn-switch.js"),
 };
 
@@ -177,22 +176,7 @@ export function useLandingEffects() {
       );
     }
 
-    // —— Data Operations 井底 liquid + grain ——
-    const dataOps = document.getElementById("data-operations");
-    if (dataOps && !shouldReduceFx()) {
-      let loaded = false;
-      disposers.push(
-        observeVisibility(
-          dataOps,
-          (vis) => {
-            if (!vis || loaded) return;
-            loaded = true;
-            mountNamed("s4LiquidGrain");
-          },
-          { rootMargin: "120px" }
-        )
-      );
-    }
+    // —— Data Operations 井底：纯白 + 淡点阵（纯 CSS），不再挂 WebGL liquid grain ——
 
     // —— Applications point waves（Returns ROI 同款 WebGL2 点波场）——
     const applications = document.getElementById("applications");
