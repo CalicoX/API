@@ -3306,7 +3306,8 @@
   overflow: hidden;
   border-radius: var(--s4-inner-r);
   container-type: size;
-  background: #fff;
+  /* 上白下灰（2026-08-29 Park），幅度刻意压淡，别盖过点阵和涟漪 */
+  background: linear-gradient(180deg, #ffffff 0%, #f1f3f6 55%, #dfe3ea 100%);
 }
 
 /* 纯白井底的淡点阵（2026-08-29 Park）：静态纸面纹理，场飞行时不动 */
