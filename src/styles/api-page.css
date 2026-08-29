@@ -116,7 +116,10 @@
   cursor: pointer;
   text-decoration: none;
   box-shadow: 0 1px 2px rgba(37, 99, 235, 0.12);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
 }
 
 .api-btn-primary:hover {
@@ -138,7 +141,9 @@
   font-size: clamp(12.5px, calc(11.6px + 0.25vw), 15px);
   font-weight: 700;
   text-decoration: none;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .api-btn-ghost:hover {
@@ -310,11 +315,11 @@
   background:
     repeating-linear-gradient(
       31deg,
-      rgba(255, 255, 255, 0.0) 0px,
-      rgba(255, 255, 255, 0.0) 11px,
+      rgba(255, 255, 255, 0) 0px,
+      rgba(255, 255, 255, 0) 11px,
       rgba(240, 242, 248, 0.35) 15px,
       rgba(255, 255, 255, 0.75) 19px,
-      rgba(255, 255, 255, 0.0) 24px
+      rgba(255, 255, 255, 0) 24px
     ),
     #fbfcfe;
 }
@@ -412,7 +417,10 @@
   color: var(--api-ink);
   outline: none;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
 }
 
 .api-field input:hover,
@@ -572,7 +580,9 @@
   box-sizing: border-box;
   padding: 0;
   --uc-grid-l: max(24px, calc((100% - var(--api-max, 1440px)) / 2 + 24px));
-  --uc-grid-v2: calc(var(--uc-grid-l) + 0.62 * (min(100%, var(--api-max, 1440px)) - 48px));
+  --uc-grid-v2: calc(
+    var(--uc-grid-l) + 0.62 * (min(100%, var(--api-max, 1440px)) - 48px)
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -856,10 +866,22 @@
   height: 1px;
   transform: translateY(-50%);
 }
-.api-s2-cross--tl { top: 40px; left: 24px; }
-.api-s2-cross--tr { top: 40px; right: 24px; }
-.api-s2-cross--bl { bottom: 40px; left: 24px; }
-.api-s2-cross--br { bottom: 40px; right: 24px; }
+.api-s2-cross--tl {
+  top: 40px;
+  left: 24px;
+}
+.api-s2-cross--tr {
+  top: 40px;
+  right: 24px;
+}
+.api-s2-cross--bl {
+  bottom: 40px;
+  left: 24px;
+}
+.api-s2-cross--br {
+  bottom: 40px;
+  right: 24px;
+}
 
 /* =========================================================
    Grid lines + intersection squares (tech/blueprint feel)
@@ -876,12 +898,14 @@
    soft circular hole tracking the globe (vars set by use-cases-scroll) */
 .api-s2.has-uc-bg-shader .api-s2-grid {
   -webkit-mask-image: radial-gradient(
-    circle var(--uc-globe-r, 0px) at var(--uc-globe-x, 100%) calc(var(--uc-globe-y-t, 0) * 100%),
+    circle var(--uc-globe-r, 0px) at var(--uc-globe-x, 100%)
+      calc(var(--uc-globe-y-t, 0) * 100%),
     transparent 0 80%,
     black 100%
   );
   mask-image: radial-gradient(
-    circle var(--uc-globe-r, 0px) at var(--uc-globe-x, 100%) calc(var(--uc-globe-y-t, 0) * 100%),
+    circle var(--uc-globe-r, 0px) at var(--uc-globe-x, 100%)
+      calc(var(--uc-globe-y-t, 0) * 100%),
     transparent 0 80%,
     black 100%
   );
@@ -943,13 +967,21 @@
 }
 
 @keyframes uc-grid-flow-y {
-  from { background-position: 0 0; }
-  to { background-position: 0 100%; }
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 100%;
+  }
 }
 
 @keyframes uc-grid-flow-x {
-  from { background-position: 0 0; }
-  to { background-position: 100% 0; }
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
 }
 
 .api-s2-grid-v--1 {
@@ -957,9 +989,23 @@
   background-color: rgba(186, 206, 232, 0.07);
   animation-duration: 8s;
 }
-.api-s2-grid-v--2 { left: var(--uc-grid-v2); animation-duration: 11s; animation-delay: -5s; animation-direction: reverse; }
-.api-s2-grid-h--1 { top: 30%; animation-duration: 9s; animation-delay: -2s; }
-.api-s2-grid-h--2 { top: 70%; animation-duration: 13s; animation-delay: -7s; animation-direction: reverse; }
+.api-s2-grid-v--2 {
+  left: var(--uc-grid-v2);
+  animation-duration: 11s;
+  animation-delay: -5s;
+  animation-direction: reverse;
+}
+.api-s2-grid-h--1 {
+  top: 30%;
+  animation-duration: 9s;
+  animation-delay: -2s;
+}
+.api-s2-grid-h--2 {
+  top: 70%;
+  animation-duration: 13s;
+  animation-delay: -7s;
+  animation-direction: reverse;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .api-s2-grid-v,
@@ -978,10 +1024,26 @@
   display: none;
 }
 
-.api-s2-grid-sq--1 { left: var(--uc-grid-l); top: 30%; transform: translate(-50%, -50%); }
-.api-s2-grid-sq--2 { left: var(--uc-grid-v2); top: 30%; transform: translate(-50%, -50%); }
-.api-s2-grid-sq--3 { left: var(--uc-grid-l); top: 70%; transform: translate(-50%, -50%); }
-.api-s2-grid-sq--4 { left: var(--uc-grid-v2); top: 70%; transform: translate(-50%, -50%); }
+.api-s2-grid-sq--1 {
+  left: var(--uc-grid-l);
+  top: 30%;
+  transform: translate(-50%, -50%);
+}
+.api-s2-grid-sq--2 {
+  left: var(--uc-grid-v2);
+  top: 30%;
+  transform: translate(-50%, -50%);
+}
+.api-s2-grid-sq--3 {
+  left: var(--uc-grid-l);
+  top: 70%;
+  transform: translate(-50%, -50%);
+}
+.api-s2-grid-sq--4 {
+  left: var(--uc-grid-v2);
+  top: 70%;
+  transform: translate(-50%, -50%);
+}
 
 /* subtle gradient wash behind grid */
 .api-s2-grid::before {
@@ -1080,7 +1142,10 @@
   height: 2px;
   background: rgba(255, 255, 255, 0.06);
   border-radius: 1px;
-  transition: width 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    width 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .api-s2-tickbar-ticks i.is-major {
@@ -1308,10 +1373,22 @@
   overflow: hidden;
   opacity: 0.18;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 25%, rgba(56, 140, 210, 0.35), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 80% 75%, rgba(40, 110, 190, 0.25), transparent 55%);
-  background-size: 130% 130%, 140% 140%;
-  background-position: 0% 0%, 100% 100%;
+    radial-gradient(
+      ellipse 80% 60% at 20% 25%,
+      rgba(56, 140, 210, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 70% 50% at 80% 75%,
+      rgba(40, 110, 190, 0.25),
+      transparent 55%
+    );
+  background-size:
+    130% 130%,
+    140% 140%;
+  background-position:
+    0% 0%,
+    100% 100%;
   animation: api-rack-fluid 16s ease-in-out infinite alternate;
   mix-blend-mode: screen;
 }
@@ -1322,15 +1399,24 @@
 
 @keyframes api-rack-fluid {
   0% {
-    background-position: 0% 10%, 100% 0%, 40% 100%;
+    background-position:
+      0% 10%,
+      100% 0%,
+      40% 100%;
     filter: saturate(1);
   }
   50% {
-    background-position: 30% 40%, 70% 30%, 60% 70%;
+    background-position:
+      30% 40%,
+      70% 30%,
+      60% 70%;
     filter: saturate(1.1);
   }
   100% {
-    background-position: 10% 80%, 40% 60%, 80% 20%;
+    background-position:
+      10% 80%,
+      40% 60%,
+      80% 20%;
     filter: saturate(1.05);
   }
 }
@@ -1370,7 +1456,10 @@
   /* bay/chip: r_inner = r_face − face_pad (pad must be < r_face) */
   --face-pad: 4px;
   --r-face-outer: var(--r-face, 6px);
-  --r-face-inner: max(1px, calc(var(--r-face-outer) - var(--face-pad))); /* 2px */
+  --r-face-inner: max(
+    1px,
+    calc(var(--r-face-outer) - var(--face-pad))
+  ); /* 2px */
 
   width: 100%;
   display: flex;
@@ -1626,21 +1715,39 @@
   animation: api-hub-flow 2.8s linear infinite;
   vector-effect: non-scaling-stroke;
 }
-.api-hub-pulse.p2 { animation-duration: 3s; animation-delay: 0.25s; }
-.api-hub-pulse.p3 { animation-duration: 2.5s; animation-delay: 0.5s; }
-.api-hub-pulse.p4 { animation-duration: 2.9s; animation-delay: 0.75s; }
-.api-hub-pulse.p5 { animation-duration: 3.1s; animation-delay: 1s; }
+.api-hub-pulse.p2 {
+  animation-duration: 3s;
+  animation-delay: 0.25s;
+}
+.api-hub-pulse.p3 {
+  animation-duration: 2.5s;
+  animation-delay: 0.5s;
+}
+.api-hub-pulse.p4 {
+  animation-duration: 2.9s;
+  animation-delay: 0.75s;
+}
+.api-hub-pulse.p5 {
+  animation-duration: 3.1s;
+  animation-delay: 1s;
+}
 .api-hub-pulse.is-right {
   stroke: rgba(167, 139, 250, 0.5);
   animation-duration: 2.2s;
 }
 
 @keyframes api-hub-flow {
-  to { stroke-dashoffset: -95; }
+  to {
+    stroke-dashoffset: -95;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .api-hub-pulse { animation: none; stroke-dasharray: none; opacity: 0.45; }
+  .api-hub-pulse {
+    animation: none;
+    stroke-dasharray: none;
+    opacity: 0.45;
+  }
 }
 
 .api-hub-node {
@@ -1771,7 +1878,9 @@
 .api-s2 [data-uc="copy"] {
   opacity: 1;
   transform: none;
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .api-s2 [data-uc="copy"].is-in {
@@ -1804,7 +1913,11 @@
 
 /* Dark glass trail card (ref: metric glass panels) */
 .api-trail-card {
-  background: linear-gradient(160deg, rgba(32, 38, 52, 0.92) 0%, rgba(14, 18, 28, 0.96) 100%);
+  background: linear-gradient(
+    160deg,
+    rgba(32, 38, 52, 0.92) 0%,
+    rgba(14, 18, 28, 0.96) 100%
+  );
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow:
@@ -1830,7 +1943,11 @@
   width: 32px;
   height: 32px;
   border-radius: 9px;
-  background: linear-gradient(145deg, rgba(56, 189, 248, 0.25), rgba(37, 99, 235, 0.35));
+  background: linear-gradient(
+    145deg,
+    rgba(56, 189, 248, 0.25),
+    rgba(37, 99, 235, 0.35)
+  );
   border: 1px solid rgba(125, 211, 252, 0.25);
   color: #e0f2fe;
 }
@@ -2456,11 +2573,15 @@
 }
 
 .api-vig-checks li::before {
-  transition: background 0.18s ease, border-color 0.18s ease;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease;
 }
 
 .api-vig-btn--primary {
-  transition: transform 0.14s ease, filter 0.14s ease;
+  transition:
+    transform 0.14s ease,
+    filter 0.14s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2544,11 +2665,22 @@
   white-space: pre;
 }
 
-.api-vig-code .c-cmd { color: #ea580c; font-weight: 600; }
-.api-vig-code .c-flag { color: #0891b2; }
-.api-vig-code .c-str { color: #db2777; }
-.api-vig-code .c-p { color: #2563eb; }
-.api-vig-code .c-url { color: #b91c1c; }
+.api-vig-code .c-cmd {
+  color: #ea580c;
+  font-weight: 600;
+}
+.api-vig-code .c-flag {
+  color: #0891b2;
+}
+.api-vig-code .c-str {
+  color: #db2777;
+}
+.api-vig-code .c-p {
+  color: #2563eb;
+}
+.api-vig-code .c-url {
+  color: #b91c1c;
+}
 
 .api-vig-link {
   position: absolute;
@@ -2655,27 +2787,45 @@
 }
 
 @keyframes api-vig-split-top {
-  0% { transform: translateY(calc(-50% - 13px)); }
+  0% {
+    transform: translateY(calc(-50% - 13px));
+  }
   22%,
-  40% { transform: translateY(0); }
+  40% {
+    transform: translateY(0);
+  }
   62%,
-  100% { transform: translateY(calc(-50% - 13px)); }
+  100% {
+    transform: translateY(calc(-50% - 13px));
+  }
 }
 
 @keyframes api-vig-split-bot {
-  0% { transform: translateY(calc(50% + 13px)); }
+  0% {
+    transform: translateY(calc(50% + 13px));
+  }
   22%,
-  40% { transform: translateY(0); }
+  40% {
+    transform: translateY(0);
+  }
   62%,
-  100% { transform: translateY(calc(50% + 13px)); }
+  100% {
+    transform: translateY(calc(50% + 13px));
+  }
 }
 
 @keyframes api-vig-link {
-  0% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
   18%,
-  44% { opacity: 0; }
+  44% {
+    opacity: 0;
+  }
   62%,
-  100% { opacity: 1; }
+  100% {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2745,8 +2895,12 @@
   background: #ff5f57;
 }
 
-.api-vig-dots i:nth-child(2) { background: #febc2e; }
-.api-vig-dots i:nth-child(3) { background: #28c840; }
+.api-vig-dots i:nth-child(2) {
+  background: #febc2e;
+}
+.api-vig-dots i:nth-child(3) {
+  background: #28c840;
+}
 
 .api-vig-jsonwin-title {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -2774,8 +2928,12 @@
   white-space: pre;
 }
 
-.api-vig-json .jk { color: #db2777; }
-.api-vig-json .js { color: #2563eb; }
+.api-vig-json .jk {
+  color: #db2777;
+}
+.api-vig-json .js {
+  color: #2563eb;
+}
 
 .api-vig-caret {
   display: inline-block;
@@ -2788,8 +2946,14 @@
 }
 
 @keyframes api-vig-caret {
-  0%, 45% { opacity: 1; }
-  46%, 100% { opacity: 0; }
+  0%,
+  45% {
+    opacity: 1;
+  }
+  46%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .api-vig-track {
@@ -2965,7 +3129,11 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  background-image: linear-gradient(to right, rgba(148, 163, 184, 0.45) 1px, transparent 1px);
+  background-image: linear-gradient(
+    to right,
+    rgba(148, 163, 184, 0.45) 1px,
+    transparent 1px
+  );
   background-size: 3px 1px;
   background-repeat: repeat-x;
   background-position: 0 0.85em;
@@ -3023,8 +3191,11 @@
 
 .api-vig--listen:hover .api-vig-rows li:not(.is-in) {
   opacity: 0;
-  transform: perspective(280px) rotateX(72deg) rotateY(-8deg) translateY(-14px) scale(0.96);
-  transition: transform 0.28s ease, opacity 0.2s ease;
+  transform: perspective(280px) rotateX(72deg) rotateY(-8deg) translateY(-14px)
+    scale(0.96);
+  transition:
+    transform 0.28s ease,
+    opacity 0.2s ease;
 }
 
 .api-vig--listen:hover .api-vig-rows li.is-in {
@@ -3089,25 +3260,34 @@
 }
 
 @keyframes api-vig-listen-track {
-  0% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
   22%,
-  42% { transform: translateX(-12%); }
+  42% {
+    transform: translateX(-12%);
+  }
   64%,
-  100% { transform: translateX(0); }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 @keyframes api-vig-event-slap {
   0% {
     opacity: 0;
-    transform: perspective(280px) rotateX(78deg) rotateY(-10deg) translateY(-16px) scale(0.94);
+    transform: perspective(280px) rotateX(78deg) rotateY(-10deg)
+      translateY(-16px) scale(0.94);
   }
   58% {
     opacity: 1;
-    transform: perspective(280px) rotateX(-10deg) rotateY(3deg) translateY(2px) scale(1.02);
+    transform: perspective(280px) rotateX(-10deg) rotateY(3deg) translateY(2px)
+      scale(1.02);
   }
   100% {
     opacity: 1;
-    transform: perspective(280px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1);
+    transform: perspective(280px) rotateX(0deg) rotateY(0deg) translateY(0)
+      scale(1);
   }
 }
 
@@ -3163,7 +3343,13 @@
   box-sizing: border-box;
   border-radius: 999px;
   border: 1px solid rgba(170, 210, 255, 0.62);
-  background: linear-gradient(90deg, #5eb0ff 0%, #3b82f6 46%, #2563eb 74%, #1e3a8a 100%);
+  background: linear-gradient(
+    90deg,
+    #5eb0ff 0%,
+    #3b82f6 46%,
+    #2563eb 74%,
+    #1e3a8a 100%
+  );
   color: #fff;
   text-decoration: none;
   isolation: isolate;
@@ -3171,7 +3357,9 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.42),
     inset 0 -1px 0 rgba(15, 40, 120, 0.22),
     0 1px 3px rgba(37, 99, 235, 0.18);
-  transition: filter 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    filter 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .api-s4-pill:hover,
@@ -3403,7 +3591,8 @@
   box-shadow: 0 14px 38px rgba(93, 112, 158, 0.16);
   pointer-events: none;
   opacity: 0;
-  animation: api-s4-bridge-run var(--bdur, 1.3s) cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: api-s4-bridge-run var(--bdur, 1.3s) cubic-bezier(0.22, 1, 0.36, 1)
+    both;
 }
 
 @keyframes api-s4-bridge-run {
@@ -3451,7 +3640,12 @@
   }
 }
 
-/* 第二场退场：卡收拢、logo 逐个弹没、线按序褪去 */
+/* 第二场退场（2026-08-29 Park）：整体向中心缩小，承运商逐个消失、线条逐条回剪 */
+.api-s4-stage.api-s4-illus--carriers.is-exit {
+  transform: scale(0.62);
+  filter: blur(9px);
+}
+
 .api-s4-stage.api-s4-illus--carriers.is-exit .api-s4-hub-core {
   animation: api-s4-hub-out 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -3459,13 +3653,12 @@
 @keyframes api-s4-hub-out {
   to {
     opacity: 0;
-    scale: 0.8;
   }
 }
 
 .api-s4-stage.api-s4-illus--carriers.is-exit .api-s4-hub-logo {
-  animation: api-s4-hublogo-out 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--i, 0) * 0.04s);
+  animation: api-s4-hublogo-out 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.06s);
 }
 
 @keyframes api-s4-hublogo-out {
@@ -3476,24 +3669,44 @@
 }
 
 .api-s4-stage.api-s4-illus--carriers.is-exit .api-s4-hub-wires .base path {
-  animation: api-s4-wire-out 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--i, 0) * 0.03s);
+  stroke-dasharray: 100;
+  animation: api-s4-wire-retract 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.06s);
 }
 
-@keyframes api-s4-wire-out {
+@keyframes api-s4-wire-retract {
+  from {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
   to {
+    stroke-dashoffset: 100;
     opacity: 0;
   }
 }
 
-/* 第三场入场：单号卡先起，连接线与轨迹面板跟进（内容激活时已清空，只出现一次） */
+/* 第三场入场：单号卡先起（居中独处），识别完成后卡上移、轨迹面板跟进 */
 .api-s4-well.is-started .api-s4-stage.api-s4-illus--auto.is-on .api-s4-codewin {
   animation: api-s4-el-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 }
 
-.api-s4-well.is-started .api-s4-stage.api-s4-illus--auto.is-on .api-s4-link,
-.api-s4-well.is-started .api-s4-stage.api-s4-illus--auto.is-on .api-s4-trackpane {
-  animation: api-s4-el-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
+/* 识别前连接线与轨迹面板都藏着，panel 翻真后一起出现 */
+.api-s4-vig--auto:not(.is-panel) .api-s4-link {
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 轨迹面板文字一块一块渐显（2026-08-29 Park） */
+.api-s4-vig--auto.is-playing.is-panel .api-s4-trackpane .api-vig-status {
+  animation: api-s4-el-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+}
+
+.api-s4-vig--auto.is-playing.is-panel .api-s4-trackpane .api-vig-timeinfo {
+  animation: api-s4-el-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
+}
+
+.api-s4-vig--auto.is-playing.is-panel .api-s4-trackpane .api-vig-events {
+  animation: api-s4-el-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.54s both;
 }
 
 .api-s4-stage.api-s4-illus--auto.is-exit .api-s4-codewin {
@@ -3506,11 +3719,15 @@
 }
 
 /* 第四场入场：donut 卡→趋势卡→toast 依次起；退场整组上飘 */
-.api-s4-well.is-started .api-s4-stage.api-s4-illus--dash.is-on .api-s4-dashtile--donut {
+.api-s4-well.is-started
+  .api-s4-stage.api-s4-illus--dash.is-on
+  .api-s4-dashtile--donut {
   animation: api-s4-el-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 
-.api-s4-well.is-started .api-s4-stage.api-s4-illus--dash.is-on .api-s4-dashtile--trend {
+.api-s4-well.is-started
+  .api-s4-stage.api-s4-illus--dash.is-on
+  .api-s4-dashtile--trend {
   animation: api-s4-el-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
 }
 
@@ -3607,7 +3824,9 @@
   opacity: 0;
 }
 
-.api-s4-well.is-started .api-s4-stage.api-s4-illus--status.is-on .api-s4-orbit-wash {
+.api-s4-well.is-started
+  .api-s4-stage.api-s4-illus--status.is-on
+  .api-s4-orbit-wash {
   animation: api-s4-wash-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: calc(0.15s + var(--r, 0) * 0.11s);
 }
@@ -3623,7 +3842,9 @@
   }
 }
 
-.api-s4-well.is-started .api-s4-stage.api-s4-illus--status.is-on .api-s4-orbit-chip {
+.api-s4-well.is-started
+  .api-s4-stage.api-s4-illus--status.is-on
+  .api-s4-orbit-chip {
   animation: api-s4-chip-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: calc(1s + var(--ci, 0) * 0.09s);
 }
@@ -3640,7 +3861,9 @@
 }
 
 /* —— 第二场编排：面板浮现，线条按序生长，承运商逐个出现（数字滚动在 JSX） —— */
-.api-s4-well.is-started .api-s4-stage.api-s4-illus--carriers.is-on .api-s4-hub-core {
+.api-s4-well.is-started
+  .api-s4-stage.api-s4-illus--carriers.is-on
+  .api-s4-hub-core {
   animation: api-s4-hub-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
 }
 
@@ -3655,7 +3878,11 @@
   }
 }
 
-.api-s4-well.is-started .api-s4-stage.api-s4-illus--carriers.is-on .api-s4-hub-wires .base path {
+.api-s4-well.is-started
+  .api-s4-stage.api-s4-illus--carriers.is-on
+  .api-s4-hub-wires
+  .base
+  path {
   stroke-dasharray: 100;
   animation: api-s4-wire-draw 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: calc(1.1s + var(--i, 0) * 0.1s);
@@ -3670,7 +3897,9 @@
   }
 }
 
-.api-s4-well.is-started .api-s4-stage.api-s4-illus--carriers.is-on .api-s4-hub-logo {
+.api-s4-well.is-started
+  .api-s4-stage.api-s4-illus--carriers.is-on
+  .api-s4-hub-logo {
   animation: api-s4-hublogo-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: calc(1.65s + var(--i, 0) * 0.12s);
 }
@@ -3826,11 +4055,10 @@
   top: 50%;
   width: calc(28% + var(--r) * 15.5%);
   height: calc(28% + var(--r) * 15.5%);
-  border: 0;
   border-radius: 50%;
-  /* 白灰底上的涟漪：中性灰、圈内深外浅，最外圈几乎不灰化整井 */
-  background: rgb(158 164 174 / calc(0.4 - var(--r, 0) * 0.055));
-  box-shadow: 0 3px 10px rgba(148, 163, 184, 0.08);
+  /* 涟漪改描边圆环（2026-08-29 Park）：淡灰 1px、再淡一档 */
+  background: none;
+  border: 1px solid rgba(158, 164, 174, 0.2);
   translate: -50% -50%;
 }
 
@@ -3930,9 +4158,7 @@
   top: 50%;
   width: 0;
   height: 0;
-  transform:
-    rotate(var(--turn))
-    translateY(calc(var(--r) * -1))
+  transform: rotate(var(--turn)) translateY(calc(var(--r) * -1))
     rotate(calc(var(--turn) * -1));
 }
 
@@ -3966,15 +4192,33 @@
   height: 16px;
 }
 
-.api-s4-orbit-chip[data-icon="info"] { --chip: #00bcd4; }
-.api-s4-orbit-chip[data-icon="transit"] { --chip: #2196f3; }
-.api-s4-orbit-chip[data-icon="out"] { --chip: #2962ff; }
-.api-s4-orbit-chip[data-icon="pickup"] { --chip: #0d47a1; }
-.api-s4-orbit-chip[data-icon="alert"] { --chip: #ff6f00; }
-.api-s4-orbit-chip[data-icon="done"] { --chip: #43a047; }
-.api-s4-orbit-chip[data-icon="expired"] { --chip: #b71c1c; }
-.api-s4-orbit-chip[data-icon="fail"] { --chip: #f44336; }
-.api-s4-orbit-chip[data-icon="missing"] { --chip: #757575; }
+.api-s4-orbit-chip[data-icon="info"] {
+  --chip: #00bcd4;
+}
+.api-s4-orbit-chip[data-icon="transit"] {
+  --chip: #2196f3;
+}
+.api-s4-orbit-chip[data-icon="out"] {
+  --chip: #2962ff;
+}
+.api-s4-orbit-chip[data-icon="pickup"] {
+  --chip: #0d47a1;
+}
+.api-s4-orbit-chip[data-icon="alert"] {
+  --chip: #ff6f00;
+}
+.api-s4-orbit-chip[data-icon="done"] {
+  --chip: #43a047;
+}
+.api-s4-orbit-chip[data-icon="expired"] {
+  --chip: #b71c1c;
+}
+.api-s4-orbit-chip[data-icon="fail"] {
+  --chip: #f44336;
+}
+.api-s4-orbit-chip[data-icon="missing"] {
+  --chip: #757575;
+}
 
 /* 转动在状态胶囊依次出现完（约 1.75s）后才开始；is-on 每次重挂都重新起拍 */
 .api-s4-stage.is-on .api-s4-orbit-ring {
@@ -4173,8 +4417,6 @@
   object-fit: cover;
 }
 
-
-
 @property --hub-beam {
   syntax: "<angle>";
   inherits: false;
@@ -4312,8 +4554,9 @@
   box-sizing: border-box;
   overflow: hidden;
   border-radius: 10px;
-  border: 1px solid rgba(15, 23, 42, 0.1);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   background: #fff;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.05);
   transform: none;
   transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -4376,8 +4619,12 @@
 }
 
 @keyframes api-s4-scan-once {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(100%); }
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
 
 .api-s4-detect-auto,
@@ -4457,7 +4704,8 @@
   height: auto;
   min-height: 0;
   margin-top: 0;
-  box-shadow: none;
+  border-color: rgba(15, 23, 42, 0.06);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
   opacity: 1;
   transform: none;
   pointer-events: none;
@@ -4543,7 +4791,12 @@
   stroke-width: 1.7;
   stroke-linecap: round;
   stroke-linejoin: round;
+  opacity: 0.5;
   vector-effect: non-scaling-stroke;
+}
+
+.api-s4-dash-curve-fill {
+  opacity: 0.55;
 }
 
 /* 紫面积 + 描边：从左往右擦出，不要 dasharray 对插值 */
@@ -4571,13 +4824,11 @@
   align-items: stretch;
 }
 
+/* Mora 式：图表直接浮在纸上，卡片不再描边/铺底 */
 .api-s4-dashtile {
   box-sizing: border-box;
-  padding: 14px 16px 12px;
+  padding: 4px 6px;
   border-radius: 14px;
-  border: 1px solid rgba(15, 23, 42, 0.09);
-  background: #fff;
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
 }
 
 .api-s4-dashtile--trend {
@@ -4603,6 +4854,25 @@
   min-height: 0;
 }
 
+.api-s4-donut-seg {
+  transform-origin: 50px 50px;
+}
+
+.api-s4-stage.is-on .api-s4-donut-seg {
+  animation: api-s4-donut-fill 3.2s cubic-bezier(0.22, 1, 0.36, 1) 1 forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes api-s4-donut-fill {
+  0% {
+    opacity: 0;
+  }
+  22%,
+  100% {
+    opacity: 1;
+  }
+}
+
 .api-s4-trend {
   display: block;
   width: 100%;
@@ -4613,57 +4883,11 @@
 
 .api-s4-trend text {
   font-size: 8.5px;
-  fill: #94a3b8;
+  fill: #b9c2cd;
   font-variant-numeric: tabular-nums;
 }
 
-@property --rest {
-  syntax: "<number>";
-  inherits: true;
-  initial-value: 44;
-}
-
-.api-s4-trend-line {
-  fill: none;
-  stroke: #5b9cf5;
-  stroke-width: 1.7;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  vector-effect: non-scaling-stroke;
-  stroke-dasharray: 100;
-  /* idle: 只露出左侧贴零平段；--rest = 未画出的后半 */
-  stroke-dashoffset: var(--rest, 44);
-}
-
-.api-s4-stage.is-on .api-s4-trend-line {
-  animation: api-s4-trend-draw 4.5s cubic-bezier(0.4, 0, 0.2, 1) 1 forwards;
-}
-
-@keyframes api-s4-trend-draw {
-  0% {
-    stroke-dashoffset: 100;
-  }
-  50%,
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
-.api-s4-trend-tip rect {
-  fill: #3d3d3d;
-}
-
-.api-s4-trend-tip text {
-  fill: #fff;
-  font-size: 8px;
-  font-weight: 650;
-  text-anchor: middle;
-}
-
-.api-s4-trend-tip text.is-sub {
-  font-weight: 500;
-  fill: #e5e7eb;
-}
+/* 趋势卡的折线已按 Park 要求删掉（井底大曲线就是那条线，只留日期标签） */
 
 /* webhook sits on the lower card, not on the well floor */
 .api-s4-dashtoast {
@@ -4740,25 +4964,7 @@
   overflow: visible;
 }
 
-.api-s4-donut-seg {
-  transform-origin: 50px 50px;
-}
-
-.api-s4-stage.is-on .api-s4-donut-seg {
-  animation: api-s4-donut-fill 3.2s cubic-bezier(0.22, 1, 0.36, 1) 1 forwards;
-  animation-delay: var(--delay, 0s);
-}
-
-@keyframes api-s4-donut-fill {
-  0% {
-    opacity: 0;
-  }
-  22%,
-  100% {
-    opacity: 1;
-  }
-}
-
+/* 状态分布图例：色块 x 标签，细字撑在 donut 右侧 */
 .api-s4-legend {
   list-style: none;
   margin: 0;
@@ -4788,12 +4994,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .api-s4-trend-line,
-  .api-s4-stage.is-on .api-s4-trend-line {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-
   .api-s4-stage.is-on .api-s4-dash-curve {
     animation: none;
     clip-path: none;
@@ -4839,14 +5039,6 @@
     gap: 12px;
   }
 
-  .api-s4-legend {
-    gap: 4px;
-  }
-
-  .api-s4-legend li {
-    font-size: 9px;
-  }
-
   .api-s4-trend {
     height: 112px;
   }
@@ -4872,8 +5064,7 @@
   }
 
   .api-s4-stage.is-on .api-s4-codewin,
-  .api-s4-stage.is-on .api-s4-link,
-  .api-s4-stage.is-on .api-s4-donut-seg {
+  .api-s4-stage.is-on .api-s4-link {
     transform: none;
   }
 
@@ -4902,8 +5093,12 @@
     opacity: 0.55;
   }
 
-  .api-s4-detect-auto { display: none; }
-  .api-s4-detect-hit { display: flex; }
+  .api-s4-detect-auto {
+    display: none;
+  }
+  .api-s4-detect-hit {
+    display: flex;
+  }
 
   .api-s4-vig--auto.is-scanning .api-s4-carrier-box::after {
     animation: none;
@@ -4946,15 +5141,33 @@
   display: block;
 }
 
-.api-mb-st.is-handover { background: #7dd3fc; }
-.api-mb-st.is-air { background: #3b82f6; }
-.api-mb-st.is-sched { background: #1d4ed8; }
-.api-mb-st.is-flag { background: #4338ca; }
-.api-mb-st.is-ok { background: #22c55e; }
-.api-mb-st.is-warn { background: #f59e0b; }
-.api-mb-st.is-fail { background: #ef4444; }
-.api-mb-st.is-return { background: #b91c1c; }
-.api-mb-st.is-wait { background: #94a3b8; }
+.api-mb-st.is-handover {
+  background: #7dd3fc;
+}
+.api-mb-st.is-air {
+  background: #3b82f6;
+}
+.api-mb-st.is-sched {
+  background: #1d4ed8;
+}
+.api-mb-st.is-flag {
+  background: #4338ca;
+}
+.api-mb-st.is-ok {
+  background: #22c55e;
+}
+.api-mb-st.is-warn {
+  background: #f59e0b;
+}
+.api-mb-st.is-fail {
+  background: #ef4444;
+}
+.api-mb-st.is-return {
+  background: #b91c1c;
+}
+.api-mb-st.is-wait {
+  background: #94a3b8;
+}
 
 .api-mb-carriers img {
   width: 28px;
@@ -5035,9 +5248,15 @@
   background: #cbd5e1;
 }
 
-.api-mb-chrome i:nth-child(1) { background: #f87171; }
-.api-mb-chrome i:nth-child(2) { background: #fbbf24; }
-.api-mb-chrome i:nth-child(3) { background: #34d399; }
+.api-mb-chrome i:nth-child(1) {
+  background: #f87171;
+}
+.api-mb-chrome i:nth-child(2) {
+  background: #fbbf24;
+}
+.api-mb-chrome i:nth-child(3) {
+  background: #34d399;
+}
 
 .api-mb-chrome b {
   margin-left: 6px;
@@ -5191,9 +5410,15 @@
   background: #e2e8f0;
 }
 
-.api-mb-skels i:nth-child(1) { width: 92%; }
-.api-mb-skels i:nth-child(2) { width: 74%; }
-.api-mb-skels i:nth-child(3) { width: 58%; }
+.api-mb-skels i:nth-child(1) {
+  width: 92%;
+}
+.api-mb-skels i:nth-child(2) {
+  width: 74%;
+}
+.api-mb-skels i:nth-child(3) {
+  width: 58%;
+}
 
 .api-mb-float footer {
   display: flex;
@@ -5462,8 +5687,16 @@
   padding: clamp(64px, 7vh, 140px) 0 clamp(80px, 8vh, 160px);
   overflow: hidden;
   background:
-    radial-gradient(ellipse 70% 55% at 18% 20%, rgba(13, 148, 136, 0.07), transparent 58%),
-    radial-gradient(ellipse 55% 45% at 88% 70%, rgba(255, 255, 255, 0.03), transparent 55%),
+    radial-gradient(
+      ellipse 70% 55% at 18% 20%,
+      rgba(13, 148, 136, 0.07),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 55% 45% at 88% 70%,
+      rgba(255, 255, 255, 0.03),
+      transparent 55%
+    ),
     #141414;
   color: #e2e8f0;
 }
@@ -5492,7 +5725,11 @@
   aspect-ratio: 1;
   right: -14%;
   bottom: -34%;
-  background: radial-gradient(circle, rgba(20, 184, 166, 0.07), transparent 60%);
+  background: radial-gradient(
+    circle,
+    rgba(20, 184, 166, 0.07),
+    transparent 60%
+  );
   animation: api-s5-glow-b 34s ease-in-out infinite;
 }
 
@@ -6789,9 +7026,15 @@ html.is-reduce-fx .api-s5::after {
   background: #cbd5e1;
 }
 
-.api-dom-stage .fx-chrome i:nth-child(1) { background: #f87171; }
-.api-dom-stage .fx-chrome i:nth-child(2) { background: #fbbf24; }
-.api-dom-stage .fx-chrome i:nth-child(3) { background: #34d399; }
+.api-dom-stage .fx-chrome i:nth-child(1) {
+  background: #f87171;
+}
+.api-dom-stage .fx-chrome i:nth-child(2) {
+  background: #fbbf24;
+}
+.api-dom-stage .fx-chrome i:nth-child(3) {
+  background: #34d399;
+}
 
 .api-dom-stage .fx-url {
   margin-left: 6px;
@@ -6894,10 +7137,19 @@ html.is-reduce-fx .api-s5::after {
   white-space: pre-wrap;
 }
 
-.api-dom-codeblock .c-key { color: #93c5fd; font-weight: 700; }
-.api-dom-codeblock .c-str { color: #86efac; }
-.api-dom-codeblock .c-num { color: #fcd34d; }
-.api-dom-codeblock .c-muted { color: #94a3b8; }
+.api-dom-codeblock .c-key {
+  color: #93c5fd;
+  font-weight: 700;
+}
+.api-dom-codeblock .c-str {
+  color: #86efac;
+}
+.api-dom-codeblock .c-num {
+  color: #fcd34d;
+}
+.api-dom-codeblock .c-muted {
+  color: #94a3b8;
+}
 
 .api-dom-events {
   margin-top: 10px;
@@ -7103,8 +7355,16 @@ html.is-reduce-fx .api-s5::after {
 
 .api-s5 {
   background:
-    radial-gradient(ellipse 70% 55% at 18% 20%, rgba(13, 148, 136, 0.07), transparent 58%),
-    radial-gradient(ellipse 55% 45% at 88% 70%, rgba(255, 255, 255, 0.03), transparent 55%),
+    radial-gradient(
+      ellipse 70% 55% at 18% 20%,
+      rgba(13, 148, 136, 0.07),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 55% 45% at 88% 70%,
+      rgba(255, 255, 255, 0.03),
+      transparent 55%
+    ),
     #141414;
 }
 

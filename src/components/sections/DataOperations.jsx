@@ -111,7 +111,18 @@ function measureBridge(well, fromWell, toWell, id) {
   const b0 = rel(bEl);
   const s = STANDBY_SCALE;
   const cx = 50 + (b0.x + b0.w / 2 - 50) / s;
-  const cy = 50 + (b0.y + b0.h / 2 - 50) / s;
+  let cy = 50 + (b0.y + b0.h / 2 - 50) / s;
+  if (cfg.kind === "dhl") {
+    /* 识别瞬间面板还是收拢态：落点要按「单号卡居中」的布局算
+       （css 的收拢位移是 translateY((100cqh - 100%) / 2 - 6px)） */
+    const codeEl = well.querySelector(
+      `.api-s4-illus--${toWell} .api-s4-codewin`,
+    );
+    if (codeEl) {
+      const codeH = codeEl.getBoundingClientRect().height / s;
+      cy += (((wr.height - codeH) / 2 - 6) / wr.height) * 100;
+    }
+  }
   const bw = b0.w / s;
   const bh = b0.h / s;
   return {

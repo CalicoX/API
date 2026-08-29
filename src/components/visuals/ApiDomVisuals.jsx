@@ -448,15 +448,17 @@ export function DataHubStage({ active = false }) {
       if (cancelled) return;
       setDetected(true);
       setScanning(false);
+      /* 识别完成：卡上移，轨迹面板带分块渐显跟进 */
+      setPanel(true);
     };
 
     if (active) {
-      /* 激活即清空：进出场期间卡是空表单，内容只出现一次，不会先全量再重播 */
+      /* 激活即清空 + 面板收拢：单号卡居中独处，识别完成再上移 */
       setTyped("");
       setTyping(false);
       setScanning(false);
       setDetected(false);
-      setPanel(true);
+      setPanel(false);
       startTimer = window.setTimeout(play, reduce ? 0 : 700);
     } else finish();
 
@@ -592,7 +594,7 @@ export function DataHubStage({ active = false }) {
   );
 }
 
-/* Dashboard collage — 17TRACK 按物流主状态 + 近90天线（真实后台） */
+/* Dashboard collage — Mora 式浮空排版 + 状态分布扇区（Park: 状态要保留） */
 const S4_DASH_ARCS = [
   [0.22, "#9aa3af", "Not Found"],
   [0.04, "#22d3ee", "Info Received"],
@@ -641,37 +643,12 @@ const S4_TREND_XS = [
   "08-19",
   "08-20",
 ];
-const S4_TREND_YS = [0, 0, 0, 0, 0, 2100, 2100];
-const S4_TREND_MAX = 2500;
-const S4_TREND_BOX = { l: 24, r: 248, t: 8, b: 92 };
+const S4_TREND_BOX = { l: 24, r: 248 };
 
 function s4TrendX(i) {
   const { l, r } = S4_TREND_BOX;
   return l + (i / (S4_TREND_XS.length - 1)) * (r - l);
 }
-function s4TrendY(v) {
-  const { t, b } = S4_TREND_BOX;
-  return b - (v / S4_TREND_MAX) * (b - t);
-}
-const S4_TREND_LINE = S4_TREND_YS.map((v, i) => {
-  const cmd = i === 0 ? "M" : "L";
-  return `${cmd}${s4TrendX(i).toFixed(1)} ${s4TrendY(v).toFixed(1)}`;
-}).join(" ");
-const S4_TREND_REST = (() => {
-  const pts = S4_TREND_YS.map((v, i) => [s4TrendX(i), s4TrendY(v)]);
-  let total = 0;
-  let flat = 0;
-  for (let i = 1; i < pts.length; i += 1) {
-    const len = Math.hypot(
-      pts[i][0] - pts[i - 1][0],
-      pts[i][1] - pts[i - 1][1],
-    );
-    total += len;
-    if (S4_TREND_YS[i] === 0) flat += len;
-  }
-  return (100 - (flat / total) * 100).toFixed(2);
-})();
-const S4_TREND_GRID = [0, 500, 1000, 1500, 2000, 2500];
 
 const S4_CURVE_LINE =
   "M0 176 C70 186 128 192 180 180 C232 168 278 140 328 112 C368 92 424 78 480 76";
@@ -679,8 +656,6 @@ const S4_CURVE_FILL = `${S4_CURVE_LINE} L480 260 L0 260 Z`;
 
 export function DataChartStage() {
   const fillId = `s4-dash-fill-${useId().replace(/:/g, "")}`;
-  const tipX = s4TrendX(1);
-  const tipY = s4TrendY(0);
   return (
     <div className="api-s4-vig api-s4-vig--dash" aria-hidden="true">
       <svg
@@ -752,32 +727,6 @@ export function DataChartStage() {
             viewBox="0 0 256 118"
             preserveAspectRatio="none"
           >
-            {S4_TREND_GRID.map((v) => {
-              const y = s4TrendY(v);
-              return (
-                <g key={v}>
-                  <line
-                    x1={S4_TREND_BOX.l}
-                    x2={S4_TREND_BOX.r}
-                    y1={y}
-                    y2={y}
-                    stroke="#eef2f7"
-                    strokeWidth="1"
-                  />
-                  {v % 1000 === 0 || v === 2500 ? (
-                    <text x={S4_TREND_BOX.l - 3} y={y + 2.5} textAnchor="end">
-                      {v === 0 ? "0" : v === 2500 ? "2.5k" : `${v / 1000}k`}
-                    </text>
-                  ) : null}
-                </g>
-              );
-            })}
-            <path
-              className="api-s4-trend-line"
-              d={S4_TREND_LINE}
-              pathLength="100"
-              style={{ "--rest": S4_TREND_REST }}
-            />
             {S4_TREND_XS.map((d, i) =>
               i % 2 === 0 ? (
                 <text key={d} x={s4TrendX(i)} y={108} textAnchor="middle">
@@ -785,18 +734,6 @@ export function DataChartStage() {
                 </text>
               ) : null,
             )}
-            <g
-              className="api-s4-trend-tip"
-              transform={`translate(${tipX}, ${tipY - 22})`}
-            >
-              <rect x="-27" y="-15" width="54" height="26" rx="4" />
-              <text x="0" y="-4">
-                08-15
-              </text>
-              <text x="0" y="7" className="is-sub">
-                Qty 0
-              </text>
-            </g>
           </svg>
         </article>
         <div className="api-s4-dashtoast">
