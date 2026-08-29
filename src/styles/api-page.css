@@ -3306,24 +3306,8 @@
   overflow: hidden;
   border-radius: var(--s4-inner-r);
   container-type: size;
-  /* 上白下灰（2026-08-29 Park），幅度刻意压淡，别盖过点阵和涟漪 */
-  background: linear-gradient(180deg, #ffffff 0%, #f1f3f6 55%, #dfe3ea 100%);
-}
-
-/* 纯白井底的淡点阵（2026-08-29 Park）：静态纸面纹理，场飞行时不动 */
-.api-s4-well::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: radial-gradient(
-    circle,
-    rgba(148, 163, 184, 0.16) 1px,
-    transparent 1.15px
-  );
-  background-size: 12px 12px;
-  background-position: center;
+  /* 上白下灰（2026-08-29 Park：灰再淡一档）；点阵暂撤 */
+  background: linear-gradient(180deg, #ffffff 0%, #f7f8fa 55%, #e9ecf1 100%);
 }
 
 /* 井底已改纯白+淡点阵（well::before），WebGL liquid grain 不再挂载 */
@@ -3844,8 +3828,8 @@
   height: calc(28% + var(--r) * 15.5%);
   border: 0;
   border-radius: 50%;
-  /* 白底上的涟漪：越靠外越淡，最外圈几乎不灰化整井 */
-  background: rgb(203 213 225 / calc(0.42 - var(--r, 0) * 0.06));
+  /* 白灰底上的涟漪：中性灰、圈内深外浅，最外圈几乎不灰化整井 */
+  background: rgb(158 164 174 / calc(0.4 - var(--r, 0) * 0.055));
   box-shadow: 0 3px 10px rgba(148, 163, 184, 0.08);
   translate: -50% -50%;
 }

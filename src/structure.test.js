@@ -191,15 +191,14 @@ describe("API landing structure (gating)", () => {
     expect(read("fx/modules/btn-switch.js")).toMatch(/export function mount/);
   });
 
-  it("Data Operations well is white-to-gray with a faint dot grid (liquid grain unmounted)", () => {
+  it("Data Operations well is white-to-gray, dot grid removed (liquid grain unmounted)", () => {
     const fx = read("fx/useLandingEffects.js");
     expect(fx).not.toMatch(/s4LiquidGrain/);
     const css = read("styles/api-page.css");
     expect(css).toMatch(
-      /\.api-s4-well \{[^}]*linear-gradient\(180deg, #ffffff 0%, #f1f3f6 55%, #dfe3ea 100%\)/s,
+      /\.api-s4-well \{[^}]*linear-gradient\(180deg, #ffffff 0%, #f7f8fa 55%, #e9ecf1 100%\)/s,
     );
-    expect(css).toMatch(/\.api-s4-well::before/);
-    expect(css).toMatch(/rgba\(148, 163, 184, 0\.16\) 1px/);
+    expect(css).not.toMatch(/\.api-s4-well::before/);
   });
 
   it("Applications mounts Returns ROI point-waves background", () => {
