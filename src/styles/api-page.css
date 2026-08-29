@@ -3640,6 +3640,24 @@
   }
 }
 
+/* 第一场退场（2026-08-29 Park）：整屏向中心缩小，状态胶囊逐个缩小收拢 */
+.api-s4-stage.api-s4-illus--status.is-exit {
+  transform: scale(0.62);
+  filter: blur(9px);
+}
+
+.api-s4-stage.api-s4-illus--status.is-exit .api-s4-orbit-chip {
+  animation: api-s4-chip-out 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--ci, 0) * 0.04s);
+}
+
+@keyframes api-s4-chip-out {
+  to {
+    opacity: 0;
+    scale: 0.45;
+  }
+}
+
 /* 第二场退场（2026-08-29 Park）：整体向中心缩小，承运商逐个消失、线条逐条回剪 */
 .api-s4-stage.api-s4-illus--carriers.is-exit {
   transform: scale(0.62);
@@ -3709,13 +3727,31 @@
   animation: api-s4-el-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.54s both;
 }
 
+/* 第三场退场（2026-08-29 Park）：卡片上下位移出画面，不再原地淡出 */
+.api-s4-stage.api-s4-illus--auto.is-exit {
+  transform: scale(0.9);
+  filter: blur(6px);
+}
+
 .api-s4-stage.api-s4-illus--auto.is-exit .api-s4-codewin {
-  animation: api-s4-el-out 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: api-s4-card-out-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .api-s4-stage.api-s4-illus--auto.is-exit .api-s4-link,
 .api-s4-stage.api-s4-illus--auto.is-exit .api-s4-trackpane {
-  animation: api-s4-el-out 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.07s both;
+  animation: api-s4-card-out-down 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
+}
+
+@keyframes api-s4-card-out-up {
+  to {
+    translate: 0 -95cqh;
+  }
+}
+
+@keyframes api-s4-card-out-down {
+  to {
+    translate: 0 100cqh;
+  }
 }
 
 /* 第四场入场：donut 卡→趋势卡→toast 依次起；退场整组上飘 */
@@ -3729,6 +3765,25 @@
   .api-s4-stage.api-s4-illus--dash.is-on
   .api-s4-dashtile--trend {
   animation: api-s4-el-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
+}
+
+/* 第四场退场（2026-08-29 Park）：整体回收缩小 + 大曲线反向擦回（回放消失） */
+.api-s4-stage.api-s4-illus--dash.is-exit {
+  transform: scale(0.62);
+  filter: blur(9px);
+}
+
+.api-s4-stage.api-s4-illus--dash.is-exit .api-s4-dash-curve {
+  animation: api-s4-curve-rollback 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes api-s4-curve-rollback {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(0 100% 0 0);
+  }
 }
 
 .api-s4-stage.api-s4-illus--dash.is-exit .api-s4-dashtile--donut,
@@ -3770,14 +3825,14 @@
 }
 
 .api-s4-keel.is-settle {
-  translate: 0 0;
+  /* 直线缩放到位（2026-08-29 Park）：位移用 px 偏移 + scale，
+     不要 left/top/translate% 耦合（那个会走弯曲路径） */
+  translate: calc(-50% + var(--sdx, 0px)) calc(-50% + var(--sdy, 0px));
+  scale: var(--ss, 1);
   transition:
     opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     translate 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
-    left 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
-    top 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
-    width 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s,
-    height 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s;
+    scale 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s;
 }
 
 /* 枢纽卡顶部的 logo 槽位：占位让卡内布局稳定，logo 由 keel 层落进来 */

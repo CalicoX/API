@@ -152,15 +152,15 @@ function measureKeelSlot(well) {
   const r = el.getBoundingClientRect();
   if (!r.width || !r.height) return null;
   const s = STANDBY_SCALE;
-  const lw = (r.width / wr.width) * 100 * (1 / s);
-  const lh = (r.height / wr.height) * 100 * (1 / s);
   const rawCx = ((r.left + r.width / 2 - wr.left) / wr.width) * 100;
   const rawCy = ((r.top + r.height / 2 - wr.top) / wr.height) * 100;
+  /* 槽位终态中心（相对井中心 px）+ 缩放比，给 keel 直线落位用 */
+  const cxPx = ((50 + (rawCx - 50) / s) / 100) * wr.width;
+  const cyPx = ((50 + (rawCy - 50) / s) / 100) * wr.height;
   return {
-    lx: 50 + (rawCx - 50) / s - lw / 2,
-    ly: 50 + (rawCy - 50) / s - lh / 2,
-    lw,
-    lh,
+    dx: +(cxPx - wr.width / 2).toFixed(1),
+    dy: +(cyPx - wr.height / 2).toFixed(1),
+    scale: +(r.width / s / 64).toFixed(3),
   };
 }
 
@@ -408,10 +408,9 @@ export default function DataOperations() {
                 style={
                   keelSlot
                     ? {
-                        left: `${keelSlot.lx}%`,
-                        top: `${keelSlot.ly}%`,
-                        width: `${keelSlot.lw}%`,
-                        height: `${keelSlot.lh}%`,
+                        "--sdx": `${keelSlot.dx}px`,
+                        "--sdy": `${keelSlot.dy}px`,
+                        "--ss": keelSlot.scale,
                       }
                     : undefined
                 }
