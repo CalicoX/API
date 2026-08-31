@@ -75,7 +75,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - BrandsSay（2026-08-26 Park 纠正）：**API 落地页没有 What Top Brands Say**。那是 Tracking 模块。不要挂进 `LandingPage`。组件和暗底样式留在仓库（LegacyLanding / tracking 用），API 顺序仍是 Hero → TrustBand → UseCases。
 
 - 产品原文不改。
-- 底部产品切换 dock：2026-08-24 Park **暂时隐藏**（Applications 100vh 屏被 dock 挡住）。组件和 `mountProductDock` 仍在，LandingPage 不渲染 `<ProductDock />`。不是误删，要回来再挂回去。
+- 底部产品切换 dock：2026-08-24 Park 暂时隐藏过（Applications 100vh 屏被 dock 挡住），**2026-08-31 Park「先放出来」已恢复**——LandingPage 渲染 `<ProductDock />`（fixed 底部居中三 tab），Applications 被压的问题 Park 接受/再说。
 - Hero H1 字内光：hover 时光斑只在字形内部（`background-clip: text`，底层墨色 + 跟鼠标的径向光斑，中心浅蓝 `#c4deff`、中段蓝紫 `rgba(91,111,255)`，半径 170px）。坐标 `--h1-x/--h1-y` 由 h1 的 onMouseMove 写入；光强 `--h1-glow` 用 `@property` 注册成 number，`:hover` 置 1、0.45s 过渡淡入淡出。不要做成扫光动画，是跟手的。
 - Hero 左栏文案（2026-08-17 定稿）：H2 副标降级不抢 H1——`clamp(1.2rem, 1.8vw, 1.55rem)`、字重 600、色 `#3352b3`（不用 `#1e40af` 粗黑蓝）。lead 去掉 `.api-lead-line` 强制两行 nowrap，自然换行 + `max-width: 42ch`。`3400+` 药丸改浅底：`#dbeafe` 底 + `#1d4ed8` 字，不再实心蓝底白字。checklist 圆点改轻量：`#eff6ff` 底 + `#bfdbfe` 描边 + 蓝勾（不再实心蓝底白勾），行距 gap 10px。copy 区加 `::before` 白色径向 veil（z:-1，压在 shader 上保证可读性）。左栏第五条「View docs」次级 CTA 暂不加。
 - Hero 注册表单：右栏宽 `minmax(420px, 520px)`（原 380/460，Park 要更宽）。不用红星标必填，非必填（Company Website / 留言）label 右侧灰字 `Optional`。留言框默认收成 44px、focus 缓动展开到 96px、`resize: none` 不能拖。输入框白底 `#e2e8f0` 描边 + 浅投影，hover 描边加深。Password 有 show/hide 眼睛。`No credit card required` 徽章在 CTA 按钮正下方居中，不在标题行。法务 checkbox 11px 淡灰。字段间距 15/14px。
