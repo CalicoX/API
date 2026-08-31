@@ -30,7 +30,7 @@ BottomCta 在 footer 上：Returns 同款暗底粒子海，文案 Efficient Solu
 
 - How-it-works / Data Operations 插图：浅灰井 `#f7f8fa` + 点阵，白 UI 碎片，8–11px 字，细描边。不要实拍、不要 3D 开盖。
 - 四张 Data Operations 卡必须**四种构图**，不要同一套铺满双栏。
-  1. Tracking data：双环 9 态绕 17 logo 公转（外 5 / 内 4，hover 反向）。涟漪铺满整井，叠层白圆 + 很淡阴影，不要描边。9 个状态全部白胶囊。轨道要散开（约 38 / 22 cqmin），内外错开 45°。
+  1. Tracking data：双环 9 态绕 17 logo 公转（外 5 / 内 4，hover 反向）。涟漪铺满整井（6 圈 `.api-s4-orbit-wash`，**描边圆环 1px 极淡** `rgba(158,164,174,0.13)`——08-29 从白圆阴影改成描边、08-31 再淡一档）。9 个状态全部白胶囊。轨道要散开（约 38 / 22 cqmin），内外错开 45°。
   2. Carriers：浅灰井（不要蓝底、不要点阵）；中心 3400+ + 两侧 logo **淡连线**；底半颗蓝点地球。Hover 时 logo+连线按 `--i` 逐个出现（只播一次）。
   3. Visibility：两张重叠卡拆开（运单号 → 自动识别）。
   4. Dashboard：井中小卡，**环形图描边**动画。
