@@ -4149,9 +4149,9 @@
   width: calc(28% + var(--r) * 15.5%);
   height: calc(28% + var(--r) * 15.5%);
   border-radius: 50%;
-  /* 涟漪改描边圆环（2026-08-29 Park）：淡灰 1px、再淡一档 */
+  /* 涟漪描边圆环：严格 1px，颜色再淡一档（2026-08-31 Park「线条太黑」；08-29 已淡过一次） */
   background: none;
-  border: 1px solid rgba(158, 164, 174, 0.2);
+  border: 1px solid rgba(158, 164, 174, 0.13);
   translate: -50% -50%;
 }
 
