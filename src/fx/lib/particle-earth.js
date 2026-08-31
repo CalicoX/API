@@ -795,7 +795,7 @@ export function mountUseCasesEarth({ section, host, canvas }) {
 export function mountCarriersEarth(host, canvas) {
   const reduce = prefersReducedMotion() || !!window.__reduceFx;
   const narrow =
-    (window.matchMedia && window.matchMedia("(max-width: 768px)").matches) ||
+    (window.matchMedia && window.matchMedia("(max-width: 640px)").matches) ||
     !!window.__isMobileLayout;
   const canHover =
     !reduce &&

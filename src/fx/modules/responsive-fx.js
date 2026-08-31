@@ -20,7 +20,9 @@ export function mount() {
     var t = mq1024.matches;
     var m = mq768.matches;
     var s = mq640.matches;
-    var reduce = mqReduce.matches || m;
+    /* FX 降级线跟手机档 640（2026-08-31 Park：768 平板竖屏要完整桌面 FX——
+       hero shader / iso 地球 / 服务器滚动旋转此前全被 ≤768 的 reduce 关掉） */
+    var reduce = mqReduce.matches || s;
     root.classList.toggle("is-bp-1024", t);
     root.classList.toggle("is-bp-768", m);
     root.classList.toggle("is-bp-480", s);
@@ -28,7 +30,7 @@ export function mount() {
     root.classList.toggle("is-touch", mqCoarse.matches);
     /* Global flag for shaders / AI lab */
     window.__reduceFx = reduce;
-    window.__isMobileLayout = m;
+    window.__isMobileLayout = s;
   }
 
   apply();

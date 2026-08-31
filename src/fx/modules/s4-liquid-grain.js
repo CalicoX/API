@@ -15,7 +15,7 @@ export function mount() {
     if (
       window.__reduceFx ||
       window.__isMobileLayout ||
-      (window.matchMedia && window.matchMedia("(max-width: 768px)").matches)
+      (window.matchMedia && window.matchMedia("(max-width: 640px)").matches)
     ) {
       well.classList.add("is-grain-fallback");
       return () => {};

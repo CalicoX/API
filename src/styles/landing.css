@@ -10542,8 +10542,7 @@ body.ai-case-lightbox-active {
     --page-pad-x: 16px;
   }
 
-  .hero-undertones,
-  .bottom-cta-shader,
+  /* shader canvas 只在手机档（≤640）隐藏；768 平板吃完整桌面 FX（2026-08-31 Park） */
   .ai-intro-rail,
   .api-ascii {
     display: none !important;
@@ -10842,6 +10841,12 @@ body.ai-case-lightbox-active {
     padding: 8px 12px;
     font-size: 12px;
   }
+  /* shader canvas 手机档隐藏（768 平板保留 hero/bottom-cta 的 WebGL 背景，2026-08-31 Park） */
+  .hero-undertones,
+  .bottom-cta-shader {
+    display: none !important;
+  }
+
   /* BrandsSay 手机全宽卡（100cqw 相对 marquee 实宽）；768 平板不吃这条 */
   .brand-card {
     width: 100cqw;

@@ -24,7 +24,7 @@ BottomCta 在 footer 上：Returns 同款暗底粒子海，文案 Efficient Solu
 
 - 全站只用 **640 / 768 / 1024** 三档 max-width（+ 640 内嵌套 360 窄机子档）；1280/1536 是 Tailwind 大屏接口，现阶段无素材不设。1440 是内容壳宽，不是断点。**别再新增断点值**（历史上 520/560/680/700/720/900/980/1100 的化石层已于 2026-08-31 清理归并）。
 - 档位语义：≤640 手机特化（tab 切换、横滑、1px 描边、去分割线、hero/s2 单列堆叠、BrandsSay 全宽卡）；≤768 平板竖屏**保持双栏**（hero / Use Cases 左右布局，只藏噪音件）+ 单列堆叠类（s3/s4/form）；≤1024 两/三列 rebalance；>1024 桌面全量。max-width 级联靠源顺序，窄档块写在宽档块之后。**从宽档往窄档挪规则时窄档必须接住**（768 删单列、640 忘接 = 390 破版）。
-- FX 开关（`matchMedia`）跟档走：`≤640` 手机 FX 分级（responsive-fx `mq640`）、`≤768` 降级/定格（hero/底 CTA shader、液态颗粒、iso-hub、particle-earth 等）、`≤1024` feature 面板 rebalance（landing-inline）。
+- FX 开关（`matchMedia`）跟档走：`≤640` **手机才降 FX**——总开关在 responsive-fx（`reduce = mqReduce || mq640` → `window.__reduceFx`），hero/底 CTA shader、液态颗粒、iso-hub、particle-earth、use-cases 滚动定格全读它，CSS 侧 `.hero-undertones/.bottom-cta-shader` 的 display:none 也在 ≤640。**768 平板竖屏吃完整桌面 FX**（2026-08-31 Park：此前 ≤768 全关导致平板无背景、无地球、无滚动旋转）；`≤1024` feature 面板 rebalance（landing-inline）。
 
 ## 视觉约定
 
@@ -34,7 +34,7 @@ BottomCta 在 footer 上：Returns 同款暗底粒子海，文案 Efficient Solu
   2. Carriers：浅灰井（不要蓝底、不要点阵）；中心 3400+ + 两侧 logo **淡连线**；底半颗蓝点地球。Hover 时 logo+连线按 `--i` 逐个出现（只播一次）。
   3. Visibility：两张重叠卡拆开（运单号 → 自动识别）。
   4. Dashboard：井中小卡，**环形图描边**动画。
-- Data Operations：浅灰整段、**不要** sticky / 滚轮横滑 / 中间白卡外框。三栏：左 [01][02] 静态白文案卡、中间方形井（直接是动画）、右 [03][04]。四卡**无**选中态、不点选切场、**无** Contact Us。标题行左标题 / 右渐变胶囊 **Start My Free Trial**（白圆 + `···→`，不要 `.api-btn-primary`），滚到 `#free-trial`。井底蓝紫绿 liquid + film grain（`s4-liquid-grain.js`），减动效/≤768/弱 GPU 静态渐变。四段同一口井连续演完 Tracking → Carriers → Visibility → Dashboard，重叠过渡（径向 mask / scale / clip-path / 模糊，0.98s `cubic-bezier(0.22, 1, 0.36, 1)`），不要横滑换片、不要淡入淡出切卡、不要斜移/3D。动画触发看井内 `.api-s4-stage.is-on`。地球自转跟当前场。reduce-motion 定格第一场。
+- Data Operations：浅灰整段、**不要** sticky / 滚轮横滑 / 中间白卡外框。三栏：左 [01][02] 静态白文案卡、中间方形井（直接是动画）、右 [03][04]。四卡**无**选中态、不点选切场、**无** Contact Us。标题行左标题 / 右渐变胶囊 **Start My Free Trial**（白圆 + `···→`，不要 `.api-btn-primary`），滚到 `#free-trial`。井底蓝紫绿 liquid + film grain（`s4-liquid-grain.js`），减动效/≤640/弱 GPU 静态渐变。四段同一口井连续演完 Tracking → Carriers → Visibility → Dashboard，重叠过渡（径向 mask / scale / clip-path / 模糊，0.98s `cubic-bezier(0.22, 1, 0.36, 1)`），不要横滑换片、不要淡入淡出切卡、不要斜移/3D。动画触发看井内 `.api-s4-stage.is-on`。地球自转跟当前场。reduce-motion 定格第一场。
 
 ## Hero shader（Undertones 1 本地复刻）
 
