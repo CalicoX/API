@@ -6878,20 +6878,8 @@ html.is-reduce-fx .api-s5::after {
    Responsive
    ========================================================= */
 @media (max-width: 1024px) {
-  /* 6 列栅格：第一排 3 卡各占 2 列，第二排 2 卡各占 3 列撑满整行
-     （2026-08-31 Park：3+2 布局第二排右侧空一格难看） */
-  .api-apps {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-
-  .api-app-card {
-    grid-column: span 2;
-  }
-
-  .api-app-card:nth-child(n + 4) {
-    grid-column: span 3;
-  }
-
+  /* 6 列栅格只给 769-1024（下方 768 块的两列会被 span 规则污染成整行一个），
+     见文件末尾的范围块 */
   .api-s4-board {
     grid-template-columns: minmax(0, 1fr) minmax(320px, 42vw) minmax(0, 1fr);
     gap: 16px;
@@ -7709,5 +7697,21 @@ html.is-reduce-fx .api-s5::after {
   }
   .api-dom-stage .fx-float-a {
     display: none;
+  }
+}
+
+/* Applications 6 列栅格只给 769-1024（2026-08-31 Park：1024 第二排撑满）；
+   ≤768 两列（2+2+1）不带 span，否则 span 2 在两列 grid 里等于整行一个 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .api-apps {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .api-app-card {
+    grid-column: span 2;
+  }
+
+  .api-app-card:nth-child(n + 4) {
+    grid-column: span 3;
   }
 }
