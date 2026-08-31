@@ -6823,7 +6823,8 @@ html.is-reduce-fx .api-s5::after {
   }
 
   .api-onboard-steps {
-    grid-template-columns: 1fr;
+    /* 768 平板竖屏 2×2（2026-08-31 Park）；≤640 走横滑（后面 640 块覆盖） */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 28px;
   }
 }
