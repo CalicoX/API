@@ -2287,15 +2287,15 @@
   }
 
   /* 光收字号在 ~900 处（井 378 → 卡高 181）仍差 ~17px：卡改随内容自然高。
-     分布用顶对齐 + 16px 缝（与 board gap 一致）——space-between 会把两卡间
-     拉出大空隙，和井的内容节奏对不上（2026-08-31 Park「间距不一致」） */
+     分布顶对齐 + 16px 缝（与 board gap 一致）；卡 1 1 auto——内容是下限、
+     富余高度拉伸撑满列（2026-08-31 Park「高度要撑开」），不会再有中空/底空 */
   .api-s4 .api-s4-col {
     justify-content: flex-start;
     gap: 16px;
   }
 
   .api-s4 .api-s4-copy-card {
-    flex: 0 0 auto;
+    flex: 1 1 auto;
   }
 }
 
