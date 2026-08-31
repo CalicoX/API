@@ -2506,7 +2506,8 @@ html.glass-mode-liquid .product-dock.dock-on-dark .tab.active,
 /* ——— Trust ——— */
 .trust-band {
   background: #fff;
-  border-bottom: 1px solid var(--border-default);
+  /* 底边线全档去掉（2026-08-31 Park「怎么还有分割线」——桌面也不要） */
+  border-bottom: 0;
   overflow: visible;
 }
 .trust {
@@ -10544,10 +10545,7 @@ body.ai-case-lightbox-active {
     display: none !important;
   }
 
-  /* trust-band（logos 带）底边分割线：窄档去掉，与 .section/.credentials 分割线清理同批（2026-08-31 Park） */
-  .trust-band {
-    border-bottom: 0;
-  }
+  /* trust-band 底边线已在基础规则全档去掉（2026-08-31 Park） */
 
   /* footer 从 ≤768 起才上下堆叠（原 ≤1024，2026-08-31 Park：1024 保持左右布局） */
   .site-footer-main {
