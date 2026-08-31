@@ -19,6 +19,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
   - **模块间发丝分割线 ≤480 已去**：来源是 landing.css `.section` / `.credentials` 的 `border-bottom: 1px solid var(--border-default)`（全页每个模块都有，不只 Park 圈的那条）；`.api-page .section, .api-page .credentials` ≤480 `border-bottom: 0`，桌面保留。
   - track-ui 悬出卡被裁根因：**≤680 块把 `.explore-card-tracking .track-ui` 设了 `overflow: hidden`**（基础样式明明是 visible），把悬出板外的 WISMO/Brand video 裁掉；≤480 改回 `overflow: visible`（returns-ui 同加）。实测 wismo left 27 ≥ 卡 16、video right 348 ≤ 卡 359，都不出卡。
   - CTA 按钮 ≤480 `max-width: 320px`（landing ≤480 块全局 `.btn-switch` + bottom-cta 另加 `margin-inline: auto` 抗 flex stretch 拉满整行）。
+  - Onboard 4 Steps ≤480 改**横向滑动 + 底部 indicator**（同日 Park）：`.api-onboard-steps` flex + `scroll-snap-type: x mandatory`，卡 `flex: 0 0 86%` + `scroll-snap-align: center`（两侧露邻卡边），滚动条隐藏；dots（`.api-onboard-dots`，桌面 `display:none`）随 onScroll 取「视口中央最近的卡」高亮（蓝长条 18px / 灰点 6px，18px 热区 `::before` 画点），可点切（`scrollIntoView inline:center`，reduce-motion 用 auto）。JSX 在 IntegrationTogether：`obIdx` state + `stepsRef` + `onStepsScroll/goStep`。桌面四列 grid 完全不动。
 
 - 移动端修正范围（2026-08-29 Park「这是 <480 的，不是单纯的小于900」）：这批 5 项全按 **≤480 手机档**做，别扩到 900。
   - Use Cases 顶部「彩虹线」（Park 问是什么）：是 `.api-s2-progress` 滚动进度条（贴 sticky 舞台顶 2px、彩虹渐变随滚动填充）。手机 ≤768 滚动编排定格 p=1，它永远满宽挂着像凭空彩线 → ≤900 已 `display:none`，桌面保留。

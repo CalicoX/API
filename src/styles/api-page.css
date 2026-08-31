@@ -6238,6 +6238,11 @@ html.is-reduce-fx .api-s5::after {
   color: #424242;
 }
 
+/* ≤480 横滑 indicator：桌面隐藏 */
+.api-onboard-dots {
+  display: none;
+}
+
 /* Onboard DOM illustrations — floating white chips, no well */
 .api-ob {
   position: relative;
@@ -6978,6 +6983,61 @@ html.is-reduce-fx .api-s5::after {
 
   .api-s4-trend {
     height: 96px;
+  }
+
+  /* Onboard 4 Steps 横向滑动 + indicator（2026-08-31 Park） */
+  .api-onboard-steps {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .api-onboard-steps::-webkit-scrollbar {
+    display: none;
+  }
+
+  .api-onboard-card {
+    flex: 0 0 86%;
+    scroll-snap-align: center;
+  }
+
+  .api-onboard-dots {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 6px;
+  }
+
+  .api-onboard-dots button {
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .api-onboard-dots button::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #cbd5e1;
+    transition:
+      width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.3s;
+  }
+
+  .api-onboard-dots button.is-active::before {
+    width: 18px;
+    background: var(--api-blue, #2563eb);
   }
 }
 
