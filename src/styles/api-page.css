@@ -2261,6 +2261,34 @@
   .api-s3-step {
     font-size: 10px;
   }
+
+  /* s4 侧列在 769-1024 只有 ~253px 宽、卡高 205（井高的一半），原字号装不下会溢出卡外
+     （2026-08-31 Park）：文字整体收一档。别动井——井和卡列联动，收井卡更矮。
+     限 769-1024 且加 .api-s4 前缀压过 3368 行的基础 clamp（块在文件前部，同特异性会输） */
+  .api-s4 .api-s4-idx {
+    margin-bottom: 8px;
+  }
+
+  .api-s4 .api-s4-copy-card h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .api-s4 .api-s4-copy-card p {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  /* 光收字号在 ~900 处（井 378 → 卡高 181）仍差 ~17px：卡改随内容自然高、
+     space-between 贴齐井沿，文字永不卡在固定卡高里（2026-08-31 Park） */
+  .api-s4 .api-s4-col {
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .api-s4 .api-s4-copy-card {
+    flex: 0 0 auto;
+  }
 }
 
 .api-vig-sheet,
@@ -6712,7 +6740,7 @@ html.is-reduce-fx .api-s5::after {
   }
 
   .api-s4-copy-card {
-    padding: 22px 20px 20px;
+    padding: 14px 16px;
   }
 }
 
