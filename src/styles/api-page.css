@@ -2262,9 +2262,13 @@
     font-size: 10px;
   }
 
-  /* s4 侧列在 769-1024 只有 ~253px 宽、卡高 205（井高的一半），原字号装不下会溢出卡外
-     （2026-08-31 Park）：文字整体收一档。别动井——井和卡列联动，收井卡更矮。
-     限 769-1024 且加 .api-s4 前缀压过 3368 行的基础 clamp（块在文件前部，同特异性会输） */
+  /* s4 侧列在窄桌面（769-1180）只有 ~250-300px 宽、卡高被井对半钉死，桌面字号装不下
+     （2026-08-31 Park「1025 咋这样了」——收档原来止于 1024，1025-1180 断层）。
+     别动井——井和卡列联动，收井卡更矮。加 .api-s4 前缀压过 3368 行的基础 clamp */
+  .api-s4-copy-card {
+    padding: 16px 16px;
+  }
+
   .api-s4 .api-s4-ico {
     width: 20px;
     height: 20px;
@@ -6997,6 +7001,13 @@ html.is-reduce-fx .api-s5::after {
     margin: 0;
   }
 
+  /* 井放大后 ④场内容同步放大（2026-08-31 Park「动画内容没有同步放大」）：
+     zoom 固定档 721/520≈1.39（zoom 的 calc 容器单位不可靠，井宽只随壳宽 769-768 档微变，
+     shell = 100% - 2×24 padding，比例近似恒定）；不改 transform——候场 scale(0.52) 是桥逆变换约定 */
+  .api-s4-dashgrid {
+    zoom: 1.39;
+  }
+
   .api-s4-col {
     gap: 16px;
   }
@@ -7098,15 +7109,6 @@ html.is-reduce-fx .api-s5::after {
     grid-template-columns: 1fr 1fr;
   }
 
-  /* 高度随内容（同行 grid stretch 拉齐，去 268 固定高的空白），最后一张跨全宽（2026-08-31 Park） */
-  .api-app-card {
-    min-height: 0;
-  }
-
-  .api-app-card:last-child {
-    grid-column: 1 / -1;
-  }
-
   .api-s1,
   .api-s2,
   .api-s3,
@@ -7173,14 +7175,8 @@ html.is-reduce-fx .api-s5::after {
     gap: 5px 10px;
   }
 
-  .api-s4-donut-wrap {
-    width: 96px;
-    height: 96px;
-  }
-
-  .api-s4-trend {
-    height: 96px;
-  }
+  /* ④场 dashgrid 的小尺寸收档已废弃（2026-08-31）：井在 768 撑满壳宽（~721），
+     内容由 .api-s4-stage 的 --dash-scale 容器化整体放大，不再需要 96px 收档 */
 
   /* hero 单列堆叠只在 ≤640（从 768 档下移，2026-08-31 Park：平板竖屏保持左右双栏） */
   .api-page .api-s1.hero {
@@ -7765,9 +7761,31 @@ html.is-reduce-fx .api-s5::after {
 
   .api-app-card {
     grid-column: span 2;
+    /* 高度随内容（同行 grid stretch 拉齐，去 268 固定高的空白），最后一张跨全宽（2026-08-31 Park） */
+    min-height: 0;
   }
 
   .api-app-card:nth-child(n + 4) {
     grid-column: span 3;
+  }
+}
+
+/* s4 769-1024 降单列（2026-08-31 Park「又出问题咯 768-1024 之间」）：三栏在 830 附近
+   侧列只剩 ~180px 文字崩版，井 + 卡纵排；zoom 回 1（1.39 只给 768 全宽井）。
+   放文件末尾赢 6885 块的三栏源顺序 */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .api-s4-board {
+    grid-template-columns: 1fr;
+  }
+
+  .api-s4-stage-card {
+    order: -1;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .api-s4-dashgrid {
+    zoom: 1;
   }
 }
