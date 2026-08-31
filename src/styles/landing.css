@@ -9962,14 +9962,8 @@ body.ai-case-lightbox-active {
 }
 
 @media (max-width: 1024px) {
-  .site-footer-main {
-    flex-direction: column;
-    gap: 48px;
-  }
-  .site-footer-brand {
-    max-width: none;
-    min-width: 0;
-  }
+  /* main 保持桌面的 brand 左 + nav 右（2026-08-31 Park：1024 footer 不该变上下堆叠）；
+     nav 收成 2×2 放在 brand 右侧 */
   .site-footer-nav {
     padding-top: 0;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -10553,6 +10547,16 @@ body.ai-case-lightbox-active {
   /* trust-band（logos 带）底边分割线：窄档去掉，与 .section/.credentials 分割线清理同批（2026-08-31 Park） */
   .trust-band {
     border-bottom: 0;
+  }
+
+  /* footer 从 ≤768 起才上下堆叠（原 ≤1024，2026-08-31 Park：1024 保持左右布局） */
+  .site-footer-main {
+    flex-direction: column;
+    gap: 48px;
+  }
+  .site-footer-brand {
+    max-width: none;
+    min-width: 0;
   }
 
   /* AI intro: static, no sticky pin wall */
