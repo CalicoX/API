@@ -304,7 +304,11 @@ void main(){
   vec2 aspCorr = vec2((uv.x - 0.5) * aspect, uv.y - 0.5);
   float u = aspCorr.x * cosA + aspCorr.y * sinA;
 
-  float flutePos = u * FREQUENCY;
+  // 手机窄视口条纹过粗（2026-08-31 Park）：原版按横向数格（FREQUENCY × aspect 宽），
+  // 窄屏 aspect<0.5 时每格物理宽近两倍。改按短边归一（min(aspect,1) 补偿），
+  // 桌面 aspect>=1 时与原版逐位一致，窄屏条纹密度回到桌面观感
+  float freqComp = max(aspect, 1.0) / max(aspect, 0.62);
+  float flutePos = u * FREQUENCY * freqComp;
   float cellPos = (fract(flutePos) - 0.5) * 2.0;
   float absCell = max(abs(cellPos), 0.0001);
   float exponent = mix(EXP_HI, EXP_LO, SOFTNESS);
