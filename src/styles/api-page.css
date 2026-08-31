@@ -2286,10 +2286,11 @@
     line-height: 1.5;
   }
 
-  /* 光收字号在 ~900 处（井 378 → 卡高 181）仍差 ~17px：卡改随内容自然高、
-     space-between 贴齐井沿，文字永不卡在固定卡高里（2026-08-31 Park） */
+  /* 光收字号在 ~900 处（井 378 → 卡高 181）仍差 ~17px：卡改随内容自然高。
+     分布用顶对齐 + 16px 缝（与 board gap 一致）——space-between 会把两卡间
+     拉出大空隙，和井的内容节奏对不上（2026-08-31 Park「间距不一致」） */
   .api-s4 .api-s4-col {
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 16px;
   }
 
@@ -6848,8 +6849,18 @@ html.is-reduce-fx .api-s5::after {
    Responsive
    ========================================================= */
 @media (max-width: 1024px) {
+  /* 6 列栅格：第一排 3 卡各占 2 列，第二排 2 卡各占 3 列撑满整行
+     （2026-08-31 Park：3+2 布局第二排右侧空一格难看） */
   .api-apps {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .api-app-card {
+    grid-column: span 2;
+  }
+
+  .api-app-card:nth-child(n + 4) {
+    grid-column: span 3;
   }
 
   .api-s4-board {

@@ -10477,8 +10477,10 @@ body.ai-case-lightbox-active {
   .float-card-rec {
     width: 190px;
   }
+  /* 1024 平板一行一个（2026-08-31 Park）：两列时文案列被压到每行两三个词；
+     卡内部保持桌面左文右图布局，全宽自然舒展。≤768 本就单列，不受影响 */
   .explore-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 14px;
   }
   .credentials-grid {
