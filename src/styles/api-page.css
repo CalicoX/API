@@ -6965,9 +6965,10 @@ html.is-reduce-fx .api-s5::after {
 
   .api-s4-stage-card {
     order: -1;
+    /* 井撑满壳宽（2026-08-31 Park「没撑满」；原 520px 居中限制废弃） */
     width: 100%;
-    max-width: min(100%, 520px);
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
   }
 
   .api-s4-col {
