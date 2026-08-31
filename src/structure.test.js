@@ -99,7 +99,9 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/DataOperations.jsx")).toMatch(/9 main \+ 27 sub/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/api-s4-board/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/idx: \"01\"/);
-    expect(read("components/sections/DataOperations.jsx")).toMatch(/\[\{card\.idx\}\]/);
+    /* 2026-08-31 Park：[01]-[04] 序号换线性 SVG icon（hover 动画），断言同步 */
+    expect(read("components/sections/DataOperations.jsx")).toMatch(/COPY_ICONS/);
+    expect(read("components/sections/DataOperations.jsx")).toMatch(/api-s4-ico/);
     expect(read("components/sections/DataOperations.jsx")).not.toMatch(/api-s4-rail|--s4-x|data-s4-dir/);
     const s4 = read("components/sections/DataOperations.jsx");
     expect(s4).not.toMatch(/Contact Us/);

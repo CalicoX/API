@@ -2265,8 +2265,15 @@
   /* s4 侧列在 769-1024 只有 ~253px 宽、卡高 205（井高的一半），原字号装不下会溢出卡外
      （2026-08-31 Park）：文字整体收一档。别动井——井和卡列联动，收井卡更矮。
      限 769-1024 且加 .api-s4 前缀压过 3368 行的基础 clamp（块在文件前部，同特异性会输） */
-  .api-s4 .api-s4-idx {
+  .api-s4 .api-s4-ico {
+    width: 20px;
+    height: 20px;
     margin-bottom: 8px;
+  }
+
+  .api-s4 .api-s4-ico svg {
+    width: 20px;
+    height: 20px;
   }
 
   .api-s4 .api-s4-copy-card h3 {
@@ -3376,14 +3383,119 @@
   color: inherit;
 }
 
-.api-s4-idx {
-  display: block;
-  margin-bottom: 14px;
-  font-size: clamp(12px, calc(11.28px + 0.2vw), 13px);
-  font-weight: 650;
-  letter-spacing: 0.04em;
+/* 文案卡序号位 icon（2026-08-31 Park：[01]-[04] 换 SVG + hover 动画） */
+.api-s4-ico {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 12px;
   color: #94a3b8;
-  font-variant-numeric: tabular-nums;
+  transition: color 0.35s ease;
+}
+
+.api-s4-ico svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  overflow: visible;
+}
+
+.api-s4-copy-card:hover .api-s4-ico {
+  color: var(--api-blue);
+}
+
+/* hover 触发的描边绘制：pathLength=100 归一，--d 做错峰 delay */
+.api-s4-ico .d {
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: 0;
+}
+
+.api-s4-copy-card:hover .api-s4-ico .d {
+  animation: api-s4-ico-draw 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+.api-s4-ico .sweep {
+  transform-origin: 12px 12px;
+}
+
+.api-s4-copy-card:hover .api-s4-ico .sweep {
+  animation: api-s4-ico-sweep 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.api-s4-ico .core,
+.api-s4-ico .bar {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.api-s4-ico .bar {
+  transform-origin: bottom;
+}
+
+.api-s4-copy-card:hover .api-s4-ico .core {
+  animation: api-s4-ico-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.api-s4-copy-card:hover .api-s4-ico .bar {
+  animation: api-s4-ico-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.api-s4-copy-card:hover .api-s4-ico .b2 {
+  animation-delay: 0.08s;
+}
+
+.api-s4-copy-card:hover .api-s4-ico .b3 {
+  animation-delay: 0.16s;
+}
+
+@keyframes api-s4-ico-draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes api-s4-ico-sweep {
+  from {
+    transform: rotate(-90deg);
+  }
+  to {
+    transform: rotate(270deg);
+  }
+}
+
+@keyframes api-s4-ico-pop {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes api-s4-ico-rise {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .api-s4-copy-card:hover .api-s4-ico .d,
+  .api-s4-copy-card:hover .api-s4-ico .sweep,
+  .api-s4-copy-card:hover .api-s4-ico .core,
+  .api-s4-copy-card:hover .api-s4-ico .bar {
+    animation: none;
+  }
 }
 
 .api-s4-copy-card h3 {

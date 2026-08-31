@@ -168,10 +168,61 @@ function measureKeelSlot(well) {
 const LOGO_SQUIRCLE_D =
   "M0.6456,0.0034Q0.7912,0.0069 0.8351,0.0174Q0.8789,0.0280 0.9071,0.0463Q0.9353,0.0647 0.9537,0.0929Q0.9720,0.1211 0.9826,0.1649Q0.9931,0.2088 0.9966,0.3544Q1.0000,0.5000 0.9966,0.6456Q0.9931,0.7912 0.9826,0.8351Q0.9720,0.8789 0.9537,0.9071Q0.9353,0.9353 0.9071,0.9537Q0.8789,0.9720 0.8351,0.9826Q0.7912,0.9931 0.6456,0.9966Q0.5000,1.0000 0.3544,0.9966Q0.2088,0.9931 0.1649,0.9826Q0.1211,0.9720 0.0929,0.9537Q0.0647,0.9353 0.0463,0.9071Q0.0280,0.8789 0.0174,0.8351Q0.0069,0.7912 0.0034,0.6456Q0.0000,0.5000 0.0034,0.3544Q0.0069,0.2088 0.0174,0.1649Q0.0280,0.1211 0.0463,0.0929Q0.0647,0.0647 0.0929,0.0463Q0.1211,0.0280 0.1649,0.0174Q0.2088,0.0069 0.3544,0.0034Q0.5000,0.0000 0.6456,0.0034Z";
 
+/* 文案卡序号位的四枚线性 icon（2026-08-31 Park：[01]-[04] 换 icon + hover SVG 动画）。
+   全部 stroke 走 currentColor；带 pathLength="100" 的描边在 hover 时统一走 dash 绘制 */
+function IcoRadar() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" pathLength="100" className="d" style={{ "--d": "0s" }} />
+      <circle cx="12" cy="12" r="5" pathLength="100" className="d" style={{ "--d": "0.08s" }} />
+      <line className="sweep" x1="12" y1="12" x2="12" y2="3.5" />
+      <circle className="core" cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function IcoGlobe() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" pathLength="100" className="d" style={{ "--d": "0s" }} />
+      <ellipse cx="12" cy="12" rx="4.2" ry="9" pathLength="100" className="d" style={{ "--d": "0.1s" }} />
+      <line x1="3" y1="12" x2="21" y2="12" pathLength="100" className="d" style={{ "--d": "0.2s" }} />
+    </svg>
+  );
+}
+
+function IcoEye() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M2.5 12C6 6.6 18 6.6 21.5 12C18 17.4 6 17.4 2.5 12Z" pathLength="100" className="d" style={{ "--d": "0s" }} />
+      <circle className="core" cx="12" cy="12" r="3" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function IcoBars() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+      <line x1="3.5" y1="20.5" x2="20.5" y2="20.5" pathLength="100" className="d" style={{ "--d": "0s" }} />
+      <rect className="bar b1" x="6" y="13" width="3.6" height="7.5" rx="1.2" />
+      <rect className="bar b2" x="11.2" y="9" width="3.6" height="11.5" rx="1.2" />
+      <rect className="bar b3" x="16.4" y="5" width="3.6" height="15.5" rx="1.2" />
+    </svg>
+  );
+}
+
+const COPY_ICONS = {
+  "01": IcoRadar,
+  "02": IcoGlobe,
+  "03": IcoEye,
+  "04": IcoBars,
+};
+
 function CopyCard({ card }) {
+  const Ico = COPY_ICONS[card.idx];
   return (
     <article className="api-s4-copy-card">
-      <span className="api-s4-idx">[{card.idx}]</span>
+      <span className="api-s4-ico" aria-hidden="true">{Ico ? <Ico /> : null}</span>
       <h3>{card.title}</h3>
       <p>{card.body}</p>
     </article>
