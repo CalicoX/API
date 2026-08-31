@@ -47,7 +47,7 @@ export default function LandingPage() {
       </div>
       <canvas id="glass-source" aria-hidden="true" />
       <canvas id="glass-output" aria-hidden="true" />
-      {/* ProductDock hidden for now — Park 2026-08-24 */}
+      <ProductDock />
     </div>
   );
 }
