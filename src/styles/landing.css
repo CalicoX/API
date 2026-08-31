@@ -9983,7 +9983,12 @@ body.ai-case-lightbox-active {
     gap: 40px;
   }
   .site-footer-nav {
-    grid-template-columns: 1fr 1fr;
+    /* 两列 space-between 拉开：Products/Partners 贴左、Company/Support 贴右（2026-08-31 Park「这一列应该在这儿」）。
+       width:100% 必须——nav 的 flex:1 1 0 在列方向 main 里宽度收缩到内容，右列到不了行右缘 */
+    width: 100%;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    column-gap: 40px;
   }
   .site-footer-bottom-left {
     gap: 16px;
@@ -10867,17 +10872,7 @@ body.ai-case-lightbox-active {
   .brand-card {
     width: 100cqw;
   }
-  .site-footer-nav {
-    /* 手机两列各自撑满半行（2026-08-31 Park「这一列应该在这儿」）：
-       左列贴左、右列贴右，中间空隙拉开——别挤在左半边 */
-    grid-template-columns: 1fr 1fr;
-    justify-items: start;
-    column-gap: 40px;
-  }
 
-  .site-footer-col {
-    width: 100%;
-  }
   /* CTA 按钮手机档别拉满整行（2026-08-31 Park） */
   .btn-switch {
     max-width: 320px;
