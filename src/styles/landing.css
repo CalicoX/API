@@ -9983,11 +9983,11 @@ body.ai-case-lightbox-active {
     gap: 40px;
   }
   .site-footer-nav {
-    /* 两列 space-between 拉开：Products/Partners 贴左、Company/Support 贴右（2026-08-31 Park「这一列应该在这儿」）。
-       width:100% 必须——nav 的 flex:1 1 0 在列方向 main 里宽度收缩到内容，右列到不了行右缘 */
+    /* 两列均分（2026-08-31 Park 标注图）：左列 Products/Partners 横排正常宽，
+       右列 Company/Support 起点在行中线；1fr 1fr + width:100%（nav 的 flex:1 1 0
+       在列方向 main 里宽度收缩到内容，必须显式撑满） */
     width: 100%;
-    grid-template-columns: auto auto;
-    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
     column-gap: 40px;
   }
   .site-footer-bottom-left {
