@@ -10551,14 +10551,17 @@ body.ai-case-lightbox-active {
 
   /* trust-band 底边线已在基础规则全档去掉（2026-08-31 Park） */
 
-  /* footer 从 ≤768 起才上下堆叠（原 ≤1024，2026-08-31 Park：1024 保持左右布局） */
-  .site-footer-main {
-    flex-direction: column;
-    gap: 48px;
-  }
-  .site-footer-brand {
-    max-width: none;
-    min-width: 0;
+  /* footer 从 ≤640 起才上下堆叠（2026-08-31 Park：768 也要左右布局——
+     brand 左 + nav 2×2 右由 ≤1024 块覆盖） */
+  @media (max-width: 640px) {
+    .site-footer-main {
+      flex-direction: column;
+      gap: 48px;
+    }
+    .site-footer-brand {
+      max-width: none;
+      min-width: 0;
+    }
   }
 
   /* AI intro: static, no sticky pin wall */
