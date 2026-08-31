@@ -6063,8 +6063,8 @@ html.is-reduce-fx .api-s5::after {
   gap: 16px;
   align-items: stretch;
   margin: 0;
-  /* 顶部留出 Popular 色带的悬浮位（官网原版形态：色带完全在框外上方） */
-  padding: 52px 0 0;
+  /* 色带在热门卡框内（官网原版），grid 上方不需要留位 */
+  padding: 0;
   list-style: none;
 }
 
@@ -6122,8 +6122,10 @@ html.is-reduce-fx .api-s5::after {
   border-radius: 16px;
   background: #fff;
   list-style: none;
-  /* Popular 徽标悬浮在框顶中点，不能再裁（2026-08-31 Park：挪出卡外、四卡框高对齐） */
-  overflow: visible;
+  /* 官网原版形态（2026-08-31 Park）：全卡下移色带高度、热门卡色带在流内顶到行顶，
+     色带底 = 其他卡框顶；白体圆角由卡裁切 */
+  margin-top: 28px;
+  overflow: hidden;
 }
 
 .api-plan-inner {
@@ -6155,25 +6157,33 @@ html.is-reduce-fx .api-s5::after {
 
 .api-plan-card.is-hot {
   border-color: var(--api-blue);
+  /* 色带 = 卡顶部背景（官网：卡背景即色带，ribbon 透明露出）；热门卡不吃全卡下移 */
+  margin-top: 0;
+  background: var(--api-blue);
 }
 
-/* Popular 色带（2026-08-31 Park 官网参考图）：完全在框外上方的独立圆角条，
-   与框留 6px 缝；absolute 不占流，四卡框顶保持同一水平线 */
 .api-plan-card.is-hot .api-plan-popular {
-  position: absolute;
-  top: auto;
-  bottom: 100%;
-  left: 0;
-  right: 0;
-  transform: none;
-  height: 46px;
-  margin-bottom: 6px;
+  position: static;
   display: flex;
+  width: 100%;
+  height: 28px;
+  flex: 0 0 28px;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  background: var(--api-blue);
+  padding: 4px 2px;
+  border-radius: 0;
+  background: transparent;
   color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.api-plan-card.is-hot .api-plan-inner {
+  flex: 1 1 auto;
+  border-radius: 14px;
+  background: #fff;
 }
 
 .api-plan-name {
