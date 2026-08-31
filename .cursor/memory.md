@@ -11,7 +11,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- **1024 三处布局（2026-08-31 Park，commit 2373f53）**：①s4 侧列 space-between 拉出的大空隙和井节奏对不上 → 顶对齐 + 16px 缝（与 board gap 一致，卡自然高不溢出的前提不变）；②Applications 5 卡 3+2 第二排右侧空格难看 → ≤1024 改 6 列栅格（前 3 卡 `span 2`、后 2 卡 `span 3` 撑满整行）；③Explore 两卡在 1024 两列时文案列被压到每行两三个词 → `.explore-grid` ≤1024 单列一行一个，卡内保持桌面左文右图。**apps 的 6 列栅格只在 ≤1024 块**，桌面 5 列、768 两列、640 一列不变。
+- **1024 三处布局（2026-08-31 Park，commit 2373f53 + 6e83fa9）**：①s4 侧列分布定案：`flex-start` + 16px 缝 + 卡 `flex: 1 1 auto`（内容为下限、富余高度拉伸撑满列，列底与井底对齐）——space-between 会拉大缝、纯自然高会底空，这个组合两个问题都没有（Park「间距不一致」→「高度要撑开」两轮迭代）；②Applications 5 卡 3+2 第二排右侧空格难看 → ≤1024 改 6 列栅格（前 3 卡 `span 2`、后 2 卡 `span 3` 撑满整行）；③Explore 两卡在 1024 两列时文案列被压到每行两三个词 → `.explore-grid` ≤1024 单列一行一个，卡内保持桌面左文右图。**apps 的 6 列栅格只在 ≤1024 块**，桌面 5 列、768 两列、640 一列不变。
 
 - **pricing Popular 徽标挪出卡外（2026-08-31 Park，commit 9c4c438）**：原来的实现是 `.api-plan-card { grid-template-rows: 36px 1fr }` 占位行（Flagship 蓝带、其他三卡透明空 36px）。现删掉占位行，四卡统一 flex column、框顶/标题完全同高；徽标改 `position:absolute; top:0; left:50%; translate(-50%,-50%)` 胶囊压线悬浮在 Flagship 框顶。**卡 `overflow: hidden` 已放开成 visible**（悬浮徽标会被裁）——以后别给 plan 卡加回 hidden。非 hot 卡的 span 是 `\u00a0` 透明占位（JSX 未动）。390 tab 档只有 `is-active` 卡渲染，徽标只随 Flagship 选中出现。
 
