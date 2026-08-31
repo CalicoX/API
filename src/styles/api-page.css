@@ -6063,7 +6063,8 @@ html.is-reduce-fx .api-s5::after {
   gap: 16px;
   align-items: stretch;
   margin: 0;
-  padding: 0;
+  /* 顶部留出 Popular 徽标的悬浮位（2026-08-31 Park：徽标是框上方的一个块，不压框线） */
+  padding-top: 38px;
   list-style: none;
 }
 
@@ -6134,9 +6135,10 @@ html.is-reduce-fx .api-s5::after {
 
 .api-plan-popular {
   position: absolute;
-  top: 0;
+  /* 徽标整体浮在框顶上方，与框线留 10px（2026-08-31 Park：独立块，不压线） */
+  top: -38px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
   height: 28px;
