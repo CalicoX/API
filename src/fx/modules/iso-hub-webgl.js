@@ -25,7 +25,7 @@ export function createIsoHubWebGL(host, opts = {}) {
   let raf = 0;
 
   const MOBILE = !!(
-    window.matchMedia && window.matchMedia("(max-width: 900px)").matches
+    window.matchMedia && window.matchMedia("(max-width: 768px)").matches
   );
 
   // ---------------------------------------------------------------------------

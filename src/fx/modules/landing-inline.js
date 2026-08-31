@@ -257,7 +257,7 @@ export function mount() {
       var current = -1;
       var clickAnimating = false;
       var clickUnlockTimer = 0;
-      var mqMobile = window.matchMedia("(max-width: 980px)");
+      var mqMobile = window.matchMedia("(max-width: 1024px)");
       var panelGap = 28;
       var panelH = 0;
       var travelPx = 1;

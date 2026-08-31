@@ -11,7 +11,9 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- 移动端 ≤480 批次（2026-08-31 Park 七点，全按 ≤480 做、桌面不动）：
+- **断点体系收敛（2026-08-31 Park 定案「按 Tailwind 的断点来」）**：全站 max-width 只剩 **640 / 768 / 1024**（+640 内嵌套 360 窄机子档），清理了 520/560/680/700/720/900/980/1100 化石层（共 28 个 @media + 4 处 JS matchMedia）。语义映射：**原 ≤900「单列堆叠」块→768**（不是 1024！机械替换会让 iPad 横屏被单列压掉）、**原 ≤980/≤1100「rebalance」块→1024**、原 ≤480/520/560→640、680/700/720→768；api-page 的 901-1100 组合块变 `(max-width:1024) and (min-width:769)`。JS：particle-earth / iso-hub 的 900→768（跟单列档，分别是性能降级和窄屏高 dpr）、landing-inline 980→1024（feature rebalance）、responsive-fx mq480→mq640。1280/1536 是 Tailwind 大屏接口暂不设，1440 是壳宽不是断点。规范已写进 AGENTS.md「断点规范」节。验证：六档（1440/1280/1024/768/640/390）关键网格实测全部按档生效、零横向溢出、桌面 1440/1280 零变化；768 的 track-ui 吃 768 档 hidden 但布局流式、悬出元素全部在卡内（实测 wismo/video 左右各 27px 余量），640 以下缩放方案接管（308px 对称居中 + visible）。**注意**：`tab.screenshot()` 被 in-app browser guest 模式拒（"activity capture failed for guest"），CUA 桌面截屏也没授权——视觉回归目前只能靠几何断言 + Park 实机看。工作方式（同日再次强调「我给你说，你来改。先别动」）：新批次也一样，Park 口述问题清单我只按他说的改，别自主扫页出诊断报告。
+
+- 移动端 ≤480 批次（2026-08-31 Park 七点，全按 ≤480 做、桌面不动；**2026-08-31 晚断点并档后这批的挂点已是 ≤640**）：
   - ④场井内容溢出（dashgrid 369 > 井 343，底部卡+toast 被裁）：≤480 图例折两列（`gap: 5px 10px`）、donut/trend 各收 96px、dashgrid gap 6 → 实测 281px 正好收进井，toast 完整可见。
   - pricing tab 改**分段控件**：grid 四等分 + `#eef2f7` 底 + 4px 内衬，选中=白钮+蓝字+轻投影（不再是四个独立胶囊）。
   - 移动端卡片描边统一 1px：`.api-plan-card / .api-plan-custom` ≤480 `border-width: 1px`（桌面仍 2px）。

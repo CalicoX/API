@@ -1206,7 +1206,7 @@
   pointer-events: none;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .api-s2-line {
     flex-direction: column;
     justify-content: flex-start;
@@ -2094,14 +2094,14 @@
   }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   .api-server-card {
     width: 168px;
     padding: 16px 14px 12px;
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   /* keep sticky stage on small screens; hud already has max-width:800 rules */
   .api-s2-sticky {
     min-height: 70vh;
@@ -2277,7 +2277,7 @@
 }
 
 /* mid widths: keep 3 equal cols until stack */
-@media (max-width: 1100px) and (min-width: 901px) {
+@media (max-width: 1024px) and (min-width: 769px) {
   .api-s3-illus {
     height: 280px;
     padding: 0;
@@ -4991,7 +4991,7 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .api-s4-vig--dash {
     padding: 12% 3% 6%;
   }
@@ -5956,12 +5956,12 @@ html.is-reduce-fx .api-s5::after {
   list-style: none;
 }
 
-/* 移动端（≤480）tab 切换：桌面隐藏，手机显示 */
+/* 移动端（≤640，Tailwind sm）tab 切换：桌面隐藏，手机/小平板显示 */
 .api-plan-tabs {
   display: none;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   /* 分段控件式 tab：等宽四格、白钮选中（2026-08-31 Park） */
   .api-plan-tabs {
     display: grid;
@@ -6238,7 +6238,7 @@ html.is-reduce-fx .api-s5::after {
   color: #424242;
 }
 
-/* ≤480 横滑 indicator：桌面隐藏 */
+/* ≤640 横滑 indicator：桌面隐藏 */
 .api-onboard-dots {
   display: none;
 }
@@ -6634,7 +6634,7 @@ html.is-reduce-fx .api-s5::after {
   min-height: 18px;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   .api-plans {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -6644,7 +6644,7 @@ html.is-reduce-fx .api-s5::after {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .api-land {
     padding: 64px 0 56px;
   }
@@ -6715,8 +6715,8 @@ html.is-reduce-fx .api-s5::after {
   min-width: 200px;
 }
 
-/* ≤480 按钮不再被 stretch 拉满整行（2026-08-31 Park） */
-@media (max-width: 480px) {
+/* ≤640 按钮不再被 stretch 拉满整行（2026-08-31 Park） */
+@media (max-width: 640px) {
   .api-page .bottom-cta .cta-row .btn-switch {
     max-width: 320px;
     margin-inline: auto;
@@ -6733,7 +6733,7 @@ html.is-reduce-fx .api-s5::after {
 /* =========================================================
    Responsive
    ========================================================= */
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   .api-apps {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -6748,7 +6748,7 @@ html.is-reduce-fx .api-s5::after {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .api-page .api-s1.hero {
     display: block;
     min-height: 0;
@@ -6915,7 +6915,7 @@ html.is-reduce-fx .api-s5::after {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .api-apps {
     grid-template-columns: 1fr 1fr;
   }
@@ -6942,7 +6942,7 @@ html.is-reduce-fx .api-s5::after {
   /* keep .api-wrap padding from --page-pad-x; no extra width shrink */
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .api-apps {
     grid-template-columns: 1fr;
   }
@@ -7499,7 +7499,7 @@ html.is-reduce-fx .api-s5::after {
     #141414;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .api-dom-stage .fx-float-b,
   .api-dom-stage .fx-float-c {
     display: none;
