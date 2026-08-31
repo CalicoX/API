@@ -6074,8 +6074,10 @@ html.is-reduce-fx .api-s5::after {
 }
 
 @media (max-width: 640px) {
-  /* 分段控件式 tab：等宽四格、白钮选中（2026-08-31 Park） */
+  /* 分段控件式 tab：等宽四格、白钮选中（2026-08-31 Park）；
+     白底由滑动 thumb 提供（--i = 激活索引，切换时白块平滑滑动） */
   .api-plan-tabs {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 4px;
@@ -6085,7 +6087,21 @@ html.is-reduce-fx .api-s5::after {
     background: #eef2f7;
   }
 
+  .api-plan-tabs-thumb {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: calc(4px + var(--i, 0) * ((100% - 20px) / 4 + 4px));
+    width: calc((100% - 20px) / 4);
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
+    transition: left 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
   .api-plan-tabs button {
+    position: relative;
+    z-index: 1;
     padding: 9px 0 10px;
     border: 0;
     border-radius: 10px;
@@ -6095,12 +6111,19 @@ html.is-reduce-fx .api-s5::after {
     font-weight: 650;
     line-height: 1;
     cursor: pointer;
+    transition: color 0.25s ease;
   }
 
   .api-plan-tabs button.is-active {
-    background: #fff;
+    background: transparent;
     color: var(--api-blue);
-    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
+    box-shadow: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .api-plan-tabs-thumb {
+      transition: none;
+    }
   }
 
   .api-plans li {

@@ -115,12 +115,14 @@ export default function IntegrationTogether() {
           </h2>
           <p className="api-land-sub">Each plan is valid for 12 months.</p>
         </div>
-        {/* 移动端（≤480）：tab 切换，不是平铺（2026-08-29 Park） */}
+        {/* 移动端（≤480）：tab 切换，不是平铺（2026-08-29 Park）；白钮滑动 thumb（--i = 激活索引） */}
         <div
           className="api-plan-tabs"
           role="tablist"
           aria-label="Pricing plans"
+          style={{ "--i": planIdx }}
         >
+          <span className="api-plan-tabs-thumb" aria-hidden="true" />
           {PLANS.map((plan, i) => (
             <button
               key={plan.name}
