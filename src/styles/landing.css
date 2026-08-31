@@ -10868,9 +10868,15 @@ body.ai-case-lightbox-active {
     width: 100cqw;
   }
   .site-footer-nav {
-    /* 55 开：minmax(0,1fr) 防长词（Notifications）撑列（2026-08-31 Park「移动端 55 开」） */
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 16px;
+    /* 手机两列各自撑满半行（2026-08-31 Park「这一列应该在这儿」）：
+       左列贴左、右列贴右，中间空隙拉开——别挤在左半边 */
+    grid-template-columns: 1fr 1fr;
+    justify-items: start;
+    column-gap: 40px;
+  }
+
+  .site-footer-col {
+    width: 100%;
   }
   /* CTA 按钮手机档别拉满整行（2026-08-31 Park） */
   .btn-switch {
