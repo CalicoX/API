@@ -6949,12 +6949,14 @@ html.is-reduce-fx .api-s5::after {
   }
 
   .api-s4-board {
-    grid-template-columns: 1fr;
+    /* 768 平板竖屏：井跨全宽在上，四张文案卡 2×2（2026-08-31 Park「上面的插图不动」） */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
   }
 
   .api-s4-stage-card {
     order: -1;
+    grid-column: 1 / -1;
     /* 井撑满壳宽（2026-08-31 Park「没撑满」；原 520px 居中限制废弃） */
     width: 100%;
     max-width: none;
@@ -7094,6 +7096,15 @@ html.is-reduce-fx .api-s5::after {
 @media (max-width: 640px) {
   .api-apps {
     grid-template-columns: 1fr;
+  }
+
+  /* 640 以下恢复单列：井 + 卡全部纵排（2×2 只给 641-768） */
+  .api-s4-board {
+    grid-template-columns: 1fr;
+  }
+
+  .api-s4-stage-card {
+    grid-column: auto;
   }
 
   /* 卡片高度自适应内容（2026-08-29 Park） */
