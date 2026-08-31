@@ -10549,6 +10549,11 @@ body.ai-case-lightbox-active {
     display: none !important;
   }
 
+  /* trust-band（logos 带）底边分割线：窄档去掉，与 .section/.credentials 分割线清理同批（2026-08-31 Park） */
+  .trust-band {
+    border-bottom: 0;
+  }
+
   /* AI intro: static, no sticky pin wall */
   .ai-lab-intro-track {
     height: auto !important;

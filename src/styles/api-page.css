@@ -6904,6 +6904,13 @@ html.is-reduce-fx .api-s5::after {
     padding-bottom: 20px;
   }
 
+  /* 模块之间的发丝分割线去掉到 768（.section/.credentials 的 border-bottom，2026-08-31 Park；
+     原在 640 档，并档后 768 也要干净） */
+  .api-page .section,
+  .api-page .credentials {
+    border-bottom: 0;
+  }
+
   /* keep .api-wrap padding from --page-pad-x; no extra width shrink */
 }
 
@@ -6922,12 +6929,6 @@ html.is-reduce-fx .api-s5::after {
   .api-plan-card,
   .api-plan-custom {
     border-width: 1px;
-  }
-
-  /* 模块之间的发丝分割线先去掉（.section/.credentials 的 border-bottom，2026-08-31 Park） */
-  .api-page .section,
-  .api-page .credentials {
-    border-bottom: 0;
   }
 
   /* ④场 dashgrid 369px > 井高 343px，底部卡+toast 被裁：
