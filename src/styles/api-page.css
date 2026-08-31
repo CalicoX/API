@@ -7075,6 +7075,15 @@ html.is-reduce-fx .api-s5::after {
     grid-template-columns: 1fr 1fr;
   }
 
+  /* 高度随内容（同行 grid stretch 拉齐，去 268 固定高的空白），最后一张跨全宽（2026-08-31 Park） */
+  .api-app-card {
+    min-height: 0;
+  }
+
+  .api-app-card:last-child {
+    grid-column: 1 / -1;
+  }
+
   .api-s1,
   .api-s2,
   .api-s3,
