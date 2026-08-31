@@ -6781,9 +6781,7 @@ html.is-reduce-fx .api-s5::after {
 }
 
 @media (max-width: 1024px) {
-  .api-plans {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  /* pricing 保持桌面四列一行（2026-08-31 Park），单列降到 ≤768 */
 
   .api-onboard-steps {
     grid-template-columns: 1fr 1fr;
