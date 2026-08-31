@@ -6109,15 +6109,17 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-plan-card {
-  display: grid;
-  grid-template-rows: 36px 1fr;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   min-height: 0;
   padding: 0;
   border: 2px solid #e5e7eb;
   border-radius: 16px;
   background: #fff;
   list-style: none;
-  overflow: hidden;
+  /* Popular 徽标悬浮在框顶中点，不能再裁（2026-08-31 Park：挪出卡外、四卡框高对齐） */
+  overflow: visible;
 }
 
 .api-plan-inner {
@@ -6128,18 +6130,22 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-plan-popular {
-  display: flex;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  height: 36px;
+  height: 28px;
   padding: 0 16px;
-  text-align: center;
+  border-radius: 999px;
   background: transparent;
   color: transparent;
   font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .api-plan-card.is-hot {
