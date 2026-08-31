@@ -7280,9 +7280,8 @@ body.ai-case-lightbox-active {
     -webkit-mask-image: none;
     mask-image: none;
   }
-  .brand-card {
-    width: 100cqw;
-  }
+  /* 卡宽 100cqw（手机全宽卡）只到 ≤640；768 平板用块头 min(300px, 86vw)，
+     768px 巨宽卡太夸张（2026-08-31 Park） */
 }
 
 /* Explore — solid green / blue cards; flat (no 3D board tilt) */
@@ -10835,6 +10834,10 @@ body.ai-case-lightbox-active {
   .product-dock .tab {
     padding: 8px 12px;
     font-size: 12px;
+  }
+  /* BrandsSay 手机全宽卡（100cqw 相对 marquee 实宽）；768 平板不吃这条 */
+  .brand-card {
+    width: 100cqw;
   }
   .site-footer-nav {
     grid-template-columns: 1fr 1fr;

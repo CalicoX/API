@@ -1207,49 +1207,17 @@
 }
 
 @media (max-width: 768px) {
-  .api-s2-line {
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 16px;
-    height: auto;
-    padding: 20px 0 16px;
-  }
-
-  .api-s2-visual {
-    /* host is position:absolute — without a real min-height, flex-shrink
-       collapses this well to 0 once copy is height:100% */
-    flex: 0 0 auto;
-    width: 100%;
-    height: min(96vw, 375px);
-    min-height: 300px;
-    max-height: 390px;
-  }
-
-  /* 桌面构图用的十字准星在手机上会压到文案 */
+  /* 768 平板竖屏保持 s2 图/文左右布局（2026-08-31 Park）；
+     visual/copy 的单列堆叠规则降到 ≤640。这里只藏平板上仍是噪音的部分：
+     十字准星、tickbar、彩虹进度线（≤768 滚动编排定格 p=1，进度线永远满宽挂着） */
   .api-s2-cross {
     display: none;
-  }
-
-  .api-s2-visual .api-hub,
-  .api-s2-visual .api-hub--webgl,
-  .api-s2-visual .api-iso-host {
-    min-height: 100%;
-  }
-
-  .api-s2-copy {
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: none;
-    min-width: 0;
-    height: auto;
-    padding: 0;
   }
 
   .api-s2-tickbar {
     display: none;
   }
 
-  /* 手机上滚动编排定格 p=1，顶部彩虹进度线永远满宽挂着——纯噪音，隐藏 */
   .api-s2-progress {
     display: none;
   }
@@ -6749,19 +6717,16 @@ html.is-reduce-fx .api-s5::after {
 }
 
 @media (max-width: 768px) {
-  .api-page .api-s1.hero {
-    display: block;
-    min-height: 0;
-    align-items: unset;
-  }
-
+  /* 768 平板竖屏保持 hero 左右双栏（2026-08-31 Park），列宽紧凑一档；
+     单列堆叠降到 ≤640 */
   .api-s1-copy {
     max-width: none;
     padding-top: 0;
   }
 
   .api-s1-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 46%);
+    gap: 24px 28px;
   }
 
   .api-s3-cards {
@@ -6983,6 +6948,51 @@ html.is-reduce-fx .api-s5::after {
 
   .api-s4-trend {
     height: 96px;
+  }
+
+  /* hero 单列堆叠只在 ≤640（从 768 档下移，2026-08-31 Park：平板竖屏保持左右双栏） */
+  .api-page .api-s1.hero {
+    display: block;
+    min-height: 0;
+    align-items: unset;
+  }
+
+  .api-s1-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* s2 图/文单列堆叠（从 768 档下移，2026-08-31 Park：平板竖屏保持左右） */
+  .api-s2-line {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 16px;
+    height: auto;
+    padding: 20px 0 16px;
+  }
+
+  .api-s2-visual {
+    /* host is position:absolute — without a real min-height, flex-shrink
+       collapses this well to 0 once copy is height:100% */
+    flex: 0 0 auto;
+    width: 100%;
+    height: min(96vw, 375px);
+    min-height: 300px;
+    max-height: 390px;
+  }
+
+  .api-s2-visual .api-hub,
+  .api-s2-visual .api-hub--webgl,
+  .api-s2-visual .api-iso-host {
+    min-height: 100%;
+  }
+
+  .api-s2-copy {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    height: auto;
+    padding: 0;
   }
 
   /* Onboard 4 Steps 横向滑动 + indicator（2026-08-31 Park） */
