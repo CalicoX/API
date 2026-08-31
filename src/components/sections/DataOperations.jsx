@@ -194,8 +194,14 @@ function IcoGlobe() {
 function IcoEye() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M2.5 12C6 6.6 18 6.6 21.5 12C18 17.4 6 17.4 2.5 12Z" pathLength="100" className="d" style={{ "--d": "0s" }} />
-      <circle className="core" cx="12" cy="12" r="3" fill="currentColor" stroke="none" />
+      <path
+        d="M1.8 12C5.8 5.7 18.2 5.7 22.2 12C18.2 18.3 5.8 18.3 1.8 12Z"
+        pathLength="100"
+        className="d"
+        style={{ "--d": "0s" }}
+      />
+      <circle cx="12" cy="12" r="4.1" pathLength="100" className="d" style={{ "--d": "0.1s" }} />
+      <circle className="core" cx="12" cy="12" r="1.35" fill="currentColor" stroke="none" />
     </svg>
   );
 }
