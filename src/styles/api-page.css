@@ -2245,6 +2245,43 @@
 }
 
 /* mid widths: keep 3 equal cols until stack */
+/* s4 窄桌面 769-1180 保持三栏但字号整体缩一档（2026-08-31 Park「<1200 保持布局缩小字号」）：
+   侧列 ~250-320px 宽、卡高被井对半钉死，桌面字号装不下；加 .api-s4 前缀压过基础 clamp。
+   放文件末尾赢源顺序 */
+@media (max-width: 1180px) and (min-width: 769px) {
+  .api-s4-copy-card {
+    padding: 14px 16px;
+  }
+
+
+
+  .api-s4 .api-s4-ico {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 6px;
+  }
+
+  .api-s4 .api-s4-ico svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .api-s4-copy-card h3 {
+    font-size: 13px !important;
+    margin-bottom: 5px;
+    letter-spacing: -0.01em;
+  }
+
+  .api-s4-copy-card p {
+    font-size: 12px !important;
+    line-height: 1.45;
+  }
+
+  .api-s4-col {
+    gap: 14px;
+  }
+}
+
 @media (max-width: 1024px) and (min-width: 769px) {
   .api-s3-illus {
     height: 280px;
@@ -7731,28 +7768,14 @@ html.is-reduce-fx .api-s5::after {
   }
 }
 
-/* s4 769-1180 降单列（2026-08-31 Park 两轮：882 三栏侧列 ~180px 崩版 → 1035 三栏侧列
-   ~300px 仍顶出卡外）——窄桌面统走井+卡纵排，三栏只留给 >1180；zoom 回 1（1.39 只给 768）。
-   放文件末尾赢 6885 块的三栏源顺序 */
-@media (max-width: 1180px) and (min-width: 769px) {
-  .api-s4-board {
-    grid-template-columns: 1fr;
+/* s4 769-940 最窄段再收一档（2026-08-31 Park：12px 后 882 第三卡仍差 20px） */
+@media (max-width: 940px) and (min-width: 769px) {
+  .api-s4-copy-card p {
+    font-size: 11px !important;
+    line-height: 1.4;
   }
 
-  .api-s4-stage-card {
-    order: -1;
-    width: 100%;
-    max-width: none;
-    margin: 0;
-  }
-
-  .api-s4-dashgrid {
-    zoom: 1;
-  }
-
-  /* 单列档卡回自然高：基础 flex: 1 1 0 + min-height: 0 在无固定高的 col 里
-     会把卡收缩到只剩 padding（1035 实测卡塌成 52px） */
-  .api-s4-copy-card {
-    flex: 0 0 auto;
+  .api-s4-copy-card h3 {
+    font-size: 12px !important;
   }
 }
