@@ -2262,45 +2262,6 @@
     font-size: 10px;
   }
 
-  /* s4 侧列在窄桌面（769-1180）只有 ~250-300px 宽、卡高被井对半钉死，桌面字号装不下
-     （2026-08-31 Park「1025 咋这样了」——收档原来止于 1024，1025-1180 断层）。
-     别动井——井和卡列联动，收井卡更矮。加 .api-s4 前缀压过 3368 行的基础 clamp */
-  .api-s4-copy-card {
-    padding: 16px 16px;
-  }
-
-  .api-s4 .api-s4-ico {
-    width: 20px;
-    height: 20px;
-    margin-bottom: 8px;
-  }
-
-  .api-s4 .api-s4-ico svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .api-s4 .api-s4-copy-card h3 {
-    font-size: 14px;
-    margin-bottom: 6px;
-  }
-
-  .api-s4 .api-s4-copy-card p {
-    font-size: 12.5px;
-    line-height: 1.5;
-  }
-
-  /* 光收字号在 ~900 处（井 378 → 卡高 181）仍差 ~17px：卡改随内容自然高。
-     分布顶对齐 + 16px 缝（与 board gap 一致）；卡 1 1 auto——内容是下限、
-     富余高度拉伸撑满列（2026-08-31 Park「高度要撑开」），不会再有中空/底空 */
-  .api-s4 .api-s4-col {
-    justify-content: flex-start;
-    gap: 16px;
-  }
-
-  .api-s4 .api-s4-copy-card {
-    flex: 1 1 auto;
-  }
 }
 
 .api-vig-sheet,
@@ -7770,10 +7731,10 @@ html.is-reduce-fx .api-s5::after {
   }
 }
 
-/* s4 769-1024 降单列（2026-08-31 Park「又出问题咯 768-1024 之间」）：三栏在 830 附近
-   侧列只剩 ~180px 文字崩版，井 + 卡纵排；zoom 回 1（1.39 只给 768 全宽井）。
+/* s4 769-1180 降单列（2026-08-31 Park 两轮：882 三栏侧列 ~180px 崩版 → 1035 三栏侧列
+   ~300px 仍顶出卡外）——窄桌面统走井+卡纵排，三栏只留给 >1180；zoom 回 1（1.39 只给 768）。
    放文件末尾赢 6885 块的三栏源顺序 */
-@media (max-width: 1024px) and (min-width: 769px) {
+@media (max-width: 1180px) and (min-width: 769px) {
   .api-s4-board {
     grid-template-columns: 1fr;
   }
@@ -7787,5 +7748,11 @@ html.is-reduce-fx .api-s5::after {
 
   .api-s4-dashgrid {
     zoom: 1;
+  }
+
+  /* 单列档卡回自然高：基础 flex: 1 1 0 + min-height: 0 在无固定高的 col 里
+     会把卡收缩到只剩 padding（1035 实测卡塌成 52px） */
+  .api-s4-copy-card {
+    flex: 0 0 auto;
   }
 }
