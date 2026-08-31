@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **FX 降级线 768→640（2026-08-31 Park「768 hero 背景没了/地球没了/服务器滚动旋转没了」，commit db1ae30）**：三个「没了」同根因——responsive-fx 总开关 `reduce = mqReduce || mq768` 把 768 平板竖屏也 reduce 了（`__reduceFx=true` → 所有 shader 不挂 + use-cases-scroll 定格 p=1 不旋转），CSS 10535 块还把 `.hero-undertones/.bottom-cta-shader` display:none。修复：总开关和 `__isMobileLayout` 改挂 mq640，10 处 JS 兜底 matchMedia（hero-wash/undertones/use-cases-bg/bottom-cta/impact-bg/s4-liquid-grain/roi-point-waves/ai-lab/particle-earth/utils）同步 640，CSS shader 隐藏移 640 块。**约定更新：≤640（手机）才降 FX，768 平板吃完整桌面 FX**（AGENTS.md 已同步）。实测：768 → `__reduceFx=false`、hero shader canvas 753×768 WebGL 挂载、iso canvas 随滚动挂载；390 → reduce=true、canvas 不挂。hero canvas 类名是 `.api-s1-shader`（动态创建），`.hero-undertones` 是 LegacyLanding 的旧类别搞混。
+
 - **s4 文案卡 [01]-[04] 换 SVG icon + hover 动画（2026-08-31 Park，commit 5fab278）**：`[{card.idx}]` 序号标签整体换成四枚 24px 线性 icon（01 雷达：双圈+扫描线旋转+中心点弹出；02 地球：圆+经纬线描边绘制；03 眼睛：眼形绘制+瞳孔弹出；04 柱状图：基线绘制+三柱依次 scaleY 长高）。默认灰 `#94a3b8`、hover 卡片变 `--api-blue`。实现：stroke 全走 currentColor、描边元素 `pathLength="100"` 归一（CSS `dasharray 100` 统一 draw keyframes，`--d` 内联变量做错峰 delay）；`.bar/.core` 要 `transform-box: fill-box`。reduce-motion 全关。坑两个：**structure.test 的 gate 断言 `[{card.idx}]` 已同步成 `COPY_ICONS`/`api-s4-ico`**；`npm test | grep` 会吞退出码（grep 永远 0），失败测试曾被带进 commit——用 vitest 直跑或看输出再 commit。1024 档 icon 收 20px（卡高预算）。
 
 - **s4 文案卡 769-1024 溢出（2026-08-31 Park，commit 9ea3eb5）**：平板档三栏侧列 ~253px 宽、卡高被井对半钉死（1024 卡 205 / 900 卡 181），正文漏出卡外 1-2 行。修法两段：①文字收一档（h3 14px、正文 12.5/lh1.5、idx margin 8、padding 14/16）——只够 1024，900 仍差 17px；②卡改随内容自然高（`flex: 0 0 auto`）+ 列 `space-between` 贴齐井沿，文字永不卡死。**两个坑**：字号规则块在文件前部（2248）会被后面（3368）的基础 clamp 同特异性反超——加 `.api-s4` 前缀提特异性；规则限 769-1024 范围块，否则手机档 12.06px 会被顶到 12.5。**别动井**：井和卡列联动，收井卡更矮。
