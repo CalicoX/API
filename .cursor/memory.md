@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **1024 三处布局（2026-08-31 Park，commit 2373f53）**：①s4 侧列 space-between 拉出的大空隙和井节奏对不上 → 顶对齐 + 16px 缝（与 board gap 一致，卡自然高不溢出的前提不变）；②Applications 5 卡 3+2 第二排右侧空格难看 → ≤1024 改 6 列栅格（前 3 卡 `span 2`、后 2 卡 `span 3` 撑满整行）；③Explore 两卡在 1024 两列时文案列被压到每行两三个词 → `.explore-grid` ≤1024 单列一行一个，卡内保持桌面左文右图。**apps 的 6 列栅格只在 ≤1024 块**，桌面 5 列、768 两列、640 一列不变。
+
 - **pricing Popular 徽标挪出卡外（2026-08-31 Park，commit 9c4c438）**：原来的实现是 `.api-plan-card { grid-template-rows: 36px 1fr }` 占位行（Flagship 蓝带、其他三卡透明空 36px）。现删掉占位行，四卡统一 flex column、框顶/标题完全同高；徽标改 `position:absolute; top:0; left:50%; translate(-50%,-50%)` 胶囊压线悬浮在 Flagship 框顶。**卡 `overflow: hidden` 已放开成 visible**（悬浮徽标会被裁）——以后别给 plan 卡加回 hidden。非 hot 卡的 span 是 `\u00a0` 透明占位（JSX 未动）。390 tab 档只有 `is-active` 卡渲染，徽标只随 Flagship 选中出现。
 
 - **FX 降级线 768→640（2026-08-31 Park「768 hero 背景没了/地球没了/服务器滚动旋转没了」，commit db1ae30）**：三个「没了」同根因——responsive-fx 总开关 `reduce = mqReduce || mq768` 把 768 平板竖屏也 reduce 了（`__reduceFx=true` → 所有 shader 不挂 + use-cases-scroll 定格 p=1 不旋转），CSS 10535 块还把 `.hero-undertones/.bottom-cta-shader` display:none。修复：总开关和 `__isMobileLayout` 改挂 mq640，10 处 JS 兜底 matchMedia（hero-wash/undertones/use-cases-bg/bottom-cta/impact-bg/s4-liquid-grain/roi-point-waves/ai-lab/particle-earth/utils）同步 640，CSS shader 隐藏移 640 块。**约定更新：≤640（手机）才降 FX，768 平板吃完整桌面 FX**（AGENTS.md 已同步）。实测：768 → `__reduceFx=false`、hero shader canvas 753×768 WebGL 挂载、iso canvas 随滚动挂载；390 → reduce=true、canvas 不挂。hero canvas 类名是 `.api-s1-shader`（动态创建），`.hero-undertones` 是 LegacyLanding 的旧类别搞混。**注意：shader 模块挂载是加载时一次性判断，in-app browser 改视口不重跑——跨档改视口后 FX 状态不对先刷新页面再判断**（Park 报 1024 没背景即此，实测全新加载 1024 FX 全在）。
