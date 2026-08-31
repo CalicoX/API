@@ -3532,6 +3532,8 @@
   overflow: hidden;
   border-radius: var(--s4-inner-r);
   container-type: size;
+  /* 描边与文案卡同款 1px（2026-08-31 Park） */
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08);
   /* 上白下灰（2026-08-29 Park：灰再淡一档）；点阵暂撤 */
   background: linear-gradient(180deg, #ffffff 0%, #f7f8fa 55%, #e9ecf1 100%);
 }
