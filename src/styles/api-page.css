@@ -6063,9 +6063,8 @@ html.is-reduce-fx .api-s5::after {
   gap: 16px;
   align-items: stretch;
   margin: 0;
-  /* 顶部留出 Popular 徽标的悬浮位（2026-08-31 Park：徽标是框上方的一个块，不压框线）；
-     显式写全四向——只写 padding-top 会放出 ul 的 UA 默认 padding-inline-start:40px */
-  padding: 38px 0 0;
+  /* 显式四向归零——只写单边会放出 ul 的 UA 默认 padding-inline-start:40px */
+  padding: 0;
   list-style: none;
 }
 
@@ -6136,8 +6135,7 @@ html.is-reduce-fx .api-s5::after {
 
 .api-plan-popular {
   position: absolute;
-  /* 徽标整体浮在框顶上方，与框线留 10px（2026-08-31 Park：独立块，不压线） */
-  top: -38px;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   display: inline-flex;
@@ -6152,15 +6150,32 @@ html.is-reduce-fx .api-s5::after {
   letter-spacing: 0.01em;
   line-height: 1;
   white-space: nowrap;
+  pointer-events: none;
 }
 
 .api-plan-card.is-hot {
   border-color: var(--api-blue);
+  /* Popular 顶部色带形态（2026-08-31 Park 参考图）：色带是卡顶、白卡体内嵌圆角 */
+  background: var(--api-blue);
 }
 
 .api-plan-card.is-hot .api-plan-popular {
-  background: var(--api-blue);
+  position: static;
+  order: -1;
+  display: flex;
+  width: 100%;
+  height: 44px;
+  padding: 0;
+  border-radius: 0;
+  background: none;
   color: #fff;
+}
+
+.api-plan-card.is-hot .api-plan-inner {
+  flex: 1 1 auto;
+  margin: 0 4px 4px;
+  border-radius: 12px;
+  background: #fff;
 }
 
 .api-plan-name {
