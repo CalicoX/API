@@ -10348,54 +10348,58 @@ body.ai-case-lightbox-active {
     width: 100%;
     justify-content: center;
   }
-  .explore-card {
-    grid-template-columns: 1fr;
-    min-height: 0;
-    height: auto;
-    padding: 20px;
-  }
-  .code-window {
-    min-height: 0;
-    max-height: none;
-    height: auto;
-  }
-  /* API terminal stays fixed height on mobile too */
-  .explore-card-api .code-window {
-    height: 268px;
-    min-height: 268px;
-    max-height: 268px;
-  }
-  .returns-ui {
-    min-height: 0;
-    max-height: none;
-    height: auto;
-  }
-  .returns-ui-stack {
-    height: 260px;
-    min-height: 260px;
-  }
-  .explore-card-tracking .track-ui {
-    min-height: 360px;
-    height: 360px;
-    overflow: hidden;
-  }
-  .track-ui-board {
-    left: 6px;
-    right: 6px;
-    top: 10px;
-  }
-  .track-ui-video {
-    width: 136px;
-    right: 6px;
-    top: 96px;
-  }
-  .track-ui-wismo {
-    width: 144px;
-    left: 6px;
-    top: 168px;
-  }
-  .track-ui-ev:nth-child(n + 4) {
-    display: none;
+  /* explore 卡的手机化布局只给 ≤640（原 ≤680，断点并档后曾把 768 的左右布局压成上下堆叠）；
+     641-768 保持桌面左文右图 */
+  @media (max-width: 640px) {
+    .explore-card {
+      grid-template-columns: 1fr;
+      min-height: 0;
+      height: auto;
+      padding: 20px;
+    }
+    .code-window {
+      min-height: 0;
+      max-height: none;
+      height: auto;
+    }
+    /* API terminal stays fixed height on mobile too */
+    .explore-card-api .code-window {
+      height: 268px;
+      min-height: 268px;
+      max-height: 268px;
+    }
+    .returns-ui {
+      min-height: 0;
+      max-height: none;
+      height: auto;
+    }
+    .returns-ui-stack {
+      height: 260px;
+      min-height: 260px;
+    }
+    .explore-card-tracking .track-ui {
+      min-height: 360px;
+      height: 360px;
+      overflow: hidden;
+    }
+    .track-ui-board {
+      left: 6px;
+      right: 6px;
+      top: 10px;
+    }
+    .track-ui-video {
+      width: 136px;
+      right: 6px;
+      top: 96px;
+    }
+    .track-ui-wismo {
+      width: 144px;
+      left: 6px;
+      top: 168px;
+    }
+    .track-ui-ev:nth-child(n + 4) {
+      display: none;
+    }
   }
   .case-card {
     min-height: auto;
@@ -10660,8 +10664,8 @@ body.ai-case-lightbox-active {
     display: none;
   }
 
+  /* 禁倾斜保险保留 ≤768（平板触屏）；单列布局只给 ≤640——否则 768 的左右布局被压成堆叠 */
   .explore-card {
-    grid-template-columns: 1fr !important;
     transform: none !important;
     min-height: 0;
   }
@@ -10669,14 +10673,19 @@ body.ai-case-lightbox-active {
   .explore-card:hover {
     transform: none !important;
   }
-  .explore-card-api .code-window {
-    height: 240px;
-    min-height: 240px;
-    max-height: 240px;
-  }
-  .returns-ui-stack {
-    height: 240px;
-    min-height: 240px;
+  @media (max-width: 640px) {
+    .explore-card {
+      grid-template-columns: 1fr !important;
+    }
+    .explore-card-api .code-window {
+      height: 240px;
+      min-height: 240px;
+      max-height: 240px;
+    }
+    .returns-ui-stack {
+      height: 240px;
+      min-height: 240px;
+    }
   }
 
   .hero {
