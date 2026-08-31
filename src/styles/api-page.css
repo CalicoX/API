@@ -6794,10 +6794,12 @@ html.is-reduce-fx .api-s5::after {
   }
 
   .api-plans {
-    grid-template-columns: 1fr;
+    /* 768 平板竖屏两列（2026-08-31 Park「这个应该也是 221 布局」）：4 plan 卡 2+2，Custom 跨全宽 */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .api-plan-custom {
+    grid-column: 1 / -1;
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
