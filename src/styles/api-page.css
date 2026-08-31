@@ -6063,8 +6063,9 @@ html.is-reduce-fx .api-s5::after {
   gap: 16px;
   align-items: stretch;
   margin: 0;
-  /* 顶部留出 Popular 徽标的悬浮位（2026-08-31 Park：徽标是框上方的一个块，不压框线） */
-  padding-top: 38px;
+  /* 顶部留出 Popular 徽标的悬浮位（2026-08-31 Park：徽标是框上方的一个块，不压框线）；
+     显式写全四向——只写 padding-top 会放出 ul 的 UA 默认 padding-inline-start:40px */
+  padding: 38px 0 0;
   list-style: none;
 }
 
