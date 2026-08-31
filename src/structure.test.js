@@ -150,7 +150,7 @@ describe("API landing structure (gating)", () => {
     expect(css).toMatch(/\.api-h1 \{[\s\S]*?font-size: var\(--fs-display\)/);
     expect(css).toMatch(/\.api-h1 \{[\s\S]*?font-weight: 700/);
     expect(css).toMatch(/\.api-h1 \{[\s\S]*?line-height: 1\.1/);
-    expect(css).toMatch(/\.api-h2 \{[\s\S]*?font-size: clamp\(28px, calc\(23\.68px \+ 1\.2vw\), 40px\)/);
+    expect(css).toMatch(/\.api-h2 \{[\s\S]*?font-size: var\(--fs-h2\)/);
     expect(css).toMatch(/\.api-h2 \{[\s\S]*?font-weight: 700/);
     expect(css).toMatch(/\.api-h2 \{[\s\S]*?letter-spacing: var\(--track-title/);
     expect(css).toMatch(/\.api-lead \{[\s\S]*?font-size: clamp\(14px, calc\(12\.92px \+ 0\.3vw\), 17px\)/);

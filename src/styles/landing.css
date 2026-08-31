@@ -7047,7 +7047,7 @@ body.ai-case-lightbox-active {
 }
 .brands-say-head h2 {
   margin: 0;
-  font-size: clamp(28px, calc(23.68px + 1.2vw), 40px);
+  font-size: var(--fs-h2);
   font-weight: 700;
   letter-spacing: var(--track-title);
   line-height: 1.15;
@@ -9456,7 +9456,7 @@ body.ai-case-lightbox-active {
 .credentials-head h2 {
   margin: 0 auto;
   max-width: 100%;
-  font-size: clamp(28px, calc(23.68px + 1.2vw), 40px);
+  font-size: var(--fs-h2);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -10840,6 +10840,10 @@ body.ai-case-lightbox-active {
     grid-template-columns: 1fr 1fr;
     gap: 24px 16px;
   }
+  /* CTA 按钮手机档别拉满整行（2026-08-31 Park） */
+  .btn-switch {
+    max-width: 320px;
+  }
 }
 
 @media (hover: none), (pointer: coarse) {
@@ -10866,6 +10870,8 @@ body.ai-case-lightbox-active {
     width: 354px;
     height: 435px;
     min-height: 0;
+    /* ≤680 的 overflow:hidden 会把悬出板外的 WISMO / Brand video 裁掉（2026-08-31 Park） */
+    overflow: visible;
     transform: scale(0.87) !important;
     transform-origin: 50% 0;
     margin-left: calc((100% - 354px) / 2);
@@ -10893,6 +10899,8 @@ body.ai-case-lightbox-active {
     width: 354px;
     height: 435px;
     min-height: 0;
+    /* 同 track-ui：别让 ≤680 的 hidden 裁掉悬出元素（2026-08-31 Park） */
+    overflow: visible;
     padding: 18px 10px 36px;
     transform: scale(0.87) !important;
     transform-origin: 50% 0;

@@ -11,6 +11,15 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- 移动端 ≤480 批次（2026-08-31 Park 七点，全按 ≤480 做、桌面不动）：
+  - ④场井内容溢出（dashgrid 369 > 井 343，底部卡+toast 被裁）：≤480 图例折两列（`gap: 5px 10px`）、donut/trend 各收 96px、dashgrid gap 6 → 实测 281px 正好收进井，toast 完整可见。
+  - pricing tab 改**分段控件**：grid 四等分 + `#eef2f7` 底 + 4px 内衬，选中=白钮+蓝字+轻投影（不再是四个独立胶囊）。
+  - 移动端卡片描边统一 1px：`.api-plan-card / .api-plan-custom` ≤480 `border-width: 1px`（桌面仍 2px）。
+  - **模块 H2 全站统一 token**：390 宽下曾有 22.05/28.36/32.5/32.6 四种字号并存。`.api-h2`、`.credentials-head h2`、`.brands-say-head h2`（规则在 landing.css）→ `var(--fs-h2)`（22.05@390，桌面 1360 仍 40 不变）；`.api-s2-title`（桌面 48）→ `clamp(21.5px, calc(11.96px + 2.65vw), 48px)`；`.bottom-cta h2`（桌面 52）→ `clamp(21.5px, calc(10.52px + 3.05vw), 52px)`——同模板 M=21.5@360、D 各自不变。structure.test 的 `.api-h2` 断言已同步成 `var(--fs-h2)`。Hero 副标（`.api-s1-copy .api-h2` 24.8/600）是 hero 层级，不动。
+  - **模块间发丝分割线 ≤480 已去**：来源是 landing.css `.section` / `.credentials` 的 `border-bottom: 1px solid var(--border-default)`（全页每个模块都有，不只 Park 圈的那条）；`.api-page .section, .api-page .credentials` ≤480 `border-bottom: 0`，桌面保留。
+  - track-ui 悬出卡被裁根因：**≤680 块把 `.explore-card-tracking .track-ui` 设了 `overflow: hidden`**（基础样式明明是 visible），把悬出板外的 WISMO/Brand video 裁掉；≤480 改回 `overflow: visible`（returns-ui 同加）。实测 wismo left 27 ≥ 卡 16、video right 348 ≤ 卡 359，都不出卡。
+  - CTA 按钮 ≤480 `max-width: 320px`（landing ≤480 块全局 `.btn-switch` + bottom-cta 另加 `margin-inline: auto` 抗 flex stretch 拉满整行）。
+
 - 移动端修正范围（2026-08-29 Park「这是 <480 的，不是单纯的小于900」）：这批 5 项全按 **≤480 手机档**做，别扩到 900。
   - Use Cases 顶部「彩虹线」（Park 问是什么）：是 `.api-s2-progress` 滚动进度条（贴 sticky 舞台顶 2px、彩虹渐变随滚动填充）。手机 ≤768 滚动编排定格 p=1，它永远满宽挂着像凭空彩线 → ≤900 已 `display:none`，桌面保留。
   - Applications 卡 `.api-app-card`：≤480 `min-height: 0`（自适应内容高度）+ padding 收紧（22/18/24），别再把空隙拉满。

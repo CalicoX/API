@@ -52,7 +52,7 @@
 
 .api-h2 {
   margin: 0;
-  font-size: clamp(28px, calc(23.68px + 1.2vw), 40px);
+  font-size: var(--fs-h2);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: var(--track-title, -0.03em);
@@ -743,7 +743,8 @@
 
 .api-s2-title {
   margin: 0;
-  font-size: clamp(32px, calc(26.24px + 1.6vw), 48px);
+  /* 48 桌面不变，360 收到 21.5 与全站模块标题一致（2026-08-31 Park） */
+  font-size: clamp(21.5px, calc(11.96px + 2.65vw), 48px);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -5961,18 +5962,22 @@ html.is-reduce-fx .api-s5::after {
 }
 
 @media (max-width: 480px) {
+  /* 分段控件式 tab：等宽四格、白钮选中（2026-08-31 Park） */
   .api-plan-tabs {
-    display: flex;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
     margin: 0 0 18px;
+    padding: 4px;
+    border-radius: 14px;
+    background: #eef2f7;
   }
 
   .api-plan-tabs button {
-    flex: 1 1 0;
-    padding: 9px 4px;
-    border: 1px solid #e5e7eb;
-    border-radius: 999px;
-    background: #fff;
+    padding: 9px 0 10px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
     color: #64748b;
     font-size: clamp(11px, calc(10.6px + 0.16vw), 13px);
     font-weight: 650;
@@ -5981,9 +5986,9 @@ html.is-reduce-fx .api-s5::after {
   }
 
   .api-plan-tabs button.is-active {
-    border-color: var(--api-blue);
-    background: var(--api-blue);
-    color: #fff;
+    background: #fff;
+    color: var(--api-blue);
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
   }
 
   .api-plans li {
@@ -6688,7 +6693,8 @@ html.is-reduce-fx .api-s5::after {
   max-width: 14em;
   margin: 0 auto;
   color: #fff;
-  font-size: clamp(32px, calc(24.8px + 2vw), 52px);
+  /* 52 桌面不变，360 收到 21.5 与全站模块标题一致（2026-08-31 Park） */
+  font-size: clamp(21.5px, calc(10.52px + 3.05vw), 52px);
   font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 1.12;
@@ -6702,6 +6708,14 @@ html.is-reduce-fx .api-s5::after {
 .api-page .bottom-cta .cta-row .btn-switch {
   width: auto;
   min-width: 200px;
+}
+
+/* ≤480 按钮不再被 stretch 拉满整行（2026-08-31 Park） */
+@media (max-width: 480px) {
+  .api-page .bottom-cta .cta-row .btn-switch {
+    max-width: 320px;
+    margin-inline: auto;
+  }
 }
 
 /* =========================================================
@@ -6932,6 +6946,38 @@ html.is-reduce-fx .api-s5::after {
   .api-app-card {
     min-height: 0;
     padding: 22px 18px 24px;
+  }
+
+  /* 移动端卡片描边统一 1px（2026-08-31 Park） */
+  .api-plan-card,
+  .api-plan-custom {
+    border-width: 1px;
+  }
+
+  /* 模块之间的发丝分割线先去掉（.section/.credentials 的 border-bottom，2026-08-31 Park） */
+  .api-page .section,
+  .api-page .credentials {
+    border-bottom: 0;
+  }
+
+  /* ④场 dashgrid 369px > 井高 343px，底部卡+toast 被裁：
+     图例折两列 + donut/trend 各收一档（2026-08-31 Park） */
+  .api-s4-dashgrid {
+    gap: 6px;
+  }
+
+  .api-s4-legend {
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 10px;
+  }
+
+  .api-s4-donut-wrap {
+    width: 96px;
+    height: 96px;
+  }
+
+  .api-s4-trend {
+    height: 96px;
   }
 }
 
