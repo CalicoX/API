@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **s4 文案卡 [01]-[04] 换 SVG icon + hover 动画（2026-08-31 Park，commit 5fab278）**：`[{card.idx}]` 序号标签整体换成四枚 24px 线性 icon（01 雷达：双圈+扫描线旋转+中心点弹出；02 地球：圆+经纬线描边绘制；03 眼睛：眼形绘制+瞳孔弹出；04 柱状图：基线绘制+三柱依次 scaleY 长高）。默认灰 `#94a3b8`、hover 卡片变 `--api-blue`。实现：stroke 全走 currentColor、描边元素 `pathLength="100"` 归一（CSS `dasharray 100` 统一 draw keyframes，`--d` 内联变量做错峰 delay）；`.bar/.core` 要 `transform-box: fill-box`。reduce-motion 全关。坑两个：**structure.test 的 gate 断言 `[{card.idx}]` 已同步成 `COPY_ICONS`/`api-s4-ico`**；`npm test | grep` 会吞退出码（grep 永远 0），失败测试曾被带进 commit——用 vitest 直跑或看输出再 commit。1024 档 icon 收 20px（卡高预算）。
+
 - **s4 文案卡 769-1024 溢出（2026-08-31 Park，commit 9ea3eb5）**：平板档三栏侧列 ~253px 宽、卡高被井对半钉死（1024 卡 205 / 900 卡 181），正文漏出卡外 1-2 行。修法两段：①文字收一档（h3 14px、正文 12.5/lh1.5、idx margin 8、padding 14/16）——只够 1024，900 仍差 17px；②卡改随内容自然高（`flex: 0 0 auto`）+ 列 `space-between` 贴齐井沿，文字永不卡死。**两个坑**：字号规则块在文件前部（2248）会被后面（3368）的基础 clamp 同特异性反超——加 `.api-s4` 前缀提特异性；规则限 769-1024 范围块，否则手机档 12.06px 会被顶到 12.5。**别动井**：井和卡列联动，收井卡更矮。
 
 - **分割线清理补全到 768（2026-08-31 Park，commit 3fb1a61）**：Park 在 768 圈了 logos 带（.trust-band）和 BrandsSay 之间那条线——`.trust-band { border-bottom }` 是 ≤480 批次漏掉的第三类线，≤768 已去。同批把 `.section/.credentials` 分割线从 640 提到 768（并档一致性）。范围实测：1440/1024 保留三条线，768/640/390 全 0。**窄档分割线清理现在覆盖：.trust-band + .section + .credentials，全部 ≤768**。
