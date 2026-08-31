@@ -23,7 +23,7 @@ BottomCta 在 footer 上：Returns 同款暗底粒子海，文案 Efficient Solu
 ## 断点规范（2026-08-31 Park 定案，Tailwind 四档）
 
 - 全站只用 **640 / 768 / 1024** 三档 max-width（+ 640 内嵌套 360 窄机子档）；1280/1536 是 Tailwind 大屏接口，现阶段无素材不设。1440 是内容壳宽，不是断点。**别再新增断点值**（历史上 520/560/680/700/720/900/980/1100 的化石层已于 2026-08-31 清理归并）。
-- 档位语义：≤640 手机特化（tab 切换、横滑、1px 描边、去分割线）；≤768 单列堆叠 + 关重 FX；≤1024 两/三列 rebalance；>1024 桌面全量。max-width 级联靠源顺序，窄档块写在宽档块之后。
+- 档位语义：≤640 手机特化（tab 切换、横滑、1px 描边、去分割线、hero/s2 单列堆叠、BrandsSay 全宽卡）；≤768 平板竖屏**保持双栏**（hero / Use Cases 左右布局，只藏噪音件）+ 单列堆叠类（s3/s4/form）；≤1024 两/三列 rebalance；>1024 桌面全量。max-width 级联靠源顺序，窄档块写在宽档块之后。**从宽档往窄档挪规则时窄档必须接住**（768 删单列、640 忘接 = 390 破版）。
 - FX 开关（`matchMedia`）跟档走：`≤640` 手机 FX 分级（responsive-fx `mq640`）、`≤768` 降级/定格（hero/底 CTA shader、液态颗粒、iso-hub、particle-earth 等）、`≤1024` feature 面板 rebalance（landing-inline）。
 
 ## 视觉约定

@@ -7153,6 +7153,8 @@ body.ai-case-lightbox-active {
   position: relative;
   flex: 0 0 auto;
   width: min(340px, 78vw);
+  /* 全档统一上限（2026-08-31 Park：桌面 340 / 手机 100cqw 全宽都要被钳住） */
+  max-width: 320px;
   height: 260px;
   border-radius: 18px;
   overflow: hidden;
