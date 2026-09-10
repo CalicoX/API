@@ -7855,6 +7855,7 @@ html.is-reduce-fx .api-s5::after {
   position: absolute;
   left: 0;
   bottom: 0;
+  display: block;
   width: 42px;
   height: 42px;
   border-radius: 13px;
@@ -7866,9 +7867,6 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-ent-ico svg {
-  position: absolute;
-  left: 0;
-  bottom: 0;
   display: block;
   width: 42px;
   height: 42px;

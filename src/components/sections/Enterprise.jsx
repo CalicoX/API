@@ -84,8 +84,9 @@ export default function Enterprise() {
             <li className="api-ent-card" key={card.kind}>
               <span className="api-ent-ico" aria-hidden="true">
                 <span className="api-ent-ico-back" />
-                <span className="api-ent-ico-glass" />
-                <CardIcon kind={card.kind} />
+                <span className="api-ent-ico-glass">
+                  <CardIcon kind={card.kind} />
+                </span>
               </span>
               <h3>{card.title}</h3>
               <p>{card.body}</p>
