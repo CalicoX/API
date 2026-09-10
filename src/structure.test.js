@@ -165,7 +165,11 @@ describe("API landing structure (gating)", () => {
     expect(ai).toMatch(/AI Make Every Tracking Signal/);
     expect(ai).toMatch(/AI EDD/);
     expect(ai).toMatch(/AI Carrier Identification/);
+    expect(ai).toMatch(/api-ai-flow/);
+    expect(ai).toMatch(/api-ai-panel/);
     expect(read("fx/modules/topbar-on-dark.js")).toMatch(/ai-intelligence|api-ai/);
+    expect(read("fx/useLandingEffects.js")).toMatch(/aiIntelligenceBg|ai-intelligence-bg/);
+    expect(read("fx/modules/ai-intelligence-bg.js")).toMatch(/createIntroFlowGl/);
   });
 
   it("CoverageBand replaces BrandsSay after TrustBand with globe + 5 metrics", () => {

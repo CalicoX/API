@@ -27,6 +27,7 @@ const FX_LOADERS = {
   aiTitleParticles: () => import("./modules/ai-title-particles.js"),
   bottomCta: () => import("./modules/bottom-cta-shader.js"),
   coverageGlobe: () => import("./modules/coverage-globe.js"),
+  aiIntelligenceBg: () => import("./modules/ai-intelligence-bg.js"),
   btnSwitch: () => import("./modules/btn-switch.js"),
 };
 
@@ -179,6 +180,23 @@ export function useLandingEffects() {
     // —— Data Operations 井底：纯白 + 淡点阵（纯 CSS），不再挂 WebGL liquid grain ——
 
     // Applications 浅底：不再挂 Point Waves（暗 canvas 会盖住 CSS）
+
+    // —— AI 段 tracking Synthesis 背景 ——
+    const aiIntel = document.getElementById("ai-intelligence");
+    if (aiIntel && !shouldReduceFx()) {
+      let loaded = false;
+      disposers.push(
+        observeVisibility(
+          aiIntel,
+          (vis) => {
+            if (!vis || loaded) return;
+            loaded = true;
+            mountNamed("aiIntelligenceBg");
+          },
+          { rootMargin: "120px" }
+        )
+      );
+    }
 
     // —— Coverage globe deferred（tracking 同款：手机也跑，只跳 reduced-motion）——
     const coverage = document.getElementById("coverage");
