@@ -7792,10 +7792,8 @@ html.is-reduce-fx .api-s5::after {
   align-items: center;
   gap: 8px;
   padding: 6px 12px;
-  border: 1px solid var(--api-line);
+  border: 1px solid transparent;
   border-radius: 999px;
-  background: #fff;
-  color: var(--api-ink);
   font-size: 13px;
   font-weight: 600;
   line-height: 18px;
@@ -7807,7 +7805,31 @@ html.is-reduce-fx .api-s5::after {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--api-blue);
+  background: currentColor;
+}
+
+.api-ent-badges li[data-kind="visible"] {
+  background: #dbeafe;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.api-ent-badges li[data-kind="reliable"] {
+  background: #d1fae5;
+  border-color: #a7f3d0;
+  color: #047857;
+}
+
+.api-ent-badges li[data-kind="trust"] {
+  background: #ede9fe;
+  border-color: #ddd6fe;
+  color: #6d28d9;
+}
+
+.api-ent-badges li[data-kind="secure"] {
+  background: #ffedd5;
+  border-color: #fed7aa;
+  color: #c2410c;
 }
 
 .api-ent-cards {

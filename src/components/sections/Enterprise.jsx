@@ -1,4 +1,9 @@
-const PILLARS = ["Visible", "Reliable", "Trust", "Secure"];
+const PILLARS = [
+  { label: "Visible", kind: "visible" },
+  { label: "Reliable", kind: "reliable" },
+  { label: "Trust", kind: "trust" },
+  { label: "Secure", kind: "secure" },
+];
 
 const CARDS = [
   {
@@ -80,7 +85,9 @@ export default function Enterprise() {
           </h2>
           <ul className="api-ent-badges">
             {PILLARS.map((item) => (
-              <li key={item}>{item}</li>
+              <li key={item.kind} data-kind={item.kind}>
+                {item.label}
+              </li>
             ))}
           </ul>
         </div>
