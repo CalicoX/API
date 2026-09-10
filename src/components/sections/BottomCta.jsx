@@ -41,7 +41,7 @@ export default function BottomCta() {
           </a>
         </div>
         <p>
-          Interested In 17TRACK Air Cargo (AWS) Tracking API?{" "}
+          Interested In 17TRACK Air Cargo Tracking API?{" "}
           <a href="#free-trial" onClick={goToTrial}>Register to learn more.</a>
         </p>
       </div>

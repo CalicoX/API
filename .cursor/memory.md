@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **底 CTA 去掉 AWS（2026-09-10 Park）**：`Air Cargo (AWS) Tracking API` → `Air Cargo Tracking API`。
+
 - **Explore 段纯白底（2026-09-10 Park）**：`.api-explore` 从 `#f7f8fa` 改 `#fff`。
 
 - **HowItWorks 挪到 AI 后（2026-09-10 Park）**：From Tracking Data 整段从 Enterprise 后移到 AiIntelligence 与 Applications 之间。
