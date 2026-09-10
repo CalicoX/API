@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Applications 改浅底（2026-09-10 Park）**：`#f7f8fa` + 白卡 + 深色字；icon 改浅底彩色方。Point Waves 底/点反成 `#f7f8fa` / `#64748b`。topbar / dock 不再当暗段。
+
 - **HowItWorks Step 4 轨迹板加宽（2026-09-10 Park）**：Listen 井内插图从 86% 铺满（和其他三步一样）；`.api-vig--listen .api-vig-track` 56%→78%，井侧垫改 8px。只动 Listen，s4 trackpane 仍 100%。
 
 - **Enterprise 卡 icon（2026-09-10 Park 参考 Home/列表 3D 方）**：两个圆角方叠——后层实心 `#3b82f6` 右上探出，前层白→浅蓝毛玻璃（13 圆角 / 42），白描边符号居中。不要紫。

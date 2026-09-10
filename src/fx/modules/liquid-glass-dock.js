@@ -197,8 +197,7 @@ void main(){
       if (
         node.id === "bottom-cta" ||
         node.id === "ai-lab-intro" ||
-        node.id === "use-cases" ||
-        node.id === "applications"
+        node.id === "use-cases"
       ) {
         return true;
       }
@@ -208,13 +207,12 @@ void main(){
       if (node.classList.contains("ai-intro-bg")) return true;
       /* API product landing dark chapters */
       if (node.classList.contains("api-s2")) return true;
-      if (node.classList.contains("api-s5")) return true;
       if (node.classList.contains("api-s6")) return true;
       // 子节点采样时沿最近祖先
       if (
         node.closest &&
         node.closest(
-          "#ai-lab-intro, #bottom-cta, #use-cases, #applications, .api-s2, .api-s5, .api-s6, .site-footer"
+          "#ai-lab-intro, #bottom-cta, #use-cases, .api-s2, .api-s6, .site-footer"
         )
       ) {
         return true;
@@ -309,13 +307,11 @@ void main(){
       var intro = document.getElementById("ai-lab-intro");
       var cta = document.getElementById("bottom-cta");
       var useCases = document.getElementById("use-cases");
-      var applications = document.getElementById("applications");
       var footer = document.querySelector(".site-footer");
       var apiS6 = document.querySelector(".api-s6");
       if (intro) darkEls.push(intro);
       if (cta) darkEls.push(cta);
       if (useCases) darkEls.push(useCases);
-      if (applications) darkEls.push(applications);
       if (apiS6) darkEls.push(apiS6);
       if (footer) darkEls.push(footer);
       var i;

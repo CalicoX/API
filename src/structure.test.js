@@ -234,7 +234,8 @@ describe("API landing structure (gating)", () => {
     const mod = read("fx/modules/topbar-on-dark.js");
     expect(mod).toMatch(/export function mount\s*\(/);
     expect(mod).toMatch(/topbar-on-dark/);
-    expect(mod).toMatch(/api-s5|applications/);
+    expect(mod).toMatch(/#ai-intelligence|#use-cases/);
+    expect(mod).not.toMatch(/#applications|\.api-s5/);
     expect(mod).toMatch(/return function dispose|return \(\)\s*=>/);
   });
 

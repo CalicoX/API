@@ -65,7 +65,7 @@ export default function Applications() {
           ))}
         </ul>
         <div className="api-s5-cta">
-          <a className="btn-switch on-dark" href="#free-trial" onClick={goToTrial}>
+          <a className="btn-switch" href="#free-trial" onClick={goToTrial}>
             <span className="btn-switch-knob" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <circle cx="5" cy="12" r="1.4" fill="currentColor" opacity="0.35" />

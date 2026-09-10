@@ -7,7 +7,7 @@ export function mount() {
   if (!bar) return () => {};
 
   const DARK_SEL =
-    "#ai-lab-intro, #ai-intelligence, #coverage, #bottom-cta, #applications, #use-cases, .api-s2, .api-s5, .api-s6, .api-ai, .coverage-band, .bottom-cta, .site-footer, .ai-lab-intro, .ai-intro-bg";
+    "#ai-lab-intro, #ai-intelligence, #coverage, #bottom-cta, #use-cases, .api-s2, .api-s6, .api-ai, .coverage-band, .bottom-cta, .site-footer, .ai-lab-intro, .ai-intro-bg";
 
   function isDarkUnderNav() {
     const br = bar.getBoundingClientRect();
@@ -27,7 +27,6 @@ export function mount() {
           node.id === "ai-intelligence" ||
           node.id === "coverage" ||
           node.id === "bottom-cta" ||
-          node.id === "applications" ||
           (node.classList &&
             (node.classList.contains("ai-lab-intro") ||
               node.classList.contains("ai-intro-bg") ||
@@ -35,7 +34,6 @@ export function mount() {
               node.classList.contains("coverage-band") ||
               node.classList.contains("bottom-cta") ||
               node.classList.contains("api-s2") ||
-              node.classList.contains("api-s5") ||
               node.classList.contains("api-s6") ||
               node.classList.contains("site-footer") ||
               (node.classList.contains("case-art") && node.classList.contains("dark"))))

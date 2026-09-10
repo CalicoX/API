@@ -16,7 +16,7 @@
  *              tilt 70° · roll 0 · zoom 1.05 · farCutoff .105 · edges mirror
  *              lighting 30→1.05 · highlights 减半 · light(.4,-.6,.7)
  *   DotGrid:   density 57 · dotSize = 渐变亮度×0.14 · 白点（屏幕空间正圆判定）
- *   底色:      面板同色 #141414（原 #080808）；点透明度 ×0.38 —— Park 调淡两轮
+ *   底色:      浅色段 #f7f8fa（2026-09-10 Park 改浅底；原暗底 #141414 / #080808）
  *
  * 兼容：需要 WebGL2 + EXT_color_buffer_float（整数位运算哈希 + 16F MRT）。
  * 不满足 / 弱 GPU / 减动效 / 窄屏 → 不挂载，保留现有静态背景与 CSS 光晕。
@@ -100,7 +100,7 @@ export function mount() {
     const FAR_CUTOFF = 0.105; // guide 0.09–0.12
     const LIGHTING = 30 * 0.035;
     const GLOSS = 0;
-    const HIGHLIGHTS = 15 * 0.012; // Applications：再压近景高光，避免波面发白
+    const HIGHLIGHTS = 15 * 0.006; // 浅底再压高光，避免波面发灰
     const LIGHT_DIR = [0.4, -0.6, 0.7];
     const FOCAL = 1.5;
     const MARCH_STEPS = 16;
@@ -110,7 +110,7 @@ export function mount() {
 
     const DENSITY = 57;
     const DOT_OUT_MAX = 0.14; // 原预设 0.21；Park：圆点太大 → 缩小
-    const DOT_FADE = 0.16; // Applications：0.30 太抢字，压到约一半
+    const DOT_FADE = 0.18; // 浅底深点，略淡于暗底白点
     // Park：近景大点会被波面畸变拉歪（不规则团块）→ 屏幕半径封顶，CSS px
     const DOT_MAX_RADIUS_CSS = 2.6;
 
@@ -138,8 +138,8 @@ export function mount() {
         s2l((n & 255) / 255),
       ];
     };
-    const BG = lin("#141414"); // 面板同色，替换原 #080808（淡一点）
-    const DOT = lin("#ffffff");
+    const BG = lin("#f7f8fa");
+    const DOT = lin("#64748b");
 
     // ═══ 相机（writeParams verbatim，参数固定 → CPU 预计算一次） ═══
     const DEG = Math.PI / 180;

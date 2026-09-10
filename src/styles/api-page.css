@@ -5935,16 +5935,16 @@
   background:
     radial-gradient(
       ellipse 70% 55% at 18% 20%,
-      rgba(13, 148, 136, 0.07),
+      rgba(37, 99, 235, 0.05),
       transparent 58%
     ),
     radial-gradient(
       ellipse 55% 45% at 88% 70%,
-      rgba(255, 255, 255, 0.03),
+      rgba(13, 148, 136, 0.04),
       transparent 55%
     ),
-    #141414;
-  color: #e2e8f0;
+    #f7f8fa;
+  color: var(--api-ink);
 }
 
 /* Returns ROI 同款青绿光晕，垫在点波 canvas 之上、内容之下 */
@@ -5962,7 +5962,7 @@
   aspect-ratio: 1;
   left: -12%;
   top: -28%;
-  background: radial-gradient(circle, rgba(13, 148, 136, 0.1), transparent 62%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.06), transparent 62%);
   animation: api-s5-glow-a 26s ease-in-out infinite;
 }
 
@@ -5973,7 +5973,7 @@
   bottom: -34%;
   background: radial-gradient(
     circle,
-    rgba(20, 184, 166, 0.07),
+    rgba(13, 148, 136, 0.05),
     transparent 60%
   );
   animation: api-s5-glow-b 34s ease-in-out infinite;
@@ -6056,7 +6056,7 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-s5-head .api-h2 {
-  color: #fff;
+  color: var(--api-ink);
 }
 
 .api-apps {
@@ -6073,13 +6073,13 @@ html.is-reduce-fx .api-s5::after {
 .api-app-card {
   position: relative;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #fff;
+  border: none;
   border-radius: 16px;
   min-height: 268px;
   padding: 28px 20px 32px;
   list-style: none;
-  backdrop-filter: blur(8px);
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08);
   transition:
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -6104,9 +6104,10 @@ html.is-reduce-fx .api-s5::after {
 
 .api-app-card:hover {
   transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(147, 197, 253, 0.42);
-  box-shadow: 0 18px 36px rgba(2, 8, 23, 0.35);
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgba(37, 99, 235, 0.22),
+    0 18px 36px rgba(15, 23, 42, 0.08);
 }
 
 .api-app-card:hover::after {
@@ -6156,7 +6157,7 @@ html.is-reduce-fx .api-s5::after {
   margin: 0 0 8px;
   font-size: clamp(13px, calc(11.92px + 0.3vw), 16px);
   font-weight: 800;
-  color: #fff;
+  color: var(--api-ink);
   letter-spacing: -0.01em;
 }
 
@@ -6164,7 +6165,7 @@ html.is-reduce-fx .api-s5::after {
   margin: 0;
   font-size: 13px;
   line-height: 1.55;
-  color: rgba(226, 232, 240, 0.78);
+  color: var(--api-muted);
 }
 
 .api-s5-cta {
@@ -7576,9 +7577,9 @@ html.is-reduce-fx .api-s5::after {
   height: 44px;
   border-radius: 12px;
   margin-bottom: 14px;
-  color: #dbeafe;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.12);
   box-shadow: none;
   transition:
     color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -7588,63 +7589,63 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-app-ico[data-kind="logistics"] {
-  color: #bfdbfe;
-  background: rgba(37, 99, 235, 0.32);
-  border-color: rgba(147, 197, 253, 0.28);
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.1);
+  border-color: rgba(37, 99, 235, 0.12);
 }
 
 .api-app-ico[data-kind="ecommerce"] {
-  color: #fed7aa;
-  background: rgba(234, 88, 12, 0.3);
-  border-color: rgba(253, 186, 116, 0.28);
+  color: #ea580c;
+  background: rgba(234, 88, 12, 0.1);
+  border-color: rgba(234, 88, 12, 0.12);
 }
 
 .api-app-ico[data-kind="finance"] {
-  color: #a7f3d0;
-  background: rgba(5, 150, 105, 0.3);
-  border-color: rgba(110, 231, 183, 0.28);
+  color: #059669;
+  background: rgba(5, 150, 105, 0.1);
+  border-color: rgba(5, 150, 105, 0.12);
 }
 
 .api-app-ico[data-kind="integrator"] {
-  color: #ddd6fe;
-  background: rgba(124, 58, 237, 0.32);
-  border-color: rgba(196, 181, 253, 0.28);
+  color: #7c3aed;
+  background: rgba(124, 58, 237, 0.1);
+  border-color: rgba(124, 58, 237, 0.12);
 }
 
 .api-app-ico[data-kind="platforms"] {
-  color: #a5f3fc;
-  background: rgba(8, 145, 178, 0.3);
-  border-color: rgba(103, 232, 249, 0.28);
+  color: #0891b2;
+  background: rgba(8, 145, 178, 0.1);
+  border-color: rgba(8, 145, 178, 0.12);
 }
 
 .api-app-card:hover .api-app-ico[data-kind="logistics"] {
-  color: #fff;
-  background: rgba(37, 99, 235, 0.5);
-  border-color: rgba(147, 197, 253, 0.55);
+  color: #1d4ed8;
+  background: rgba(37, 99, 235, 0.16);
+  border-color: rgba(37, 99, 235, 0.22);
 }
 
 .api-app-card:hover .api-app-ico[data-kind="ecommerce"] {
-  color: #fff;
-  background: rgba(234, 88, 12, 0.48);
-  border-color: rgba(253, 186, 116, 0.55);
+  color: #c2410c;
+  background: rgba(234, 88, 12, 0.16);
+  border-color: rgba(234, 88, 12, 0.22);
 }
 
 .api-app-card:hover .api-app-ico[data-kind="finance"] {
-  color: #fff;
-  background: rgba(5, 150, 105, 0.48);
-  border-color: rgba(110, 231, 183, 0.55);
+  color: #047857;
+  background: rgba(5, 150, 105, 0.16);
+  border-color: rgba(5, 150, 105, 0.22);
 }
 
 .api-app-card:hover .api-app-ico[data-kind="integrator"] {
-  color: #fff;
-  background: rgba(124, 58, 237, 0.5);
-  border-color: rgba(196, 181, 253, 0.55);
+  color: #6d28d9;
+  background: rgba(124, 58, 237, 0.16);
+  border-color: rgba(124, 58, 237, 0.22);
 }
 
 .api-app-card:hover .api-app-ico[data-kind="platforms"] {
-  color: #fff;
-  background: rgba(8, 145, 178, 0.48);
-  border-color: rgba(103, 232, 249, 0.55);
+  color: #0e7490;
+  background: rgba(8, 145, 178, 0.16);
+  border-color: rgba(8, 145, 178, 0.22);
 }
 
 .api-app-ico svg {
@@ -7703,15 +7704,15 @@ html.is-reduce-fx .api-s5::after {
   background:
     radial-gradient(
       ellipse 70% 55% at 18% 20%,
-      rgba(13, 148, 136, 0.07),
+      rgba(37, 99, 235, 0.05),
       transparent 58%
     ),
     radial-gradient(
       ellipse 55% 45% at 88% 70%,
-      rgba(255, 255, 255, 0.03),
+      rgba(13, 148, 136, 0.04),
       transparent 55%
     ),
-    #141414;
+    #f7f8fa;
 }
 
 @media (max-width: 768px) {
