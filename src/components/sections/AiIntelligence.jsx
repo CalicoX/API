@@ -46,7 +46,7 @@ function PanelMap() {
       <svg className="api-ai-map" viewBox={AI_MAP.viewBox} aria-hidden="true">
         <g className="api-ai-map-dots">
           {AI_MAP.dots.map(([x, y], i) => (
-            <circle key={i} cx={x} cy={y} r="1.15" />
+            <circle key={i} cx={x} cy={y} r="1.05" />
           ))}
         </g>
         <path className="api-ai-map-route" d={AI_MAP.route} />
