@@ -11,7 +11,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- **HowItWorks 四步一行（2026-09-10 Park「再加一个 step1，目前 123 改成 234，看一行能否放下」）**：补 Step 1 Register（报名白卡插图 `IllusSignupPanel`），原三卡改 Step 2/3/4。桌面 `.api-s3-cards` `repeat(4)`，缝 12–16；≤768 仍单列。先让 Park 看 1440 一行四卡。
+- **HowItWorks 四步 2×2（2026-09-10 Park「改成 2x2」）**：`.api-s3-cards` 桌面 + 768 `repeat(2)`；≤640 单列。四步文案仍是 Register → Webhook → Register numbers → Updates。
 
 - **Hero 左栏加宽（2026-09-10 Park「这个太空了，左边的文字宽度可以加一些」）**：`.api-s1-copy .api-lead` 去掉 42ch，段宽跟左栏走；栅格 `1.2fr / 520 / gap 48` → **`1.35fr / 500 / gap 32`**。表单只收 20px，空的是段宽被卡死。≤768 双栏规则不动。
 
