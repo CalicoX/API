@@ -2361,10 +2361,106 @@
 }
 
 /* keep form chrome from flex-shrinking inside the clipped sheet */
+.api-vig-sheet--signup {
+  left: 8%;
+  right: 8%;
+  top: 18px;
+  bottom: -28px;
+  padding: 16px 16px 20px;
+  border-radius: 16px 16px 0 0;
+}
+
+.api-vig-sheet--signup .api-vig-title {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.api-vig-signup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 10px;
+  margin: 0 0 10px;
+}
+
+.api-vig-signup-field {
+  min-width: 0;
+}
+
+.api-vig-signup-field.is-full {
+  grid-column: 1 / -1;
+}
+
+.api-vig-signup-field .api-vig-k {
+  margin-bottom: 4px;
+  font-size: 10px;
+}
+
+.api-vig-input--select {
+  justify-content: space-between;
+  color: #94a3b8;
+  font-family: inherit;
+}
+
+.api-vig-input--select::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin-left: auto;
+  border-right: 1.4px solid #64748b;
+  border-bottom: 1.4px solid #64748b;
+  transform: rotate(45deg) translate(-2px, -2px);
+}
+
+.api-vig-input--pass {
+  justify-content: space-between;
+  color: #94a3b8;
+}
+
+.api-vig-input--pass i {
+  flex: 1;
+}
+
+.api-vig-signup-agree {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0 0 10px;
+  font-size: 9px;
+  line-height: 1.4;
+  color: #64748b;
+}
+
+.api-vig-signup-agree i {
+  flex-shrink: 0;
+  width: 11px;
+  height: 11px;
+  margin-top: 1px;
+  border-radius: 3px;
+  border: 1px solid #2563eb;
+  background: #2563eb
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2L5 8.7 9.5 3.5' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 9px 9px no-repeat;
+}
+
+.api-vig-btn--wide {
+  width: 100%;
+  border-radius: 999px;
+  padding: 9px 16px;
+}
+
+.api-vig-signup-nocc {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+}
+
 .api-vig-sheet--signup .api-vig-head,
-.api-vig-sheet--signup .api-vig-k,
-.api-vig-sheet--signup .api-vig-input,
+.api-vig-sheet--signup .api-vig-signup-grid,
+.api-vig-sheet--signup .api-vig-signup-agree,
 .api-vig-sheet--signup .api-vig-actions,
+.api-vig-sheet--signup .api-vig-signup-nocc,
 .api-vig-sheet--webhook .api-vig-head,
 .api-vig-sheet--webhook .api-vig-desc,
 .api-vig-sheet--webhook .api-vig-k,

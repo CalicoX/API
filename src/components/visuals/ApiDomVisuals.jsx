@@ -855,24 +855,63 @@ export function AppIcon({ kind }) {
 
 /* ——— How-it-works: static light UI vignettes (no cursor) ——— */
 
-/** Step 1 — Create account / Register */
+/** Step 1 — Hero 留资表缩样 */
 export function IllusSignupPanel() {
   return (
     <div className="api-vig api-vig--signup">
       <div className="api-vig-sheet api-vig-sheet--signup">
         <header className="api-vig-head">
-          <h4 className="api-vig-title">Create account</h4>
-          <span className="api-vig-close" aria-hidden="true">
-            ×
-          </span>
+          <h4 className="api-vig-title">Sign up for free trial</h4>
         </header>
-        <span className="api-vig-k">Email</span>
-        <div className="api-vig-input">you@company.com</div>
-        <span className="api-vig-k">Password</span>
-        <div className="api-vig-input">••••••••</div>
-        <div className="api-vig-actions">
-          <span className="api-vig-btn api-vig-btn--primary">Register</span>
+        <div className="api-vig-signup-grid">
+          <div className="api-vig-signup-field">
+            <span className="api-vig-k">Company Name</span>
+            <div className="api-vig-input" />
+          </div>
+          <div className="api-vig-signup-field">
+            <span className="api-vig-k">Company Website</span>
+            <div className="api-vig-input" />
+          </div>
+          <div className="api-vig-signup-field">
+            <span className="api-vig-k">Phone Number</span>
+            <div className="api-vig-input" />
+          </div>
+          <div className="api-vig-signup-field">
+            <span className="api-vig-k">Email</span>
+            <div className="api-vig-input" />
+          </div>
+          <div className="api-vig-signup-field is-full">
+            <span className="api-vig-k">Monthly Shipment Volume</span>
+            <div className="api-vig-input api-vig-input--select">Select</div>
+          </div>
+          <div className="api-vig-signup-field is-full">
+            <span className="api-vig-k">Password</span>
+            <div className="api-vig-input api-vig-input--pass">
+              <i />
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M1.5 8s2.4-4.5 6.5-4.5S14.5 8 14.5 8s-2.4 4.5-6.5 4.5S1.5 8 1.5 8Z" stroke="currentColor" strokeWidth="1.3" />
+                <circle cx="8" cy="8" r="2" stroke="currentColor" strokeWidth="1.3" />
+              </svg>
+            </div>
+          </div>
+          <div className="api-vig-signup-field is-full">
+            <span className="api-vig-k">Tell us how would you like us to help.</span>
+            <div className="api-vig-input" />
+          </div>
         </div>
+        <p className="api-vig-signup-agree">
+          <i className="is-on" />
+          <span>
+            By continuing to use our service means that you have read and agree to 17TRACK
+            &apos;Terms&apos; and &apos;Privacy&apos;.
+          </span>
+        </p>
+        <div className="api-vig-actions">
+          <span className="api-vig-btn api-vig-btn--primary api-vig-btn--wide">
+            Start My Free Trial
+          </span>
+        </div>
+        <p className="api-vig-signup-nocc">No credit card required</p>
       </div>
     </div>
   );
