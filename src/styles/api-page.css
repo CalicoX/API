@@ -6205,8 +6205,8 @@ html.is-reduce-fx .api-s5::after {
   gap: 16px;
   align-items: stretch;
   margin: 0;
-  /* 色带在热门卡框内（官网原版），grid 上方不需要留位 */
-  padding: 0;
+  /* 给 Flagship 顶边 Popular 胶囊留出半个身位 */
+  padding: 14px 0 0;
   list-style: none;
 }
 
@@ -6287,10 +6287,8 @@ html.is-reduce-fx .api-s5::after {
   border-radius: 16px;
   background: #fff;
   list-style: none;
-  /* 官网原版形态（2026-08-31 Park）：全卡下移色带高度、热门卡色带在流内顶到行顶，
-     色带底 = 其他卡框顶；白体圆角由卡裁切 */
-  margin-top: 28px;
-  overflow: hidden;
+  margin-top: 0;
+  overflow: visible;
 }
 
 .api-plan-inner {
@@ -6304,54 +6302,53 @@ html.is-reduce-fx .api-s5::after {
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  z-index: 2;
+  transform: translate(-50%, -50%);
   display: inline-flex;
   align-items: center;
-  height: 28px;
-  padding: 0 16px;
+  height: auto;
+  padding: 4px 14px;
   border-radius: 999px;
   background: transparent;
   color: transparent;
-  font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.01em;
-  line-height: 1;
+  line-height: 1.2;
   white-space: nowrap;
   pointer-events: none;
 }
 
 .api-plan-card.is-hot {
   border-color: var(--api-blue);
-  /* 色带 = 卡顶部背景（官网：卡背景即色带，ribbon 透明露出）；热门卡不吃全卡下移 */
-  margin-top: 0;
-  background: var(--api-blue);
+  background: #fff;
 }
 
 .api-plan-card.is-hot .api-plan-popular {
-  position: static;
-  /* 清掉基础胶囊的 left/transform，否则文字整体左移半身位被裁 */
-  left: auto;
-  transform: none;
-  display: flex;
-  width: 100%;
-  height: 28px;
-  flex: 0 0 28px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  width: auto;
+  height: auto;
+  flex: none;
   align-items: center;
   justify-content: center;
-  padding: 4px 2px;
-  border-radius: 0;
-  background: transparent;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--api-blue);
   color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
   white-space: nowrap;
 }
 
 .api-plan-card.is-hot .api-plan-inner {
   flex: 1 1 auto;
-  border-radius: 14px;
-  background: #fff;
+  border-radius: 0;
+  background: transparent;
 }
 
 .api-plan-name {

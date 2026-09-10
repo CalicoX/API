@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **pricing Popular 改回框上小胶囊（2026-09-10 Park「布局改回这个」）**：不要官网整条蓝带。四卡顶对齐；Flagship 蓝描边 + 顶边居中蓝胶囊 Popular（`translate(-50%,-50%)`）；卡 `overflow: visible`，`.api-plans` 顶垫 14px。640 tab 选中 Flagship 仍出胶囊。
+
 - **Onboard in 4 Steps 整块去掉（2026-09-10 Park）**：IntegrationTogether 只留 pricing + Custom。插图组件 `IllusOnboard*` 一并删。价卡原文不动。
 
 - **HowItWorks Step 2 井底被截空（2026-09-10 Park）**：`translateY` 抬的是整张白卡，Save 出场后井底露灰。白卡钉死 `min-height` 挂出井底，只平移内部 `.api-vig-sheet-shift`。signup 同样。
