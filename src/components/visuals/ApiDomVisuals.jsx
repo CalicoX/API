@@ -929,10 +929,17 @@ export function IllusSignupPanel() {
     const aim = (el) => aimIn(rootRef.current, el, setCursor);
 
     (async () => {
+      let first = true;
       while (!cancelled) {
         setFill({ company: "", email: "", volume: "" });
         setToast(false);
-        setSheetY(0);
+        if (!first) {
+          setCursor((c) => ({ ...c, show: false, press: false }));
+          setSheetY(0);
+          await wait(480);
+          if (cancelled) return;
+        }
+        first = false;
         aim(companyRef.current);
         await wait(480);
         if (cancelled) return;
@@ -1108,10 +1115,17 @@ export function IllusWebhookPanel() {
     const aim = (el) => aimIn(rootRef.current, el, setCursor);
 
     (async () => {
+      let first = true;
       while (!cancelled) {
         setOn(new Set());
         setToast(false);
-        setSheetY(0);
+        if (!first) {
+          setCursor((c) => ({ ...c, show: false, press: false }));
+          setSheetY(0);
+          await wait(480);
+          if (cancelled) return;
+        }
+        first = false;
         aim(infoRef.current);
         await wait(520);
         if (cancelled) return;

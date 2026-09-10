@@ -13,6 +13,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - **Onboard in 4 Steps 整块去掉（2026-09-10 Park）**：IntegrationTogether 只留 pricing + Custom。插图组件 `IllusOnboard*` 一并删。价卡原文不动。
 
+- **HowItWorks Step 1/2 循环光标偏移（2026-09-10 Park）**：第二圈 `setSheetY(0)` 后立刻 `aim()`，表单 CSS transition 还停在 -88/-108，量到的是上移后的坐标，光标钉在标题上方。第二圈先藏光标、等 480ms 落稳再瞄准。
+
 - **HowItWorks Step 1/2 井内白卡（2026-09-10 Park）**：signup/webhook 内卡同宽（左右 10%）；input 34→26；Package Status **一行一个**。webhook 勾选后表单上移改 `-108`，光标仍 `getBoundingClientRect` 瞄准，Save 落在井里。
 
 - **HowItWorks Step 1/2 卡级 hover 光标戏（2026-09-10 Park「step1 和 step2 的动画没了」）**：signup 新建时没做动画；webhook 还绑在井内 vig 上、勾选/Save 又被 2×2 井裁掉。现 `useVigCardHover` 挂整张 `.api-s3-card`。Step 1：光标填公司 → 邮箱 → 货量 → 点 Start My Free Trial → toast Trial started，表单随目标上移。Step 2：仍点 Info Received → In Transit → Save → Webhook saved，Save 前上移一截。井内 vig 撑满、勾选/按钮要落在可见区。
