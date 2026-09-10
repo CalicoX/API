@@ -197,9 +197,9 @@ export function useLandingEffects() {
       );
     }
 
-    // —— AI 段 tracking Synthesis 背景 ——
+    // —— AI 段：点阵 orb（2D，手机也挂）+ tracking Synthesis 背景 ——
     const aiIntel = document.getElementById("ai-intelligence");
-    if (aiIntel && !shouldReduceFx()) {
+    if (aiIntel) {
       let loaded = false;
       disposers.push(
         observeVisibility(
@@ -207,7 +207,8 @@ export function useLandingEffects() {
           (vis) => {
             if (!vis || loaded) return;
             loaded = true;
-            mountNamed("aiIntelligenceBg");
+            mountNamed("thinkingOrb");
+            if (!shouldReduceFx()) mountNamed("aiIntelligenceBg");
           },
           { rootMargin: "120px" }
         )

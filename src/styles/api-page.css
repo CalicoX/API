@@ -8145,35 +8145,18 @@ html.is-reduce-fx .api-s5::after {
   text-align: center;
 }
 
-.api-ai-scan {
-  position: relative;
+.api-ai-orb {
   display: grid;
   place-items: center;
-  width: 88px;
-  height: 88px;
+  width: 96px;
+  height: 96px;
   margin: 4px 0 16px;
 }
 
-.api-ai-scan-ring,
-.api-ai-scan-ring.is-2 {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(196, 181, 253, 0.35);
-  animation: api-ai-pulse 2.4s ease-out infinite;
-}
-
-.api-ai-scan-ring.is-2 {
-  animation-delay: 1.2s;
-}
-
-.api-ai-scan span {
-  position: relative;
-  z-index: 1;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: #f5e9ff;
+.api-ai-orb canvas {
+  display: block;
+  width: 96px;
+  height: 96px;
 }
 
 .api-ai-panel[data-kind="ai"] code {
@@ -8234,17 +8217,6 @@ html.is-reduce-fx .api-s5::after {
   letter-spacing: 0.04em;
 }
 
-@keyframes api-ai-pulse {
-  0% {
-    transform: scale(0.72);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1.18);
-    opacity: 0;
-  }
-}
-
 @keyframes api-ai-route {
   to {
     stroke-dashoffset: -26;
@@ -8252,7 +8224,6 @@ html.is-reduce-fx .api-s5::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .api-ai-scan-ring,
   .api-ai-map-route {
     animation: none;
   }

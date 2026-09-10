@@ -27,10 +27,8 @@ function PanelAi() {
   return (
     <div className="api-ai-panel" data-kind="ai">
       <span className="api-ai-panel-kicker">AI Carrier Identification</span>
-      <div className="api-ai-scan" aria-hidden="true">
-        <i className="api-ai-scan-ring" />
-        <i className="api-ai-scan-ring is-2" />
-        <span>AI</span>
+      <div className="api-ai-orb" aria-hidden="true">
+        <canvas id="api-ai-orb" width="96" height="96" />
       </div>
       <code>RR123456789CN</code>
       <p>

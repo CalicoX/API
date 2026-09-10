@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **AI 识别卡用 thinking-orbs 点阵球（2026-09-10 Park）**：中间卡原来是双圈 + AI 字。改挂 `thinking-orb` searching globe（96、dark 亮点、dotScale 1.45）。`#ai-intelligence` 入屏就挂，≤640 也挂（2D）；reduce-motion 只画一帧。圆环样式删掉。
+
 - **AI Live route 换成真地图（2026-09-10 Park「这地图不对劲」）**：原先是一团 blob，看不出大陆。现用 `world.json` 投太平洋裁切（深圳→洛杉矶），CN/US 落在真实岸线。路径在 `src/components/visuals/aiMapLand.js`。整宽裁切残片丢掉，否则太平洋中间会横一条陆地。
 
 - **Enterprise icon 和前层玻璃绑在一起（2026-09-10 Park）**：hover 展开时线标必须跟前层一起走，不能停在原位。SVG 嵌进 `.api-ent-ico-glass`，位移只打在这一层；后蓝方仍单独往右上。

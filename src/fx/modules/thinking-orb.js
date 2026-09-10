@@ -216,8 +216,10 @@ export function mount() {
       io.observe(canvas);
     }
 
-    start();
     paint(performance.now());
+    if (options.animate !== false) {
+      start();
+    }
 
     var api = {
       setState: function (next) {
@@ -239,6 +241,21 @@ export function mount() {
   }
 
   global.mountThinkingOrb = mountThinkingOrb;
+
+  var aiOrb = document.getElementById("api-ai-orb");
+  if (aiOrb) {
+    var reduce =
+      typeof matchMedia === "function" &&
+      matchMedia("(prefers-reduced-motion: reduce)").matches;
+    mountThinkingOrb(aiOrb, {
+      state: "searching",
+      size: 96,
+      theme: "dark",
+      speed: 1,
+      dotScale: 1.45,
+      animate: !reduce,
+    });
+  }
 })(typeof window !== "undefined" ? window : globalThis);
 
   } catch (err) {
