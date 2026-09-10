@@ -1056,7 +1056,7 @@ export function IllusWebhookPanel() {
   );
 }
 
-/** Register — two cards overlap → expand, connector; pair stays centered */
+/** Register — curl left + Add Number right, horizontal connector */
 export function IllusRegisterPanel() {
   return (
     <div className="api-vig api-vig--register">
