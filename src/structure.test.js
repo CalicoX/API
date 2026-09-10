@@ -25,11 +25,11 @@ describe("API landing structure (gating)", () => {
       "TrustBand",
       "CoverageBand",
       "Enterprise",
-      "UseCases",
       "HowItWorks",
       "DataOperations",
       "AiIntelligence",
       "Applications",
+      "UseCases",
       "IntegrationTogether",
       "Credentials",
       "ExploreMore",
@@ -50,10 +50,11 @@ describe("API landing structure (gating)", () => {
     expect(lp.indexOf("Hero")).toBeLessThan(lp.indexOf("TrustBand"));
     expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("CoverageBand"));
     expect(lp.indexOf("CoverageBand")).toBeLessThan(lp.indexOf("Enterprise"));
-    expect(lp.indexOf("Enterprise")).toBeLessThan(lp.indexOf("UseCases"));
+    expect(lp.indexOf("Enterprise")).toBeLessThan(lp.indexOf("HowItWorks"));
     expect(lp.indexOf("DataOperations")).toBeLessThan(lp.indexOf("AiIntelligence"));
     expect(lp.indexOf("AiIntelligence")).toBeLessThan(lp.indexOf("Applications"));
-    expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("UseCases"));
+    expect(lp.indexOf("Applications")).toBeLessThan(lp.indexOf("UseCases"));
+    expect(lp.indexOf("UseCases")).toBeLessThan(lp.indexOf("IntegrationTogether"));
     expect(lp.indexOf("Credentials")).toBeLessThan(lp.indexOf("ExploreMore"));
     expect(lp.indexOf("ExploreMore")).toBeLessThan(lp.indexOf("BottomCta"));
   });

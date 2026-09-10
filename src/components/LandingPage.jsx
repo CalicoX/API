@@ -5,11 +5,11 @@ import Hero from "./sections/Hero.jsx";
 import TrustBand from "./sections/TrustBand.jsx";
 import CoverageBand from "./sections/CoverageBand.jsx";
 import Enterprise from "./sections/Enterprise.jsx";
-import UseCases from "./sections/UseCases.jsx";
 import HowItWorks from "./sections/HowItWorks.jsx";
 import DataOperations from "./sections/DataOperations.jsx";
 import AiIntelligence from "./sections/AiIntelligence.jsx";
 import Applications from "./sections/Applications.jsx";
+import UseCases from "./sections/UseCases.jsx";
 import IntegrationTogether from "./sections/IntegrationTogether.jsx";
 import Credentials from "./sections/Credentials.jsx";
 import ExploreMore from "./sections/ExploreMore.jsx";
@@ -36,11 +36,11 @@ export default function LandingPage() {
           <TrustBand />
           <CoverageBand />
           <Enterprise />
-          <UseCases />
           <HowItWorks />
           <DataOperations />
           <AiIntelligence />
           <Applications />
+          <UseCases />
           <IntegrationTogether />
           <Credentials />
           {/* Cross-sell: Returns + Tracking (no API self-promo) */}
