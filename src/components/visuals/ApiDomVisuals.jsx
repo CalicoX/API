@@ -1132,7 +1132,7 @@ export function IllusWebhookPanel() {
         setCursor((c) => ({ ...c, press: false }));
         await wait(280);
         if (cancelled) return;
-        setSheetY(-56);
+        setSheetY(-108);
         await wait(480);
         if (cancelled) return;
         aim(saveRef.current);

@@ -2346,8 +2346,8 @@
 .api-vig-sheet--signup,
 .api-vig-sheet--webhook {
   position: absolute;
-  left: 12%;
-  right: 12%;
+  left: 10%;
+  right: 10%;
   top: 16px;
   /* extend past the well → bottom of form is cut off */
   bottom: -64px;
@@ -2370,12 +2370,9 @@
 
 /* keep form chrome from flex-shrinking inside the clipped sheet */
 .api-vig-sheet--signup {
-  left: 8%;
-  right: 8%;
-  top: 14px;
+  top: 16px;
   bottom: auto;
-  padding: 14px 14px 18px;
-  border-radius: 16px 16px 0 0;
+  border-radius: 12px 12px 0 0;
 }
 
 .api-vig-sheet--signup,
@@ -2389,15 +2386,15 @@
 }
 
 .api-vig-sheet--signup .api-vig-title {
-  font-size: 16px;
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .api-vig-signup-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 10px;
-  margin: 0 0 10px;
+  gap: 8px 10px;
+  margin: 0 0 8px;
 }
 
 .api-vig-signup-field {
@@ -2551,16 +2548,16 @@
 .api-vig-input {
   display: flex;
   align-items: center;
-  min-height: 34px;
-  height: 34px;
-  padding: 0 10px;
-  border-radius: 8px;
+  min-height: 26px;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 6px;
   border: 1px solid rgba(148, 163, 184, 0.45);
   background: #fff;
   box-sizing: border-box;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 11px;
-  line-height: 1.4;
+  font-size: 10px;
+  line-height: 1.3;
   color: #1e293b;
   white-space: nowrap;
   overflow: hidden;
@@ -2569,11 +2566,11 @@
 
 .api-vig-checks {
   list-style: none;
-  margin: 0 0 14px;
+  margin: 0 0 12px;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7px 10px;
+  grid-template-columns: 1fr;
+  gap: 5px;
   align-content: start;
 }
 
@@ -2581,7 +2578,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 18px;
+  min-height: 16px;
   padding: 0 0 0 20px;
   border: none;
   border-radius: 0;
@@ -7122,9 +7119,9 @@ html.is-reduce-fx .api-s5::after {
 
   .api-vig-sheet--signup,
   .api-vig-sheet--webhook {
-    top: 18px;
-    left: 8%;
-    right: 8%;
+    top: 16px;
+    left: 10%;
+    right: 10%;
     padding: 10px 12px 12px;
   }
 
@@ -7144,7 +7141,7 @@ html.is-reduce-fx .api-s5::after {
   }
 
   .api-vig-checks {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .api-form-card {
