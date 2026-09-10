@@ -15,7 +15,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - **HowItWorks Step 1 插图改成 Hero 留资表（2026-09-10 Park）**：`IllusSignupPanel` 不再是 Email/Password/Register，改成 Sign up for free trial 同款字段（公司/网站/电话/邮箱/货量/密码/help/条款/Start My Free Trial）。
 
-- **HowItWorks Step 3 插图左右排（2026-09-10 Park）**：`IllusRegisterPanel` 不再上下叠/重叠拆开。curl 左、Add Number 右，橙线横连。2×2 卡够宽。
+- **HowItWorks Step 3 插图改回上下（2026-09-10 Park「保留上下」）**：1×4 卡太窄，左右会裁 curl。`IllusRegisterPanel` 回到重叠叠放：curl 上、Add Number 下，hover 拆开 + 竖向橙线。
 
 - **HowItWorks 四步改回 1×4（2026-09-10 Park「还是改成1x4吧」）**：`.api-s3-cards` 桌面 `repeat(4)`；768 仍 2×2（四卡一行太窄）；≤640 单列。井高收回 `clamp(260px, 28vw, 360px)`。四步文案仍是 Register → Webhook → Register numbers → Updates。
 

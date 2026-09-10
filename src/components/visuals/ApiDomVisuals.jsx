@@ -1215,7 +1215,7 @@ export function IllusWebhookPanel() {
   );
 }
 
-/** Register — curl left + Add Number right, horizontal connector */
+/** Register — curl above Add Number, overlap then split on hover */
 export function IllusRegisterPanel() {
   return (
     <div className="api-vig api-vig--register">
