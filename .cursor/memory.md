@@ -23,9 +23,9 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - **HowItWorks Step 3 插图改回上下（2026-09-10 Park「保留上下」）**：1×4 卡太窄，左右会裁 curl。`IllusRegisterPanel` 回到重叠叠放：curl 上、Add Number 下，hover 拆开 + 竖向橙线。
 
-- **HowItWorks Step 3 卡加宽（2026-09-10 Park）**：桌面 1×4 第三列 `1.4fr`（其余 `1fr`）。768 2×2 / ≤640 单列仍均分。
+- **HowItWorks Step 3 加宽的是井内插图（2026-09-10 Park 纠正）**：外卡四列均分，不是第三列 1.4fr。`.api-vig--register` 撑满井，`.api-vig-flow` 78%→80%（和 Step 1/2 内卡左右 10% 同宽）。
 
-- **HowItWorks 四步改回 1×4（2026-09-10 Park「还是改成1x4吧」）**：`.api-s3-cards` 桌面一行四卡；768 仍 2×2（四卡一行太窄）；≤640 单列。井高收回 `clamp(260px, 28vw, 360px)`。四步文案仍是 Register → Webhook → Register numbers → Updates。
+- **HowItWorks 四步改回 1×4（2026-09-10 Park「还是改成1x4吧」）**：`.api-s3-cards` 桌面 `repeat(4)` 均分；768 仍 2×2；≤640 单列。井高收回 `clamp(260px, 28vw, 360px)`。四步文案仍是 Register → Webhook → Register numbers → Updates。
 
 - **Hero 左右列缝（2026-09-10 Park）**：文案和表单之间 `gap` 列向 32→**40**（「稍微加大一点点」）。768 双栏 28 不动。
 

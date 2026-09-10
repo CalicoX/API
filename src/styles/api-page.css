@@ -2109,12 +2109,12 @@
   max-width: 68ch;
 }
 
-/* 1×4 — Park 改回一行四卡；Step 3 插图要更宽 */
+/* 1×4 — 四张外卡均分；Step 3 只加宽井内插图 */
 .api-s3-cards {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(12px, 1.2vw, 16px);
   width: 100%;
   min-height: 0;
@@ -2214,7 +2214,8 @@
 }
 
 .api-s3-illus > .api-vig--signup,
-.api-s3-illus > .api-vig--webhook {
+.api-s3-illus > .api-vig--webhook,
+.api-s3-illus > .api-vig--register {
   align-self: stretch;
   width: 100%;
   max-width: 100%;
@@ -2740,11 +2741,6 @@
 }
 
 /* —— Step 3: curl above Add Number, overlap then split —— */
-.api-s3-illus > .api-vig--register {
-  width: 86%;
-  max-width: 86%;
-}
-
 .api-vig--register {
   height: 100%;
   width: 100%;
@@ -2761,7 +2757,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 78%;
+  width: 80%;
   margin: 0 auto;
   padding: 76px 0 68px;
   box-sizing: border-box;
