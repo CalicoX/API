@@ -44,7 +44,11 @@ function PanelMap() {
     <div className="api-ai-panel" data-kind="map">
       <span className="api-ai-panel-kicker">Live route</span>
       <svg className="api-ai-map" viewBox={AI_MAP.viewBox} aria-hidden="true">
-        <path className="api-ai-map-land" d={AI_MAP.land} />
+        <g className="api-ai-map-dots">
+          {AI_MAP.dots.map(([x, y], i) => (
+            <circle key={i} cx={x} cy={y} r="1.15" />
+          ))}
+        </g>
         <path className="api-ai-map-route" d={AI_MAP.route} />
         <circle className="api-ai-map-dot" cx={AI_MAP.sz[0]} cy={AI_MAP.sz[1]} r="4.5" />
         <circle className="api-ai-map-dot is-end" cx={AI_MAP.la[0]} cy={AI_MAP.la[1]} r="4.5" />

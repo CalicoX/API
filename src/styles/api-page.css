@@ -8215,8 +8215,8 @@ html.is-reduce-fx .api-s5::after {
   margin-top: 8px;
 }
 
-.api-ai-map-land {
-  fill: rgba(255, 255, 255, 0.16);
+.api-ai-map-dots {
+  fill: rgba(255, 255, 255, 0.38);
 }
 
 .api-ai-map-route {
