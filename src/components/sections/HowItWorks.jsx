@@ -28,7 +28,7 @@ const CARDS = [
   },
 ];
 
-/** Section 3 — From Tracking Data to Real-Time Visibility — 4 cards in 2×2 */
+/** Section 3 — From Tracking Data to Real-Time Visibility — 4 cards in one row */
 export default function HowItWorks() {
   return (
     <section className="api-s3" id="how-it-works" aria-labelledby="api-how-title">
