@@ -2109,12 +2109,12 @@
   max-width: 68ch;
 }
 
-/* 1×4 — Park 改回一行四卡 */
+/* 1×4 — Park 改回一行四卡；Step 3 插图要更宽 */
 .api-s3-cards {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr);
   gap: clamp(12px, 1.2vw, 16px);
   width: 100%;
   min-height: 0;
