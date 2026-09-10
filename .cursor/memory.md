@@ -19,7 +19,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - **HowItWorks 挪到 AI 后（2026-09-10 Park）**：From Tracking Data 整段从 Enterprise 后移到 AiIntelligence 与 Applications 之间。
 
-- **Applications 改浅底（2026-09-10 Park）**：`#f7f8fa` + 白卡 + 深色字；icon 改浅底彩色方。Point Waves 底/点反成 `#f7f8fa` / `#64748b`。topbar / dock 不再当暗段。
+- **Applications 改浅底（2026-09-10 Park 两轮）**：`#f7f8fa` + 白卡。点波 canvas 仍铺暗底会盖住 CSS，已卸挂并 `display:none`。topbar / dock 不当暗段。
 
 - **HowItWorks Step 4 轨迹板加宽（2026-09-10 Park）**：Listen 井内插图从 86% 铺满（和其他三步一样）；`.api-vig--listen .api-vig-track` 56%→78%，井侧垫改 8px。只动 Listen，s4 trackpane 仍 100%。
 

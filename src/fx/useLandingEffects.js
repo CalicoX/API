@@ -27,7 +27,6 @@ const FX_LOADERS = {
   aiTitleParticles: () => import("./modules/ai-title-particles.js"),
   bottomCta: () => import("./modules/bottom-cta-shader.js"),
   coverageGlobe: () => import("./modules/coverage-globe.js"),
-  roiPointWaves: () => import("./modules/roi-point-waves.js"),
   btnSwitch: () => import("./modules/btn-switch.js"),
 };
 
@@ -179,22 +178,7 @@ export function useLandingEffects() {
 
     // —— Data Operations 井底：纯白 + 淡点阵（纯 CSS），不再挂 WebGL liquid grain ——
 
-    // —— Applications point waves（Returns ROI 同款 WebGL2 点波场）——
-    const applications = document.getElementById("applications");
-    if (applications && !shouldReduceFx()) {
-      let loaded = false;
-      disposers.push(
-        observeVisibility(
-          applications,
-          (vis) => {
-            if (!vis || loaded) return;
-            loaded = true;
-            mountNamed("roiPointWaves");
-          },
-          { rootMargin: "120px" }
-        )
-      );
-    }
+    // Applications 浅底：不再挂 Point Waves（暗 canvas 会盖住 CSS）
 
     // —— Coverage globe deferred（tracking 同款：手机也跑，只跳 reduced-motion）——
     const coverage = document.getElementById("coverage");
