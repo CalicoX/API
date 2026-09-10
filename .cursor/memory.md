@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Data Operations 标题三行（2026-09-10 Park）**：`Turn Complex Tracking Data` / `Into Usable Intelligence` / `Forecast, Monitor, Intervene.`
+
 - **Explore 标题居中（2026-09-10 Park）**：`.api-explore .section-head` 加 `center`。
 
 - **底 CTA 去掉 AWS（2026-09-10 Park）**：`Air Cargo (AWS) Tracking API` → `Air Cargo Tracking API`。

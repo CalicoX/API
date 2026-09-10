@@ -389,7 +389,9 @@ export default function DataOperations() {
       <div className="api-wrap">
         <div className="api-s4-head">
           <h2 className="api-h2" id="api-data-title">
-            {tintWords("Turn Complex Tracking Data Into Usable Intelligence")}
+            {tintWords("Turn Complex Tracking Data")}
+            <br />
+            {tintWords("Into Usable Intelligence", 4)}
             <span className="api-s4-h2-sub">
               {tintWords("Forecast, Monitor, Intervene.", 7)}
             </span>
