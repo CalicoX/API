@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **AI Live route 换成真地图（2026-09-10 Park「这地图不对劲」）**：原先是一团 blob，看不出大陆。现用 `world.json` 投太平洋裁切（深圳→洛杉矶），CN/US 落在真实岸线。路径在 `src/components/visuals/aiMapLand.js`。整宽裁切残片丢掉，否则太平洋中间会横一条陆地。
+
 - **Enterprise icon 和前层玻璃绑在一起（2026-09-10 Park）**：hover 展开时线标必须跟前层一起走，不能停在原位。SVG 嵌进 `.api-ent-ico-glass`，位移只打在这一层；后蓝方仍单独往右上。
 
 - **Enterprise 四卡描述对齐（2026-09-10 Park「描述文字没对齐」）**：标题换行数不同（1/2/3）导致正文起点不齐。桌面四列用 `subgrid` + `grid-row: span 3`，标题行跟最高那张齐；h3 另留 `min-height: calc(1.3em * 2)`。≤1024 两列改回 flex + `gap: 20px`（subgrid 的 parent row-gap 会把卡内三行也撑开）。不要 `p { margin-top: auto }`（那是底对齐）。

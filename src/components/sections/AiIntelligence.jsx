@@ -1,3 +1,5 @@
+import { AI_MAP } from "../visuals/aiMapLand.js";
+
 function PanelEdd() {
   return (
     <div className="api-ai-panel" data-kind="edd">
@@ -43,21 +45,15 @@ function PanelMap() {
   return (
     <div className="api-ai-panel" data-kind="map">
       <span className="api-ai-panel-kicker">Live route</span>
-      <svg className="api-ai-map" viewBox="0 0 280 140" aria-hidden="true">
-        <path
-          className="api-ai-map-land"
-          d="M18 78c22-18 48-22 70-14 18 6 28 4 42-8 16-14 40-16 62-6 20 9 38 8 52-4 8 18 6 36-8 52-18 20-48 24-78 16-22-6-36 2-54 12-20 11-46 10-66-4-14-10-22-26-20-44z"
-        />
-        <path
-          className="api-ai-map-route"
-          d="M52 86 C 110 28, 176 28, 232 64"
-        />
-        <circle className="api-ai-map-dot" cx="52" cy="86" r="4.5" />
-        <circle className="api-ai-map-dot is-end" cx="232" cy="64" r="4.5" />
-        <text x="40" y="108">
+      <svg className="api-ai-map" viewBox={AI_MAP.viewBox} aria-hidden="true">
+        <path className="api-ai-map-land" d={AI_MAP.land} />
+        <path className="api-ai-map-route" d={AI_MAP.route} />
+        <circle className="api-ai-map-dot" cx={AI_MAP.sz[0]} cy={AI_MAP.sz[1]} r="4.5" />
+        <circle className="api-ai-map-dot is-end" cx={AI_MAP.la[0]} cy={AI_MAP.la[1]} r="4.5" />
+        <text x={AI_MAP.sz[0] - 8} y={AI_MAP.sz[1] + 16}>
           CN
         </text>
-        <text x="214" y="48">
+        <text x={AI_MAP.la[0] - 8} y={AI_MAP.la[1] - 10}>
           US
         </text>
       </svg>
