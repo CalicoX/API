@@ -8303,6 +8303,16 @@ html.is-reduce-fx .api-s5::after {
 
   .api-ent-cards {
     grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .api-ent-card {
+    height: auto;
+    min-height: 0;
+  }
+
+  .api-ent-card h3 {
+    min-height: 0;
   }
 
   .api-ai {

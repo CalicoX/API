@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Enterprise 手机取消标题固高（2026-09-10 Park）**：桌面 h3 `min-height: 2em` 是为了四列描述对齐。≤640 单列不需要，标题和卡都随内容；卡 `align-items: start` + `height: auto`。1024 两列仍留 2 行固高。
+
 - **CoverageBand 手机标签换行（2026-09-10 Park）**：`.coverage-data span` 基础是 `nowrap`（桌面一行）。≤640 两列时 Standardized / Carrier Recognition 两句溢出，改 `white-space: normal` + `text-wrap: balance`。文案不改。
 
 - **HowItWorks 1024 改 2×2（2026-09-10 Park）**：四步卡在 1024 从 1×4 改 2×2（卡约 484、井 340，和 768 对齐）。>1024 仍四列；≤640 仍单列。2×2 必须写 `641-1024` 范围块——纯 ≤1024 会泄漏进 390 顶掉单列。768 块不再独自写 `repeat(2)`，列数交给这段。
