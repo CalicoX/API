@@ -6095,7 +6095,7 @@ html.is-reduce-fx .api-s5::after {
   transform: translateY(-5px);
   background: #fff;
   box-shadow:
-    0 0 0 1px rgba(37, 99, 235, 0.22),
+    0 0 0 1px rgba(15, 23, 42, 0.08),
     0 18px 36px rgba(15, 23, 42, 0.08);
 }
 

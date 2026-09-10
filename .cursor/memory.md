@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Applications 卡 hover 不要蓝描边（2026-09-10 Park）**：`.api-app-card:hover` 去掉 `rgba(37,99,235,0.22)` 蓝圈，描边保持静息灰 `rgba(15,23,42,0.08)`，抬起阴影留下。
+
 - **AI EDD 进度条要流动（2026-09-10 Park）**：68% 蓝→粉填充上加高光扫过（`::after` 1.8s ease-in-out 循环）。只在填充里裁，不要扫进右边灰轨。reduce-motion 关掉。
 
 - **AI 识别卡用 thinking-orbs 点阵球（2026-09-10 Park）**：中间卡原来是双圈 + AI 字。改挂 `thinking-orb` searching globe（96、dark 亮点、dotScale 1.45）。`#ai-intelligence` 入屏就挂，≤640 也挂（2D）；reduce-motion 只画一帧。圆环样式删掉。
