@@ -9,7 +9,7 @@ import {
 const CDN = "https://static.17track.net/www/2026-08/assets/images/api";
 
 const FEATURES = [
-  "3,400 carriers supported",
+  "4,000 carriers supported",
   "Batch tracking and automatic updates",
   "Shipment dashboard and management",
   "Carrier identification and auto-matching",

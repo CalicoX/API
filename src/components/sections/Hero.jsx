@@ -1,4 +1,4 @@
-/** Section 1 — International Package Tracking API + free trial form */
+/** Section 1 — Global Shipment Tracking API + free trial form */
 import { useState } from "react";
 
 export default function Hero() {
@@ -16,16 +16,17 @@ export default function Hero() {
               e.currentTarget.style.setProperty("--h1-y", `${e.clientY - r.top}px`);
             }}
           >
-            International Package{" "}
+            Global Shipment{" "}
             <span className="api-nowrap">Tracking API</span>
           </h1>
           <h2 className="api-h2">
             Accurate, <span className="api-nowrap">Reliable, Up-to-Date.</span>
           </h2>
           <p className="api-lead">
-            Access the tracking data of{" "}
-            <span className="api-lead-tag">3400+</span> carriers worldwide via
-            17TRACK’s tracking api integration, optimizing your operations
+            Access tracking data from{" "}
+            <span className="api-lead-tag">4,000+</span> carriers worldwide
+            through 17TRACK API, and bring reliable shipment visibility
+            directly into your systems and workflows.
           </p>
           <ul className="api-check-list">
             <li>For developers and dev-capable teams.</li>
@@ -50,10 +51,8 @@ export default function Hero() {
                 <input id="company_name" name="company_name" maxLength={250} required autoComplete="organization" />
               </div>
               <div className="api-field">
-                <label htmlFor="company_url">
-                  Company Website<span className="opt">Optional</span>
-                </label>
-                <input id="company_url" name="company_url" maxLength={250} autoComplete="url" />
+                <label htmlFor="company_url">Company Website</label>
+                <input id="company_url" name="company_url" maxLength={250} required autoComplete="url" />
               </div>
               <div className="api-field">
                 <label htmlFor="phone">Phone Number</label>
@@ -62,6 +61,19 @@ export default function Hero() {
               <div className="api-field">
                 <label htmlFor="email">Email</label>
                 <input id="email" name="email" type="email" maxLength={250} required autoComplete="email" />
+              </div>
+              <div className="api-field is-full">
+                <label htmlFor="shipment_volume">Monthly Shipment Volume</label>
+                <select id="shipment_volume" name="shipment_volume" required defaultValue="">
+                  <option value="" disabled>
+                    Select
+                  </option>
+                  <option value="1-100">1–100</option>
+                  <option value="101-1000">101–1,000</option>
+                  <option value="1001-10000">1,001–10,000</option>
+                  <option value="10001-100000">10,001–100,000</option>
+                  <option value="100000+">100,000+</option>
+                </select>
               </div>
               <div className="api-field is-full">
                 <label htmlFor="password">Password</label>
@@ -96,9 +108,9 @@ export default function Hero() {
               </div>
               <div className="api-field is-full">
                 <label htmlFor="help_note">
-                  Tell us how would you like us to help.<span className="opt">Optional</span>
+                  Tell us how would you like us to help.
                 </label>
-                <textarea id="help_note" name="help_note" maxLength={1000} />
+                <textarea id="help_note" name="help_note" maxLength={1000} required />
               </div>
             </div>
             <label className="api-form-agree">

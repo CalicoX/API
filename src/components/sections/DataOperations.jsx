@@ -36,32 +36,32 @@ const SCENES = [
     Visual: DataStatusStage,
     well: "status",
     idx: "01",
-    title: "Tracking data that counts",
-    body: "The combination of 9 main + 27 sub package status makes it a no-brainer to understand the shipping progress, and the cause of delivery exceptions.",
+    title: "Tracking Data That Counts",
+    body: "Standardized 9+30 shipment statuses give your systems a consistent view of shipment progress across carriers.",
     dwell: 5200,
   },
   {
     Visual: DataCarriersStage,
     well: "carriers",
     idx: "02",
-    title: "The world's carriers covered",
-    body: "17TRACK now includes 3400+ mainstream carriers worldwide, with ever-increasing new ones every week. Contact us anytime and request an unsupported carrier.",
+    title: "Global Carriers Covered",
+    body: "Access tracking data from 4,000+ carriers through one reliable data layer.",
     dwell: 5800,
   },
   {
     Visual: DataHubStage,
     well: "auto",
     idx: "03",
-    title: "Logistics visibility automated",
-    body: "The system auto-identifies over 80% of the carriers with the tracking number. All trackings are synced from the carrier on a regular basis, non-stop until fulfilled.",
+    title: "Smart Carrier Identification",
+    body: "Automatically identify carriers for 80%+ of tracking numbers and keep shipment data continuously updated until delivery.",
     dwell: 6200,
   },
   {
     Visual: DataChartStage,
     well: "dash",
     idx: "04",
-    title: "Dashboard report done right",
-    body: "All data you care about, in one dashboard. Package status distribution, carrier time performance, tracking function status, webhook push alert, and more.",
+    title: "Actionable tracking insights",
+    body: "Monitor tracking accuracy, shipment status, carrier performance, and webhook activity in one dashboard.",
     dwell: 6400,
   },
 ];
@@ -235,7 +235,7 @@ function CopyCard({ card }) {
   );
 }
 
-/** Section 4 — Data Operation Granularized */
+/** Section 4 — Turn Complex Tracking Data Into Usable Intelligence */
 export default function DataOperations() {
   const sectionRef = useRef(null);
   const wellRef = useRef(null);
@@ -389,9 +389,9 @@ export default function DataOperations() {
       <div className="api-wrap">
         <div className="api-s4-head">
           <h2 className="api-h2" id="api-data-title">
-            {tintWords("Data Operation Granularized")}
+            {tintWords("Turn Complex Tracking Data Into Usable Intelligence")}
             <span className="api-s4-h2-sub">
-              {tintWords("Forecast, Monitor, Intervene.", 3)}
+              {tintWords("Forecast, Monitor, Intervene.", 7)}
             </span>
           </h2>
           <a className="btn-switch" href="#free-trial" onClick={goToTrial}>
@@ -421,7 +421,7 @@ export default function DataOperations() {
                 />
               </svg>
             </span>
-            <span className="btn-switch-label">Start My Free Trial</span>
+            <span className="btn-switch-label">Start Free</span>
           </a>
         </div>
 

@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **文案稿第一轮（2026-09-10 Park：只改文案，不增删模块）**：对照 Downloads《（新）产品详情页文案设计 API》。页序不动（Hero→TrustBand→BrandsSay→UseCases→HowItWorks→DataOperations→Applications→IntegrationTogether→Credentials→ExploreMore→BottomCta）。**没做**：Enterprise / 数据指标带 / AI 新段；没删 BrandsSay、UseCases、Credentials、pricing。HowItWorks 仍 3 卡（稿是 4 步，第 1 步 Register 没加），三卡文案对上稿的 Step 2–4。数字 3400→4,000、9+27→9+30。CTA 现有钮改 `Start Free`，没加 View API docs 第二钮。Hero 表单全必填 + Monthly Shipment Volume 下拉（稿要求）；三条 checklist 稿没写，保留。
+
 - **footer 布局分档（2026-08-31 Park 两轮，commit 56f198f + 326b862）**：>640 = 桌面式左右（brand 左 max 480 + nav 右侧 2×2 两列，768 实测 row/并排）；≤640 才上下堆叠（堆叠规则嵌套在 10535 块的 ≤640 里）。nav 的 2×2 两列规则留在 ≤1024（桌面 4 列并排在 976px 放不下）。
 
 - **1024 三处布局（2026-08-31 Park，commit 2373f53 + 6e83fa9）**：①s4 侧列分布定案：`flex-start` + 16px 缝 + 卡 `flex: 1 1 auto`（内容为下限、富余高度拉伸撑满列，列底与井底对齐）——space-between 会拉大缝、纯自然高会底空，这个组合两个问题都没有（Park「间距不一致」→「高度要撑开」两轮迭代）；②Applications 5 卡 3+2 第二排右侧空格难看 → ≤1024 改 6 列栅格（前 3 卡 `span 2`、后 2 卡 `span 3` 撑满整行）；③Explore 两卡在 1024 两列时文案列被压到每行两三个词 → `.explore-grid` ≤1024 单列一行一个，卡内保持桌面左文右图。**apps 的 6 列栅格只在 ≤1024 块**，桌面 5 列、768 两列、640 一列不变。

@@ -405,6 +405,7 @@
 }
 
 .api-field input,
+.api-field select,
 .api-field textarea {
   width: 100%;
   box-sizing: border-box;
@@ -424,15 +425,25 @@
 }
 
 .api-field input:hover,
+.api-field select:hover,
 .api-field textarea:hover {
   border-color: #c8d3e2;
 }
 
 .api-field input:focus,
+.api-field select:focus,
 .api-field textarea:focus {
   border-color: #93c5fd;
   background: #fff;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.api-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' stroke='%2364748b' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
 }
 
 .api-field textarea {
@@ -6876,6 +6887,12 @@ html.is-reduce-fx .api-s5::after {
   grid-template-columns: none;
 }
 
+.api-page .bottom-cta-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .api-page .bottom-cta h2 {
   max-width: 14em;
   margin: 0 auto;
@@ -6886,6 +6903,17 @@ html.is-reduce-fx .api-s5::after {
   letter-spacing: -0.035em;
   line-height: 1.12;
   text-align: center;
+}
+
+.api-page .bottom-cta p {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.api-page .bottom-cta p a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .api-page .bottom-cta .cta-row {

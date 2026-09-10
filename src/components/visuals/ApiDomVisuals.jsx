@@ -235,11 +235,11 @@ const S4_HUB_WIRES = S4_HUB_NODES.map((node, i) => ({
 
 function HubCarrierCount({ active = false }) {
   const ref = useRef(null);
-  const [n, setN] = useState(3400);
+  const [n, setN] = useState(4000);
 
   useEffect(() => {
     if (prefersReducedMotion()) {
-      setN(3400);
+      setN(4000);
       return undefined;
     }
     let raf = 0;
@@ -250,7 +250,7 @@ function HubCarrierCount({ active = false }) {
       const tick = (now) => {
         const p = Math.min(1, (now - t0) / dur);
         const e = 1 - (1 - p) ** 3;
-        setN(Math.round(3400 * e));
+        setN(Math.round(4000 * e));
         if (p < 1) raf = requestAnimationFrame(tick);
       };
       setN(0);
@@ -259,7 +259,7 @@ function HubCarrierCount({ active = false }) {
     if (active) play();
     else {
       cancelAnimationFrame(raf);
-      setN(3400);
+      setN(4000);
     }
     return () => cancelAnimationFrame(raf);
   }, [active]);

@@ -4,8 +4,8 @@ export default function ExploreMore() {
 <section className="section alt api-explore">
         <div className="section-inner">
           <div className="section-head">
-            <h2>Need a branded tracking page or returns automation?</h2>
-            <p className="lead">Beyond the Tracking API, explore ready-made products for storefronts and reverse logistics.</p>
+            <h2>Find the Right Solution for Your Business</h2>
+            <p className="lead">Go beyond tracking with solutions for post-purchase experience, returns automation, and global shipment visibility.</p>
           </div>
           <div className="explore-grid">
             {/* Tracking card — visual from Returns ExploreMore */}
@@ -19,10 +19,10 @@ export default function ExploreMore() {
                     <circle className="ico-t-dot" cx="17" cy="8" r="1.2" fill="currentColor" stroke="none"/>
                   </svg>
                 </span>
-                <h3>17 Order Tracking</h3>
-                <p>Branded order tracking for Shopify and DTC — cut WISMO tickets and turn tracking visits into repurchase moments.</p>
+                <h3>17TRACK ORDER TRACKING</h3>
+                <p>Turn Tracking Into a Branded Customer Experience. Transform post-purchase tracking into a branded customer experience that keeps your brand in the journey, drives repeat purchases, and builds lasting customer loyalty.</p>
                 <span className="explore-link">
-                  <span className="explore-link-label">Explore 17 Order Tracking</span>
+                  <span className="explore-link-label">Explore 17TRACK Order Tracking</span>
                   <span className="explore-link-arrow" aria-hidden="true">→</span>
                 </span>
               </div>
@@ -166,10 +166,10 @@ export default function ExploreMore() {
                     <circle className="ico-r-dot" cx="0" cy="0" r="1.15" fill="currentColor" stroke="none"/>
                   </svg>
                 </span>
-                <h3>17 Returns</h3>
-                <p>Automate returns, exchanges, and refunds to cut manual work, recover more revenue, and control reverse-logistics cost.</p>
+                <h3>17RETURNS</h3>
+                <p>Turn Returns Into Revenue and Growth. AI-assisted, branded return experiences help you automate returns, exchanges, and refunds, recover more revenue, and access competitive label rates for DTC brands.</p>
                 <span className="explore-link">
-                  <span className="explore-link-label">Explore 17 Returns</span>
+                  <span className="explore-link-label">Explore 17RETURNS</span>
                   <span className="explore-link-arrow" aria-hidden="true">→</span>
                 </span>
               </div>

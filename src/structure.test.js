@@ -69,9 +69,11 @@ describe("API landing structure (gating)", () => {
 
   it("Hero copy matches 17track API hero", () => {
     const hero = read("components/sections/Hero.jsx");
-    expect(hero).toMatch(/International Package Tracking API/);
+    expect(hero).toMatch(/Global Shipment Tracking API/);
     expect(hero).toMatch(/Accurate,\s*(<span[^>]*>)?Reliable/);
     expect(hero).toMatch(/Start My Free Trial/);
+    expect(hero).toMatch(/Monthly Shipment Volume/);
+    expect(hero).toMatch(/4,000\+/);
     expect(hero).toMatch(/No credit card required/);
     expect(hero).toMatch(/className=\"api-s1 hero\"|className=\{?[\"']api-s1 hero/);
   });
@@ -94,9 +96,9 @@ describe("API landing structure (gating)", () => {
 
   it("core content sections use original 17track wording", () => {
     expect(read("components/sections/UseCases.jsx")).toMatch(/One Solution/);
-    expect(read("components/sections/HowItWorks.jsx")).toMatch(/How Does the API Work/);
-    expect(read("components/sections/DataOperations.jsx")).toMatch(/Data Operation Granularized/);
-    expect(read("components/sections/DataOperations.jsx")).toMatch(/9 main \+ 27 sub/);
+    expect(read("components/sections/HowItWorks.jsx")).toMatch(/From Tracking Data to Real-Time Visibility/);
+    expect(read("components/sections/DataOperations.jsx")).toMatch(/Turn Complex Tracking Data Into Usable Intelligence/);
+    expect(read("components/sections/DataOperations.jsx")).toMatch(/9\+30/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/api-s4-board/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/idx: \"01\"/);
     /* 2026-08-31 Park：[01]-[04] 序号换线性 SVG icon（hover 动画），断言同步 */
@@ -108,11 +110,11 @@ describe("API landing structure (gating)", () => {
     expect(s4).not.toMatch(/api-s4-cta/);
     expect(s4).not.toMatch(/api-btn-primary/);
     expect(s4).not.toMatch(/onPick|onHold|aria-current/);
-    expect(s4).toMatch(/Start My Free Trial/);
+    expect(s4).toMatch(/Start Free/);
     expect(s4).toMatch(/#free-trial/);
     expect(s4).toMatch(/btn-switch/);
     expect(read("components/sections/Applications.jsx")).toMatch(/Logistics Service/);
-    expect(read("components/sections/Applications.jsx")).toMatch(/Various Platforms/);
+    expect(read("components/sections/Applications.jsx")).toMatch(/Platforms \& SaaS/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Land the Integration Together/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/className=\"api-h2\"/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Each plan is valid for 12 months/);
@@ -120,22 +122,22 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Popular/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/api-plan-custom/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/is-custom/);
-    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/3,400 carriers supported/);
+    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/4,000 carriers supported/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Onboard in 4 Steps/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/All green\? Go live!/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/IllusOnboardChat/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/api-onboard-well/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/Part6_/);
-    expect(read("components/sections/BottomCta.jsx")).toMatch(/Efficient Solution of Value and Possibility/);
-    expect(read("components/sections/BottomCta.jsx")).toMatch(/Contact Us/);
+    expect(read("components/sections/BottomCta.jsx")).toMatch(/Ready to Build Smarter Tracking/);
+    expect(read("components/sections/BottomCta.jsx")).toMatch(/Start Free/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/btn-switch/);
     expect(read("components/LandingPage.jsx")).toMatch(/<BottomCta/);
   });
 
   it("ExploreMore cross-sells Tracking (not API self-promo)", () => {
     const explore = read("components/sections/ExploreMore.jsx");
-    expect(explore).toMatch(/17 Order Tracking|explore-card-tracking/);
-    expect(explore).toMatch(/17 Returns|explore-card-returns/);
+    expect(explore).toMatch(/17TRACK ORDER TRACKING|explore-card-tracking/);
+    expect(explore).toMatch(/17RETURNS|explore-card-returns/);
     expect(explore).not.toMatch(/explore-card-api/);
   });
 
@@ -186,7 +188,7 @@ describe("API landing structure (gating)", () => {
   it("Applications CTA is Tracking btn-switch", () => {
     const apps = read("components/sections/Applications.jsx");
     expect(apps).toMatch(/btn-switch/);
-    expect(apps).toMatch(/Start My Free Trial/);
+    expect(apps).toMatch(/Start Free/);
     expect(apps).not.toMatch(/api-s5-cta[\s\S]*api-btn-primary/);
     const fx = read("fx/useLandingEffects.js");
     expect(fx).toMatch(/btnSwitch|btn-switch/);

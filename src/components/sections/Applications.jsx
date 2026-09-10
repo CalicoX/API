@@ -5,31 +5,31 @@ const APPS = [
     kind: "logistics",
     title: "Logistics Service",
     body:
-      "Get the tracking data of your carrier partners and last-mile delivery. Put them together to form a complete tracking feed that covers your entire shipping process.",
+      "Unify carrier and last-mile tracking data into one consistent feed, giving you end-to-end shipment visibility.",
   },
   {
     kind: "ecommerce",
-    title: "E-commerce Seller",
+    title: "Marketplace",
     body:
-      "Integrate our API to your order management system, or build your own tracking tool. Monitor all your orders in one place and get up-to-date status and events.",
+      "Sync real-time tracking data with your OMS or tracking tools, so every order stays visible in one place.",
   },
   {
     kind: "finance",
     title: "Finance and Payment",
     body:
-      "Leverage an ocean of data for risk management. Track shipments in bulk, and determine delivery time and package authenticity with event details and key status.",
-  },
-  {
-    kind: "integrator",
-    title: "System Integrator",
-    body:
-      "Create customized tracking features and provide value-added services to your users. Build an optimized order management solution that stands out.",
+      "Use tracking events to assess delivery progress, risk, and package authenticity.",
   },
   {
     kind: "platforms",
-    title: "Various Platforms",
+    title: "Platforms & SaaS",
     body:
-      "Build a logistics middleware empowered by our API, facilitate your end-to-end data processing needs and support your operation.",
+      "Power your platform with unified tracking data across carriers and markets.",
+  },
+  {
+    kind: "integrator",
+    title: "System Integrators",
+    body:
+      "Integrate standardized logistics data into custom workflows and customer experience.",
   },
 ];
 
@@ -80,7 +80,7 @@ export default function Applications() {
                 />
               </svg>
             </span>
-            <span className="btn-switch-label">Start My Free Trial</span>
+            <span className="btn-switch-label">Start Free</span>
           </a>
         </div>
       </div>
