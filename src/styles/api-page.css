@@ -7811,7 +7811,8 @@ html.is-reduce-fx .api-s5::after {
 .api-ent-cards {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  column-gap: 20px;
+  row-gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -7819,9 +7820,10 @@ html.is-reduce-fx .api-s5::after {
 
 .api-ent-card {
   --s4-r: 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  align-items: start;
   min-width: 0;
   padding: 28px 24px 24px;
   text-align: left;
@@ -7941,6 +7943,7 @@ html.is-reduce-fx .api-s5::after {
 
 .api-ent-card h3 {
   margin: 0 0 8px;
+  min-height: calc(1.3em * 2);
   font-size: clamp(16.5px, calc(15.24px + 0.35vw), 20px);
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -8260,6 +8263,14 @@ html.is-reduce-fx .api-s5::after {
 @media (max-width: 1024px) {
   .api-ent-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .api-ent-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    grid-row: auto;
   }
 
   .api-ai-stage {

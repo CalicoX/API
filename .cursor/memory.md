@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Enterprise 四卡描述对齐（2026-09-10 Park「描述文字没对齐」）**：标题换行数不同（1/2/3）导致正文起点不齐。桌面四列用 `subgrid` + `grid-row: span 3`，标题行跟最高那张齐；h3 另留 `min-height: calc(1.3em * 2)`。≤1024 两列改回 flex + `gap: 20px`（subgrid 的 parent row-gap 会把卡内三行也撑开）。不要 `p { margin-top: auto }`（那是底对齐）。
+
 - **Applications 浅底把点波加回来（2026-09-10 Park「波浪点阵背景怎么没了」）**：卸挂是因为暗 canvas 盖住浅底。现重新挂 `roi-point-waves`，底 `#f7f8fa`、灰点 `#64748b`、`DOT_FADE` 0.32。≤640 仍不挂。
 
 - **Applications 卡不要 268 固高，跟最高卡齐；icon 白线 + 实色底（2026-09-10 Park）**：`.api-app-card` 去掉 `min-height: 268px`（改 `0`），靠 grid stretch 跟同行最高卡齐，不再写死高度。`.api-app-ico` 白线（`color: #fff`）+ 实色底：logistics `#2563eb` / ecommerce `#ea580c` / finance `#059669` / platforms `#0891b2` / integrator `#7c3aed`。hover 只略压暗底，icon 保持白。640/1024 已有 `min-height: 0` 不动，别再引入 268。
