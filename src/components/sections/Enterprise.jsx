@@ -33,9 +33,9 @@ const CARDS = [
 function GlassFill({ id }) {
   return (
     <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stopColor="#f7f4ff" />
-      <stop offset="42%" stopColor="#ddd6fe" />
-      <stop offset="100%" stopColor="#7c3aed" />
+      <stop offset="0%" stopColor="#f8fbff" />
+      <stop offset="42%" stopColor="#bfdbfe" />
+      <stop offset="100%" stopColor="#2563eb" />
     </linearGradient>
   );
 }
@@ -51,8 +51,8 @@ function CardIcon({ kind }) {
           <GlassFill id={g} />
         </defs>
         <circle cx="24" cy="24" r="14" fill={`url(#${g})`} />
-        <ellipse cx="24" cy="24" rx="6" ry="14" stroke="#5b21b6" strokeWidth="1.6" opacity="0.28" />
-        <path d="M10 24h28" stroke="#5b21b6" strokeWidth="1.6" opacity="0.28" />
+        <ellipse cx="24" cy="24" rx="6" ry="14" stroke="#1d4ed8" strokeWidth="1.6" opacity="0.28" />
+        <path d="M10 24h28" stroke="#1d4ed8" strokeWidth="1.6" opacity="0.28" />
       </svg>
     );
   }
