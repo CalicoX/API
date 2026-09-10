@@ -6059,7 +6059,7 @@ html.is-reduce-fx .api-s5::after {
   background: #fff;
   border: none;
   border-radius: 16px;
-  min-height: 268px;
+  min-height: 0;
   padding: 28px 20px 32px;
   list-style: none;
   box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08);
@@ -7560,75 +7560,63 @@ html.is-reduce-fx .api-s5::after {
   height: 44px;
   border-radius: 12px;
   margin-bottom: 14px;
-  color: #2563eb;
-  background: rgba(37, 99, 235, 0.1);
-  border: 1px solid rgba(37, 99, 235, 0.12);
+  color: #fff;
+  background: #2563eb;
+  border: none;
   box-shadow: none;
   transition:
-    color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .api-app-ico[data-kind="logistics"] {
-  color: #2563eb;
-  background: rgba(37, 99, 235, 0.1);
-  border-color: rgba(37, 99, 235, 0.12);
+  color: #fff;
+  background: #2563eb;
 }
 
 .api-app-ico[data-kind="ecommerce"] {
-  color: #ea580c;
-  background: rgba(234, 88, 12, 0.1);
-  border-color: rgba(234, 88, 12, 0.12);
+  color: #fff;
+  background: #ea580c;
 }
 
 .api-app-ico[data-kind="finance"] {
-  color: #059669;
-  background: rgba(5, 150, 105, 0.1);
-  border-color: rgba(5, 150, 105, 0.12);
+  color: #fff;
+  background: #059669;
 }
 
 .api-app-ico[data-kind="integrator"] {
-  color: #7c3aed;
-  background: rgba(124, 58, 237, 0.1);
-  border-color: rgba(124, 58, 237, 0.12);
+  color: #fff;
+  background: #7c3aed;
 }
 
 .api-app-ico[data-kind="platforms"] {
-  color: #0891b2;
-  background: rgba(8, 145, 178, 0.1);
-  border-color: rgba(8, 145, 178, 0.12);
+  color: #fff;
+  background: #0891b2;
 }
 
 .api-app-card:hover .api-app-ico[data-kind="logistics"] {
-  color: #1d4ed8;
-  background: rgba(37, 99, 235, 0.16);
-  border-color: rgba(37, 99, 235, 0.22);
+  color: #fff;
+  background: #1d4ed8;
 }
 
 .api-app-card:hover .api-app-ico[data-kind="ecommerce"] {
-  color: #c2410c;
-  background: rgba(234, 88, 12, 0.16);
-  border-color: rgba(234, 88, 12, 0.22);
+  color: #fff;
+  background: #c2410c;
 }
 
 .api-app-card:hover .api-app-ico[data-kind="finance"] {
-  color: #047857;
-  background: rgba(5, 150, 105, 0.16);
-  border-color: rgba(5, 150, 105, 0.22);
+  color: #fff;
+  background: #047857;
 }
 
 .api-app-card:hover .api-app-ico[data-kind="integrator"] {
-  color: #6d28d9;
-  background: rgba(124, 58, 237, 0.16);
-  border-color: rgba(124, 58, 237, 0.22);
+  color: #fff;
+  background: #6d28d9;
 }
 
 .api-app-card:hover .api-app-ico[data-kind="platforms"] {
-  color: #0e7490;
-  background: rgba(8, 145, 178, 0.16);
-  border-color: rgba(8, 145, 178, 0.22);
+  color: #fff;
+  background: #0e7490;
 }
 
 .api-app-ico svg {
