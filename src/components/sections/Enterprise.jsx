@@ -32,31 +32,31 @@ function CardIcon({ kind }) {
   if (kind === "carriers") {
     return (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9">
-        <circle cx="12" cy="12" r="7.2" />
-        <ellipse cx="12" cy="12" rx="3" ry="7.2" />
-        <path d="M4.8 12h14.4" />
+        <circle cx="12" cy="12" r="7.2" pathLength="100" />
+        <ellipse cx="12" cy="12" rx="3" ry="7.2" pathLength="100" />
+        <path d="M4.8 12h14.4" pathLength="100" />
       </svg>
     );
   }
   if (kind === "performance") {
     return (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9">
-        <path d="M5 16.5 10.2 11l3 3L19 8" />
-        <path d="M14.2 8H19v4.8" />
+        <path d="M5 16.5 10.2 11l3 3L19 8" pathLength="100" />
+        <path d="M14.2 8H19v4.8" pathLength="100" />
       </svg>
     );
   }
   if (kind === "security") {
     return (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9">
-        <path d="M12 3.6 5.4 6.4v5.2c0 4.3 2.9 7.3 6.6 8.6 3.7-1.3 6.6-4.3 6.6-8.6V6.4Z" />
+        <path d="M12 3.6 5.4 6.4v5.2c0 4.3 2.9 7.3 6.6 8.6 3.7-1.3 6.6-4.3 6.6-8.6V6.4Z" pathLength="100" />
       </svg>
     );
   }
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9">
-      <circle cx="12" cy="9" r="3.1" />
-      <path d="M6.2 18.6c.6-2.8 2.8-4.2 5.8-4.2s5.2 1.4 5.8 4.2" />
+      <circle cx="12" cy="9" r="3.1" pathLength="100" />
+      <path d="M6.2 18.6c.6-2.8 2.8-4.2 5.8-4.2s5.2 1.4 5.8 4.2" pathLength="100" />
     </svg>
   );
 }

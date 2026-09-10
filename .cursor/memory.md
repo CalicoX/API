@@ -27,7 +27,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - **HowItWorks Step 4 轨迹板加宽（2026-09-10 Park）**：Listen 井内插图从 86% 铺满（和其他三步一样）；`.api-vig--listen .api-vig-track` 56%→78%，井侧垫改 8px。只动 Listen，s4 trackpane 仍 100%。
 
-- **Enterprise 卡 icon（2026-09-10 Park 参考 Home/列表 3D 方）**：两个圆角方叠——后层实心 `#3b82f6` 右上探出，前层透明毛玻璃（`rgba(255,255,255,0.14)` + `backdrop-filter: blur(10px)`，13 圆角 / 42），无描边。白描边符号居中。不要实心渐变、不要紫。
+- **Enterprise 卡 icon（2026-09-10 Park 参考 Home/列表 3D 方）**：两个圆角方叠——后层实心 `#3b82f6` 右上探出，前层透明毛玻璃（`rgba(255,255,255,0.14)` + `backdrop-filter: blur(10px)`，13 圆角 / 42），无描边。白描边符号居中。hover：上下层展开再收回 + 线标 pathLength 描边。不要实心渐变、不要紫。
 
 - **Enterprise badge 四色（2026-09-10 Park「要彩色的」）**：Visible 蓝 / Reliable 绿 / Trust 紫 / Secure 橙，浅底+同色点，跟 Applications 四色一系。
 
