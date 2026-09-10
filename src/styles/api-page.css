@@ -2215,7 +2215,8 @@
 
 .api-s3-illus > .api-vig--signup,
 .api-s3-illus > .api-vig--webhook,
-.api-s3-illus > .api-vig--register {
+.api-s3-illus > .api-vig--register,
+.api-s3-illus > .api-vig--listen {
   align-self: stretch;
   width: 100%;
   max-width: 100%;
@@ -2996,7 +2997,7 @@
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  padding: 6px 6% 0;
+  padding: 6px 8px 0;
   box-sizing: border-box;
 }
 
@@ -3106,6 +3107,14 @@
   100% {
     opacity: 0;
   }
+}
+
+.api-vig--listen .api-vig-jsonwin {
+  width: 50%;
+}
+
+.api-vig--listen .api-vig-track {
+  width: 78%;
 }
 
 .api-vig-track {
