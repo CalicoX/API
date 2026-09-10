@@ -2109,7 +2109,7 @@
   max-width: 68ch;
 }
 
-/* 1×4 — 四张外卡均分；Step 3 只加宽井内插图 */
+/* >1024 1×4；641-1024 2×2；≤640 单列 */
 .api-s3-cards {
   position: relative;
   z-index: 1;
@@ -2305,15 +2305,13 @@
 
 @media (max-width: 1024px) and (min-width: 769px) {
   .api-s3-illus {
-    height: 280px;
+    height: 340px;
+    min-height: 340px;
     padding: 0;
   }
 
   .api-s3-card-text {
     padding: 14px 14px 14px;
-  }
-
-  .api-s3-card-text h3 {
   }
 
   .api-s3-step {
@@ -6910,9 +6908,7 @@ html.is-reduce-fx .api-s5::after {
     gap: 24px 28px;
   }
 
-  /* 768 四卡一行放不下，保持 2×2 */
   .api-s3-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
   }
 
@@ -7116,7 +7112,7 @@ html.is-reduce-fx .api-s5::after {
     grid-template-columns: 1fr;
   }
 
-  /* 640 以下恢复单列：井 + 卡全部纵排（2×2 只给 641-768） */
+  /* 640 以下恢复单列：井 + 卡全部纵排（HowItWorks 2×2 给 641-1024） */
   .api-s4-board {
     grid-template-columns: 1fr;
   }
@@ -8292,7 +8288,19 @@ html.is-reduce-fx .api-s5::after {
   }
 }
 
+/* HowItWorks 2×2：641-1024。范围必须圈住，否则 ≤1024 会泄漏进 390 把单列顶掉 */
+@media (max-width: 1024px) and (min-width: 641px) {
+  .api-s3-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
 @media (max-width: 640px) {
+  .api-s3-cards {
+    grid-template-columns: 1fr;
+  }
+
   .api-ent-cards {
     grid-template-columns: 1fr;
   }

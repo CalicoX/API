@@ -25,7 +25,7 @@ AI（`#ai-intelligence`）整屏：tracking 5175 同款 Synthesis 蓝粉底（`a
 ## 断点规范（2026-08-31 Park 定案，Tailwind 四档）
 
 - 全站只用 **640 / 768 / 1024** 三档 max-width（+ 640 内嵌套 360 窄机子档）；1280/1536 是 Tailwind 大屏接口，现阶段无素材不设。1440 是内容壳宽，不是断点。**别再新增断点值**（历史上 520/560/680/700/720/900/980/1100 的化石层已于 2026-08-31 清理归并）。
-- 档位语义：≤640 手机特化（tab 切换、横滑、1px 描边、去分割线、hero/s2 单列堆叠、BrandsSay 全宽卡）；≤768 平板竖屏**保持双栏**（hero / Use Cases 左右布局，只藏噪音件）+ 单列堆叠类（s3/s4/form）；≤1024 两/三列 rebalance；>1024 桌面全量。max-width 级联靠源顺序，窄档块写在宽档块之后。**从宽档往窄档挪规则时窄档必须接住**（768 删单列、640 忘接 = 390 破版）。
+- 档位语义：≤640 手机特化（tab 切换、横滑、1px 描边、去分割线、hero/s2 单列堆叠、BrandsSay 全宽卡）；≤768 平板竖屏**保持双栏**（hero / Use Cases 左右布局，只藏噪音件）+ 单列堆叠类（s4/form）；HowItWorks **>1024 四列、641–1024 2×2、≤640 单列**；≤1024 两/三列 rebalance；>1024 桌面全量。max-width 级联靠源顺序，窄档块写在宽档块之后。**从宽档往窄档挪规则时窄档必须接住**（768 删单列、640 忘接 = 390 破版）。
 - FX 开关（`matchMedia`）跟档走：`≤640` **手机才降 FX**——总开关在 responsive-fx（`reduce = mqReduce || mq640` → `window.__reduceFx`），hero/底 CTA shader、液态颗粒、iso-hub、particle-earth、use-cases 滚动定格全读它，CSS 侧 `.hero-undertones/.bottom-cta-shader` 的 display:none 也在 ≤640。**768 平板竖屏吃完整桌面 FX**（2026-08-31 Park：此前 ≤768 全关导致平板无背景、无地球、无滚动旋转）；`≤1024` feature 面板 rebalance（landing-inline）。
 
 ## 视觉约定
