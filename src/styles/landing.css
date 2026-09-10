@@ -9592,6 +9592,121 @@ body.ai-case-lightbox-active {
   }
 }
 
+/* CoverageBand：Top Global Carriers Coverage，居中 3+2 数据 + 空心点阵地球动画（coverage-globe.js） */
+.coverage-band {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(460px, 60vh, 680px);
+  padding: 72px 0;
+  background: #010409;
+  color: #fff;
+  text-align: center;
+}
+.coverage-globe {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.coverage-band .section-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.coverage-head {
+  margin-bottom: 8px;
+}
+.coverage-head h2 {
+  margin: 0;
+  font-size: var(--fs-h2);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  background-image: linear-gradient(90deg, #ffffff 0%, #a8c6ff 55%, #4f8dff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.coverage-data {
+  list-style: none;
+  margin: 56px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 44px 40px;
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+}
+.coverage-data li {
+  grid-column: span 2;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  justify-items: center;
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--cv-i, 0) * 0.12s);
+}
+.coverage-band.is-in .coverage-data li {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .coverage-data li {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+.coverage-data li:nth-child(4),
+.coverage-data li:nth-child(5) {
+  grid-column: span 3;
+}
+.coverage-data strong {
+  font-size: clamp(34px, calc(25px + 2.4vw), 58px);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #fff;
+}
+.coverage-data span {
+  font-size: clamp(14px, calc(12.6px + 0.4vw), 17px);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.64);
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  .coverage-band {
+    min-height: 0;
+    padding: 64px 0;
+  }
+  .coverage-data {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 18px;
+    margin-top: 26px;
+  }
+  .coverage-data li,
+  .coverage-data li:nth-child(4),
+  .coverage-data li:nth-child(5) {
+    grid-column: auto;
+  }
+  .coverage-data li:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
 /* Bottom CTA — 透视点阵波浪（图2：纯黑 + 白点） */
 .bottom-cta {
   position: relative;

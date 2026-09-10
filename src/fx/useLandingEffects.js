@@ -26,6 +26,7 @@ const FX_LOADERS = {
   aiLab: () => import("./modules/ai-lab.js"),
   aiTitleParticles: () => import("./modules/ai-title-particles.js"),
   bottomCta: () => import("./modules/bottom-cta-shader.js"),
+  coverageGlobe: () => import("./modules/coverage-globe.js"),
   roiPointWaves: () => import("./modules/roi-point-waves.js"),
   btnSwitch: () => import("./modules/btn-switch.js"),
 };
@@ -192,6 +193,22 @@ export function useLandingEffects() {
           },
           { rootMargin: "120px" }
         )
+      );
+    }
+
+    // —— Coverage globe deferred（tracking 同款：手机也跑，只跳 reduced-motion）——
+    const coverage = document.getElementById("coverage");
+    if (coverage && !prefersReducedMotion()) {
+      let loaded = false;
+      disposers.push(
+        observeVisibility(coverage, (vis) => {
+          if (!vis || loaded) return;
+          loaded = true;
+          const stop = whenIdle(() => {
+            if (!cancelled) mountNamed("coverageGlobe");
+          }, 300);
+          disposers.push(stop);
+        })
       );
     }
 

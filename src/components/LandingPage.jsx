@@ -11,6 +11,7 @@ import Applications from "./sections/Applications.jsx";
 import IntegrationTogether from "./sections/IntegrationTogether.jsx";
 import Credentials from "./sections/Credentials.jsx";
 import ExploreMore from "./sections/ExploreMore.jsx";
+import CoverageBand from "./sections/CoverageBand.jsx";
 import BottomCta from "./sections/BottomCta.jsx";
 import { useEffect } from "react";
 import { useLandingEffects } from "../fx/useLandingEffects.js";
@@ -41,6 +42,7 @@ export default function LandingPage() {
           <Credentials />
           {/* Cross-sell: Returns + Tracking (no API self-promo) */}
           <ExploreMore />
+          <CoverageBand />
           <BottomCta />
         </main>
         <Footer />

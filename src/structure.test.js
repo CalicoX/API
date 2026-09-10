@@ -31,6 +31,7 @@ describe("API landing structure (gating)", () => {
       "IntegrationTogether",
       "Credentials",
       "ExploreMore",
+      "CoverageBand",
       "BottomCta",
       "Footer",
       "ProductDock",
@@ -51,7 +52,8 @@ describe("API landing structure (gating)", () => {
     expect(lp.indexOf("BrandsSay")).toBeLessThan(lp.indexOf("UseCases"));
     expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("UseCases"));
     expect(lp.indexOf("Credentials")).toBeLessThan(lp.indexOf("ExploreMore"));
-    expect(lp.indexOf("ExploreMore")).toBeLessThan(lp.indexOf("BottomCta"));
+    expect(lp.indexOf("ExploreMore")).toBeLessThan(lp.indexOf("CoverageBand"));
+    expect(lp.indexOf("CoverageBand")).toBeLessThan(lp.indexOf("BottomCta"));
   });
 
   it("TrustBand is a static two-row logo grid, not a marquee", () => {
@@ -132,6 +134,25 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/BottomCta.jsx")).toMatch(/Start Free/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/btn-switch/);
     expect(read("components/LandingPage.jsx")).toMatch(/<BottomCta/);
+  });
+
+  it("CoverageBand sits above BottomCta with tracking globe + 5 metrics", () => {
+    const band = read("components/sections/CoverageBand.jsx");
+    expect(band).toMatch(/id=\"coverage\"/);
+    expect(band).toMatch(/coverage-globe-canvas/);
+    expect(band).toMatch(/Top Global Carriers Coverage/);
+    expect(band).toMatch(/4,000\+/);
+    expect(band).toMatch(/9\+30/);
+    expect(band).toMatch(/99\.9%/);
+    expect(band).toMatch(/95%\+/);
+    expect(band).toMatch(/Carrier Recognition Success Rate/);
+    expect(existsSync(join(process.cwd(), "public/world.json"))).toBe(true);
+    const fx = read("fx/useLandingEffects.js");
+    expect(fx).toMatch(/coverageGlobe|coverage-globe/);
+    expect(fx).toMatch(/getElementById\([\"']coverage[\"']\)/);
+    expect(read("fx/modules/coverage-globe.js")).toMatch(/export function mount/);
+    expect(read("styles/landing.css")).toMatch(/\.coverage-band \{/);
+    expect(read("styles/landing.css")).toMatch(/grid-template-columns: repeat\(6/);
   });
 
   it("ExploreMore cross-sells Tracking (not API self-promo)", () => {
@@ -268,6 +289,7 @@ describe("API landing structure (gating)", () => {
       "hero-wash-shader.js",
       "s4-liquid-grain.js",
       "bottom-cta-shader.js",
+      "coverage-globe.js",
       "thinking-orb.js",
       "ai-title-particles.js",
       "border-beam.js",

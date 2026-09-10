@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **CoverageBand 接到 CTA 上方（2026-09-10 Park）**：tracking-react 同款「Top Global Carriers Coverage」点阵地球 + 5 项指标，插在 ExploreMore 与 BottomCta 之间。JSX / `coverage-globe.js` / `public/world.json` / CSS 3+2 栅格照搬 tracking；文案与 tracking 截图一致（4,000+ / 9+30 / 99.9% / 95%+ / 99.9% SLA）。地球手机也跑，只跳 reduced-motion。BottomCta 仍是 Ready to Build Smarter Tracking，不含这组数。
+
 - **文案稿第一轮（2026-09-10 Park：只改文案，不增删模块）**：对照 Downloads《（新）产品详情页文案设计 API》。页序不动（Hero→TrustBand→BrandsSay→UseCases→HowItWorks→DataOperations→Applications→IntegrationTogether→Credentials→ExploreMore→BottomCta）。**没做**：Enterprise / 数据指标带 / AI 新段；没删 BrandsSay、UseCases、Credentials、pricing。HowItWorks 仍 3 卡（稿是 4 步，第 1 步 Register 没加），三卡文案对上稿的 Step 2–4。数字 3400→4,000、9+27→9+30。CTA 现有钮改 `Start Free`，没加 View API docs 第二钮。Hero 表单全必填 + Monthly Shipment Volume 下拉（稿要求）；三条 checklist 稿没写，保留。
 
 - **footer 布局分档（2026-08-31 Park 两轮，commit 56f198f + 326b862）**：>640 = 桌面式左右（brand 左 max 480 + nav 右侧 2×2 两列，768 实测 row/并排）；≤640 才上下堆叠（堆叠规则嵌套在 10535 块的 ≤640 里）。nav 的 2×2 两列规则留在 ≤1024（桌面 4 列并排在 976px 放不下）。
