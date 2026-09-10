@@ -8142,11 +8142,16 @@ html.is-reduce-fx .api-s5::after {
   }
 }
 
+.api-ai-panel[data-kind="edd"] {
+  display: flex;
+  flex-direction: column;
+}
+
 .api-ai-panel[data-kind="edd"] ul {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin: 0;
+  margin: auto 0 0;
   padding: 0;
   list-style: none;
 }

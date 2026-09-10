@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **AI EDD Origin/Destination 往下（2026-09-10 Park）**：EDD 卡改 flex 列，城市行 `margin-top: auto` 贴卡底，和中间卡 USPS 对齐。不要只加一点缝。
+
 - **Hero 4,000+ 胶囊文字返白（2026-09-10 Park）**：`.api-lead-tag` 从浅蓝底深蓝字改成 `--api-blue` 底白字。
 
 - **Applications 卡 hover 不要蓝描边（2026-09-10 Park）**：`.api-app-card:hover` 去掉 `rgba(37,99,235,0.22)` 蓝圈，描边保持静息灰 `rgba(15,23,42,0.08)`，抬起阴影留下。
