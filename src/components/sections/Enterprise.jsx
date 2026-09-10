@@ -34,8 +34,8 @@ function GlassFill({ id }) {
   return (
     <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stopColor="#f8fbff" />
-      <stop offset="42%" stopColor="#bfdbfe" />
-      <stop offset="100%" stopColor="#2563eb" />
+      <stop offset="32%" stopColor="#dbeafe" />
+      <stop offset="100%" stopColor="#3b82f6" />
     </linearGradient>
   );
 }
@@ -50,34 +50,41 @@ function CardIcon({ kind }) {
         <defs>
           <GlassFill id={g} />
         </defs>
-        <circle cx="24" cy="24" r="14" fill={`url(#${g})`} />
-        <ellipse cx="24" cy="24" rx="6" ry="14" stroke="#1d4ed8" strokeWidth="1.6" opacity="0.28" />
-        <path d="M10 24h28" stroke="#1d4ed8" strokeWidth="1.6" opacity="0.28" />
+        <circle cx="24" cy="20" r="13.2" fill="#1d4ed8" />
+        <circle cx="24" cy="25.2" r="13.2" fill={`url(#${g})`} />
+        <ellipse cx="24" cy="25.2" rx="5.4" ry="13.2" stroke="#fff" strokeWidth="1.5" opacity="0.85" />
+        <path d="M10.8 25.2h26.4" stroke="#fff" strokeWidth="1.5" opacity="0.85" />
       </svg>
     );
   }
   if (kind === "performance") {
+    const d = "M27.2 6.4 14.6 25.2h9.2L16.8 41.6 33.4 21.2h-9.1L27.2 6.4Z";
     return (
       <svg viewBox="0 0 48 48" fill="none">
         <defs>
           <GlassFill id={g} />
         </defs>
-        <path
-          fill={`url(#${g})`}
-          d="M27.2 6.4 14.6 25.2h9.2L16.8 41.6 33.4 21.2h-9.1L27.2 6.4Z"
-        />
+        <path fill="#1d4ed8" d={d} transform="translate(0 -4)" />
+        <path fill={`url(#${g})`} d={d} />
       </svg>
     );
   }
   if (kind === "security") {
+    const d =
+      "M24 5.6 9.6 11.2v9.2c0 9.1 6.1 15.4 14.4 18 8.3-2.6 14.4-8.9 14.4-18v-9.2L24 5.6Z";
     return (
       <svg viewBox="0 0 48 48" fill="none">
         <defs>
           <GlassFill id={g} />
         </defs>
+        <path fill="#1d4ed8" d={d} transform="translate(0 -3.6)" />
+        <path fill={`url(#${g})`} d={d} />
         <path
-          fill={`url(#${g})`}
-          d="M24 5.6 9.6 11.2v9.2c0 9.1 6.1 15.4 14.4 18 8.3-2.6 14.4-8.9 14.4-18v-9.2L24 5.6Z"
+          d="m18.4 24.2 4.1 4.1 7.4-7.6"
+          stroke="#fff"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     );
@@ -87,6 +94,8 @@ function CardIcon({ kind }) {
       <defs>
         <GlassFill id={g} />
       </defs>
+      <circle cx="24" cy="12.4" r="7.2" fill="#1d4ed8" />
+      <path fill="#1d4ed8" d="M10.4 36.6c0-7.6 6.1-12 13.6-12s13.6 4.4 13.6 12v1.2H10.4v-1.2Z" />
       <circle cx="24" cy="16.2" r="7.2" fill={`url(#${g})`} />
       <path
         fill={`url(#${g})`}
