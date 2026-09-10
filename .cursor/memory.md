@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Hero 左栏加宽（2026-09-10 Park「这个太空了，左边的文字宽度可以加一些」）**：`.api-s1-copy .api-lead` 去掉 42ch，段宽跟左栏走；栅格 `1.2fr / 520 / gap 48` → **`1.35fr / 500 / gap 32`**。表单只收 20px，空的是段宽被卡死。≤768 双栏规则不动。
+
 - **CoverageBand 接到 CTA 上方（2026-09-10 Park）**：tracking-react 同款「Top Global Carriers Coverage」点阵地球 + 5 项指标，插在 ExploreMore 与 BottomCta 之间。JSX / `coverage-globe.js` / `public/world.json` / CSS 3+2 栅格照搬 tracking；文案与 tracking 截图一致（4,000+ / 9+30 / 99.9% / 95%+ / 99.9% SLA）。地球手机也跑，只跳 reduced-motion。BottomCta 仍是 Ready to Build Smarter Tracking，不含这组数。
 
 - **文案稿第一轮（2026-09-10 Park：只改文案，不增删模块）**：对照 Downloads《（新）产品详情页文案设计 API》。页序不动（Hero→TrustBand→BrandsSay→UseCases→HowItWorks→DataOperations→Applications→IntegrationTogether→Credentials→ExploreMore→BottomCta）。**没做**：Enterprise / 数据指标带 / AI 新段；没删 BrandsSay、UseCases、Credentials、pricing。HowItWorks 仍 3 卡（稿是 4 步，第 1 步 Register 没加），三卡文案对上稿的 Step 2–4。数字 3400→4,000、9+27→9+30。CTA 现有钮改 `Start Free`，没加 View API docs 第二钮。Hero 表单全必填 + Monthly Shipment Volume 下拉（稿要求）；三条 checklist 稿没写，保留。

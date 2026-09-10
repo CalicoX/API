@@ -189,8 +189,8 @@
   z-index: 2;
   flex: 1 1 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(420px, 520px);
-  gap: 36px 48px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(420px, 500px);
+  gap: 36px 32px;
   align-items: center;
   justify-items: stretch;
   width: 100%;
@@ -270,7 +270,7 @@
 }
 
 .api-s1-copy .api-lead {
-  max-width: 42ch;
+  max-width: none;
   margin-top: 0;
   font-size: var(--fs-lead);
   text-wrap: pretty;
