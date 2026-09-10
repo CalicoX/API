@@ -8109,11 +8109,37 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-ai-edd-bar i {
+  position: relative;
   display: block;
   width: 68%;
   height: 100%;
+  overflow: hidden;
   border-radius: inherit;
   background: linear-gradient(90deg, #0582e8, #f00e94);
+}
+
+.api-ai-edd-bar i::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 46%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.75),
+    transparent
+  );
+  animation: api-ai-edd-flow 1.8s ease-in-out infinite;
+}
+
+@keyframes api-ai-edd-flow {
+  0% {
+    transform: translateX(-130%);
+  }
+  100% {
+    transform: translateX(280%);
+  }
 }
 
 .api-ai-panel[data-kind="edd"] ul {
@@ -8224,8 +8250,13 @@ html.is-reduce-fx .api-s5::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .api-ai-edd-bar i::after,
   .api-ai-map-route {
     animation: none;
+  }
+
+  .api-ai-edd-bar i::after {
+    display: none;
   }
 }
 
