@@ -5,9 +5,9 @@ import Hero from "./sections/Hero.jsx";
 import TrustBand from "./sections/TrustBand.jsx";
 import CoverageBand from "./sections/CoverageBand.jsx";
 import Enterprise from "./sections/Enterprise.jsx";
-import HowItWorks from "./sections/HowItWorks.jsx";
 import DataOperations from "./sections/DataOperations.jsx";
 import AiIntelligence from "./sections/AiIntelligence.jsx";
+import HowItWorks from "./sections/HowItWorks.jsx";
 import Applications from "./sections/Applications.jsx";
 import UseCases from "./sections/UseCases.jsx";
 import IntegrationTogether from "./sections/IntegrationTogether.jsx";
@@ -36,9 +36,9 @@ export default function LandingPage() {
           <TrustBand />
           <CoverageBand />
           <Enterprise />
-          <HowItWorks />
           <DataOperations />
           <AiIntelligence />
+          <HowItWorks />
           <Applications />
           <UseCases />
           <IntegrationTogether />
