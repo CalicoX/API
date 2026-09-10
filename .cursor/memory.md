@@ -13,7 +13,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - **Explore Returns 卡跟 tracking（2026-09-10 Park「这块把 tracking 的拿过，响应式也一起」）**：17RETURNS 插图整段搬 tracking-react（5175）：场景图 `returns-scene.jpg`、毛玻璃双卡、窗口三点、只留 Sneakers、循环箭头 icon、标题拆成 headline。手机档不整体 scale，跟 tracking 改卡位（≤768 井 340 / ≤640 井 360 + photo `8% 86%`）。Tracking 卡不动。
 
-- **pricing 短卡一行五张（2026-09-10 Park「照这个做，那些内容都不要了」）**：中文官网那种矮白卡。每张只留 name / Unit Price / price / quota；**不要** Get Started、What's in、功能列表、Popular 胶囊。Flagship 名称旁 🔥。Custom 同排第五张：二维码 +「Please scan the QR code…」，不要 Contact Us 大钮、不要三人插图、不要底下横条。英文价数字不动，不抄橙色/人民币。桌面 `repeat(5)`；≤768 两列、Custom 跨行。≤640 不再 tab。
+- **pricing 对照官网 zh-cn/api Section6（2026-09-10 Park「对比原图」）**：照 `https://www.17track.net/zh-cn/api` 量的。卡 272 高 / pad 20 / 半径 15 / 描边 `#e0e0e0` / 列缝 24 / 标题和价块缝 32。名称 24/600 `#212121`；Unit 16 `#757575`；价 **50/700 `#FF6F00`**；配额 16/500 `#424242`。Flagship 标题渐变 `#FF51EC→#3736FF→#545EFF` + `::after` 🔥。Custom 用官网 `davi-qrcode.png`（128，自带 ⑰，不要再叠标），说明 14 `#757575`。英文价数字不动。≤768 两列、Custom 跨行。
 
 - **Onboard in 4 Steps 整块去掉（2026-09-10 Park）**：IntegrationTogether 只留 pricing + Custom。插图组件 `IllusOnboard*` 一并删。价卡原文不动。
 

@@ -129,6 +129,7 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/api-plan-custom/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/plan-contact-qr/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Please scan the QR code/);
+    expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/plan-qr-mark/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/is-custom/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/4,000 carriers supported/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/Onboard in 4 Steps/);
