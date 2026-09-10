@@ -1,10 +1,4 @@
-import { useRef, useState } from "react";
-import {
-  IllusOnboardChat,
-  IllusOnboardTrial,
-  IllusOnboardPlans,
-  IllusOnboardLive,
-} from "../visuals/ApiDomVisuals.jsx";
+import { useState } from "react";
 
 const CDN = "https://static.17track.net/www/2026-08/assets/images/api";
 
@@ -45,62 +39,9 @@ function PlanCheck() {
   );
 }
 
-const STEPS = [
-  {
-    n: "1",
-    Visual: IllusOnboardChat,
-    text: "Talk with our expert, tell us how we can help.",
-  },
-  {
-    n: "2",
-    Visual: IllusOnboardTrial,
-    text: "Get a free trial and the integration support.",
-  },
-  {
-    n: "3",
-    Visual: IllusOnboardPlans,
-    text: "Choose a price plan that suits your volume.",
-  },
-  {
-    n: "4",
-    Visual: IllusOnboardLive,
-    text: "All green? Go live!",
-  },
-];
-
 /** Official 17track.net/en/api — Land the Integration Together */
 export default function IntegrationTogether() {
   const [planIdx, setPlanIdx] = useState(0);
-  const [obIdx, setObIdx] = useState(0);
-  const stepsRef = useRef(null);
-
-  /* ≤480 横滑时，视口中央最近的卡就是当前步 */
-  const onStepsScroll = (e) => {
-    const el = e.currentTarget;
-    const center = el.getBoundingClientRect().left + el.clientWidth / 2;
-    let best = 0;
-    let bestDist = Infinity;
-    Array.from(el.children).forEach((card, i) => {
-      const r = card.getBoundingClientRect();
-      const d = Math.abs(r.left + r.width / 2 - center);
-      if (d < bestDist) {
-        bestDist = d;
-        best = i;
-      }
-    });
-    setObIdx(best);
-  };
-
-  const goStep = (i) => {
-    const card = stepsRef.current?.children[i];
-    card?.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
-      inline: "center",
-      block: "nearest",
-    });
-  };
 
   return (
     <section
@@ -185,38 +126,6 @@ export default function IntegrationTogether() {
           >
             Contact Us
           </a>
-        </div>
-        <div className="api-onboard">
-          <h3 className="api-onboard-title">Onboard in 4 Steps</h3>
-          <ul
-            className="api-onboard-steps"
-            ref={stepsRef}
-            onScroll={onStepsScroll}
-          >
-            {STEPS.map((step) => (
-              <li className="api-onboard-card" key={step.n}>
-                <div className="api-onboard-art">
-                  <step.Visual />
-                </div>
-                <b className="api-onboard-num" aria-hidden="true">
-                  {step.n}
-                </b>
-                <span>{step.text}</span>
-              </li>
-            ))}
-          </ul>
-          {/* ≤480 横滑 indicator；桌面隐藏 */}
-          <div className="api-onboard-dots">
-            {STEPS.map((step, i) => (
-              <button
-                key={step.n}
-                type="button"
-                className={i === obIdx ? "is-active" : ""}
-                aria-label={`Go to step ${step.n}`}
-                onClick={() => goStep(i)}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>

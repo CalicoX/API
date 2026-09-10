@@ -128,10 +128,9 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/api-plan-custom/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/is-custom/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/4,000 carriers supported/);
-    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Onboard in 4 Steps/);
-    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/All green\? Go live!/);
-    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/IllusOnboardChat/);
-    expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/api-onboard-well/);
+    expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/Onboard in 4 Steps/);
+    expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/IllusOnboardChat/);
+    expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/api-onboard/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/Part6_/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/Ready to Build Smarter Tracking/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/Start Free/);
