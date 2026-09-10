@@ -24,9 +24,11 @@ describe("API landing structure (gating)", () => {
       "Hero",
       "TrustBand",
       "BrandsSay",
+      "Enterprise",
       "UseCases",
       "HowItWorks",
       "DataOperations",
+      "AiIntelligence",
       "Applications",
       "IntegrationTogether",
       "Credentials",
@@ -49,7 +51,10 @@ describe("API landing structure (gating)", () => {
     // Hero then TrustBand; TrustBand then BrandsSay; Credentials then ExploreMore
     expect(lp.indexOf("Hero")).toBeLessThan(lp.indexOf("TrustBand"));
     expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("BrandsSay"));
-    expect(lp.indexOf("BrandsSay")).toBeLessThan(lp.indexOf("UseCases"));
+    expect(lp.indexOf("BrandsSay")).toBeLessThan(lp.indexOf("Enterprise"));
+    expect(lp.indexOf("Enterprise")).toBeLessThan(lp.indexOf("UseCases"));
+    expect(lp.indexOf("DataOperations")).toBeLessThan(lp.indexOf("AiIntelligence"));
+    expect(lp.indexOf("AiIntelligence")).toBeLessThan(lp.indexOf("Applications"));
     expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("UseCases"));
     expect(lp.indexOf("Credentials")).toBeLessThan(lp.indexOf("ExploreMore"));
     expect(lp.indexOf("ExploreMore")).toBeLessThan(lp.indexOf("CoverageBand"));
@@ -140,6 +145,25 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/BottomCta.jsx")).toMatch(/Start Free/);
     expect(read("components/sections/BottomCta.jsx")).toMatch(/btn-switch/);
     expect(read("components/LandingPage.jsx")).toMatch(/<BottomCta/);
+  });
+
+  it("Enterprise and AI sections use copy-doc wording", () => {
+    const ent = read("components/sections/Enterprise.jsx");
+    expect(ent).toMatch(/id=\"enterprise\"/);
+    expect(ent).toMatch(/Why Enterprise Trust 17TRACK API\?/);
+    expect(ent).toMatch(/Enterprise-Grade Shipment Tracking Solution/);
+    expect(ent).toMatch(/Visible/);
+    expect(ent).toMatch(/Reliable/);
+    expect(ent).toMatch(/4,000\+ Carriers Worldwide/);
+    expect(ent).toMatch(/Enterprise-Grade Performance Assurance/);
+    expect(ent).toMatch(/Security \& Global Compliance/);
+    expect(ent).toMatch(/Dedicated SLA \& Dedicated Support/);
+    const ai = read("components/sections/AiIntelligence.jsx");
+    expect(ai).toMatch(/id=\"ai-intelligence\"/);
+    expect(ai).toMatch(/AI Make Every Tracking Signal/);
+    expect(ai).toMatch(/AI EDD/);
+    expect(ai).toMatch(/AI Carrier Identification/);
+    expect(read("fx/modules/topbar-on-dark.js")).toMatch(/ai-intelligence|api-ai/);
   });
 
   it("CoverageBand sits above BottomCta with tracking globe + 5 metrics", () => {

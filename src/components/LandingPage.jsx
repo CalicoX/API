@@ -4,9 +4,11 @@ import ProductDock from "./layout/ProductDock.jsx";
 import Hero from "./sections/Hero.jsx";
 import TrustBand from "./sections/TrustBand.jsx";
 import BrandsSay from "./sections/BrandsSay.jsx";
+import Enterprise from "./sections/Enterprise.jsx";
 import UseCases from "./sections/UseCases.jsx";
 import HowItWorks from "./sections/HowItWorks.jsx";
 import DataOperations from "./sections/DataOperations.jsx";
+import AiIntelligence from "./sections/AiIntelligence.jsx";
 import Applications from "./sections/Applications.jsx";
 import IntegrationTogether from "./sections/IntegrationTogether.jsx";
 import Credentials from "./sections/Credentials.jsx";
@@ -34,9 +36,11 @@ export default function LandingPage() {
           <Hero />
           <TrustBand />
           <BrandsSay />
+          <Enterprise />
           <UseCases />
           <HowItWorks />
           <DataOperations />
+          <AiIntelligence />
           <Applications />
           <IntegrationTogether />
           <Credentials />
