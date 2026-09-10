@@ -235,7 +235,7 @@ function CopyCard({ card }) {
   );
 }
 
-/** Section 4 — Turn Complex Tracking Data Into Usable Intelligence */
+/** Section 4 — Turn Complex Tracking Data into Usable Intelligence */
 export default function DataOperations() {
   const sectionRef = useRef(null);
   const wellRef = useRef(null);
@@ -391,7 +391,7 @@ export default function DataOperations() {
           <h2 className="api-h2" id="api-data-title">
             {tintWords("Turn Complex Tracking Data")}
             <br />
-            {tintWords("Into Usable Intelligence", 4)}
+            {tintWords("into Usable Intelligence", 4)}
             <span className="api-s4-h2-sub">
               {tintWords("Forecast, Monitor, Intervene.", 7)}
             </span>

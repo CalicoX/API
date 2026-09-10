@@ -107,7 +107,7 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/HowItWorks.jsx")).toMatch(/Step 4/);
     expect(read("components/sections/HowItWorks.jsx")).toMatch(/text: \"Register\"/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/Turn Complex Tracking Data/);
-    expect(read("components/sections/DataOperations.jsx")).toMatch(/Into Usable Intelligence/);
+    expect(read("components/sections/DataOperations.jsx")).toMatch(/into Usable Intelligence/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/9\+30/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/api-s4-board/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/idx: \"01\"/);

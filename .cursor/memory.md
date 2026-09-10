@@ -13,7 +13,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - **AI 段重做（2026-09-10 Park）**：背景搬 tracking 5175 Synthesis 1（蓝 `#0582e8` / 粉 `#f00e94` / 底 `#08071a`）。文案不动。下面三块玻璃卡：预测（AI EDD 窗口）、AI 识别、地图航线。≤640 不挂 WebGL。
 
-- **Data Operations 标题三行（2026-09-10 Park）**：`Turn Complex Tracking Data` / `Into Usable Intelligence` / `Forecast, Monitor, Intervene.`
+- **Data Operations 标题三行（2026-09-10 Park）**：`Turn Complex Tracking Data` / `into Usable Intelligence` / `Forecast, Monitor, Intervene.` 介词小写。
 
 - **Explore 标题居中（2026-09-10 Park）**：`.api-explore .section-head` 加 `center`。
 
