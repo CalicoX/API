@@ -6272,10 +6272,10 @@ html.is-reduce-fx .api-s5::after {
 
 .api-plan-price {
   margin: 0 0 8px;
-  font-size: 50px;
+  font-size: 36px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 60px;
+  line-height: 44px;
   color: #ff6f00;
   white-space: nowrap;
 }
@@ -6289,14 +6289,16 @@ html.is-reduce-fx .api-s5::after {
 
 .api-plan-custom {
   justify-content: space-between;
+  align-items: center;
   gap: 0;
+  text-align: center;
 }
 
 .api-plan-qr {
   display: block;
   width: 128px;
   height: 128px;
-  margin: 0;
+  margin: 0 auto;
   object-fit: contain;
 }
 
@@ -6770,8 +6772,8 @@ html.is-reduce-fx .api-s5::after {
   }
 
   .api-plan-price {
-    font-size: 36px;
-    line-height: 44px;
+    font-size: 30px;
+    line-height: 36px;
   }
 
   .api-onboard-steps {
