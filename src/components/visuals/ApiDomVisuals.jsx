@@ -997,10 +997,11 @@ export function IllusSignupPanel() {
 
   return (
     <div className="api-vig api-vig--signup" ref={rootRef}>
-      <div
-        className="api-vig-sheet api-vig-sheet--signup"
-        style={{ transform: `translateY(${sheetY}px)` }}
-      >
+      <div className="api-vig-sheet api-vig-sheet--signup">
+        <div
+          className="api-vig-sheet-shift"
+          style={{ transform: `translateY(${sheetY}px)` }}
+        >
         <header className="api-vig-head">
           <h4 className="api-vig-title">Sign up for free trial</h4>
         </header>
@@ -1062,6 +1063,7 @@ export function IllusSignupPanel() {
           </span>
         </div>
         <p className="api-vig-signup-nocc">No credit card required</p>
+        </div>
       </div>
       <VigPointer cursor={cursor} />
       <div className={`api-vig-toast${toast ? " is-on" : ""}`} aria-hidden="true">
@@ -1170,10 +1172,11 @@ export function IllusWebhookPanel() {
 
   return (
     <div className="api-vig api-vig--webhook" ref={rootRef}>
-      <div
-        className="api-vig-sheet api-vig-sheet--webhook"
-        style={{ transform: `translateY(${sheetY}px)` }}
-      >
+      <div className="api-vig-sheet api-vig-sheet--webhook">
+        <div
+          className="api-vig-sheet-shift"
+          style={{ transform: `translateY(${sheetY}px)` }}
+        >
         <header className="api-vig-head">
           <h4 className="api-vig-title">Edit Tracking webhook</h4>
           <span className="api-vig-close" aria-hidden="true">
@@ -1211,6 +1214,7 @@ export function IllusWebhookPanel() {
             Save
           </span>
           <span className="api-vig-btn api-vig-btn--ghost">Cancel</span>
+        </div>
         </div>
       </div>
       <VigPointer cursor={cursor} />

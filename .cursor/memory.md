@@ -13,6 +13,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - **Onboard in 4 Steps 整块去掉（2026-09-10 Park）**：IntegrationTogether 只留 pricing + Custom。插图组件 `IllusOnboard*` 一并删。价卡原文不动。
 
+- **HowItWorks Step 2 井底被截空（2026-09-10 Park）**：`translateY` 抬的是整张白卡，Save 出场后井底露灰。白卡钉死 `min-height` 挂出井底，只平移内部 `.api-vig-sheet-shift`。signup 同样。
+
 - **HowItWorks Step 1/2 循环光标偏移（2026-09-10 Park）**：第二圈 `setSheetY(0)` 后立刻 `aim()`，表单 CSS transition 还停在 -88/-108，量到的是上移后的坐标，光标钉在标题上方。第二圈先藏光标、等 480ms 落稳再瞄准。webhook 同样。
 
 - **HowItWorks Step 1/2 井内白卡（2026-09-10 Park）**：signup/webhook 内卡同宽（左右 10%）；input 34→26；Package Status **一行一个**。webhook 勾选后表单上移改 `-108`，光标仍 `getBoundingClientRect` 瞄准，Save 落在井里。

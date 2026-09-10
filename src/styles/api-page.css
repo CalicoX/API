@@ -2350,13 +2350,14 @@
   left: 10%;
   right: 10%;
   top: 16px;
-  /* extend past the well → bottom of form is cut off */
-  bottom: -64px;
+  /* hang past the well → bottom clipped; min-height so translate 不露灰底 */
+  bottom: -48px;
   display: flex;
   flex-direction: column;
   gap: 0;
   width: auto;
   height: auto;
+  min-height: calc(100% - 16px + 48px);
   max-height: none;
   margin: 0;
   padding: 12px 14px 16px;
@@ -2367,17 +2368,13 @@
   background: #fff;
   box-shadow: none;
   box-sizing: border-box;
+  transform: none;
 }
 
-/* keep form chrome from flex-shrinking inside the clipped sheet */
-.api-vig-sheet--signup {
-  top: 16px;
-  bottom: auto;
-  border-radius: 12px 12px 0 0;
-}
-
-.api-vig-sheet--signup,
-.api-vig-sheet--webhook {
+.api-vig-sheet-shift {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
