@@ -1,0 +1,20 @@
+{
+  "approvalRules": [
+    {
+      "action": "allow",
+      "pattern": "ss *"
+    },
+    {
+      "action": "allow",
+      "pattern": "grep *"
+    },
+    {
+      "action": "allow",
+      "pattern": "echo *"
+    },
+    {
+      "action": "allow",
+      "pattern": "lsof *"
+    }
+  ]
+}

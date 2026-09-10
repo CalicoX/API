@@ -126,6 +126,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-09-10 11:13 — .pi
 - 2026-08-29 14:1x — memory.md、useLandingEffects.js、api-page.css、structure.test.js（井底纯白+点阵）
 - 2026-08-29 01:2x — memory.md、DataOperations.jsx、ApiDomVisuals.jsx、api-page.css（四场 match-cut 编排）
 - 2026-08-28 17:50 — AGENTS.md、DataOperations.jsx、structure.test.js、api-page.css
@@ -145,6 +146,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-17 14:35 — memory.md、AGENTS.md、hero-wash-shader.js
 - 2026-08-17 14:32 — hero-wash-shader.js、api-page.css
 - 2026-08-17 14:25 — memory.md、Hero.jsx、api-page.css
-- 2026-08-17 14:06 — memory.md、Hero.jsx、api-page.css
-- 2026-08-17 13:59 — memory.md、api-page.css
-- 2026-08-17 13:57 — memory.md、Hero.jsx、structure.test.js、api-page.css
