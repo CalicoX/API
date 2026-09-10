@@ -123,11 +123,14 @@ describe("API landing structure (gating)", () => {
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Land the Integration Together/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/className=\"api-h2\"/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Each plan is valid for 12 months/);
-    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Get Started/);
-    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Popular/);
+    expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/Get Started/);
+    expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/Popular/);
+    expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/What's in/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/api-plan-custom/);
+    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/plan-contact-qr/);
+    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Please scan the QR code/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/is-custom/);
-    expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/4,000 carriers supported/);
+    expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/4,000 carriers supported/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/Onboard in 4 Steps/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/IllusOnboardChat/);
     expect(read("components/sections/IntegrationTogether.jsx")).not.toMatch(/api-onboard/);

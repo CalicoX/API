@@ -6202,258 +6202,106 @@ html.is-reduce-fx .api-s5::after {
 .api-plans {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 16px;
+  gap: 20px;
   align-items: stretch;
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-/* 移动端（≤640，Tailwind sm）tab 切换：桌面隐藏，手机/小平板显示 */
-.api-plan-tabs {
-  display: none;
-}
-
-@media (max-width: 640px) {
-  /* 分段控件式 tab：等宽四格、白钮选中（2026-08-31 Park）；
-     白底由滑动 thumb 提供（--i = 激活索引，切换时白块平滑滑动） */
-  .api-plan-tabs {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
-    margin: 0 0 18px;
-    padding: 4px;
-    border-radius: 14px;
-    background: #eef2f7;
-  }
-
-  .api-plan-tabs-thumb {
-    position: absolute;
-    top: 4px;
-    bottom: 4px;
-    left: calc(4px + var(--i, 0) * ((100% - 20px) / 4 + 4px));
-    width: calc((100% - 20px) / 4);
-    border-radius: 10px;
-    background: #fff;
-    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
-    transition: left 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .api-plan-tabs button {
-    position: relative;
-    z-index: 1;
-    padding: 9px 0 10px;
-    border: 0;
-    border-radius: 10px;
-    background: transparent;
-    color: #64748b;
-    font-size: clamp(11px, calc(10.6px + 0.16vw), 13px);
-    font-weight: 650;
-    line-height: 1;
-    cursor: pointer;
-    transition: color 0.25s ease;
-  }
-
-  .api-plan-tabs button.is-active {
-    background: transparent;
-    color: var(--api-blue);
-    box-shadow: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .api-plan-tabs-thumb {
-      transition: none;
-    }
-  }
-
-  .api-plans li {
-    display: none;
-  }
-
-  .api-plans li.is-active,
-  .api-plans li.api-plan-custom {
-    display: flex;
-  }
 }
 
 .api-plan-card {
   position: relative;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   min-height: 0;
   padding: 0;
-  border: 2px solid #e5e7eb;
+  border: none;
   border-radius: 16px;
   background: #fff;
+  box-shadow: 0 8px 28px rgba(17, 24, 39, 0.06);
   list-style: none;
-  margin-top: 0;
-  overflow: visible;
+  margin: 0;
 }
 
 .api-plan-inner {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   min-height: 0;
-  padding: 20px 22px 24px;
-}
-
-.api-plan-popular {
-  display: inline;
-  margin-left: 6px;
-  padding: 0;
-  border-radius: 0;
-  background: none;
-  color: inherit;
-  font-size: 0.55em;
-  font-style: normal;
-  font-weight: 600;
-  letter-spacing: 0;
-  line-height: 1;
-  vertical-align: super;
-}
-
-.api-plan-card.is-hot {
-  border-color: var(--api-blue);
-  background: #fff;
-}
-
-.api-plan-card.is-hot .api-plan-inner {
-  flex: 1 1 auto;
-  border-radius: 0;
-  background: transparent;
+  padding: 22px 20px 24px;
 }
 
 .api-plan-name {
-  font-size: clamp(21.5px, calc(19.88px + 0.45vw), 26px);
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
   letter-spacing: -0.02em;
   color: #111;
 }
 
+.api-plan-fire {
+  margin-left: 4px;
+  font-size: 14px;
+  line-height: 1;
+}
+
 .api-plan-unit {
-  margin-top: 28px;
-  font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
-  font-weight: 500;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 400;
   color: #9ca3af;
 }
 
 .api-plan-price {
-  margin: 6px 0 8px;
-  font-size: clamp(29.5px, calc(27.16px + 0.65vw), 36px);
-  font-weight: 800;
-  letter-spacing: -0.035em;
+  margin: 6px 0 10px;
+  font-size: clamp(26px, calc(22px + 0.7vw), 34px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
   line-height: 1.1;
   color: #111;
 }
 
 .api-plan-quota {
-  font-size: clamp(12px, calc(11.28px + 0.2vw), 14px);
-  color: #6b7280;
-}
-
-.api-plan-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 44px;
-  margin: 28px 0 0;
-  padding: 0 16px;
-  border-radius: 999px;
-  border: 1.5px solid var(--api-blue);
-  background: #fff;
-  color: var(--api-blue);
-  font-size: clamp(12.5px, calc(11.6px + 0.25vw), 15px);
-  font-weight: 600;
-  text-decoration: none;
-  box-sizing: border-box;
-}
-
-.api-plan-cta:hover {
-  background: #eff6ff;
-}
-
-.api-plan-card.is-hot .api-plan-cta {
-  background: var(--api-blue);
-  color: #fff;
-  border-color: var(--api-blue);
-}
-
-.api-plan-card.is-hot .api-plan-cta:hover {
-  background: var(--api-blue-dark);
-}
-
-.api-plan-whats {
-  margin: 22px 0 12px;
   font-size: 13px;
-  font-weight: 500;
   color: #9ca3af;
 }
 
-.api-plan-feats {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.api-plan-feats li {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: clamp(12px, calc(11.46px + 0.15vw), 13.5px);
-  line-height: 1.4;
-  color: #111;
-}
-
-.api-plan-feats svg {
-  flex: 0 0 auto;
-  margin-top: 1px;
-}
-
-.api-plan-custom {
-  display: flex;
-  margin-top: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .api-plan-custom .api-plan-inner {
-  flex: 1 1 auto;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
-.api-plan-illu {
+.api-plan-qr {
+  position: relative;
   display: block;
-  width: 120px;
-  height: 120px;
-  margin: 28px auto 20px;
-  object-fit: contain;
+  width: 104px;
+  height: 104px;
+  margin: 16px 0 12px;
 }
 
-.api-plan-contact {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.api-plan-qr img:first-child {
+  display: block;
   width: 100%;
-  min-height: 44px;
-  min-width: 0;
-  margin-top: auto;
-  padding: 0 16px;
-  border-radius: 999px;
-  color: #fff;
-  font-size: clamp(12.5px, calc(11.6px + 0.25vw), 15px);
-  font-weight: 600;
-  text-decoration: none;
-  background: var(--api-blue);
+  height: 100%;
 }
 
-.api-plan-contact:hover {
-  background: var(--api-blue-dark);
+.api-plan-qr-mark {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.api-plan-note {
+  margin: 0;
+  max-width: 16em;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #9ca3af;
 }
 
 .api-onboard {
@@ -6924,19 +6772,11 @@ html.is-reduce-fx .api-s5::after {
   }
 
   .api-plans {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* 768 两列只给 641-768：≤640 是 tab 切换
-     （非激活卡 display:none），两列 grid 会让激活卡只占半宽 */
-  @media (min-width: 641px) {
-    .api-plans {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .api-plan-custom {
-      grid-column: 1 / -1;
-    }
+  .api-plan-custom {
+    grid-column: 1 / -1;
   }
 
   .api-onboard-steps {
@@ -7269,12 +7109,6 @@ html.is-reduce-fx .api-s5::after {
   .api-app-card {
     min-height: 0;
     padding: 22px 18px 24px;
-  }
-
-  /* 移动端卡片描边统一 1px（2026-08-31 Park） */
-  .api-plan-card,
-  .api-plan-custom {
-    border-width: 1px;
   }
 
   /* ④场 dashgrid 369px > 井高 343px，底部卡+toast 被裁：
