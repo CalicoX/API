@@ -13,7 +13,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - **Onboard in 4 Steps 整块去掉（2026-09-10 Park）**：IntegrationTogether 只留 pricing + Custom。插图组件 `IllusOnboard*` 一并删。价卡原文不动。
 
-- **HowItWorks Step 1/2 循环光标偏移（2026-09-10 Park）**：第二圈 `setSheetY(0)` 后立刻 `aim()`，表单 CSS transition 还停在 -88/-108，量到的是上移后的坐标，光标钉在标题上方。第二圈先藏光标、等 480ms 落稳再瞄准。
+- **HowItWorks Step 1/2 循环光标偏移（2026-09-10 Park）**：第二圈 `setSheetY(0)` 后立刻 `aim()`，表单 CSS transition 还停在 -88/-108，量到的是上移后的坐标，光标钉在标题上方。第二圈先藏光标、等 480ms 落稳再瞄准。webhook 同样。
 
 - **HowItWorks Step 1/2 井内白卡（2026-09-10 Park）**：signup/webhook 内卡同宽（左右 10%）；input 34→26；Package Status **一行一个**。webhook 勾选后表单上移改 `-108`，光标仍 `getBoundingClientRect` 瞄准，Save 落在井里。
 
@@ -150,6 +150,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-09-10 14:16 — memory.md
 - 2026-09-10 11:13 — .pi
 - 2026-08-29 14:1x — memory.md、useLandingEffects.js、api-page.css、structure.test.js（井底纯白+点阵）
 - 2026-08-29 01:2x — memory.md、DataOperations.jsx、ApiDomVisuals.jsx、api-page.css（四场 match-cut 编排）
@@ -169,4 +170,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-17 16:42 — memory.md、ApiDomVisuals.jsx、iso-hub-webgl.js、use-cases-scroll.js、api-page.css
 - 2026-08-17 14:35 — memory.md、AGENTS.md、hero-wash-shader.js
 - 2026-08-17 14:32 — hero-wash-shader.js、api-page.css
-- 2026-08-17 14:25 — memory.md、Hero.jsx、api-page.css
