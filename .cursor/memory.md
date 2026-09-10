@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Explore 标题居中（2026-09-10 Park）**：`.api-explore .section-head` 加 `center`。
+
 - **底 CTA 去掉 AWS（2026-09-10 Park）**：`Air Cargo (AWS) Tracking API` → `Air Cargo Tracking API`。
 
 - **Explore 段纯白底（2026-09-10 Park）**：`.api-explore` 从 `#f7f8fa` 改 `#fff`。

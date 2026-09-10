@@ -3,7 +3,7 @@ export default function ExploreMore() {
   return (
 <section className="section alt api-explore">
         <div className="section-inner">
-          <div className="section-head">
+          <div className="section-head center">
             <h2>Find the Right Solution for Your Business</h2>
             <p className="lead">Go beyond tracking with solutions for post-purchase experience, returns automation, and global shipment visibility.</p>
           </div>
