@@ -23,7 +23,7 @@ describe("API landing structure (gating)", () => {
       "Topbar",
       "Hero",
       "TrustBand",
-      "BrandsSay",
+      "CoverageBand",
       "Enterprise",
       "UseCases",
       "HowItWorks",
@@ -33,7 +33,6 @@ describe("API landing structure (gating)", () => {
       "IntegrationTogether",
       "Credentials",
       "ExploreMore",
-      "CoverageBand",
       "BottomCta",
       "Footer",
       "ProductDock",
@@ -46,19 +45,17 @@ describe("API landing structure (gating)", () => {
       expect(existsSync(join(root, sectionPath))).toBe(true);
     }
     // tracking-only sections must not drive this page
-    // (BrandsSay joined 2026-08-28: Park 同步进 API，TrustBand 后白底单排)
-    expect(lp).not.toMatch(/ImpactBand|FeaturesSection|AiLab/);
-    // Hero then TrustBand; TrustBand then BrandsSay; Credentials then ExploreMore
+    // BrandsSay 2026-09-10 再撤：CoverageBand 上移替换
+    expect(lp).not.toMatch(/ImpactBand|FeaturesSection|AiLab|BrandsSay/);
     expect(lp.indexOf("Hero")).toBeLessThan(lp.indexOf("TrustBand"));
-    expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("BrandsSay"));
-    expect(lp.indexOf("BrandsSay")).toBeLessThan(lp.indexOf("Enterprise"));
+    expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("CoverageBand"));
+    expect(lp.indexOf("CoverageBand")).toBeLessThan(lp.indexOf("Enterprise"));
     expect(lp.indexOf("Enterprise")).toBeLessThan(lp.indexOf("UseCases"));
     expect(lp.indexOf("DataOperations")).toBeLessThan(lp.indexOf("AiIntelligence"));
     expect(lp.indexOf("AiIntelligence")).toBeLessThan(lp.indexOf("Applications"));
     expect(lp.indexOf("TrustBand")).toBeLessThan(lp.indexOf("UseCases"));
     expect(lp.indexOf("Credentials")).toBeLessThan(lp.indexOf("ExploreMore"));
-    expect(lp.indexOf("ExploreMore")).toBeLessThan(lp.indexOf("CoverageBand"));
-    expect(lp.indexOf("CoverageBand")).toBeLessThan(lp.indexOf("BottomCta"));
+    expect(lp.indexOf("ExploreMore")).toBeLessThan(lp.indexOf("BottomCta"));
   });
 
   it("TrustBand is a static two-row logo grid, not a marquee", () => {
@@ -166,7 +163,7 @@ describe("API landing structure (gating)", () => {
     expect(read("fx/modules/topbar-on-dark.js")).toMatch(/ai-intelligence|api-ai/);
   });
 
-  it("CoverageBand sits above BottomCta with tracking globe + 5 metrics", () => {
+  it("CoverageBand replaces BrandsSay after TrustBand with globe + 5 metrics", () => {
     const band = read("components/sections/CoverageBand.jsx");
     expect(band).toMatch(/id=\"coverage\"/);
     expect(band).toMatch(/coverage-globe-canvas/);

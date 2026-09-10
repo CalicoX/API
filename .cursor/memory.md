@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **CoverageBand 上移替 BrandsSay（2026-09-10 Park）**：底部「Top Global Carriers Coverage」去掉；整段挪到 TrustBand 后，替换 BrandsSay。组件文件留着，LandingPage 不再挂 BrandsSay。ExploreMore 直接接 BottomCta。
+
 - **补文案稿两个新段（2026-09-10 Park「还少了两个模块」）**：稿里第一轮没做的 Enterprise + AI。数据带已是 CoverageBand，不再另做中段指标。页序插在现有模块之间，不删 BrandsSay / UseCases / Credentials。Enterprise 在 logo 墙后：浅灰底、居中 eyebrow + 四词支柱 + 四张白卡（稿图 image 2）。AI 在 Data Operations 后：暗底大标题 + `AI EDD` / `AI Carrier Identification` 两标签（稿图 image 8），**整屏 100vh** 避免和 Applications 暗底粘成一段。文案按稿原文，不改。≤1024 企业卡 2×2，≤640 单列。
 
 - **Explore Returns 卡跟 tracking（2026-09-10 Park「这块把 tracking 的拿过，响应式也一起」）**：17RETURNS 插图整段搬 tracking-react（5175）：场景图 `returns-scene.jpg`、毛玻璃双卡、窗口三点、只留 Sneakers、循环箭头 icon、标题拆成 headline。手机档不整体 scale，跟 tracking 改卡位（≤768 井 340 / ≤640 井 360 + photo `8% 86%`）。Tracking 卡不动。
