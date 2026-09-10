@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Hero 4,000+ 胶囊文字返白（2026-09-10 Park）**：`.api-lead-tag` 从浅蓝底深蓝字改成 `--api-blue` 底白字。
+
 - **Applications 卡 hover 不要蓝描边（2026-09-10 Park）**：`.api-app-card:hover` 去掉 `rgba(37,99,235,0.22)` 蓝圈，描边保持静息灰 `rgba(15,23,42,0.08)`，抬起阴影留下。
 
 - **AI EDD 进度条要流动（2026-09-10 Park）**：68% 蓝→粉填充上加高光扫过（`::after` 1.8s ease-in-out 循环）。只在填充里裁，不要扫进右边灰轨。reduce-motion 关掉。
