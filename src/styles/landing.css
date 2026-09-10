@@ -9661,6 +9661,12 @@ body.ai-case-lightbox-active {
   .coverage-data li:last-child {
     grid-column: 1 / -1;
   }
+
+  .coverage-data span {
+    white-space: normal;
+    max-width: 100%;
+    text-wrap: balance;
+  }
 }
 
 /* Bottom CTA — 透视点阵波浪（图2：纯黑 + 白点） */

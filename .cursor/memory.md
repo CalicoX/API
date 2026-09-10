@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **CoverageBand 手机标签换行（2026-09-10 Park）**：`.coverage-data span` 基础是 `nowrap`（桌面一行）。≤640 两列时 Standardized / Carrier Recognition 两句溢出，改 `white-space: normal` + `text-wrap: balance`。文案不改。
+
 - **HowItWorks 1024 改 2×2（2026-09-10 Park）**：四步卡在 1024 从 1×4 改 2×2（卡约 484、井 340，和 768 对齐）。>1024 仍四列；≤640 仍单列。2×2 必须写 `641-1024` 范围块——纯 ≤1024 会泄漏进 390 顶掉单列。768 块不再独自写 `repeat(2)`，列数交给这段。
 
 - **AI EDD Origin/Destination 往下（2026-09-10 Park）**：EDD 卡改 flex 列，城市行 `margin-top: auto` 贴卡底，和中间卡 USPS 对齐。不要只加一点缝。
