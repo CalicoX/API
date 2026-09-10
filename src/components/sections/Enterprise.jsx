@@ -78,7 +78,7 @@ export default function Enterprise() {
           <h2 className="api-h2" id="api-ent-title">
             Enterprise-Grade Shipment Tracking Solution
           </h2>
-          <ul className="api-ent-pillars">
+          <ul className="api-ent-badges">
             {PILLARS.map((item) => (
               <li key={item}>{item}</li>
             ))}
@@ -87,7 +87,7 @@ export default function Enterprise() {
         <ul className="api-ent-cards">
           {CARDS.map((card) => (
             <li className="api-ent-card" key={card.kind}>
-              <span className="api-ent-ico" aria-hidden="true">
+              <span className="api-s4-ico" aria-hidden="true">
                 <CardIcon kind={card.kind} />
               </span>
               <h3>{card.title}</h3>

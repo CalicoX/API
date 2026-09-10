@@ -149,8 +149,10 @@ describe("API landing structure (gating)", () => {
     expect(ent).toMatch(/id=\"enterprise\"/);
     expect(ent).toMatch(/Why Enterprise Trust 17TRACK API\?/);
     expect(ent).toMatch(/Enterprise-Grade Shipment Tracking Solution/);
+    expect(ent).toMatch(/api-ent-badges/);
     expect(ent).toMatch(/Visible/);
     expect(ent).toMatch(/Reliable/);
+    expect(ent).toMatch(/api-s4-ico/);
     expect(ent).toMatch(/4,000\+ Carriers Worldwide/);
     expect(ent).toMatch(/Enterprise-Grade Performance Assurance/);
     expect(ent).toMatch(/Security \& Global Compliance/);
