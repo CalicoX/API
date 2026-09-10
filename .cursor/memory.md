@@ -35,6 +35,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - **Hero 左右列缝（2026-09-10 Park）**：文案和表单之间 `gap` 列向 32→**40**（「稍微加大一点点」）。768 双栏 28 不动。
 
+- **Hero lead 收窄（2026-09-10 Park 圈了 4,000+ 那段「收窄一点」）**：只卡 `.api-s1-copy .api-lead` 为 **36em**，标题和 checklist 仍跟左栏走。不要再把整栏收回去。
+
 - **Hero 左栏加宽（2026-09-10 Park「这个太空了，左边的文字宽度可以加一些」）**：`.api-s1-copy .api-lead` 去掉 42ch，段宽跟左栏走；栅格 `1.2fr / 520 / gap 48` → **`1.35fr / 500 / gap 32`**（后改为 40）。表单只收 20px，空的是段宽被卡死。≤768 双栏规则不动。
 
 - **CoverageBand 接到 CTA 上方（2026-09-10 Park）**：tracking-react 同款「Top Global Carriers Coverage」点阵地球 + 5 项指标，插在 ExploreMore 与 BottomCta 之间。JSX / `coverage-globe.js` / `public/world.json` / CSS 3+2 栅格照搬 tracking；文案与 tracking 截图一致（4,000+ / 9+30 / 99.9% / 95%+ / 99.9% SLA）。地球手机也跑，只跳 reduced-motion。BottomCta 仍是 Ready to Build Smarter Tracking，不含这组数。

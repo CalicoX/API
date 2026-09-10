@@ -270,7 +270,7 @@
 }
 
 .api-s1-copy .api-lead {
-  max-width: none;
+  max-width: 36em;
   margin-top: 0;
   font-size: var(--fs-lead);
   text-wrap: pretty;
