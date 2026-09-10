@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Explore 段纯白底（2026-09-10 Park）**：`.api-explore` 从 `#f7f8fa` 改 `#fff`。
+
 - **HowItWorks 挪到 AI 后（2026-09-10 Park）**：From Tracking Data 整段从 Enterprise 后移到 AiIntelligence 与 Applications 之间。
 
 - **Applications 改浅底（2026-09-10 Park）**：`#f7f8fa` + 白卡 + 深色字；icon 改浅底彩色方。Point Waves 底/点反成 `#f7f8fa` / `#64748b`。topbar / dock 不再当暗段。

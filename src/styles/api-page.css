@@ -6889,7 +6889,7 @@ html.is-reduce-fx .api-s5::after {
    Explore more (product cross-sell) — keep after main API content
    ========================================================= */
 .api-page .section.alt.api-explore {
-  background: var(--bg-subtle, #f7f8fa);
+  background: #fff;
 }
 
 /* =========================================================
