@@ -110,7 +110,7 @@ export function mount() {
 
     const DENSITY = 57;
     const DOT_OUT_MAX = 0.14; // 原预设 0.21；Park：圆点太大 → 缩小
-    const DOT_FADE = 0.18; // 浅底深点，略淡于暗底白点
+    const DOT_FADE = 0.32; // 浅底灰点要看得见波浪
     // Park：近景大点会被波面畸变拉歪（不规则团块）→ 屏幕半径封顶，CSS px
     const DOT_MAX_RADIUS_CSS = 2.6;
 

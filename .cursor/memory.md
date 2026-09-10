@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Applications 浅底把点波加回来（2026-09-10 Park「波浪点阵背景怎么没了」）**：卸挂是因为暗 canvas 盖住浅底。现重新挂 `roi-point-waves`，底 `#f7f8fa`、灰点 `#64748b`、`DOT_FADE` 0.32。≤640 仍不挂。
+
 - **Applications 卡不要 268 固高，跟最高卡齐；icon 白线 + 实色底（2026-09-10 Park）**：`.api-app-card` 去掉 `min-height: 268px`（改 `0`），靠 grid stretch 跟同行最高卡齐，不再写死高度。`.api-app-ico` 白线（`color: #fff`）+ 实色底：logistics `#2563eb` / ecommerce `#ea580c` / finance `#059669` / platforms `#0891b2` / integrator `#7c3aed`。hover 只略压暗底，icon 保持白。640/1024 已有 `min-height: 0` 不动，别再引入 268。
 
 - **AI 段重做（2026-09-10 Park）**：背景搬 tracking 5175 Synthesis 1（蓝 `#0582e8` / 粉 `#f00e94` / 底 `#08071a`）。文案不动。下面三块玻璃卡：预测（AI EDD 窗口）、AI 识别、地图航线。≤640 不挂 WebGL。

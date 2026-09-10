@@ -265,12 +265,17 @@ describe("API landing structure (gating)", () => {
     expect(css).not.toMatch(/\.api-s4-well::before/);
   });
 
-  it("Applications is a light section without Point Waves canvas", () => {
+  it("Applications mounts light Point Waves on #f7f8fa", () => {
     const fx = read("fx/useLandingEffects.js");
-    expect(fx).not.toMatch(/mountNamed\([\"']roiPointWaves[\"']\)/);
+    expect(fx).toMatch(/roiPointWaves|roi-point-waves/);
+    expect(fx).toMatch(/mountNamed\([\"']roiPointWaves[\"']\)/);
+    const waves = read("fx/modules/roi-point-waves.js");
+    expect(waves).toMatch(/export function mount/);
+    expect(waves).toMatch(/api-s5-waves/);
+    expect(waves).toMatch(/lin\([\"']#f7f8fa[\"']\)/);
     const css = read("styles/api-page.css");
     expect(css).toMatch(/\.api-s5 \{[^}]*background:\s*#f7f8fa/s);
-    expect(css).toMatch(/\.api-s5-waves \{[^}]*display:\s*none/s);
+    expect(css).not.toMatch(/\.api-s5-waves \{[^}]*display:\s*none/s);
   });
 
   it("use-cases sticky scroll drives 3D hub progress", () => {

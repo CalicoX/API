@@ -28,6 +28,7 @@ const FX_LOADERS = {
   bottomCta: () => import("./modules/bottom-cta-shader.js"),
   coverageGlobe: () => import("./modules/coverage-globe.js"),
   aiIntelligenceBg: () => import("./modules/ai-intelligence-bg.js"),
+  roiPointWaves: () => import("./modules/roi-point-waves.js"),
   btnSwitch: () => import("./modules/btn-switch.js"),
 };
 
@@ -179,7 +180,22 @@ export function useLandingEffects() {
 
     // —— Data Operations 井底：纯白 + 淡点阵（纯 CSS），不再挂 WebGL liquid grain ——
 
-    // Applications 浅底：不再挂 Point Waves（暗 canvas 会盖住 CSS）
+    // —— Applications 浅底 Point Waves ——
+    const applications = document.getElementById("applications");
+    if (applications && !shouldReduceFx()) {
+      let loaded = false;
+      disposers.push(
+        observeVisibility(
+          applications,
+          (vis) => {
+            if (!vis || loaded) return;
+            loaded = true;
+            mountNamed("roiPointWaves");
+          },
+          { rootMargin: "120px" }
+        )
+      );
+    }
 
     // —— AI 段 tracking Synthesis 背景 ——
     const aiIntel = document.getElementById("ai-intelligence");
