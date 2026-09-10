@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Explore Returns 卡跟 tracking（2026-09-10 Park「这块把 tracking 的拿过，响应式也一起」）**：17RETURNS 插图整段搬 tracking-react（5175）：场景图 `returns-scene.jpg`、毛玻璃双卡、窗口三点、只留 Sneakers、循环箭头 icon、标题拆成 headline。手机档不整体 scale，跟 tracking 改卡位（≤768 井 340 / ≤640 井 360 + photo `8% 86%`）。Tracking 卡不动。
+
 - **pricing 短卡一行五张（2026-09-10 Park「照这个做，那些内容都不要了」）**：中文官网那种矮白卡。每张只留 name / Unit Price / price / quota；**不要** Get Started、What's in、功能列表、Popular 胶囊。Flagship 名称旁 🔥。Custom 同排第五张：二维码 +「Please scan the QR code…」，不要 Contact Us 大钮、不要三人插图、不要底下横条。英文价数字不动，不抄橙色/人民币。桌面 `repeat(5)`；≤768 两列、Custom 跨行。≤640 不再 tab。
 
 - **Onboard in 4 Steps 整块去掉（2026-09-10 Park）**：IntegrationTogether 只留 pricing + Custom。插图组件 `IllusOnboard*` 一并删。价卡原文不动。
