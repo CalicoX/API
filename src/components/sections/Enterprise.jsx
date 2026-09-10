@@ -1,3 +1,5 @@
+import { useId } from "react";
+
 const PILLARS = [
   { label: "Visible", kind: "visible" },
   { label: "Reliable", kind: "reliable" },
@@ -28,32 +30,68 @@ const CARDS = [
   },
 ];
 
+function GlassFill({ id }) {
+  return (
+    <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#f7f4ff" />
+      <stop offset="42%" stopColor="#ddd6fe" />
+      <stop offset="100%" stopColor="#7c3aed" />
+    </linearGradient>
+  );
+}
+
 function CardIcon({ kind }) {
+  const uid = useId().replace(/:/g, "");
+  const g = `ent-glass-${uid}`;
+
   if (kind === "carriers") {
     return (
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm6.9 9h-2.6c-.1-2.1-.5-4-.9-5.4A8.1 8.1 0 0 1 18.9 11ZM12 4c.9 0 2.6 2.4 3.1 7H8.9C9.4 6.4 11.1 4 12 4ZM8.6 5.6C8.2 7 7.8 8.9 7.7 11H5.1A8.1 8.1 0 0 1 8.6 5.6ZM5.1 13h2.6c.1 2.1.5 4 .9 5.4A8.1 8.1 0 0 1 5.1 13ZM12 20c-.9 0-2.6-2.4-3.1-7h6.2c-.5 4.6-2.2 7-3.1 7Zm3.4-1.6c.4-1.4.8-3.3.9-5.4h2.6a8.1 8.1 0 0 1-3.5 5.4Z" />
+      <svg viewBox="0 0 48 48" fill="none">
+        <defs>
+          <GlassFill id={g} />
+        </defs>
+        <circle cx="24" cy="24" r="14" fill={`url(#${g})`} />
+        <ellipse cx="24" cy="24" rx="6" ry="14" stroke="#5b21b6" strokeWidth="1.6" opacity="0.28" />
+        <path d="M10 24h28" stroke="#5b21b6" strokeWidth="1.6" opacity="0.28" />
       </svg>
     );
   }
   if (kind === "performance") {
     return (
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M13.2 3.2a1 1 0 0 1 1.8.4L16.4 9H20a1 1 0 0 1 .8 1.6l-8.2 10.2a1 1 0 0 1-1.8-.5L9.6 15H4a1 1 0 0 1-.8-1.6Z" />
+      <svg viewBox="0 0 48 48" fill="none">
+        <defs>
+          <GlassFill id={g} />
+        </defs>
+        <path
+          fill={`url(#${g})`}
+          d="M27.2 6.4 14.6 25.2h9.2L16.8 41.6 33.4 21.2h-9.1L27.2 6.4Z"
+        />
       </svg>
     );
   }
   if (kind === "security") {
     return (
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2.2 4.4 5.2v6.2c0 5.1 3.4 8.6 7.6 10.1 4.2-1.5 7.6-5 7.6-10.1V5.2Z" />
+      <svg viewBox="0 0 48 48" fill="none">
+        <defs>
+          <GlassFill id={g} />
+        </defs>
+        <path
+          fill={`url(#${g})`}
+          d="M24 5.6 9.6 11.2v9.2c0 9.1 6.1 15.4 14.4 18 8.3-2.6 14.4-8.9 14.4-18v-9.2L24 5.6Z"
+        />
       </svg>
     );
   }
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <circle cx="12" cy="8.2" r="3.1" />
-      <path d="M5.2 19.2a6.8 6.8 0 0 1 13.6 0 1 1 0 0 1-1 1.1H6.2a1 1 0 0 1-1-1.1Z" />
+    <svg viewBox="0 0 48 48" fill="none">
+      <defs>
+        <GlassFill id={g} />
+      </defs>
+      <circle cx="24" cy="16.2" r="7.2" fill={`url(#${g})`} />
+      <path
+        fill={`url(#${g})`}
+        d="M10.4 40.4c0-7.6 6.1-12 13.6-12s13.6 4.4 13.6 12v1.2H10.4v-1.2Z"
+      />
     </svg>
   );
 }
