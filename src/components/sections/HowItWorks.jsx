@@ -1,4 +1,5 @@
 import {
+  IllusSignupPanel,
   IllusWebhookPanel,
   IllusRegisterPanel,
   IllusListenPanel,
@@ -6,23 +7,28 @@ import {
 
 const CARDS = [
   {
-    Visual: IllusWebhookPanel,
+    Visual: IllusSignupPanel,
     step: "Step 1",
+    text: "Register",
+  },
+  {
+    Visual: IllusWebhookPanel,
+    step: "Step 2",
     text: "Create Your Webhook Endpoint",
   },
   {
     Visual: IllusRegisterPanel,
-    step: "Step 2",
+    step: "Step 3",
     text: "Register Tracking Numbers via API",
   },
   {
     Visual: IllusListenPanel,
-    step: "Step 3",
+    step: "Step 4",
     text: "Receive Automatic Updates",
   },
 ];
 
-/** Section 3 — From Tracking Data to Real-Time Visibility — 3 equal cards fill 1440 content shell */
+/** Section 3 — From Tracking Data to Real-Time Visibility — 4 cards in one row */
 export default function HowItWorks() {
   return (
     <section className="api-s3" id="how-it-works" aria-labelledby="api-how-title">

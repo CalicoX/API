@@ -99,6 +99,9 @@ describe("API landing structure (gating)", () => {
   it("core content sections use original 17track wording", () => {
     expect(read("components/sections/UseCases.jsx")).toMatch(/One Solution/);
     expect(read("components/sections/HowItWorks.jsx")).toMatch(/From Tracking Data to Real-Time Visibility/);
+    expect(read("components/sections/HowItWorks.jsx")).toMatch(/IllusSignupPanel/);
+    expect(read("components/sections/HowItWorks.jsx")).toMatch(/Step 4/);
+    expect(read("components/sections/HowItWorks.jsx")).toMatch(/text: \"Register\"/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/Turn Complex Tracking Data Into Usable Intelligence/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/9\+30/);
     expect(read("components/sections/DataOperations.jsx")).toMatch(/api-s4-board/);

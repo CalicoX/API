@@ -855,7 +855,30 @@ export function AppIcon({ kind }) {
 
 /* ——— How-it-works: static light UI vignettes (no cursor) ——— */
 
-/** Step 1 — Edit Tracking webhook (matches product UI; bottom-cropped) */
+/** Step 1 — Create account / Register */
+export function IllusSignupPanel() {
+  return (
+    <div className="api-vig api-vig--signup">
+      <div className="api-vig-sheet api-vig-sheet--signup">
+        <header className="api-vig-head">
+          <h4 className="api-vig-title">Create account</h4>
+          <span className="api-vig-close" aria-hidden="true">
+            ×
+          </span>
+        </header>
+        <span className="api-vig-k">Email</span>
+        <div className="api-vig-input">you@company.com</div>
+        <span className="api-vig-k">Password</span>
+        <div className="api-vig-input">••••••••</div>
+        <div className="api-vig-actions">
+          <span className="api-vig-btn api-vig-btn--primary">Register</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Step 2 — Edit Tracking webhook (matches product UI; bottom-cropped) */
 const WEBHOOK_STATUSES = [
   { label: "Info Received", on: true },
   { label: "In Transit", on: true },
