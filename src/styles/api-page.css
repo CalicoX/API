@@ -6201,12 +6201,11 @@ html.is-reduce-fx .api-s5::after {
 
 .api-plans {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px;
   align-items: stretch;
   margin: 0;
-  /* 给 Flagship 顶边 Popular 胶囊留出半个身位 */
-  padding: 14px 0 0;
+  padding: 0;
   list-style: none;
 }
 
@@ -6272,8 +6271,9 @@ html.is-reduce-fx .api-s5::after {
     display: none;
   }
 
-  .api-plans li.is-active {
-    display: block;
+  .api-plans li.is-active,
+  .api-plans li.api-plan-custom {
+    display: flex;
   }
 }
 
@@ -6299,50 +6299,23 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-plan-popular {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  z-index: 2;
-  transform: translate(-50%, -50%);
-  display: inline-flex;
-  align-items: center;
-  height: auto;
-  padding: 4px 14px;
-  border-radius: 999px;
-  background: transparent;
-  color: transparent;
-  font-size: 13px;
+  display: inline;
+  margin-left: 6px;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font-size: 0.55em;
+  font-style: normal;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  line-height: 1.2;
-  white-space: nowrap;
-  pointer-events: none;
+  letter-spacing: 0;
+  line-height: 1;
+  vertical-align: super;
 }
 
 .api-plan-card.is-hot {
   border-color: var(--api-blue);
   background: #fff;
-}
-
-.api-plan-card.is-hot .api-plan-popular {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: inline-flex;
-  width: auto;
-  height: auto;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 14px;
-  border-radius: 999px;
-  background: var(--api-blue);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.2;
-  white-space: nowrap;
 }
 
 .api-plan-card.is-hot .api-plan-inner {
@@ -6443,39 +6416,34 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-plan-custom {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 24px;
-  margin-top: 16px;
-  padding: 22px 32px;
-  border: 2px solid #e5e7eb;
-  border-radius: 16px;
-  background: #fff;
+  display: flex;
+  margin-top: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-.api-plan-custom .api-plan-name {
-  justify-self: start;
+.api-plan-custom .api-plan-inner {
+  flex: 1 1 auto;
+  align-items: stretch;
 }
 
 .api-plan-illu {
   display: block;
-  width: 96px;
-  height: 96px;
-  margin: 0;
+  width: 120px;
+  height: 120px;
+  margin: 28px auto 20px;
   object-fit: contain;
 }
 
 .api-plan-contact {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  justify-self: end;
+  width: 100%;
   min-height: 44px;
-  min-width: 148px;
-  padding: 0 22px;
-  margin: 0;
+  min-width: 0;
+  margin-top: auto;
+  padding: 0 16px;
   border-radius: 999px;
   color: #fff;
   font-size: clamp(12.5px, calc(11.6px + 0.25vw), 15px);
@@ -6943,7 +6911,7 @@ html.is-reduce-fx .api-s5::after {
 }
 
 @media (max-width: 1024px) {
-  /* pricing 保持桌面四列一行（2026-08-31 Park），单列降到 ≤768 */
+  /* pricing 桌面五行；单列/两列降到 ≤768 */
 
   .api-onboard-steps {
     grid-template-columns: 1fr 1fr;
@@ -6959,15 +6927,7 @@ html.is-reduce-fx .api-s5::after {
     grid-template-columns: 1fr;
   }
 
-  .api-plan-custom {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-    padding: 22px 20px;
-    gap: 16px;
-  }
-
-  /* 768 两列只给 641-768（2026-08-31 Park「221 布局」）：≤640 是 tab 切换
+  /* 768 两列只给 641-768：≤640 是 tab 切换
      （非激活卡 display:none），两列 grid 会让激活卡只占半宽 */
   @media (min-width: 641px) {
     .api-plans {
@@ -6977,11 +6937,6 @@ html.is-reduce-fx .api-s5::after {
     .api-plan-custom {
       grid-column: 1 / -1;
     }
-  }
-
-  .api-plan-custom .api-plan-name,
-  .api-plan-contact {
-    justify-self: center;
   }
 
   .api-onboard-steps {

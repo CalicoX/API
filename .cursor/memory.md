@@ -11,7 +11,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- **pricing Popular 改回框上小胶囊（2026-09-10 Park「布局改回这个」）**：不要官网整条蓝带。四卡顶对齐；Flagship 蓝描边 + 顶边居中蓝胶囊 Popular（`translate(-50%,-50%)`）；卡 `overflow: visible`，`.api-plans` 顶垫 14px。640 tab 选中 Flagship 仍出胶囊。
+- **pricing 一行五卡（2026-09-10 Park 中文价卡截图 +「颜色不要抄。只要布局 / 内容」）**：Basic–Flagship + Custom 同一排 `repeat(5)`。定制版不再是底下横条，做成第五张卡（插图 + Contact Us）。英文价/功能/Get Started/Popular/Contact Us 原文不动，不抄橙色。Popular 收成 Flagship 标题旁小字。768 两列、Custom 跨行；≤640 四 tab + Custom 常在。
 
 - **Onboard in 4 Steps 整块去掉（2026-09-10 Park）**：IntegrationTogether 只留 pricing + Custom。插图组件 `IllusOnboard*` 一并删。价卡原文不动。
 

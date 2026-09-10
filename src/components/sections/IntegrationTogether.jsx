@@ -85,11 +85,11 @@ export default function IntegrationTogether() {
               }`}
               key={plan.name}
             >
-              <span className="api-plan-popular" aria-hidden={!plan.hot}>
-                {plan.hot ? "Popular" : "\u00a0"}
-              </span>
               <div className="api-plan-inner">
-                <span className="api-plan-name">{plan.name}</span>
+                <span className="api-plan-name">
+                  {plan.name}
+                  {plan.hot ? <em className="api-plan-popular">Popular</em> : null}
+                </span>
                 <span className="api-plan-unit">Unit Price</span>
                 <strong className="api-plan-price">{plan.price}</strong>
                 <span className="api-plan-quota">{plan.quota}</span>
@@ -108,25 +108,27 @@ export default function IntegrationTogether() {
               </div>
             </li>
           ))}
+          <li className="api-plan-card api-plan-custom">
+            <div className="api-plan-inner">
+              <span className="api-plan-name">Custom</span>
+              <img
+                className="api-plan-illu"
+                src={`${CDN}/illustration.png`}
+                alt=""
+                width="96"
+                height="96"
+              />
+              <a
+                className="api-plan-contact"
+                href="https://www.17track.com/en/contact-us"
+                target="_blank"
+                rel="noopener"
+              >
+                Contact Us
+              </a>
+            </div>
+          </li>
         </ul>
-        <div className="api-plan-custom">
-          <span className="api-plan-name">Custom</span>
-          <img
-            className="api-plan-illu"
-            src={`${CDN}/illustration.png`}
-            alt=""
-            width="96"
-            height="96"
-          />
-          <a
-            className="api-plan-contact"
-            href="https://www.17track.com/en/contact-us"
-            target="_blank"
-            rel="noopener"
-          >
-            Contact Us
-          </a>
-        </div>
       </div>
     </section>
   );
