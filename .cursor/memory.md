@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Enterprise 卡 icon 毛玻璃（2026-09-10 Park）**：跟稿图那种浅紫玻璃方底 + 实心紫标，不再用 s4 细线灰 icon。44 方 / 14 圆角 / 内高光 / blur 16。
+
 - **Enterprise badge 四色（2026-09-10 Park「要彩色的」）**：Visible 蓝 / Reliable 绿 / Trust 紫 / Secure 橙，浅底+同色点，跟 Applications 四色一系。
 
 - **Use Cases 挪到定价前（2026-09-10 Park）**：One Solution / Various Use Cases 整段从 Enterprise 后移到 Applications 与 IntegrationTogether 之间。

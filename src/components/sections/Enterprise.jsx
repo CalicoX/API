@@ -31,44 +31,29 @@ const CARDS = [
 function CardIcon({ kind }) {
   if (kind === "carriers") {
     return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <circle className="d" pathLength="100" style={{ "--d": "0s" }} cx="12" cy="12" r="8.2" />
-        <ellipse className="d" pathLength="100" style={{ "--d": "0.08s" }} cx="12" cy="12" rx="3.4" ry="8.2" />
-        <path className="d" pathLength="100" style={{ "--d": "0.12s" }} d="M3.8 12h16.4" />
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm6.9 9h-2.6c-.1-2.1-.5-4-.9-5.4A8.1 8.1 0 0 1 18.9 11ZM12 4c.9 0 2.6 2.4 3.1 7H8.9C9.4 6.4 11.1 4 12 4ZM8.6 5.6C8.2 7 7.8 8.9 7.7 11H5.1A8.1 8.1 0 0 1 8.6 5.6ZM5.1 13h2.6c.1 2.1.5 4 .9 5.4A8.1 8.1 0 0 1 5.1 13ZM12 20c-.9 0-2.6-2.4-3.1-7h6.2c-.5 4.6-2.2 7-3.1 7Zm3.4-1.6c.4-1.4.8-3.3.9-5.4h2.6a8.1 8.1 0 0 1-3.5 5.4Z" />
       </svg>
     );
   }
   if (kind === "performance") {
     return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path className="d" pathLength="100" style={{ "--d": "0s" }} d="M4.5 16.5 10 11l3.2 3.2 6.3-7.2" />
-        <path className="d" pathLength="100" style={{ "--d": "0.1s" }} d="M15.2 7h4.3v4.2" />
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M13.2 3.2a1 1 0 0 1 1.8.4L16.4 9H20a1 1 0 0 1 .8 1.6l-8.2 10.2a1 1 0 0 1-1.8-.5L9.6 15H4a1 1 0 0 1-.8-1.6Z" />
       </svg>
     );
   }
   if (kind === "security") {
     return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path
-          className="d"
-          pathLength="100"
-          style={{ "--d": "0s" }}
-          d="M12 3.6 5.2 6.4v5.3c0 4.4 2.9 7.4 6.8 8.7 3.9-1.3 6.8-4.3 6.8-8.7V6.4Z"
-        />
-        <path className="d" pathLength="100" style={{ "--d": "0.12s" }} d="m8.8 12.1 2.2 2.2 4.3-4.4" />
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.2 4.4 5.2v6.2c0 5.1 3.4 8.6 7.6 10.1 4.2-1.5 7.6-5 7.6-10.1V5.2Z" />
       </svg>
     );
   }
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-      <path
-        className="d"
-        pathLength="100"
-        style={{ "--d": "0s" }}
-        d="M5.2 16.8a7.6 7.6 0 1 1 13.6 0"
-      />
-      <circle className="d" pathLength="100" style={{ "--d": "0.08s" }} cx="12" cy="10.2" r="2.4" />
-      <path className="d" pathLength="100" style={{ "--d": "0.14s" }} d="M8.2 19.2h7.6" />
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="8.2" r="3.1" />
+      <path d="M5.2 19.2a6.8 6.8 0 0 1 13.6 0 1 1 0 0 1-1 1.1H6.2a1 1 0 0 1-1-1.1Z" />
     </svg>
   );
 }
@@ -94,7 +79,7 @@ export default function Enterprise() {
         <ul className="api-ent-cards">
           {CARDS.map((card) => (
             <li className="api-ent-card" key={card.kind}>
-              <span className="api-s4-ico" aria-hidden="true">
+              <span className="api-ent-ico" aria-hidden="true">
                 <CardIcon kind={card.kind} />
               </span>
               <h3>{card.title}</h3>
