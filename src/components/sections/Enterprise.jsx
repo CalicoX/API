@@ -1,5 +1,3 @@
-import { useId } from "react";
-
 const PILLARS = [
   { label: "Visible", kind: "visible" },
   { label: "Reliable", kind: "reliable" },
@@ -30,77 +28,35 @@ const CARDS = [
   },
 ];
 
-function GlassFill({ id }) {
-  return (
-    <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stopColor="#f8fbff" />
-      <stop offset="32%" stopColor="#dbeafe" />
-      <stop offset="100%" stopColor="#3b82f6" />
-    </linearGradient>
-  );
-}
-
 function CardIcon({ kind }) {
-  const uid = useId().replace(/:/g, "");
-  const g = `ent-glass-${uid}`;
-
   if (kind === "carriers") {
     return (
-      <svg viewBox="0 0 48 48" fill="none">
-        <defs>
-          <GlassFill id={g} />
-        </defs>
-        <circle cx="24" cy="20" r="13.2" fill="#1d4ed8" />
-        <circle cx="24" cy="25.2" r="13.2" fill={`url(#${g})`} />
-        <ellipse cx="24" cy="25.2" rx="5.4" ry="13.2" stroke="#fff" strokeWidth="1.5" opacity="0.85" />
-        <path d="M10.8 25.2h26.4" stroke="#fff" strokeWidth="1.5" opacity="0.85" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9">
+        <circle cx="12" cy="12" r="7.2" />
+        <ellipse cx="12" cy="12" rx="3" ry="7.2" />
+        <path d="M4.8 12h14.4" />
       </svg>
     );
   }
   if (kind === "performance") {
-    const d = "M27.2 6.4 14.6 25.2h9.2L16.8 41.6 33.4 21.2h-9.1L27.2 6.4Z";
     return (
-      <svg viewBox="0 0 48 48" fill="none">
-        <defs>
-          <GlassFill id={g} />
-        </defs>
-        <path fill="#1d4ed8" d={d} transform="translate(0 -4)" />
-        <path fill={`url(#${g})`} d={d} />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9">
+        <path d="M5 16.5 10.2 11l3 3L19 8" />
+        <path d="M14.2 8H19v4.8" />
       </svg>
     );
   }
   if (kind === "security") {
-    const d =
-      "M24 5.6 9.6 11.2v9.2c0 9.1 6.1 15.4 14.4 18 8.3-2.6 14.4-8.9 14.4-18v-9.2L24 5.6Z";
     return (
-      <svg viewBox="0 0 48 48" fill="none">
-        <defs>
-          <GlassFill id={g} />
-        </defs>
-        <path fill="#1d4ed8" d={d} transform="translate(0 -3.6)" />
-        <path fill={`url(#${g})`} d={d} />
-        <path
-          d="m18.4 24.2 4.1 4.1 7.4-7.6"
-          stroke="#fff"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9">
+        <path d="M12 3.6 5.4 6.4v5.2c0 4.3 2.9 7.3 6.6 8.6 3.7-1.3 6.6-4.3 6.6-8.6V6.4Z" />
       </svg>
     );
   }
   return (
-    <svg viewBox="0 0 48 48" fill="none">
-      <defs>
-        <GlassFill id={g} />
-      </defs>
-      <circle cx="24" cy="12.4" r="7.2" fill="#1d4ed8" />
-      <path fill="#1d4ed8" d="M10.4 36.6c0-7.6 6.1-12 13.6-12s13.6 4.4 13.6 12v1.2H10.4v-1.2Z" />
-      <circle cx="24" cy="16.2" r="7.2" fill={`url(#${g})`} />
-      <path
-        fill={`url(#${g})`}
-        d="M10.4 40.4c0-7.6 6.1-12 13.6-12s13.6 4.4 13.6 12v1.2H10.4v-1.2Z"
-      />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9">
+      <circle cx="12" cy="9" r="3.1" />
+      <path d="M6.2 18.6c.6-2.8 2.8-4.2 5.8-4.2s5.2 1.4 5.8 4.2" />
     </svg>
   );
 }
@@ -127,6 +83,8 @@ export default function Enterprise() {
           {CARDS.map((card) => (
             <li className="api-ent-card" key={card.kind}>
               <span className="api-ent-ico" aria-hidden="true">
+                <span className="api-ent-ico-back" />
+                <span className="api-ent-ico-glass" />
                 <CardIcon kind={card.kind} />
               </span>
               <h3>{card.title}</h3>

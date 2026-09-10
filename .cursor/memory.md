@@ -11,7 +11,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- **Enterprise 卡 icon 毛玻璃（2026-09-10 Park 纠正）**：钱包那种**两层叠**：后层实心蓝 `#1d4ed8` 上移探出，前层白→`#3b82f6` 玻璃面，白细节。不要紫、不要方底托盘。
+- **Enterprise 卡 icon（2026-09-10 Park 参考 Home/列表 3D 方）**：两个圆角方叠——后层实心 `#3b82f6` 右上探出，前层白→浅蓝毛玻璃（13 圆角 / 42），白描边符号居中。不要紫。
 
 - **Enterprise badge 四色（2026-09-10 Park「要彩色的」）**：Visible 蓝 / Reliable 绿 / Trust 紫 / Secure 橙，浅底+同色点，跟 Applications 四色一系。
 
