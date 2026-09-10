@@ -853,20 +853,161 @@ export function AppIcon({ kind }) {
   );
 }
 
-/* ——— How-it-works: static light UI vignettes (no cursor) ——— */
+/* ——— How-it-works: light UI vignettes ——— */
 
-/** Step 1 — Hero 留资表缩样 */
-export function IllusSignupPanel() {
+function useVigCardHover(ref) {
+  const [hover, setHover] = useState(false);
+  useEffect(() => {
+    const node = ref.current;
+    const card = node?.closest(".api-s3-card") ?? node;
+    if (!card) return undefined;
+    const on = () => setHover(true);
+    const off = () => setHover(false);
+    card.addEventListener("mouseenter", on);
+    card.addEventListener("mouseleave", off);
+    return () => {
+      card.removeEventListener("mouseenter", on);
+      card.removeEventListener("mouseleave", off);
+    };
+  }, []);
+  return hover;
+}
+
+function VigPointer({ cursor }) {
   return (
-    <div className="api-vig api-vig--signup">
-      <div className="api-vig-sheet api-vig-sheet--signup">
+    <span
+      className={`api-vig-pointer${cursor.show ? " is-on" : ""}${cursor.press ? " is-press" : ""}`}
+      style={{ left: cursor.x, top: cursor.y }}
+      aria-hidden="true"
+    >
+      <svg className="api-vig-pointer-arrow" viewBox="0 0 24 24" width="22" height="22">
+        <path
+          d="M4.2 3.2 L4.2 19.4 L8.8 14.9 L12.6 22.2 L15.4 20.8 L11.7 13.6 L18.2 13.6 Z"
+          fill="#0a0a0a"
+          stroke="#fff"
+          strokeWidth="2.2"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+      </svg>
+    </span>
+  );
+}
+
+function aimIn(root, el, setCursor) {
+  if (!root || !el) return;
+  const a = root.getBoundingClientRect();
+  const b = el.getBoundingClientRect();
+  setCursor({
+    x: b.left - a.left + Math.min(14, b.width * 0.22),
+    y: b.top - a.top + b.height * 0.55,
+    show: true,
+    press: false,
+  });
+}
+
+/** Step 1 — Hero 留资表缩样 + 光标填表 */
+export function IllusSignupPanel() {
+  const rootRef = useRef(null);
+  const companyRef = useRef(null);
+  const emailRef = useRef(null);
+  const volumeRef = useRef(null);
+  const submitRef = useRef(null);
+  const hover = useVigCardHover(rootRef);
+  const [fill, setFill] = useState({ company: "", email: "", volume: "" });
+  const [cursor, setCursor] = useState({ x: 48, y: 80, show: false, press: false });
+  const [toast, setToast] = useState(false);
+  const [sheetY, setSheetY] = useState(0);
+
+  useEffect(() => {
+    if (!hover) {
+      setFill({ company: "", email: "", volume: "" });
+      setCursor((c) => ({ ...c, show: false, press: false }));
+      setToast(false);
+      setSheetY(0);
+      return undefined;
+    }
+    if (prefersReducedMotion()) return undefined;
+
+    let cancelled = false;
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    const aim = (el) => aimIn(rootRef.current, el, setCursor);
+
+    (async () => {
+      while (!cancelled) {
+        setFill({ company: "", email: "", volume: "" });
+        setToast(false);
+        setSheetY(0);
+        aim(companyRef.current);
+        await wait(480);
+        if (cancelled) return;
+        setCursor((c) => ({ ...c, press: true }));
+        await wait(140);
+        if (cancelled) return;
+        setFill((f) => ({ ...f, company: "Acme Logistics" }));
+        setCursor((c) => ({ ...c, press: false }));
+        await wait(320);
+        if (cancelled) return;
+        aim(emailRef.current);
+        await wait(440);
+        if (cancelled) return;
+        setCursor((c) => ({ ...c, press: true }));
+        await wait(140);
+        if (cancelled) return;
+        setFill((f) => ({ ...f, email: "you@acme.com" }));
+        setCursor((c) => ({ ...c, press: false }));
+        await wait(280);
+        if (cancelled) return;
+        setSheetY(-36);
+        await wait(480);
+        if (cancelled) return;
+        aim(volumeRef.current);
+        await wait(440);
+        if (cancelled) return;
+        setCursor((c) => ({ ...c, press: true }));
+        await wait(140);
+        if (cancelled) return;
+        setFill((f) => ({ ...f, volume: "1,001–10,000" }));
+        setCursor((c) => ({ ...c, press: false }));
+        await wait(280);
+        if (cancelled) return;
+        setSheetY(-88);
+        await wait(480);
+        if (cancelled) return;
+        aim(submitRef.current);
+        await wait(480);
+        if (cancelled) return;
+        setCursor((c) => ({ ...c, press: true }));
+        await wait(150);
+        if (cancelled) return;
+        setCursor((c) => ({ ...c, press: false }));
+        setToast(true);
+        await wait(1600);
+        if (cancelled) return;
+        await wait(360);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [hover]);
+
+  return (
+    <div className="api-vig api-vig--signup" ref={rootRef}>
+      <div
+        className="api-vig-sheet api-vig-sheet--signup"
+        style={{ transform: `translateY(${sheetY}px)` }}
+      >
         <header className="api-vig-head">
           <h4 className="api-vig-title">Sign up for free trial</h4>
         </header>
         <div className="api-vig-signup-grid">
           <div className="api-vig-signup-field">
             <span className="api-vig-k">Company Name</span>
-            <div className="api-vig-input" />
+            <div ref={companyRef} className={`api-vig-input${fill.company ? " is-filled" : ""}`}>
+              {fill.company}
+            </div>
           </div>
           <div className="api-vig-signup-field">
             <span className="api-vig-k">Company Website</span>
@@ -878,11 +1019,18 @@ export function IllusSignupPanel() {
           </div>
           <div className="api-vig-signup-field">
             <span className="api-vig-k">Email</span>
-            <div className="api-vig-input" />
+            <div ref={emailRef} className={`api-vig-input${fill.email ? " is-filled" : ""}`}>
+              {fill.email}
+            </div>
           </div>
           <div className="api-vig-signup-field is-full">
             <span className="api-vig-k">Monthly Shipment Volume</span>
-            <div className="api-vig-input api-vig-input--select">Select</div>
+            <div
+              ref={volumeRef}
+              className={`api-vig-input api-vig-input--select${fill.volume ? " is-filled" : ""}`}
+            >
+              {fill.volume || "Select"}
+            </div>
           </div>
           <div className="api-vig-signup-field is-full">
             <span className="api-vig-k">Password</span>
@@ -907,11 +1055,15 @@ export function IllusSignupPanel() {
           </span>
         </p>
         <div className="api-vig-actions">
-          <span className="api-vig-btn api-vig-btn--primary api-vig-btn--wide">
+          <span ref={submitRef} className="api-vig-btn api-vig-btn--primary api-vig-btn--wide">
             Start My Free Trial
           </span>
         </div>
         <p className="api-vig-signup-nocc">No credit card required</p>
+      </div>
+      <VigPointer cursor={cursor} />
+      <div className={`api-vig-toast${toast ? " is-on" : ""}`} aria-hidden="true">
+        Trial started
       </div>
     </div>
   );
@@ -935,7 +1087,7 @@ export function IllusWebhookPanel() {
   const infoRef = useRef(null);
   const transitRef = useRef(null);
   const saveRef = useRef(null);
-  const [hover, setHover] = useState(false);
+  const hover = useVigCardHover(rootRef);
   const [on, setOn] = useState(() => new Set(["Info Received", "In Transit"]));
   const [cursor, setCursor] = useState({
     x: 48,
@@ -944,40 +1096,27 @@ export function IllusWebhookPanel() {
     press: false,
   });
   const [toast, setToast] = useState(false);
+  const [sheetY, setSheetY] = useState(0);
 
   useEffect(() => {
     if (!hover) {
       setOn(new Set(["Info Received", "In Transit"]));
       setCursor((c) => ({ ...c, show: false, press: false }));
       setToast(false);
+      setSheetY(0);
       return undefined;
     }
-
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return undefined;
+    if (prefersReducedMotion()) return undefined;
 
     let cancelled = false;
     const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-
-    const aim = (el) => {
-      const root = rootRef.current;
-      if (!root || !el) return;
-      const a = root.getBoundingClientRect();
-      const b = el.getBoundingClientRect();
-      setCursor({
-        x: b.left - a.left + Math.min(14, b.width * 0.22),
-        y: b.top - a.top + b.height * 0.55,
-        show: true,
-        press: false,
-      });
-    };
+    const aim = (el) => aimIn(rootRef.current, el, setCursor);
 
     (async () => {
       while (!cancelled) {
         setOn(new Set());
         setToast(false);
+        setSheetY(0);
         aim(infoRef.current);
         await wait(520);
         if (cancelled) return;
@@ -996,7 +1135,10 @@ export function IllusWebhookPanel() {
         if (cancelled) return;
         setOn(new Set(["Info Received", "In Transit"]));
         setCursor((c) => ({ ...c, press: false }));
-        await wait(360);
+        await wait(280);
+        if (cancelled) return;
+        setSheetY(-56);
+        await wait(480);
         if (cancelled) return;
         aim(saveRef.current);
         await wait(500);
@@ -1018,13 +1160,11 @@ export function IllusWebhookPanel() {
   }, [hover]);
 
   return (
-    <div
-      className="api-vig api-vig--webhook"
-      ref={rootRef}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-    >
-      <div className="api-vig-sheet api-vig-sheet--webhook">
+    <div className="api-vig api-vig--webhook" ref={rootRef}>
+      <div
+        className="api-vig-sheet api-vig-sheet--webhook"
+        style={{ transform: `translateY(${sheetY}px)` }}
+      >
         <header className="api-vig-head">
           <h4 className="api-vig-title">Edit Tracking webhook</h4>
           <span className="api-vig-close" aria-hidden="true">
@@ -1064,27 +1204,7 @@ export function IllusWebhookPanel() {
           <span className="api-vig-btn api-vig-btn--ghost">Cancel</span>
         </div>
       </div>
-      <span
-        className={`api-vig-pointer${cursor.show ? " is-on" : ""}${cursor.press ? " is-press" : ""}`}
-        style={{ left: cursor.x, top: cursor.y }}
-        aria-hidden="true"
-      >
-        <svg
-          className="api-vig-pointer-arrow"
-          viewBox="0 0 24 24"
-          width="22"
-          height="22"
-        >
-          <path
-            d="M4.2 3.2 L4.2 19.4 L8.8 14.9 L12.6 22.2 L15.4 20.8 L11.7 13.6 L18.2 13.6 Z"
-            fill="#0a0a0a"
-            stroke="#fff"
-            strokeWidth="2.2"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-        </svg>
-      </span>
+      <VigPointer cursor={cursor} />
       <div
         className={`api-vig-toast${toast ? " is-on" : ""}`}
         aria-hidden="true"

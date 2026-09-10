@@ -2213,6 +2213,14 @@
   max-width: 86%;
 }
 
+.api-s3-illus > .api-vig--signup,
+.api-s3-illus > .api-vig--webhook {
+  align-self: stretch;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+}
+
 .api-s3-card-text {
   flex: 0 0 auto;
   display: flex;
@@ -2340,9 +2348,9 @@
   position: absolute;
   left: 12%;
   right: 12%;
-  top: 28px;
+  top: 16px;
   /* extend past the well → bottom of form is cut off */
-  bottom: -88px;
+  bottom: -64px;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -2364,10 +2372,20 @@
 .api-vig-sheet--signup {
   left: 8%;
   right: 8%;
-  top: 18px;
-  bottom: -28px;
-  padding: 16px 16px 20px;
+  top: 14px;
+  bottom: auto;
+  padding: 14px 14px 18px;
   border-radius: 16px 16px 0 0;
+}
+
+.api-vig-sheet--signup,
+.api-vig-sheet--webhook {
+  transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.api-vig-input.is-filled,
+.api-vig-input--select.is-filled {
+  color: #1e293b;
 }
 
 .api-vig-sheet--signup .api-vig-title {
@@ -2507,6 +2525,14 @@
   line-height: 1.45;
   color: #64748b;
   font-weight: 400;
+}
+
+.api-vig-sheet--webhook .api-vig-desc {
+  margin: 0 0 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .api-vig-k {
