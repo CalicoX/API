@@ -7963,44 +7963,50 @@ html.is-reduce-fx .api-s5::after {
   justify-content: center;
   min-height: 100vh;
   min-height: 100dvh;
-  padding: 100px 0 88px;
+  padding: 0;
   overflow: hidden;
+  isolation: isolate;
   text-align: center;
   color: #fff;
+  background: transparent;
+}
+
+.api-ai.is-duo-settled {
   background: #05040f;
 }
 
 .api-ai-shell {
-  position: relative;
-  flex: 1 1 auto;
-  align-self: stretch;
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  min-height: 100%;
+  padding: 100px 0 88px;
+  box-sizing: border-box;
   overflow: hidden;
+  isolation: isolate;
   transform-origin: 50% 50%;
   background:
     radial-gradient(ellipse 80% 70% at 18% 82%, rgba(5, 130, 232, 0.55), transparent 58%),
     radial-gradient(ellipse 70% 60% at 82% 38%, rgba(240, 14, 148, 0.48), transparent 52%),
     #08071a;
   clip-path: inset(
-    calc((1 - var(--ai-duo)) * 5%)
-    calc((1 - var(--ai-duo)) * 16%)
-    calc((1 - var(--ai-duo)) * 5%)
-    calc((1 - var(--ai-duo)) * 16%)
-    round calc((1 - var(--ai-duo)) * 36px)
+    calc((1 - var(--ai-duo)) * 6%)
+    calc((1 - var(--ai-duo)) * 18%)
+    calc((1 - var(--ai-duo)) * 6%)
+    calc((1 - var(--ai-duo)) * 18%)
+    round calc((1 - var(--ai-duo)) * 40px)
   );
   transform: scale3d(
-    calc(0.7 + 0.3 * var(--ai-duo)),
-    calc(0.88 + 0.12 * var(--ai-duo)),
+    calc(0.58 + 0.42 * var(--ai-duo)),
+    calc(0.86 + 0.14 * var(--ai-duo)),
     1
   );
 }
 
 .api-ai:not(.is-duo-settled) .api-ai-shell {
   will-change: transform, clip-path;
+  box-shadow: 0 28px 80px rgba(5, 4, 15, 0.55);
 }
 
 .api-ai-frost {
@@ -8335,6 +8341,13 @@ html.is-reduce-fx .api-s5::after {
   }
 }
 
+html.is-reduce-fx .api-ai {
+  background:
+    radial-gradient(ellipse 80% 70% at 18% 82%, rgba(5, 130, 232, 0.55), transparent 58%),
+    radial-gradient(ellipse 70% 60% at 82% 38%, rgba(240, 14, 148, 0.48), transparent 52%),
+    #08071a;
+}
+
 html.is-reduce-fx .api-ai-shell {
   clip-path: none;
   transform: none;
@@ -8429,6 +8442,9 @@ html.is-reduce-fx .api-ai-frost {
   }
 
   .api-ai-shell {
+    position: relative;
+    inset: auto;
+    padding: 0;
     clip-path: none;
     transform: none;
     overflow: visible;

@@ -77,23 +77,23 @@ export default function AiIntelligence() {
           <i />
         </div>
         <div className="api-wrap">
-        <h2 className="api-h2" id="api-ai-title">
-          AI Make Every Tracking Signal <em>Smarter.</em>
-        </h2>
-        <p className="api-lead">
-          17TRACK AI Intelligence enhances tracking data from identification to
-          prediction—helping you deliver more accurate, complete, and reliable shipment
-          visibility.
-        </p>
-        <ul className="api-ai-tags">
-          <li>AI EDD</li>
-          <li>AI Carrier Identification</li>
-        </ul>
-        <div className="api-ai-stage">
-          <PanelEdd />
-          <PanelAi />
-          <PanelMap />
-        </div>
+          <h2 className="api-h2" id="api-ai-title">
+            AI Make Every Tracking Signal <em>Smarter.</em>
+          </h2>
+          <p className="api-lead">
+            17TRACK AI Intelligence enhances tracking data from identification to
+            prediction—helping you deliver more accurate, complete, and reliable shipment
+            visibility.
+          </p>
+          <ul className="api-ai-tags">
+            <li>AI EDD</li>
+            <li>AI Carrier Identification</li>
+          </ul>
+          <div className="api-ai-stage">
+            <PanelEdd />
+            <PanelAi />
+            <PanelMap />
+          </div>
         </div>
       </div>
     </section>

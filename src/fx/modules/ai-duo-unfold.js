@@ -22,9 +22,7 @@ export function mount() {
   function target() {
     const r = section.getBoundingClientRect();
     const vh = window.innerHeight || 1;
-    const start = vh * 0.74;
-    const end = vh * 0.06;
-    const t = (start - r.top) / Math.max(start - end, 1);
+    const t = (vh - r.top) / vh;
     const p = Math.max(0, Math.min(1, t));
     return p * p * (3 - 2 * p);
   }
@@ -39,10 +37,10 @@ export function mount() {
   function tick() {
     raf = 0;
     const next = target();
-    current += (next - current) * 0.16;
-    if (Math.abs(next - current) < 0.001) current = next;
+    current += (next - current) * 0.55;
+    if (Math.abs(next - current) < 0.002) current = next;
     write(current);
-    if (Math.abs(next - current) > 0.001) {
+    if (Math.abs(next - current) > 0.002) {
       raf = requestAnimationFrame(tick);
     } else {
       running = false;
