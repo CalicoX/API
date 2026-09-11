@@ -7963,12 +7963,17 @@ html.is-reduce-fx .api-s5::after {
   overflow: visible;
   text-align: center;
   color: #fff;
-  background: #05040f;
+  background:
+    radial-gradient(ellipse 80% 70% at 18% 82%, rgba(5, 130, 232, 0.55), transparent 58%),
+    radial-gradient(ellipse 70% 60% at 82% 38%, rgba(240, 14, 148, 0.48), transparent 52%),
+    #08071a;
 }
 
 .api-ai-pin {
   position: sticky;
   top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
@@ -7976,7 +7981,10 @@ html.is-reduce-fx .api-s5::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #05040f;
+  background:
+    radial-gradient(ellipse 80% 70% at 18% 82%, rgba(5, 130, 232, 0.55), transparent 58%),
+    radial-gradient(ellipse 70% 60% at 82% 38%, rgba(240, 14, 148, 0.48), transparent 52%),
+    #08071a;
 }
 
 /* 透视只包旋转壳。糊层是 pin 的兄弟，祖先不能有 transform / filter / opacity */
@@ -7997,13 +8005,17 @@ html.is-reduce-fx .api-s5::after {
 
 .api-ai-shell {
   position: absolute;
-  inset: 0;
+  inset: 0 -22vw;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   transform-origin: 50% 0%;
   backface-visibility: hidden;
+}
+
+.api-ai.is-duo-settled .api-ai-shell {
+  inset: 0;
 }
 
 .api-ai:not(.is-duo-settled) .api-ai-shell {
