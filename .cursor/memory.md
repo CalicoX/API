@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **TrustBand 加高一点（2026-09-11 Park）**：`.trust` 上下 padding 从 `--sec-y-tight`（最高 96）改 `clamp(72px, 8vw, 128px)`。只加这段，不动物标尺寸。1024 档 36/40 仍紧，Park 再圈再改。
+
 - **Enterprise 手机取消标题固高（2026-09-10 Park）**：桌面 h3 `min-height: 2em` 是为了四列描述对齐。≤640 单列不需要，标题和卡都随内容；卡 `align-items: start` + `height: auto`。1024 两列仍留 2 行固高。
 
 - **CoverageBand 手机标签换行（2026-09-10 Park）**：`.coverage-data span` 基础是 `nowrap`（桌面一行）。≤640 两列时 Standardized / Carrier Recognition 两句溢出，改 `white-space: normal` + `text-wrap: balance`。文案不改。

@@ -2513,7 +2513,7 @@ html.glass-mode-liquid .product-dock.dock-on-dark .tab.active,
 .trust {
   max-width: var(--max);
   margin: 0 auto;
-  padding: var(--sec-y-tight) var(--page-pad-x);
+  padding: clamp(72px, 8vw, 128px) var(--page-pad-x);
   width: 100%;
   box-sizing: border-box;
   display: flex;
