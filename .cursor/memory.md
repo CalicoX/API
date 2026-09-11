@@ -11,7 +11,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- **AI 整段 Duo 展开（2026-09-11 Park）**：进屏顶铰链立正、底糊；入场透视要够（`rotateX` 最大 78、perspective 920）；进场壳要**左右撑满**（overscan + 加大 scaleX），两侧不能露白。离开是**底边开始折**（`origin 50% 100%` + `rotateX+`），糊贴顶，不是原路倒回、也不是顶铰链再折。中间直立停约 0.45 屏（段高 145vh sticky），然后离场跟页面往下走，不要长锁。≤640 / reduce 定格。
+- **AI 整段 Duo 展开（2026-09-11 Park）**：进屏顶铰链立正、底糊；入场透视要够（`rotateX` 最大 78、perspective 920、带 translateZ）。不要为了撑满两侧去 overscan / 加大 scaleX。离开是**底边开始折**（`origin 50% 100%` + `rotateX+`），糊贴顶，不是原路倒回、也不是顶铰链再折。中间直立停约 0.45 屏（段高 145vh sticky），然后离场跟页面往下走，不要长锁。≤640 / reduce 定格。
 
 - **TrustBand 加高一点（2026-09-11 Park）**：`.trust` 上下 padding 从 `--sec-y-tight`（最高 96）改 `clamp(72px, 8vw, 128px)`。只加这段，不动物标尺寸。1024 档 36/40 仍紧，Park 再圈再改。
 
@@ -216,6 +216,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-09-11 16:19 — memory.md、ai-duo-unfold.js、api-page.css
 - 2026-09-11 16:18 — memory.md、ai-duo-unfold.js、api-page.css
 - 2026-09-11 16:16 — memory.md、ai-duo-unfold.js、api-page.css
 - 2026-09-11 16:15 — memory.md、ai-duo-unfold.js、api-page.css
@@ -235,4 +236,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-29 01:2x — memory.md、DataOperations.jsx、ApiDomVisuals.jsx、api-page.css（四场 match-cut 编排）
 - 2026-08-28 17:50 — AGENTS.md、DataOperations.jsx、structure.test.js、api-page.css
 - 2026-08-25 10:53 — memory.md、ExploreMore.jsx、landing.css
-- 2026-08-18 20:08 — memory.md、ApiDomVisuals.jsx、api-page.css
