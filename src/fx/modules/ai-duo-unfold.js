@@ -81,12 +81,13 @@ export function mount() {
       return;
     }
 
-    const pitch = kEnter * 54;
-    const pullY = 1 + kEnter * 0.48;
-    const pullX = 1 + kEnter * 0.05;
+    const pitch = kEnter * 78;
+    const pullY = 1 + kEnter * 0.72;
+    const pullX = 1 + kEnter * 0.1;
+    const sink = kEnter * 140;
     shell.style.transformOrigin = "50% 0%";
     shell.style.transform =
-      `rotateX(${(-pitch).toFixed(2)}deg) scale3d(${pullX.toFixed(3)}, ${pullY.toFixed(3)}, 1)`;
+      `rotateX(${(-pitch).toFixed(2)}deg) scale3d(${pullX.toFixed(3)}, ${pullY.toFixed(3)}, 1) translateZ(${(-sink).toFixed(1)}px)`;
   }
 
   function tick() {

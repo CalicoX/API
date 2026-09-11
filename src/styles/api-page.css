@@ -7983,7 +7983,7 @@ html.is-reduce-fx .api-s5::after {
 .api-ai-persp {
   position: absolute;
   inset: 0;
-  perspective: 1400px;
+  perspective: 920px;
   perspective-origin: 50% 0%;
 }
 
