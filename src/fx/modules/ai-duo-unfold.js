@@ -21,15 +21,15 @@ export function mount() {
     const vh = window.innerHeight || 1;
     const top = section.getBoundingClientRect().top;
     const travel = Math.max(section.offsetHeight - vh, vh);
-    // 第一像素进视口就开始立；钉住时还没立直
-    const atPin = 0.36;
-    if (top >= vh) return 0;
-    if (top > 0) {
-      const raw = (vh - top) / vh;
-      const u = raw * (2 - raw);
-      return atPin * u;
+    // 刚碰到视口底：gone=0；钉住铺满：gone=vh
+    const gone = vh - top;
+    if (gone <= 0) return 0;
+    const atPin = 0.42;
+    if (gone < vh) {
+      // sqrt：刚露出就明显在立，不是等铺满才动
+      return atPin * Math.sqrt(gone / vh);
     }
-    const u = Math.max(0, Math.min(1, -top / (travel * 0.92)));
+    const u = Math.max(0, Math.min(1, (gone - vh) / (travel * 0.9)));
     return atPin + (1 - atPin) * u;
   }
 
