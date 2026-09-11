@@ -7958,7 +7958,7 @@ html.is-reduce-fx .api-s5::after {
   --ai-duo: 0;
   --ai-blur: 1;
   position: relative;
-  min-height: 240vh;
+  min-height: 180vh;
   padding: 0;
   overflow: visible;
   text-align: center;

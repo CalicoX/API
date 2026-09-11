@@ -20,23 +20,23 @@ export function mount() {
   function target() {
     const vh = window.innerHeight || 1;
     const top = section.getBoundingClientRect().top;
-    const travel = Math.max(section.offsetHeight - vh, vh);
-    // 刚碰到视口底：gone=0；钉住铺满：gone=vh
-    const gone = vh - top;
+    const travel = Math.max(section.offsetHeight - vh, vh * 0.5);
+    // 还差一截进屏就开始立；铺满时大部分已经立完
+    const start = vh * 1.06;
+    const gone = start - top;
     if (gone <= 0) return 0;
-    const atPin = 0.42;
-    if (gone < vh) {
-      // sqrt：刚露出就明显在立，不是等铺满才动
-      return atPin * Math.sqrt(gone / vh);
+    const atPin = 0.78;
+    if (top > 0) {
+      return atPin * Math.min(1, Math.sqrt(gone / start));
     }
-    const u = Math.max(0, Math.min(1, (gone - vh) / (travel * 0.9)));
+    const u = Math.max(0, Math.min(1, -top / (travel * 0.3)));
     return atPin + (1 - atPin) * u;
   }
 
   function write(p) {
     const k = 1 - p;
     section.style.setProperty("--ai-duo", p.toFixed(4));
-    const blur = p < 0.38 ? 1 : Math.max(0, 1 - (p - 0.38) / 0.62);
+    const blur = p < 0.5 ? 1 : Math.max(0, 1 - (p - 0.5) / 0.5);
     section.style.setProperty("--ai-blur", blur.toFixed(4));
     section.classList.toggle("is-duo-settled", p > 0.985);
 
