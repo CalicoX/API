@@ -166,10 +166,15 @@ describe("API landing structure (gating)", () => {
     expect(ai).toMatch(/AI EDD/);
     expect(ai).toMatch(/AI Carrier Identification/);
     expect(ai).toMatch(/api-ai-flow/);
+    expect(ai).toMatch(/api-ai-shell/);
+    expect(ai).toMatch(/api-ai-frost/);
     expect(ai).toMatch(/api-ai-panel/);
     expect(ai).toMatch(/api-ai-orb/);
     expect(read("fx/modules/topbar-on-dark.js")).toMatch(/ai-intelligence|api-ai/);
     expect(read("fx/useLandingEffects.js")).toMatch(/aiIntelligenceBg|ai-intelligence-bg/);
+    expect(read("fx/useLandingEffects.js")).toMatch(/aiDuoUnfold|ai-duo-unfold/);
+    expect(read("fx/modules/ai-duo-unfold.js")).toMatch(/export function mount/);
+    expect(read("fx/modules/ai-duo-unfold.js")).toMatch(/--ai-duo/);
     expect(read("fx/useLandingEffects.js")).toMatch(/thinkingOrb/);
     expect(read("fx/modules/thinking-orb.js")).toMatch(/api-ai-orb/);
     expect(read("fx/modules/ai-intelligence-bg.js")).toMatch(/createIntroFlowGl/);
@@ -338,6 +343,7 @@ describe("API landing structure (gating)", () => {
       "ai-title-particles.js",
       "border-beam.js",
       "ai-lab.js",
+      "ai-duo-unfold.js",
     ]) {
       const mod = read(`fx/modules/${name}`);
       expect(mod).toMatch(/export function mount\s*\(/);

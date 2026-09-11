@@ -67,9 +67,16 @@ function PanelMap() {
 export default function AiIntelligence() {
   return (
     <section className="api-ai" id="ai-intelligence" aria-labelledby="api-ai-title">
-      <canvas className="api-ai-flow" aria-hidden="true" />
-      <div className="api-ai-veil" aria-hidden="true" />
-      <div className="api-wrap">
+      <div className="api-ai-shell">
+        <canvas className="api-ai-flow" aria-hidden="true" />
+        <div className="api-ai-veil" aria-hidden="true" />
+        <div className="api-ai-frost" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <i />
+        </div>
+        <div className="api-wrap">
         <h2 className="api-h2" id="api-ai-title">
           AI Make Every Tracking Signal <em>Smarter.</em>
         </h2>
@@ -86,6 +93,7 @@ export default function AiIntelligence() {
           <PanelEdd />
           <PanelAi />
           <PanelMap />
+        </div>
         </div>
       </div>
     </section>

@@ -28,6 +28,7 @@ const FX_LOADERS = {
   bottomCta: () => import("./modules/bottom-cta-shader.js"),
   coverageGlobe: () => import("./modules/coverage-globe.js"),
   aiIntelligenceBg: () => import("./modules/ai-intelligence-bg.js"),
+  aiDuoUnfold: () => import("./modules/ai-duo-unfold.js"),
   roiPointWaves: () => import("./modules/roi-point-waves.js"),
   btnSwitch: () => import("./modules/btn-switch.js"),
 };
@@ -84,6 +85,9 @@ export function useLandingEffects() {
       // Tracking 同款 CTA（API 页无 #ai-lab，不能指望 ai-lab.js）
       if (document.querySelector(".btn-switch")) {
         await mountNamed("btnSwitch");
+      }
+      if (document.getElementById("ai-intelligence") && !shouldReduceFx()) {
+        await mountNamed("aiDuoUnfold");
       }
       // Use Cases full-screen sticky scroll chapters + bg light wash
       if (document.getElementById("use-cases-scroll")) {

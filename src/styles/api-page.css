@@ -7955,6 +7955,8 @@ html.is-reduce-fx .api-s5::after {
    AI — tracking Synthesis 蓝粉底 + 预测 / 识别 / 地图
    ========================================================= */
 .api-ai {
+  --ai-duo: 1;
+  --ai-frost: 0;
   position: relative;
   display: flex;
   align-items: center;
@@ -7965,10 +7967,93 @@ html.is-reduce-fx .api-s5::after {
   overflow: hidden;
   text-align: center;
   color: #fff;
+  background: #05040f;
+}
+
+.api-ai-shell {
+  position: relative;
+  flex: 1 1 auto;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  transform-origin: 50% 50%;
   background:
     radial-gradient(ellipse 80% 70% at 18% 82%, rgba(5, 130, 232, 0.55), transparent 58%),
     radial-gradient(ellipse 70% 60% at 82% 38%, rgba(240, 14, 148, 0.48), transparent 52%),
     #08071a;
+  clip-path: inset(
+    calc((1 - var(--ai-duo)) * 5%)
+    calc((1 - var(--ai-duo)) * 16%)
+    calc((1 - var(--ai-duo)) * 5%)
+    calc((1 - var(--ai-duo)) * 16%)
+    round calc((1 - var(--ai-duo)) * 36px)
+  );
+  transform: scale3d(
+    calc(0.7 + 0.3 * var(--ai-duo)),
+    calc(0.88 + 0.12 * var(--ai-duo)),
+    1
+  );
+}
+
+.api-ai:not(.is-duo-settled) .api-ai-shell {
+  will-change: transform, clip-path;
+}
+
+.api-ai-frost {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: var(--ai-frost);
+}
+
+.api-ai-frost i {
+  position: absolute;
+  inset: 0;
+  -webkit-backdrop-filter: blur(var(--ai-b)) saturate(1.2);
+  backdrop-filter: blur(var(--ai-b)) saturate(1.2);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 calc(50% - var(--ai-band)),
+    #000 calc(50% + var(--ai-band)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 calc(50% - var(--ai-band)),
+    #000 calc(50% + var(--ai-band)),
+    transparent 100%
+  );
+}
+
+.api-ai-frost i:nth-child(1) {
+  --ai-b: 4px;
+  --ai-band: calc((1 - var(--ai-duo)) * 48%);
+}
+
+.api-ai-frost i:nth-child(2) {
+  --ai-b: 12px;
+  --ai-band: calc((1 - var(--ai-duo)) * 32%);
+}
+
+.api-ai-frost i:nth-child(3) {
+  --ai-b: 22px;
+  --ai-band: calc((1 - var(--ai-duo)) * 18%);
+}
+
+.api-ai-frost i:nth-child(4) {
+  --ai-b: 36px;
+  --ai-band: calc((1 - var(--ai-duo)) * 8%);
+}
+
+.api-ai.is-duo-settled .api-ai-frost {
+  visibility: hidden;
 }
 
 .api-ai-flow {
@@ -8250,7 +8335,25 @@ html.is-reduce-fx .api-s5::after {
   }
 }
 
+html.is-reduce-fx .api-ai-shell {
+  clip-path: none;
+  transform: none;
+}
+
+html.is-reduce-fx .api-ai-frost {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .api-ai-shell {
+    clip-path: none;
+    transform: none;
+  }
+
+  .api-ai-frost {
+    display: none;
+  }
+
   .api-ai-edd-bar i::after,
   .api-ai-map-route {
     animation: none;
@@ -8319,6 +8422,20 @@ html.is-reduce-fx .api-s5::after {
     overflow: visible;
     min-height: 0;
     padding: 88px 0 120px;
+    background:
+      radial-gradient(ellipse 80% 70% at 18% 82%, rgba(5, 130, 232, 0.55), transparent 58%),
+      radial-gradient(ellipse 70% 60% at 82% 38%, rgba(240, 14, 148, 0.48), transparent 52%),
+      #08071a;
+  }
+
+  .api-ai-shell {
+    clip-path: none;
+    transform: none;
+    overflow: visible;
+  }
+
+  .api-ai-frost {
+    display: none;
   }
 
   .api-ai-flow {

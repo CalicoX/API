@@ -11,6 +11,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **AI 整段 Duo 展开（2026-09-11 Park）**：`#ai-intelligence` 滚入时从中间拉开（scaleX 0.7→1 + clip inset）+ 四层 `backdrop-filter` 渐进模糊（中间最糊，往外散，糊略滞后于拉伸）。整段含背景，不是单卡。≤640 / reduce-motion 定格打开。`--ai-duo` / `--ai-frost` 由 `ai-duo-unfold.js` 跟 Lenis。
+
 - **TrustBand 加高一点（2026-09-11 Park）**：`.trust` 上下 padding 从 `--sec-y-tight`（最高 96）改 `clamp(72px, 8vw, 128px)`。只加这段，不动物标尺寸。1024 档 36/40 仍紧，Park 再圈再改。
 
 - **Enterprise 手机取消标题固高（2026-09-10 Park）**：桌面 h3 `min-height: 2em` 是为了四列描述对齐。≤640 单列不需要，标题和卡都随内容；卡 `align-items: start` + `height: auto`。1024 两列仍留 2 行固高。
@@ -214,6 +216,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-09-11 14:59 — memory.md、AiIntelligence.jsx、useLandingEffects.js、structure.test.js、api-page.css 等 6 项
 - 2026-09-10 14:16 — memory.md
 - 2026-09-10 11:13 — .pi
 - 2026-08-29 14:1x — memory.md、useLandingEffects.js、api-page.css、structure.test.js（井底纯白+点阵）
@@ -233,4 +236,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-17 17:03 — memory.md、ApiDomVisuals.jsx、particle-earth.js、structure.test.js、api-page.css
 - 2026-08-17 16:42 — memory.md、ApiDomVisuals.jsx、iso-hub-webgl.js、use-cases-scroll.js、api-page.css
 - 2026-08-17 14:35 — memory.md、AGENTS.md、hero-wash-shader.js
-- 2026-08-17 14:32 — hero-wash-shader.js、api-page.css
