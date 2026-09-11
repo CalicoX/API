@@ -1,7 +1,8 @@
 import { shouldReduceFx } from "../utils.js";
 
 /**
- * AI 段边滚边立。糊按 kennethnym 的分段 backdrop-filter + mask。
+ * 进屏：顶铰链立正，底糊。
+ * 离开：不原路折回，从上沿开始透视 + 顶糊。
  */
 export function mount() {
   const section = document.getElementById("ai-intelligence");
@@ -10,6 +11,8 @@ export function mount() {
 
   if (shouldReduceFx()) {
     section.style.setProperty("--ai-duo", "1");
+    section.style.setProperty("--ai-leave", "0");
+    section.style.setProperty("--ai-blur", "0");
     section.classList.add("is-duo-settled");
     return () => {};
   }
@@ -28,39 +31,60 @@ export function mount() {
     const leaveEnd = -travel;
     const leaveStart = leaveEnd + vh * 1.05;
 
-    if (top >= start) return 0;
+    if (top >= start) return { enter: 0, leave: 0 };
 
-    // 往下离开：立正再折回去
     if (top <= leaveStart) {
       const span = Math.max(leaveStart - leaveEnd, 1);
       const u = Math.max(0, Math.min(1, (leaveStart - top) / span));
-      return 1 - u;
+      return { enter: 1, leave: u };
     }
 
     if (top > almost) {
-      return atAlmost * (start - top) / (start - almost);
+      return { enter: atAlmost * (start - top) / (start - almost), leave: 0 };
     }
-    if (top > 0) return atAlmost;
+    if (top > 0) return { enter: atAlmost, leave: 0 };
     if (top > standEnd) {
-      return atAlmost + (1 - atAlmost) * (-top / -standEnd);
+      return {
+        enter: atAlmost + (1 - atAlmost) * (-top / -standEnd),
+        leave: 0,
+      };
     }
-    return 1;
+    return { enter: 1, leave: 0 };
   }
 
-  function write(p) {
-    const k = 1 - p;
-    section.style.setProperty("--ai-duo", p.toFixed(4));
-    section.style.setProperty("--ai-blur", k.toFixed(4));
-    section.classList.toggle("is-duo-settled", p > 0.992);
+  function write(state) {
+    const enter = state.enter;
+    const leave = state.leave;
+    const leaving = leave > 0.008;
+    const kEnter = 1 - enter;
+    const blur = leaving ? leave : kEnter;
 
-    if (p > 0.992) {
+    section.style.setProperty("--ai-duo", enter.toFixed(4));
+    section.style.setProperty("--ai-leave", leave.toFixed(4));
+    section.style.setProperty("--ai-blur", blur.toFixed(4));
+    section.classList.toggle("is-leaving", leaving);
+    section.classList.toggle("is-duo-settled", enter > 0.992 && !leaving);
+
+    if (leaving) {
+      const pitch = leave * 54;
+      const pullY = 1 + leave * 0.48;
+      const pullX = 1 + leave * 0.05;
+      shell.style.transformOrigin = "50% 0%";
+      shell.style.transform =
+        `rotateX(${pitch.toFixed(2)}deg) scale3d(${pullX.toFixed(3)}, ${pullY.toFixed(3)}, 1)`;
+      return;
+    }
+
+    if (enter > 0.992) {
+      shell.style.transformOrigin = "";
       shell.style.transform = "";
       return;
     }
 
-    const pitch = k * 54;
-    const pullY = 1 + k * 0.48;
-    const pullX = 1 + k * 0.05;
+    const pitch = kEnter * 54;
+    const pullY = 1 + kEnter * 0.48;
+    const pullX = 1 + kEnter * 0.05;
+    shell.style.transformOrigin = "50% 0%";
     shell.style.transform =
       `rotateX(${(-pitch).toFixed(2)}deg) scale3d(${pullX.toFixed(3)}, ${pullY.toFixed(3)}, 1)`;
   }
@@ -113,5 +137,7 @@ export function mount() {
     if (typeof lenisOff === "function") lenisOff();
     if (io) io.disconnect();
     shell.style.transform = "";
+    shell.style.transformOrigin = "";
+    section.classList.remove("is-leaving");
   };
 }
