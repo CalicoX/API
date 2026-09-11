@@ -11,7 +11,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- **AI 整段 Duo 展开（2026-09-11 Park）**：边滚边立——段刚露头就开始回正，铺满视口时立直，不再钉住后再滚一段。透视仍从上往下 `rotateX`。渐进糊是 section 上四条横带 `backdrop-filter`（不进 3D 壳，壳上也不挂 filter）。≤640 / reduce 定格。
+- **AI 整段 Duo 展开（2026-09-11 Park）**：模块**第一像素进视口就往立正走**（ease-out，进屏阶段就能看出在立）。钉住/铺满时 `p≈0.36` 还明显歪着，sticky（段高 240vh）里走完。不要等铺满再开始，也不要 `top===0` 就 p=1。透视顶铰链 `rotateX`。渐进糊 kennethnym 分段 backdrop-filter，**贴底、顶清、远处（下）最糊**。糊层是 pin 里、3D 壳的兄弟。≤640 / reduce 定格。
 
 - **TrustBand 加高一点（2026-09-11 Park）**：`.trust` 上下 padding 从 `--sec-y-tight`（最高 96）改 `clamp(72px, 8vw, 128px)`。只加这段，不动物标尺寸。1024 档 36/40 仍紧，Park 再圈再改。
 
@@ -216,6 +216,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-09-11 15:35 — memory.md、AiIntelligence.jsx、ai-duo-unfold.js、structure.test.js、api-page.css
 - 2026-09-11 14:59 — memory.md、AiIntelligence.jsx、useLandingEffects.js、structure.test.js、api-page.css 等 6 项
 - 2026-09-10 14:16 — memory.md
 - 2026-09-10 11:13 — .pi
@@ -235,4 +236,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-17 17:12 — memory.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-17 17:03 — memory.md、ApiDomVisuals.jsx、particle-earth.js、structure.test.js、api-page.css
 - 2026-08-17 16:42 — memory.md、ApiDomVisuals.jsx、iso-hub-webgl.js、use-cases-scroll.js、api-page.css
-- 2026-08-17 14:35 — memory.md、AGENTS.md、hero-wash-shader.js

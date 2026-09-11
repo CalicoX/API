@@ -167,8 +167,12 @@ describe("API landing structure (gating)", () => {
     expect(ai).toMatch(/AI Carrier Identification/);
     expect(ai).toMatch(/api-ai-flow/);
     expect(ai).toMatch(/api-ai-pin/);
+    expect(ai).toMatch(/api-ai-persp/);
     expect(ai).toMatch(/api-ai-shell/);
-    expect(ai).toMatch(/api-ai-frost/);
+    expect(ai).toMatch(/api-ai-live/);
+    expect(ai).toMatch(/api-ai-pblur/);
+    expect(read("styles/api-page.css")).toMatch(/progressive-blur/);
+    expect(read("styles/api-page.css")).toMatch(/backdrop-filter: blur\(calc\(64px/);
     expect(ai).toMatch(/api-ai-panel/);
     expect(ai).toMatch(/api-ai-orb/);
     expect(read("fx/modules/topbar-on-dark.js")).toMatch(/ai-intelligence|api-ai/);

@@ -1,18 +1,14 @@
 import { shouldReduceFx } from "../utils.js";
 
 /**
- * AI 段边滚边立：露头就开始 rotateX 回正，到位时立直。
- * 渐进糊是 pin 上的四条横带（backdrop-filter），不挂在 3D 壳里。
+ * AI 段边滚边立。糊按 kennethnym 的分段 backdrop-filter + mask。
  */
 export function mount() {
   const section = document.getElementById("ai-intelligence");
   const shell = section?.querySelector(".api-ai-shell");
-  const frost = section?.querySelector(".api-ai-frost");
-  const bands = frost ? [...frost.querySelectorAll("i")] : [];
   if (!section || !shell) return () => {};
 
   if (shouldReduceFx()) {
-    clear();
     section.style.setProperty("--ai-duo", "1");
     section.classList.add("is-duo-settled");
     return () => {};
@@ -24,41 +20,34 @@ export function mount() {
   function target() {
     const vh = window.innerHeight || 1;
     const top = section.getBoundingClientRect().top;
-    return Math.max(0, Math.min(1, (vh - top) / vh));
-  }
-
-  function clear() {
-    shell.style.transform = "";
-    shell.style.filter = "";
-    if (frost) frost.style.opacity = "";
-    bands.forEach((el) => {
-      el.style.removeProperty("--ai-b");
-    });
+    const travel = Math.max(section.offsetHeight - vh, vh);
+    // 第一像素进视口就开始立；钉住时还没立直
+    const atPin = 0.36;
+    if (top >= vh) return 0;
+    if (top > 0) {
+      const raw = (vh - top) / vh;
+      const u = raw * (2 - raw);
+      return atPin * u;
+    }
+    const u = Math.max(0, Math.min(1, -top / (travel * 0.92)));
+    return atPin + (1 - atPin) * u;
   }
 
   function write(p) {
     const k = 1 - p;
-    const pitch = k * 56;
-    const pullY = 1 + k * 0.5;
-    const pullX = 1 + k * 0.06;
-
     section.style.setProperty("--ai-duo", p.toFixed(4));
     section.classList.toggle("is-duo-settled", p > 0.985);
 
     if (p > 0.985) {
-      clear();
+      shell.style.transform = "";
       return;
     }
 
+    const pitch = k * 54;
+    const pullY = 1 + k * 0.48;
+    const pullX = 1 + k * 0.05;
     shell.style.transform =
-      `rotateX(${(-pitch).toFixed(2)}deg) ` +
-      `scale3d(${pullX.toFixed(3)}, ${pullY.toFixed(3)}, 1)`;
-
-    if (frost) frost.style.opacity = k.toFixed(3);
-    const radii = [22, 14, 8, 3];
-    bands.forEach((el, i) => {
-      el.style.setProperty("--ai-b", `${(radii[i] * k).toFixed(2)}px`);
-    });
+      `rotateX(${(-pitch).toFixed(2)}deg) scale3d(${pullX.toFixed(3)}, ${pullY.toFixed(3)}, 1)`;
   }
 
   function tick() {
@@ -80,6 +69,15 @@ export function mount() {
   }
 
   write(target());
+  start();
+
+  window.addEventListener("scroll", start, { passive: true });
+  window.addEventListener("resize", start, { passive: true });
+  let lenisOff = null;
+  if (window.__lenis?.on) {
+    window.__lenis.on("scroll", start);
+    lenisOff = () => window.__lenis?.off?.("scroll", start);
+  }
 
   const io =
     typeof IntersectionObserver === "undefined"
@@ -89,14 +87,16 @@ export function mount() {
             if (entries.some((e) => e.isIntersecting)) start();
             else stop();
           },
-          { threshold: 0, rootMargin: "80px" }
+          { threshold: 0, rootMargin: "120px" }
         );
   if (io) io.observe(section);
-  else start();
 
   return function dispose() {
     stop();
+    window.removeEventListener("scroll", start);
+    window.removeEventListener("resize", start);
+    if (typeof lenisOff === "function") lenisOff();
     if (io) io.disconnect();
-    clear();
+    shell.style.transform = "";
   };
 }

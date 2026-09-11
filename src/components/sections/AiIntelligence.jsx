@@ -68,36 +68,44 @@ export default function AiIntelligence() {
   return (
     <section className="api-ai" id="ai-intelligence" aria-labelledby="api-ai-title">
       <div className="api-ai-pin">
-        <div className="api-ai-shell">
-          <canvas className="api-ai-flow" aria-hidden="true" />
-          <div className="api-ai-veil" aria-hidden="true" />
-          <div className="api-wrap">
-          <h2 className="api-h2" id="api-ai-title">
-            AI Make Every Tracking Signal <em>Smarter.</em>
-          </h2>
-          <p className="api-lead">
-            17TRACK AI Intelligence enhances tracking data from identification to
-            prediction—helping you deliver more accurate, complete, and reliable shipment
-            visibility.
-          </p>
-          <ul className="api-ai-tags">
-            <li>AI EDD</li>
-            <li>AI Carrier Identification</li>
-          </ul>
-          <div className="api-ai-stage">
-            <PanelEdd />
-            <PanelAi />
-            <PanelMap />
+        <div className="api-ai-persp">
+          <div className="api-ai-shell">
+            <div className="api-ai-live">
+              <canvas className="api-ai-flow" aria-hidden="true" />
+              <div className="api-ai-veil" aria-hidden="true" />
+              <div className="api-wrap">
+                <h2 className="api-h2" id="api-ai-title">
+                  AI Make Every Tracking Signal <em>Smarter.</em>
+                </h2>
+                <p className="api-lead">
+                  17TRACK AI Intelligence enhances tracking data from identification to
+                  prediction—helping you deliver more accurate, complete, and reliable shipment
+                  visibility.
+                </p>
+                <ul className="api-ai-tags">
+                  <li>AI EDD</li>
+                  <li>AI Carrier Identification</li>
+                </ul>
+                <div className="api-ai-stage">
+                  <PanelEdd />
+                  <PanelAi />
+                  <PanelMap />
+                </div>
+              </div>
+            </div>
           </div>
-          </div>
+        </div>
+        <div className="api-ai-pblur" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <i />
+          <i />
+          <i />
+          <i />
+          <b />
         </div>
       </div>
-        <div className="api-ai-frost" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-          <i />
-        </div>
     </section>
   );
 }
