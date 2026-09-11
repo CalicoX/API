@@ -7956,22 +7956,20 @@ html.is-reduce-fx .api-s5::after {
    ========================================================= */
 .api-ai {
   --ai-duo: 0;
-  --ai-frost: 1;
   position: relative;
-  min-height: 180vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   padding: 0;
-  overflow: visible;
-  isolation: isolate;
+  overflow: hidden;
   text-align: center;
   color: #fff;
   background: #05040f;
 }
 
 .api-ai-pin {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100dvh;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -7979,7 +7977,6 @@ html.is-reduce-fx .api-s5::after {
   background: #05040f;
   perspective: 1280px;
   perspective-origin: 50% 0%;
-  transform-style: preserve-3d;
 }
 
 .api-ai-shell {
@@ -7992,7 +7989,6 @@ html.is-reduce-fx .api-s5::after {
   box-sizing: border-box;
   overflow: hidden;
   transform-origin: 50% 0%;
-  transform-style: preserve-3d;
   backface-visibility: hidden;
   background:
     radial-gradient(ellipse 80% 70% at 18% 82%, rgba(5, 130, 232, 0.55), transparent 58%),
@@ -8001,56 +7997,54 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-ai:not(.is-duo-settled) .api-ai-shell {
-  will-change: transform, filter;
+  will-change: transform;
 }
 
 .api-ai-frost {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 4;
   pointer-events: none;
-  opacity: var(--ai-frost);
 }
 
 .api-ai-frost i {
   position: absolute;
-  inset: 0;
-  -webkit-backdrop-filter: blur(var(--ai-b)) saturate(1.2);
-  backdrop-filter: blur(var(--ai-b)) saturate(1.2);
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 calc(50% - var(--ai-band)),
-    #000 calc(50% + var(--ai-band)),
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 calc(50% - var(--ai-band)),
-    #000 calc(50% + var(--ai-band)),
-    transparent 100%
-  );
+  left: 0;
+  right: 0;
+  -webkit-backdrop-filter: blur(var(--ai-b, 0px)) saturate(1.15);
+  backdrop-filter: blur(var(--ai-b, 0px)) saturate(1.15);
 }
 
 .api-ai-frost i:nth-child(1) {
-  --ai-b: 4px;
-  --ai-band: calc((1 - var(--ai-duo)) * 48%);
+  top: 0;
+  height: 38%;
+  --ai-b: 22px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
 }
 
 .api-ai-frost i:nth-child(2) {
-  --ai-b: 12px;
-  --ai-band: calc((1 - var(--ai-duo)) * 32%);
+  top: 18%;
+  height: 32%;
+  --ai-b: 14px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent);
+  mask-image: linear-gradient(to bottom, #000 40%, transparent);
 }
 
 .api-ai-frost i:nth-child(3) {
-  --ai-b: 22px;
-  --ai-band: calc((1 - var(--ai-duo)) * 18%);
+  top: 38%;
+  height: 30%;
+  --ai-b: 8px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent);
+  mask-image: linear-gradient(to bottom, #000 35%, transparent);
 }
 
 .api-ai-frost i:nth-child(4) {
-  --ai-b: 36px;
-  --ai-band: calc((1 - var(--ai-duo)) * 8%);
+  top: 58%;
+  height: 42%;
+  --ai-b: 3px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 20%, transparent);
+  mask-image: linear-gradient(to bottom, #000 20%, transparent);
 }
 
 .api-ai.is-duo-settled .api-ai-frost {

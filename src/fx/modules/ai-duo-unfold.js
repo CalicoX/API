@@ -1,16 +1,18 @@
 import { shouldReduceFx } from "../utils.js";
 
 /**
- * AI 整段钉在视口里：透视拉伸 + 模糊。
- * 合上时绕顶边 rotateX 往下翻、沿纵向拉开；滚完回正、糊散掉。
+ * AI 段边滚边立：露头就开始 rotateX 回正，到位时立直。
+ * 渐进糊是 pin 上的四条横带（backdrop-filter），不挂在 3D 壳里。
  */
 export function mount() {
   const section = document.getElementById("ai-intelligence");
   const shell = section?.querySelector(".api-ai-shell");
+  const frost = section?.querySelector(".api-ai-frost");
+  const bands = frost ? [...frost.querySelectorAll("i")] : [];
   if (!section || !shell) return () => {};
 
   if (shouldReduceFx()) {
-    clear(shell);
+    clear();
     section.style.setProperty("--ai-duo", "1");
     section.classList.add("is-duo-settled");
     return () => {};
@@ -22,41 +24,41 @@ export function mount() {
   function target() {
     const vh = window.innerHeight || 1;
     const top = section.getBoundingClientRect().top;
-    const travel = Math.max(1, section.offsetHeight - vh);
-    return Math.max(0, Math.min(1, -top / travel));
+    return Math.max(0, Math.min(1, (vh - top) / vh));
   }
 
-  function ease(t) {
-    return t * t * (3 - 2 * t);
+  function clear() {
+    shell.style.transform = "";
+    shell.style.filter = "";
+    if (frost) frost.style.opacity = "";
+    bands.forEach((el) => {
+      el.style.removeProperty("--ai-b");
+    });
   }
 
-  function clear(node) {
-    node.style.transform = "";
-    node.style.filter = "";
-  }
-
-  function write(raw) {
-    const p = ease(raw);
+  function write(p) {
     const k = 1 - p;
     const pitch = k * 56;
-    const pullY = 1 + k * 0.52;
-    const pullX = 1 + k * 0.08;
-    const blur = k * 18;
-    const frost = Math.max(0, 1 - Math.max(0, (p - 0.1) / 0.8));
+    const pullY = 1 + k * 0.5;
+    const pullX = 1 + k * 0.06;
 
     section.style.setProperty("--ai-duo", p.toFixed(4));
-    section.style.setProperty("--ai-frost", frost.toFixed(4));
     section.classList.toggle("is-duo-settled", p > 0.985);
 
     if (p > 0.985) {
-      clear(shell);
+      clear();
       return;
     }
 
     shell.style.transform =
       `rotateX(${(-pitch).toFixed(2)}deg) ` +
       `scale3d(${pullX.toFixed(3)}, ${pullY.toFixed(3)}, 1)`;
-    shell.style.filter = `blur(${blur.toFixed(2)}px) saturate(${(0.72 + 0.28 * p).toFixed(2)})`;
+
+    if (frost) frost.style.opacity = k.toFixed(3);
+    const radii = [22, 14, 8, 3];
+    bands.forEach((el, i) => {
+      el.style.setProperty("--ai-b", `${(radii[i] * k).toFixed(2)}px`);
+    });
   }
 
   function tick() {
@@ -87,7 +89,7 @@ export function mount() {
             if (entries.some((e) => e.isIntersecting)) start();
             else stop();
           },
-          { threshold: 0, rootMargin: "40px" }
+          { threshold: 0, rootMargin: "80px" }
         );
   if (io) io.observe(section);
   else start();
@@ -95,6 +97,6 @@ export function mount() {
   return function dispose() {
     stop();
     if (io) io.disconnect();
-    clear(shell);
+    clear();
   };
 }
