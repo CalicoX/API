@@ -7956,6 +7956,7 @@ html.is-reduce-fx .api-s5::after {
    ========================================================= */
 .api-ai {
   --ai-duo: 0;
+  --ai-blur: 1;
   position: relative;
   min-height: 240vh;
   padding: 0;
@@ -8023,7 +8024,7 @@ html.is-reduce-fx .api-s5::after {
   bottom: 0;
   z-index: 6;
   width: 100%;
-  height: 56%;
+  height: 72%;
   pointer-events: none;
 }
 
@@ -8034,58 +8035,58 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-ai-pblur > i:nth-child(1) {
-  -webkit-backdrop-filter: blur(calc(1px * (1 - var(--ai-duo))));
-  backdrop-filter: blur(calc(1px * (1 - var(--ai-duo))));
-  -webkit-mask: linear-gradient(to bottom, transparent, #000 10%, #000 30%, transparent 40%);
-  mask: linear-gradient(to bottom, transparent, #000 10%, #000 30%, transparent 40%);
+  -webkit-backdrop-filter: blur(calc(4px * var(--ai-blur)));
+  backdrop-filter: blur(calc(4px * var(--ai-blur)));
+  -webkit-mask: linear-gradient(to bottom, transparent, #000 8%, #000 28%, transparent 40%);
+  mask: linear-gradient(to bottom, transparent, #000 8%, #000 28%, transparent 40%);
 }
 
 .api-ai-pblur > i:nth-child(2) {
-  -webkit-backdrop-filter: blur(calc(2px * (1 - var(--ai-duo))));
-  backdrop-filter: blur(calc(2px * (1 - var(--ai-duo))));
-  -webkit-mask: linear-gradient(to bottom, transparent 10%, #000 20%, #000 40%, transparent 50%);
-  mask: linear-gradient(to bottom, transparent 10%, #000 20%, #000 40%, transparent 50%);
+  -webkit-backdrop-filter: blur(calc(10px * var(--ai-blur)));
+  backdrop-filter: blur(calc(10px * var(--ai-blur)));
+  -webkit-mask: linear-gradient(to bottom, transparent 8%, #000 18%, #000 38%, transparent 50%);
+  mask: linear-gradient(to bottom, transparent 8%, #000 18%, #000 38%, transparent 50%);
 }
 
 .api-ai-pblur > i:nth-child(3) {
-  -webkit-backdrop-filter: blur(calc(4px * (1 - var(--ai-duo))));
-  backdrop-filter: blur(calc(4px * (1 - var(--ai-duo))));
-  -webkit-mask: linear-gradient(to bottom, transparent 15%, #000 30%, #000 50%, transparent 60%);
-  mask: linear-gradient(to bottom, transparent 15%, #000 30%, #000 50%, transparent 60%);
+  -webkit-backdrop-filter: blur(calc(20px * var(--ai-blur)));
+  backdrop-filter: blur(calc(20px * var(--ai-blur)));
+  -webkit-mask: linear-gradient(to bottom, transparent 12%, #000 28%, #000 50%, transparent 62%);
+  mask: linear-gradient(to bottom, transparent 12%, #000 28%, #000 50%, transparent 62%);
 }
 
 .api-ai-pblur > i:nth-child(4) {
-  -webkit-backdrop-filter: blur(calc(8px * (1 - var(--ai-duo))));
-  backdrop-filter: blur(calc(8px * (1 - var(--ai-duo))));
-  -webkit-mask: linear-gradient(to bottom, transparent 20%, #000 40%, #000 60%, transparent 70%);
-  mask: linear-gradient(to bottom, transparent 20%, #000 40%, #000 60%, transparent 70%);
+  -webkit-backdrop-filter: blur(calc(40px * var(--ai-blur)));
+  backdrop-filter: blur(calc(40px * var(--ai-blur)));
+  -webkit-mask: linear-gradient(to bottom, transparent 18%, #000 38%, #000 62%, transparent 74%);
+  mask: linear-gradient(to bottom, transparent 18%, #000 38%, #000 62%, transparent 74%);
 }
 
 .api-ai-pblur > i:nth-child(5) {
-  -webkit-backdrop-filter: blur(calc(16px * (1 - var(--ai-duo))));
-  backdrop-filter: blur(calc(16px * (1 - var(--ai-duo))));
-  -webkit-mask: linear-gradient(to bottom, transparent 40%, #000 60%, #000 80%, transparent 90%);
-  mask: linear-gradient(to bottom, transparent 40%, #000 60%, #000 80%, transparent 90%);
+  -webkit-backdrop-filter: blur(calc(72px * var(--ai-blur)));
+  backdrop-filter: blur(calc(72px * var(--ai-blur)));
+  -webkit-mask: linear-gradient(to bottom, transparent 32%, #000 52%, #000 78%, transparent 90%);
+  mask: linear-gradient(to bottom, transparent 32%, #000 52%, #000 78%, transparent 90%);
 }
 
 .api-ai-pblur > i:nth-child(6) {
-  -webkit-backdrop-filter: blur(calc(32px * (1 - var(--ai-duo))));
-  backdrop-filter: blur(calc(32px * (1 - var(--ai-duo))));
-  -webkit-mask: linear-gradient(to bottom, transparent 60%, #000 80%);
-  mask: linear-gradient(to bottom, transparent 60%, #000 80%);
+  -webkit-backdrop-filter: blur(calc(110px * var(--ai-blur)));
+  backdrop-filter: blur(calc(110px * var(--ai-blur)));
+  -webkit-mask: linear-gradient(to bottom, transparent 42%, #000 68%);
+  mask: linear-gradient(to bottom, transparent 42%, #000 68%);
 }
 
 .api-ai-pblur > i:nth-child(7) {
   z-index: 10;
-  -webkit-backdrop-filter: blur(calc(64px * (1 - var(--ai-duo))));
-  backdrop-filter: blur(calc(64px * (1 - var(--ai-duo))));
-  -webkit-mask: linear-gradient(to bottom, transparent 70%, #000 100%);
-  mask: linear-gradient(to bottom, transparent 70%, #000 100%);
+  -webkit-backdrop-filter: blur(calc(160px * var(--ai-blur)));
+  backdrop-filter: blur(calc(160px * var(--ai-blur)));
+  -webkit-mask: linear-gradient(to bottom, transparent 52%, #000 88%);
+  mask: linear-gradient(to bottom, transparent 52%, #000 88%);
 }
 
 .api-ai-pblur > b {
-  background: linear-gradient(to bottom, transparent, #05040f);
-  opacity: calc(0.72 * (1 - var(--ai-duo)));
+  background: linear-gradient(to bottom, transparent 30%, rgba(5, 4, 15, 0.55) 78%, #05040f);
+  opacity: calc(0.85 * var(--ai-blur));
 }
 
 .api-ai.is-duo-settled .api-ai-pblur {

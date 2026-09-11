@@ -172,7 +172,7 @@ describe("API landing structure (gating)", () => {
     expect(ai).toMatch(/api-ai-live/);
     expect(ai).toMatch(/api-ai-pblur/);
     expect(read("styles/api-page.css")).toMatch(/progressive-blur/);
-    expect(read("styles/api-page.css")).toMatch(/backdrop-filter: blur\(calc\(64px/);
+    expect(read("styles/api-page.css")).toMatch(/backdrop-filter: blur\(calc\(160px/);
     expect(ai).toMatch(/api-ai-panel/);
     expect(ai).toMatch(/api-ai-orb/);
     expect(read("fx/modules/topbar-on-dark.js")).toMatch(/ai-intelligence|api-ai/);

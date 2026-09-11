@@ -36,6 +36,8 @@ export function mount() {
   function write(p) {
     const k = 1 - p;
     section.style.setProperty("--ai-duo", p.toFixed(4));
+    const blur = p < 0.38 ? 1 : Math.max(0, 1 - (p - 0.38) / 0.62);
+    section.style.setProperty("--ai-blur", blur.toFixed(4));
     section.classList.toggle("is-duo-settled", p > 0.985);
 
     if (p > 0.985) {
