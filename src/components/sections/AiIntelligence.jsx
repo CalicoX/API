@@ -67,6 +67,7 @@ function PanelMap() {
 export default function AiIntelligence() {
   return (
     <section className="api-ai" id="ai-intelligence" aria-labelledby="api-ai-title">
+      <div className="api-ai-pin">
       <div className="api-ai-shell">
         <canvas className="api-ai-flow" aria-hidden="true" />
         <div className="api-ai-veil" aria-hidden="true" />
@@ -95,6 +96,7 @@ export default function AiIntelligence() {
             <PanelMap />
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

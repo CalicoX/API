@@ -166,6 +166,7 @@ describe("API landing structure (gating)", () => {
     expect(ai).toMatch(/AI EDD/);
     expect(ai).toMatch(/AI Carrier Identification/);
     expect(ai).toMatch(/api-ai-flow/);
+    expect(ai).toMatch(/api-ai-pin/);
     expect(ai).toMatch(/api-ai-shell/);
     expect(ai).toMatch(/api-ai-frost/);
     expect(ai).toMatch(/api-ai-panel/);

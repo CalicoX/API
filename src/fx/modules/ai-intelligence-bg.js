@@ -8,6 +8,7 @@ import { shouldReduceFx } from "../utils.js";
 export function mount() {
   const section = document.getElementById("ai-intelligence");
   const canvas = section?.querySelector(".api-ai-flow");
+  const sizeEl = section?.querySelector(".api-ai-pin") || section;
   if (!section || !canvas) return () => {};
 
   if (shouldReduceFx()) {
@@ -17,7 +18,7 @@ export function mount() {
 
   let glApi = null;
   try {
-    glApi = createIntroFlowGl(canvas, section);
+    glApi = createIntroFlowGl(canvas, sizeEl);
   } catch {
     glApi = null;
   }
@@ -80,7 +81,7 @@ export function mount() {
     ro = new ResizeObserver(() => {
       glApi.resize();
     });
-    ro.observe(section);
+    ro.observe(sizeEl);
   }
 
   return function dispose() {
