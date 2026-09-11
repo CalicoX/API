@@ -7958,8 +7958,7 @@ html.is-reduce-fx .api-s5::after {
   --ai-duo: 0;
   --ai-blur: 1;
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 145vh;
   padding: 0;
   overflow: visible;
   text-align: center;
@@ -7968,8 +7967,8 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-ai-pin {
-  position: relative;
-  top: auto;
+  position: sticky;
+  top: 0;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;

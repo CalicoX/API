@@ -29,11 +29,12 @@ export function mount() {
 
     if (top >= start) return { enter: 0, leave: 0 };
 
-    // 离场跟页面一起往下走，不靠加长 sticky 锁屏
-    if (top < 0) {
-      const u = Math.max(0, Math.min(1, -top / (vh * 0.82)));
+    const hold = vh * 0.45;
+    if (top < -hold) {
+      const u = Math.max(0, Math.min(1, (-hold - top) / (vh * 0.82)));
       return { enter: 1, leave: u };
     }
+    if (top <= 0) return { enter: 1, leave: 0 };
 
     if (top > almost) {
       return { enter: atAlmost * (start - top) / (start - almost), leave: 0 };
