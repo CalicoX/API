@@ -1,86 +1,100 @@
 import { shouldReduceFx } from "../utils.js";
 
 /**
- * AI 整段 Duo 式展开：滚入时从中间拉开 + 渐进模糊。
- * --ai-duo 0 合上 / 1 打开；--ai-frost 糊层透明度（略滞后于拉伸）。
- * ≤640 / reduce-motion 定格打开。
+ * AI 整段钉在视口里：透视拉伸 + 模糊。
+ * 合上时绕顶边 rotateX 往下翻、沿纵向拉开；滚完回正、糊散掉。
  */
 export function mount() {
   const section = document.getElementById("ai-intelligence");
-  if (!section) return () => {};
+  const shell = section?.querySelector(".api-ai-shell");
+  if (!section || !shell) return () => {};
 
   if (shouldReduceFx()) {
+    clear(shell);
     section.style.setProperty("--ai-duo", "1");
-    section.style.setProperty("--ai-frost", "0");
+    section.classList.add("is-duo-settled");
     return () => {};
   }
 
   let raf = 0;
-  let current = 1;
-  let running = false;
+  let looping = false;
 
   function target() {
-    const r = section.getBoundingClientRect();
     const vh = window.innerHeight || 1;
-    const t = (vh - r.top) / vh;
-    const p = Math.max(0, Math.min(1, t));
-    return p * p * (3 - 2 * p);
+    const top = section.getBoundingClientRect().top;
+    const travel = Math.max(1, section.offsetHeight - vh);
+    return Math.max(0, Math.min(1, -top / travel));
   }
 
-  function write(p) {
-    const frost = Math.max(0, Math.min(1, 1 - Math.max(0, (p - 0.08) / 0.86)));
+  function ease(t) {
+    return t * t * (3 - 2 * t);
+  }
+
+  function clear(node) {
+    node.style.transform = "";
+    node.style.filter = "";
+  }
+
+  function write(raw) {
+    const p = ease(raw);
+    const k = 1 - p;
+    const pitch = k * 56;
+    const pullY = 1 + k * 0.52;
+    const pullX = 1 + k * 0.08;
+    const blur = k * 18;
+    const frost = Math.max(0, 1 - Math.max(0, (p - 0.1) / 0.8));
+
     section.style.setProperty("--ai-duo", p.toFixed(4));
     section.style.setProperty("--ai-frost", frost.toFixed(4));
     section.classList.toggle("is-duo-settled", p > 0.985);
+
+    if (p > 0.985) {
+      clear(shell);
+      return;
+    }
+
+    shell.style.transform =
+      `rotateX(${(-pitch).toFixed(2)}deg) ` +
+      `scale3d(${pullX.toFixed(3)}, ${pullY.toFixed(3)}, 1)`;
+    shell.style.filter = `blur(${blur.toFixed(2)}px) saturate(${(0.72 + 0.28 * p).toFixed(2)})`;
   }
 
   function tick() {
-    raf = 0;
-    const next = target();
-    current += (next - current) * 0.55;
-    if (Math.abs(next - current) < 0.002) current = next;
-    write(current);
-    if (Math.abs(next - current) > 0.002) {
-      raf = requestAnimationFrame(tick);
-    } else {
-      running = false;
-    }
+    write(target());
+    if (looping) raf = requestAnimationFrame(tick);
+    else raf = 0;
   }
 
-  function schedule() {
-    if (raf) return;
-    running = true;
+  function start() {
+    if (looping) return;
+    looping = true;
     raf = requestAnimationFrame(tick);
   }
 
+  function stop() {
+    looping = false;
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+  }
+
   write(target());
-  current = target();
 
-  window.addEventListener("scroll", schedule, { passive: true });
-  window.addEventListener("resize", schedule, { passive: true });
-
-  let lenisOff = null;
-  const bindLenis = () => {
-    if (window.__lenis && typeof window.__lenis.on === "function") {
-      window.__lenis.on("scroll", schedule);
-      lenisOff = () => {
-        try {
-          window.__lenis?.off?.("scroll", schedule);
-        } catch {
-          /* older lenis */
-        }
-      };
-    }
-  };
-  bindLenis();
-  const lenisRetry = setTimeout(bindLenis, 0);
+  const io =
+    typeof IntersectionObserver === "undefined"
+      ? null
+      : new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) start();
+            else stop();
+          },
+          { threshold: 0, rootMargin: "40px" }
+        );
+  if (io) io.observe(section);
+  else start();
 
   return function dispose() {
-    running = false;
-    if (raf) cancelAnimationFrame(raf);
-    clearTimeout(lenisRetry);
-    window.removeEventListener("scroll", schedule);
-    window.removeEventListener("resize", schedule);
-    if (typeof lenisOff === "function") lenisOff();
+    stop();
+    if (io) io.disconnect();
+    clear(shell);
   };
 }

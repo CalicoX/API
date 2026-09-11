@@ -11,7 +11,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- **AI 整段 Duo 展开（2026-09-11 Park）**：整段（含背景）滚入时从中间拉开。进度跟入屏：`top=100vh` 合上 → `top=0` 打开。合上 scaleX 0.58 + clip 18%，四层 `backdrop-filter` 中间最糊、略滞后于拉伸。段底透明，两边露出页面白，打开后铺满。≤640 / reduce-motion 定格打开。自己写的，没搬外部 Duo 仓库。
+- **AI 整段 Duo 展开（2026-09-11 Park）**：透视方向从上到下，不是左右。铰链在顶：`rotateX` 56°→0 + `scaleY` 往下拉，`filter: blur` 18→0。perspective-origin / transform-origin 都在顶边。≤640 / reduce 定格。
 
 - **TrustBand 加高一点（2026-09-11 Park）**：`.trust` 上下 padding 从 `--sec-y-tight`（最高 96）改 `clamp(72px, 8vw, 128px)`。只加这段，不动物标尺寸。1024 档 36/40 仍紧，Park 再圈再改。
 
