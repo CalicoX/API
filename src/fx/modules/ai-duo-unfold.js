@@ -23,33 +23,25 @@ export function mount() {
   function target() {
     const vh = window.innerHeight || 1;
     const top = section.getBoundingClientRect().top;
-    const travel = Math.max(section.offsetHeight - vh, vh);
     const start = vh * 1.45;
     const almost = vh * 0.08;
     const atAlmost = 0.94;
-    const standEnd = -vh * 0.06;
-    const leaveEnd = -travel;
-    const leaveStart = leaveEnd + vh * 1.05;
 
     if (top >= start) return { enter: 0, leave: 0 };
 
-    if (top <= leaveStart) {
-      const span = Math.max(leaveStart - leaveEnd, 1);
-      const u = Math.max(0, Math.min(1, (leaveStart - top) / span));
+    // 离场跟页面一起往下走，不靠加长 sticky 锁屏
+    if (top < 0) {
+      const u = Math.max(0, Math.min(1, -top / (vh * 0.82)));
       return { enter: 1, leave: u };
     }
 
     if (top > almost) {
       return { enter: atAlmost * (start - top) / (start - almost), leave: 0 };
     }
-    if (top > 0) return { enter: atAlmost, leave: 0 };
-    if (top > standEnd) {
-      return {
-        enter: atAlmost + (1 - atAlmost) * (-top / -standEnd),
-        leave: 0,
-      };
-    }
-    return { enter: 1, leave: 0 };
+    return {
+      enter: atAlmost + (1 - atAlmost) * (almost - top) / almost,
+      leave: 0,
+    };
   }
 
   function write(state) {
