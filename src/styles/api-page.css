@@ -7988,11 +7988,11 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-ai.is-leaving .api-ai-persp {
-  perspective-origin: 50% 0%;
+  perspective-origin: 50% 100%;
 }
 
 .api-ai.is-leaving .api-ai-shell {
-  transform-origin: 50% 0%;
+  transform-origin: 50% 100%;
 }
 
 .api-ai-shell {
@@ -8024,7 +8024,7 @@ html.is-reduce-fx .api-s5::after {
     #08071a;
 }
 
-/* kennethnym.com/blog/progressive-blur-in-css — 进：贴底顶清；离：从上沿开始糊 */
+/* 进：顶铰链、贴底糊。离：底边折、贴顶糊 */
 .api-ai-pblur {
   --ai-blur-dir: to bottom;
   position: absolute;

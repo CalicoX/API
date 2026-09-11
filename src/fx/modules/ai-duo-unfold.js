@@ -2,7 +2,7 @@ import { shouldReduceFx } from "../utils.js";
 
 /**
  * 进屏：顶铰链立正，底糊。
- * 离开：不原路折回，从上沿开始透视 + 顶糊。
+ * 离开：底边开始折，顶糊。
  */
 export function mount() {
   const section = document.getElementById("ai-intelligence");
@@ -69,7 +69,7 @@ export function mount() {
       const pitch = leave * 54;
       const pullY = 1 + leave * 0.48;
       const pullX = 1 + leave * 0.05;
-      shell.style.transformOrigin = "50% 0%";
+      shell.style.transformOrigin = "50% 100%";
       shell.style.transform =
         `rotateX(${pitch.toFixed(2)}deg) scale3d(${pullX.toFixed(3)}, ${pullY.toFixed(3)}, 1)`;
       return;
