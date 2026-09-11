@@ -20,18 +20,31 @@ export function mount() {
   function target() {
     const vh = window.innerHeight || 1;
     const top = section.getBoundingClientRect().top;
-    const travel = Math.max(section.offsetHeight - vh, vh * 0.35);
-    // 还在视口下面就开始立，快铺满时基本立直
+    const travel = Math.max(section.offsetHeight - vh, vh);
     const start = vh * 1.45;
     const almost = vh * 0.08;
     const atAlmost = 0.94;
+    const standEnd = -vh * 0.06;
+    const leaveEnd = -travel;
+    const leaveStart = leaveEnd + vh * 1.05;
+
     if (top >= start) return 0;
+
+    // 往下离开：立正再折回去
+    if (top <= leaveStart) {
+      const span = Math.max(leaveStart - leaveEnd, 1);
+      const u = Math.max(0, Math.min(1, (leaveStart - top) / span));
+      return 1 - u;
+    }
+
     if (top > almost) {
       return atAlmost * (start - top) / (start - almost);
     }
     if (top > 0) return atAlmost;
-    const u = Math.max(0, Math.min(1, -top / (travel * 0.14)));
-    return atAlmost + (1 - atAlmost) * u;
+    if (top > standEnd) {
+      return atAlmost + (1 - atAlmost) * (-top / -standEnd);
+    }
+    return 1;
   }
 
   function write(p) {
@@ -40,7 +53,7 @@ export function mount() {
     section.style.setProperty("--ai-blur", k.toFixed(4));
     section.classList.toggle("is-duo-settled", p > 0.992);
 
-    if (p > 0.985) {
+    if (p > 0.992) {
       shell.style.transform = "";
       return;
     }

@@ -11,7 +11,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
-- **AI 整段 Duo 展开（2026-09-11 Park）**：立正要**更靠前**——`top=1.45vh` 就开始，`top≈0.08vh` 已到 `p≈0.94`，钉住后只留极短收尾（段高 155vh）。糊值跟 `1-p` 一路降，禁止满幅撑着再 `display:none` 一下切掉。透视顶铰链 `rotateX`。渐进糊贴底、顶清、远处最糊。≤640 / reduce 定格。
+- **AI 整段 Duo 展开（2026-09-11 Park）**：进屏立正靠前（`top=1.45vh` 起，快铺满 `p≈0.94`）。钉住看一会儿后，**往下滚离开再反向折回去**（糊也跟 `1-p` 回来）。段高 220vh：进 → 短停直立 → 离段约 1.05vh 折回。糊层不要 `display:none`。≤640 / reduce 定格。
 
 - **TrustBand 加高一点（2026-09-11 Park）**：`.trust` 上下 padding 从 `--sec-y-tight`（最高 96）改 `clamp(72px, 8vw, 128px)`。只加这段，不动物标尺寸。1024 档 36/40 仍紧，Park 再圈再改。
 
@@ -216,6 +216,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 日志
 
+- 2026-09-11 16:06 — memory.md、ai-duo-unfold.js、api-page.css
 - 2026-09-11 16:03 — memory.md、ai-duo-unfold.js、api-page.css
 - 2026-09-11 16:00 — memory.md、ai-duo-unfold.js、api-page.css
 - 2026-09-11 15:53 — memory.md、ai-duo-unfold.js、structure.test.js、api-page.css
@@ -235,4 +236,3 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 2026-08-18 19:28 — memory.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-18 19:18 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css
 - 2026-08-18 19:05 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css
-- 2026-08-18 18:52 — memory.md、AGENTS.md、ApiDomVisuals.jsx、api-page.css

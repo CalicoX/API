@@ -7958,7 +7958,7 @@ html.is-reduce-fx .api-s5::after {
   --ai-duo: 0;
   --ai-blur: 1;
   position: relative;
-  min-height: 155vh;
+  min-height: 220vh;
   padding: 0;
   overflow: visible;
   text-align: center;
@@ -8090,7 +8090,7 @@ html.is-reduce-fx .api-s5::after {
 }
 
 .api-ai.is-duo-settled .api-ai-pblur {
-  visibility: hidden;
+  pointer-events: none;
 }
 
 .api-ai-flow {
