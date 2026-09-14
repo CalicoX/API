@@ -38,7 +38,7 @@ const SCENES = [
     idx: "01",
     title: "Tracking Data That Counts",
     body: "Standardized 9+30 shipment statuses give your systems a consistent view of shipment progress across carriers.",
-    dwell: 3400,
+    dwell: 4600,
   },
   {
     Visual: DataCarriersStage,
@@ -46,7 +46,7 @@ const SCENES = [
     idx: "02",
     title: "Global Carriers Covered",
     body: "Access tracking data from 4,000+ carriers through one reliable data layer.",
-    dwell: 3800,
+    dwell: 5800,
   },
   {
     Visual: DataHubStage,
@@ -54,7 +54,7 @@ const SCENES = [
     idx: "03",
     title: "Smart Carrier Identification",
     body: "Automatically identify carriers for 80%+ of tracking numbers and keep shipment data continuously updated until delivery.",
-    dwell: 4000,
+    dwell: 5200,
   },
   {
     Visual: DataChartStage,
@@ -62,7 +62,7 @@ const SCENES = [
     idx: "04",
     title: "Actionable tracking insights",
     body: "Monitor tracking accuracy, shipment status, carrier performance, and webhook activity in one dashboard.",
-    dwell: 4000,
+    dwell: 5600,
   },
 ];
 
