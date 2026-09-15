@@ -14,7 +14,9 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 - **Hero 标题字被切（2026-09-15 Park 圈了 API / Up-to-Date）**：`.api-h1` 全局 `line-height: 1.1`，字内光 `background-clip: text` 把行盒裁得比字形矮，第二行 API / Tracking 的 g 底被切。Hero h1 改 `line-height: 1.22` + `padding-block: 0.04em` + `overflow: visible`，和 h2 的缝 10→14。nowrap 加 `hyphens: none`，避免 Up-to-Date 在连字符处折开。
 
-- **Hero 背景首屏不要空等（2026-09-15 Park「页面出来但是还是空的背景」）**：`.api-s1.hero` 第一帧就铺 CSS 棱条灰白底（原 fallback 配方），不再白底干等 WebGL。`hero-wash-shader` 在 responsive 之后立刻挂、chunk 在 useLandingEffects 求值时就开始拉，不再排在 dock / use-cases 后面。canvas 首帧后 `.is-ready` 淡入（0.45s）盖住 CSS。手机/减动效本来就不挂 shader，现在也有条纹底。
+- **Hero 初始背景要对上 shader idle（2026-09-15 Park「初始的背景不对」）**：第一帧 CSS 不能用旧 24px 细灰条（看起来像笔记本线）。按 Undertones idle：Swirl `#FFFFFF`/`#EBEBEB`、FlutedGlass 31°、freq 8，周期 `100vw/8` 的宽软棱。WebGL 盖上来之前/手机降 FX 都吃这层。先前「空等白底」那轮的细条纹作废。
+
+- **Hero 背景首屏不要空等（2026-09-15 Park「页面出来但是还是空的背景」）**：`.api-s1.hero` 第一帧就铺 CSS 底，不再白底干等 WebGL。`hero-wash-shader` 在 responsive 之后立刻挂、chunk 在 useLandingEffects 求值时就开始拉，不再排在 dock / use-cases 后面。canvas 首帧后 `.is-ready` 淡入盖住 CSS。条纹配方见上条（2026-09-15 已改宽棱）。
 
 - **Data Operations 四场停留（2026-09-14 Park 两轮）**：先从 5200/5800/6200/6400 收到 3400/3800/4000/4000，Park「缩太多、动画没播完」。改回盖过入场再留一点看：4600/5800/5200/5600。承运商场连线流光最后一根 `2s+7×0.55s=5.85s`，所以 02 回到 5800；01 胶囊完 ~2.3s；03 打字+扫+面板块 ~3.1s；04 曲线 4.5s / donut 3.2s。只减空等，不改进出场。
 

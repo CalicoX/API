@@ -154,21 +154,21 @@
 /* =========================================================
    Section 1 — Hero + signup form
    ========================================================= */
-/* Idle pearl fluted wash on first paint (WebGL covers it once ready).
-   Same recipe as the old .hero-shader-fallback — don't wait for JS. */
+/* First-paint = Undertones idle: Swirl #FFF/#EBEBEB, FlutedGlass 31° / freq 8.
+   Wide soft ridges (period ~12.5vw), not the old 24px grey pinstripe. */
 .api-s1,
 .api-page .api-s1.hero,
 .api-page .api-s1.hero.hero-shader-fallback {
   background:
     repeating-linear-gradient(
       31deg,
-      rgba(255, 255, 255, 0) 0px,
-      rgba(255, 255, 255, 0) 11px,
-      rgba(240, 242, 248, 0.35) 15px,
-      rgba(255, 255, 255, 0.75) 19px,
-      rgba(255, 255, 255, 0) 24px
-    ),
-    #fbfcfe;
+      #ffffff 0,
+      #ffffff calc(100vw / 8 * 0.42),
+      #f4f4f4 calc(100vw / 8 * 0.7),
+      #ebebeb calc(100vw / 8 * 0.86),
+      #f7f7f7 calc(100vw / 8 * 0.94),
+      #ffffff calc(100vw / 8)
+    );
 }
 
 .api-s1 {
