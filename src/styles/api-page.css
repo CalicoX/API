@@ -241,6 +241,8 @@
 
 .api-s1-copy .api-nowrap {
   white-space: nowrap;
+  hyphens: none;
+  -webkit-hyphens: none;
 }
 
 /* 注册成 <number> 才能对 hover 光强做平滑过渡 */
@@ -253,7 +255,11 @@
 .api-s1-copy h1.api-h1 {
   --h1-x: 50%;
   --h1-y: 42%;
-  margin-bottom: 10px;
+  /* 1.1 行盒比字形矮，background-clip:text 会切掉 API / g 的底 */
+  line-height: 1.22;
+  margin-bottom: 14px;
+  padding-block: 0.04em;
+  overflow: visible;
   text-wrap: pretty;
   /* 字内光：光斑裁进字形，底层保持墨色。单色相品牌蓝，保持比背景深，不发浅、不发紫 */
   background:
