@@ -7781,46 +7781,15 @@ html.is-reduce-fx .api-s5::after {
 .api-ent-badges li {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border: 1px solid transparent;
+  padding: 6px 14px;
+  border: 1px solid var(--border-default, #e6e8ec);
   border-radius: 999px;
+  background: #fff;
+  color: var(--text-secondary, #5c6370);
   font-size: 13px;
   font-weight: 600;
   line-height: 18px;
   letter-spacing: -0.01em;
-}
-
-.api-ent-badges li::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.api-ent-badges li[data-kind="visible"] {
-  background: #dbeafe;
-  border-color: #bfdbfe;
-  color: #1d4ed8;
-}
-
-.api-ent-badges li[data-kind="reliable"] {
-  background: #d1fae5;
-  border-color: #a7f3d0;
-  color: #047857;
-}
-
-.api-ent-badges li[data-kind="trust"] {
-  background: #ede9fe;
-  border-color: #ddd6fe;
-  color: #6d28d9;
-}
-
-.api-ent-badges li[data-kind="secure"] {
-  background: #ffedd5;
-  border-color: #fed7aa;
-  color: #c2410c;
 }
 
 .api-ent-cards {

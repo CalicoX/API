@@ -12,6 +12,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **Enterprise 四词胶囊去点、去彩（2026-09-15 Park）**：Visible / Reliable / Trust / Secure 不再四色浅底+圆点。改白底、灰描边 `#e6e8ec`、字 `#5c6370`，跟落地页 `.badge` 同款但不带 `::before` 点。文案不动。
+
 - **Hero 标题字被切（2026-09-15 Park 圈了 API / Up-to-Date）**：`.api-h1` 全局 `line-height: 1.1`，字内光 `background-clip: text` 把行盒裁得比字形矮，第二行 API / Tracking 的 g 底被切。Hero h1 改 `line-height: 1.22` + `padding-block: 0.04em` + `overflow: visible`，和 h2 的缝 10→14。nowrap 加 `hyphens: none`，避免 Up-to-Date 在连字符处折开。
 
 - **Hero 初始背景要对上 shader idle（2026-09-15 Park「初始的背景不对」）**：第一帧 CSS 不能用旧 24px 细灰条（看起来像笔记本线）。按 Undertones idle：Swirl `#FFFFFF`/`#EBEBEB`、FlutedGlass 31°、freq 8，周期 `100vw/8` 的宽软棱。WebGL 盖上来之前/手机降 FX 都吃这层。先前「空等白底」那轮的细条纹作废。
