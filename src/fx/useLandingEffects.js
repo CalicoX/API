@@ -10,7 +10,11 @@ import {
 
 /**
  * Static import map so Vite emits real FX chunks (literal paths only).
+ * Hero wash is above-the-fold: start the chunk fetch as soon as this module
+ * evaluates, so it overlaps React first paint instead of waiting for dock.
  */
+const heroWashChunk = import("./modules/hero-wash-shader.js");
+
 const FX_LOADERS = {
   responsive: () => import("./modules/responsive-fx.js"),
   borderBeam: () => import("./modules/border-beam.js"),
@@ -18,7 +22,7 @@ const FX_LOADERS = {
   useCasesScroll: () => import("./modules/use-cases-scroll.js"),
   useCasesBg: () => import("./modules/use-cases-bg-shader.js"),
   undertones: () => import("./modules/undertones-shader.js"),
-  heroWash: () => import("./modules/hero-wash-shader.js"),
+  heroWash: () => heroWashChunk,
   impactMetrics: () => import("./modules/impact-metrics.js"),
   impactBg: () => import("./modules/impact-bg-shader.js"),
   landingInline: () => import("./modules/landing-inline.js"),
@@ -79,6 +83,11 @@ export function useLandingEffects() {
     // —— Core above-the-fold ——
     (async () => {
       await mountNamed("responsive");
+      const hero = document.querySelector(".hero");
+      /* Hero shader first — don't sit behind dock / use-cases / btn FX */
+      if (hero?.classList.contains("api-s1") && !shouldReduceFx()) {
+        mountNamed("heroWash");
+      }
       await mountNamed("borderBeam");
       // Always-on: topbar opacity when over dark sections (no #ai-lab required)
       await mountNamed("topbarOnDark");
@@ -104,26 +113,21 @@ export function useLandingEffects() {
         console.warn("[useLandingEffects] product dock", err);
       }
 
-      const hero = document.querySelector(".hero");
-      if (hero && !shouldReduceFx()) {
-        if (hero.classList.contains("api-s1")) {
-          await mountNamed("heroWash");
-        } else {
-          const stopIdle = whenIdle(() => {
-            const unvis = observeVisibility(
-              hero,
-              (vis) => {
-                if (vis && !hero.dataset.fxUndertones) {
-                  hero.dataset.fxUndertones = "1";
-                  mountNamed("undertones");
-                }
-              },
-              { threshold: 0.02, rootMargin: "40px" }
-            );
-            disposers.push(unvis);
-          }, 600);
-          disposers.push(stopIdle);
-        }
+      if (hero && !shouldReduceFx() && !hero.classList.contains("api-s1")) {
+        const stopIdle = whenIdle(() => {
+          const unvis = observeVisibility(
+            hero,
+            (vis) => {
+              if (vis && !hero.dataset.fxUndertones) {
+                hero.dataset.fxUndertones = "1";
+                mountNamed("undertones");
+              }
+            },
+            { threshold: 0.02, rootMargin: "40px" }
+          );
+          disposers.push(unvis);
+        }, 600);
+        disposers.push(stopIdle);
       }
     })();
 

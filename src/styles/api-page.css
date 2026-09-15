@@ -154,13 +154,29 @@
 /* =========================================================
    Section 1 — Hero + signup form
    ========================================================= */
+/* Idle pearl fluted wash on first paint (WebGL covers it once ready).
+   Same recipe as the old .hero-shader-fallback — don't wait for JS. */
+.api-s1,
+.api-page .api-s1.hero,
+.api-page .api-s1.hero.hero-shader-fallback {
+  background:
+    repeating-linear-gradient(
+      31deg,
+      rgba(255, 255, 255, 0) 0px,
+      rgba(255, 255, 255, 0) 11px,
+      rgba(240, 242, 248, 0.35) 15px,
+      rgba(255, 255, 255, 0.75) 19px,
+      rgba(255, 255, 255, 0) 24px
+    ),
+    #fbfcfe;
+}
+
 .api-s1 {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
   padding: 48px 0 44px;
   isolation: isolate;
-  background: #ffffff;
 }
 
 /* Override tracking .hero flex if present — API hero uses own grid */
@@ -169,7 +185,6 @@
   min-height: 0;
   align-items: unset;
   overflow: hidden;
-  background: #ffffff;
 }
 
 .api-s1-bg {
@@ -308,20 +323,18 @@
   display: block;
   pointer-events: none;
   z-index: 0;
+  opacity: 0;
+  transition: opacity 0.45s ease;
 }
 
-/* Idle pearl fluted wash when WebGL is skipped (no chroma — matches 5173 idle) */
-.api-page .api-s1.hero.hero-shader-fallback {
-  background:
-    repeating-linear-gradient(
-      31deg,
-      rgba(255, 255, 255, 0) 0px,
-      rgba(255, 255, 255, 0) 11px,
-      rgba(240, 242, 248, 0.35) 15px,
-      rgba(255, 255, 255, 0.75) 19px,
-      rgba(255, 255, 255, 0) 24px
-    ),
-    #fbfcfe;
+.api-s1.has-hero-wash .api-s1-shader.is-ready {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .api-s1-shader {
+    transition: none;
+  }
 }
 
 /* signup card */

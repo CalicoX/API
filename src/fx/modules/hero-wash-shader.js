@@ -671,6 +671,9 @@ void main(){
       gl.uniform1i(locsGlass.uScene, 0);
       gl.uniform2f(locsGlass.uRes, w, h);
       drawQuad(locsGlass.aPos);
+      if (!canvas.classList.contains("is-ready")) {
+        canvas.classList.add("is-ready");
+      }
     }
 
     // Literal port of the engine's pointer handler: y-down normalized against

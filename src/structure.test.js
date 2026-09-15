@@ -247,6 +247,20 @@ describe("API landing structure (gating)", () => {
     expect(boot).toMatch(/retired|no-op|useLandingEffects/i);
   });
 
+  it("Hero fluted wash is first-paint CSS; WebGL mounts before dock", () => {
+    const css = read("styles/api-page.css");
+    expect(css).toMatch(/\.api-page \.api-s1\.hero[\s\S]*?repeating-linear-gradient/);
+    expect(css).toMatch(/\.api-s1-shader \{[\s\S]*?opacity: 0/);
+    expect(css).toMatch(/\.api-s1-shader\.is-ready \{[\s\S]*?opacity: 1/);
+    const fx = read("fx/useLandingEffects.js");
+    expect(fx).toMatch(/heroWashChunk/);
+    const heroIdx = fx.indexOf('mountNamed("heroWash")');
+    const dockIdx = fx.indexOf("await mountProductDock");
+    expect(heroIdx).toBeGreaterThan(0);
+    expect(dockIdx).toBeGreaterThan(heroIdx);
+    expect(read("fx/modules/hero-wash-shader.js")).toMatch(/classList\.add\("is-ready"\)/);
+  });
+
   it("topbar-on-dark mounts without requiring #ai-lab", () => {
     const fx = read("fx/useLandingEffects.js");
     expect(fx).toMatch(/topbarOnDark|topbar-on-dark/);
