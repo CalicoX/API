@@ -110,7 +110,7 @@ export default function Hero() {
                 <label htmlFor="help_note">
                   Tell us how would you like us to help.
                 </label>
-                <textarea id="help_note" name="help_note" maxLength={1000} required />
+                <textarea id="help_note" name="help_note" rows={1} maxLength={1000} required />
               </div>
             </div>
             <label className="api-form-agree">
