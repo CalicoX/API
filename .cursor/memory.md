@@ -7,6 +7,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 仓库：https://github.com/CalicoX/API.git（`main`）
 - 本地开发：`http://localhost:5174/`（2026-08-27 起 5173 被 returns 项目 dev server 占用；Vite 只绑 IPv6，浏览器用 localhost 访问）
 - tracking-react AI intro（`#ai-lab-intro`，5175）已同步同一套 Duo 进/离场（2026-09-11，本地未要求 push）
+- tracking-react CoverageBand 手机标签换行已同步 API（2026-09-16，本地未要求 push）
 - 用户：Park，设计师，直接改代码迭代
 - 产品：17TRACK Tracking API 落地页
 
