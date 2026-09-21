@@ -8,7 +8,6 @@ import Enterprise from "./sections/Enterprise.jsx";
 import DataOperations from "./sections/DataOperations.jsx";
 import AiIntelligence from "./sections/AiIntelligence.jsx";
 import HowItWorks from "./sections/HowItWorks.jsx";
-import Applications from "./sections/Applications.jsx";
 import UseCases from "./sections/UseCases.jsx";
 import IntegrationTogether from "./sections/IntegrationTogether.jsx";
 import Credentials from "./sections/Credentials.jsx";
@@ -39,7 +38,6 @@ export default function LandingPage() {
           <DataOperations />
           <AiIntelligence />
           <HowItWorks />
-          <Applications />
           <UseCases />
           <IntegrationTogether />
           <Credentials />

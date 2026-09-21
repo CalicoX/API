@@ -1,7 +1,41 @@
-import { UseCasesStage } from "../visuals/ApiDomVisuals.jsx";
+import { UseCasesStage, AppIcon } from "../visuals/ApiDomVisuals.jsx";
+
+/* 原 Applications 五卡（2026-09-21 Park：挪进 Use Cases 标题下，滚动逐条出现、无卡片框） */
+const APP_POINTS = [
+  {
+    kind: "logistics",
+    title: "Logistics Service",
+    body:
+      "Unify carrier and last-mile tracking data into one consistent feed, giving you end-to-end shipment visibility.",
+  },
+  {
+    kind: "ecommerce",
+    title: "Marketplace",
+    body:
+      "Sync real-time tracking data with your OMS or tracking tools, so every order stays visible in one place.",
+  },
+  {
+    kind: "finance",
+    title: "Finance and Payment",
+    body:
+      "Use tracking events to assess delivery progress, risk, and package authenticity.",
+  },
+  {
+    kind: "platforms",
+    title: "Platforms & SaaS",
+    body:
+      "Power your platform with unified tracking data across carriers and markets.",
+  },
+  {
+    kind: "integrator",
+    title: "System Integrators",
+    body:
+      "Integrate standardized logistics data into custom workflows and customer experience.",
+  },
+];
 
 /**
- * Sticky Use Cases — 3D hub | split title + bullets.
+ * Sticky Use Cases — 3D hub | split title + app list.
  * Bottom: tick-style progress bar with % readout.
  */
 export default function UseCases() {
@@ -44,16 +78,16 @@ export default function UseCases() {
                     <span className="api-s2-title-line api-s2-title-line--bottom"><em>Various</em> Use Cases.</span>
                   </h2>
                 </div>
-                <ul className="api-s2-points">
-                  <li data-uc-line style={{ ["--d"]: 0 }}>
-                    Track and trace your shipments in bulk.
-                  </li>
-                  <li data-uc-line style={{ ["--d"]: 1 }}>
-                    Build a tracking portal in your own system.
-                  </li>
-                  <li data-uc-line style={{ ["--d"]: 2 }}>
-                    Avoid high cost of multi-carrier integration.
-                  </li>
+                <ul className="api-s2-app-list">
+                  {APP_POINTS.map((app, i) => (
+                    <li className="api-s2-app-item" key={app.title} data-uc-line style={{ ["--d"]: i }}>
+                      <AppIcon kind={app.kind} />
+                      <div className="api-s2-app-text">
+                        <h3>{app.title}</h3>
+                        <p>{app.body}</p>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

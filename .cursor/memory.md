@@ -13,6 +13,14 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **五连改（2026-09-21 Park 批量圈点，一 commit）**：
+  1. **Hero 背景 shader 撤、改淡蓝渐变**：`hero-wash-shader` 不再挂（useLandingEffects 摘 heroWash；模块文件留存），`.api-s1` 首帧底改 `linear-gradient(#f3f8ff→#fafcff→#fff)` + 左上/右上两团淡蓝 radial（`#93c5fd`/`#bfdbfe` 系）。`.api-s1-shader` CSS 规则已删。
+  2. **Hero 加 three.js 点阵地球**：新模块 `src/fx/modules/hero-globe.js`（46 纬度行均匀球面采样，PointsMaterial `#7fb2e5`、size 0.016、opacity 0.75，自转 0.07 rad/s），挂 `<div id="hero-globe" class="api-s1-hero-globe">`（Hero.jsx 左列后面，CSS z:0、左下探出、radial mask 收边、整体 opacity 0.55）。IO 离屏停 rAF；reduce / ≤640（shouldReduceFx）不挂。
+  3. **btn-switch 全静息**：hover 滑动 / knob morph / hover 变色全去，白钮固定右侧（CSS `right: 4px`，文案左），`btn-switch.js` 只剩补 `.btn-switch-shader` 层。keyframes `btn-switch-knob-go/back` 已删。
+  4. **border beam 全撤**：useLandingEffects 摘 `borderBeam` 挂载（按钮 + 深色 dock 两处 beam 都断源）。`border-beam.js` 文件留存（test 清单仍要求它 export mount）。
+  5. **Applications 段下线，内容并入 Use Cases**：LandingPage 不再挂 Applications（组件文件留存）；五张卡变成 Use Cases 标题下 `.api-s2-app-list` 五条（icon + 标题 + 描述，**无卡片框**），滚动驱动逐条出现——`use-cases-scroll.js` 的 apply() 里 `revealed = round(1 + p*(n-1))` 逐条 `.is-in`（CSS 初始 `opacity:0 + translateY(14px)`；1958 行旧「全亮」规则已删，reveal 只归滚动管）。右下三条旧 bullet（Track and trace…）删除。Applications 的 Point Waves 挂载一并摘除。structure.test 全部同步（段落序、app-list 断言、hero 渐变/globe 断言），20/20 过。
+  注意：AiIntelligence 的 `progressive-blur` 字样在 CSS 里已不存在（只剩 `.api-ai-pblur` 规则），structure.test 174 行断言已改查 `api-ai-pblur`。
+
 - **Hero 注册表「how would you like us to help」滚动条（2026-09-15 Park）**：textarea 高 44 / padding 11 把内容盒压到 ~20px，行高比它高 1px，空着也出滚动条。改 `overflow: hidden`、藏 scrollbar、`rows=1`、行高 1.3；focus 仍扩到 96。
 
 - **Enterprise 四词胶囊去点、去彩（2026-09-15 Park）**：Visible / Reliable / Trust / Secure 不再四色浅底+圆点。改白底、灰描边 `#e6e8ec`、字 `#5c6370`，跟落地页 `.badge` 同款但不带 `::before` 点。文案不动。

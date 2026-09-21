@@ -405,7 +405,7 @@ button {
   box-shadow: none;
 }
 
-/* Start free trial — primary 蓝底 + border beam + 内层 shader；hover 圆钮滑右 */
+/* Start free trial — primary 蓝底 + 内层 shader；钮固定右侧（2026-09-21 Park：去 hover 滑动） */
 .btn-switch {
   --sw-pad: 4px;
   --sw-knob: 36px;
@@ -423,10 +423,10 @@ button {
   height: var(--sw-h);
   min-height: var(--sw-h);
   min-width: 188px;
-  /* 默认：左侧给 knob 留位 */
+  /* 钮在右：文案落在左侧空档 */
   padding: var(--sw-pad);
-  padding-left: calc(var(--sw-pad) + var(--sw-knob) + var(--sw-gap));
-  padding-right: calc(var(--sw-pad) + 14px);
+  padding-left: calc(var(--sw-pad) + 14px);
+  padding-right: calc(var(--sw-pad) + var(--sw-knob) + var(--sw-gap));
   box-sizing: border-box;
   border-radius: 999px;
   border: 1px solid rgba(160, 190, 255, 0.28);
@@ -450,10 +450,6 @@ button {
     0 1px 3px rgba(0, 40, 110, 0.28) !important;
   filter: none !important;
   transform: none !important;
-  transition:
-    padding var(--sw-dur) var(--sw-ease),
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
 }
 /* 内层 shader：偏 primary 蓝光雾（border-beam 占用 ::before/::after） */
 .btn-switch-shader {
@@ -507,10 +503,10 @@ button {
   }
 }
 .btn-switch-knob {
-  /* !important：border-beam 会给子元素写 position:relative，需保住绝对定位滑动 */
+  /* 钮固定右侧，不滑动 */
   --sw-knob-w: var(--sw-knob);
   position: absolute !important;
-  left: var(--sw-pad);
+  right: var(--sw-pad);
   top: 50%;
   width: var(--sw-knob-w);
   height: var(--sw-knob);
@@ -524,12 +520,7 @@ button {
   box-shadow:
     0 1px 3px rgba(0, 30, 90, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  /* left 滑行 + 回程宽度收圆 */
-  transition:
-    left var(--sw-dur) var(--sw-ease),
-    width 0.22s ease;
   pointer-events: none;
-  will-change: left, width;
 }
 .btn-switch-knob svg {
   width: 18px;
@@ -537,49 +528,10 @@ button {
   display: block;
 }
 /*
-     * 白钮 morph：圆形 → 滑动中略成胶囊 → 到位恢复圆形
-     * (JS 加 .is-knob-go / .is-knob-back 驱动，避免 leave 时动画被掐断)
+     * 白钮 morph keyframes 已随 hover 滑动移除（2026-09-21 Park：按钮保持静息态）
      */
-@keyframes btn-switch-knob-go {
-  0% {
-    width: var(--sw-knob);
-  }
-  32% {
-    /* 加速段：拉成一点胶囊 */
-    width: calc(var(--sw-knob) + 15px);
-  }
-  68% {
-    width: calc(var(--sw-knob) + 10px);
-  }
-  100% {
-    width: var(--sw-knob);
-  }
-}
-@keyframes btn-switch-knob-back {
-  0% {
-    width: var(--sw-knob);
-  }
-  32% {
-    width: calc(var(--sw-knob) + 15px);
-  }
-  68% {
-    width: calc(var(--sw-knob) + 10px);
-  }
-  100% {
-    width: var(--sw-knob);
-  }
-}
-.btn-switch-knob.is-knob-go {
-  animation: btn-switch-knob-go var(--sw-dur) cubic-bezier(0.4, 0, 0.15, 1)
-    forwards;
-}
-.btn-switch-knob.is-knob-back {
-  animation: btn-switch-knob-back var(--sw-dur) cubic-bezier(0.4, 0, 0.15, 1)
-    forwards;
-}
 @media (prefers-reduced-motion: reduce) {
-  .btn-switch-knob.is-knob-go,
-  .btn-switch-knob.is-knob-back {
+  .btn-switch-shader {
     animation: none;
   }
 }
@@ -590,34 +542,12 @@ button {
   width: 100%;
   text-align: center;
   white-space: nowrap;
-  transition: none;
   text-shadow: 0 1px 2px rgba(0, 30, 80, 0.28);
 }
 .btn-switch:hover,
 .btn-switch:focus-visible {
-  /* 右侧给 knob 留位，文案整体落在左侧空档 */
-  padding-left: calc(var(--sw-pad) + 14px);
-  padding-right: calc(var(--sw-pad) + var(--sw-knob) + var(--sw-gap));
-  border-color: rgba(190, 215, 255, 0.42);
   filter: none !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 4px 14px rgba(0, 58, 155, 0.32) !important;
   transform: none !important;
-}
-.btn-switch:hover .btn-switch-shader,
-.btn-switch:focus-visible .btn-switch-shader {
-  opacity: 1;
-  filter: hue-rotate(6deg) brightness(1.14) saturate(1.2);
-}
-.btn-switch:hover .btn-switch-knob,
-.btn-switch:focus-visible .btn-switch-knob,
-.btn-switch-knob.is-knob-go {
-  /* 滑到最右；文案已通过 padding 让到左侧，不重叠 */
-  left: calc(100% - var(--sw-pad) - var(--sw-knob));
-}
-.btn-switch-knob.is-knob-back {
-  left: var(--sw-pad);
 }
 .btn-switch:focus-visible {
   outline: 2px solid rgba(0, 58, 155, 0.45);
@@ -640,8 +570,8 @@ button {
 }
 .btn-switch.on-dark:hover,
 .btn-switch.on-dark:focus-visible {
-  border-color: rgba(190, 215, 255, 0.45);
-  background: linear-gradient(180deg, #1256c4 0%, #0042ad 50%, #003088 100%);
+  filter: none !important;
+  transform: none !important;
 }
 .ai-think .btn-switch {
   width: 100%;

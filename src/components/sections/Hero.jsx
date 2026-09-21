@@ -5,6 +5,7 @@ export default function Hero() {
   const [showPass, setShowPass] = useState(false);
   return (
     <section className="api-s1 hero" id="content" aria-labelledby="api-hero-title">
+      <div className="api-s1-hero-globe" id="hero-globe" aria-hidden="true" />
       <div className="api-wrap api-s1-grid">
         <div className="api-s1-copy">
           <h1

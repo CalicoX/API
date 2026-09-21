@@ -10,19 +10,15 @@ import {
 
 /**
  * Static import map so Vite emits real FX chunks (literal paths only).
- * Hero wash is above-the-fold: start the chunk fetch as soon as this module
- * evaluates, so it overlaps React first paint instead of waiting for dock.
+ * Hero wash shader 已撤（2026-09-21 Park：背景改淡蓝渐变，不再挂 WebGL）。
  */
-const heroWashChunk = import("./modules/hero-wash-shader.js");
 
 const FX_LOADERS = {
   responsive: () => import("./modules/responsive-fx.js"),
-  borderBeam: () => import("./modules/border-beam.js"),
   topbarOnDark: () => import("./modules/topbar-on-dark.js"),
   useCasesScroll: () => import("./modules/use-cases-scroll.js"),
   useCasesBg: () => import("./modules/use-cases-bg-shader.js"),
   undertones: () => import("./modules/undertones-shader.js"),
-  heroWash: () => heroWashChunk,
   impactMetrics: () => import("./modules/impact-metrics.js"),
   impactBg: () => import("./modules/impact-bg-shader.js"),
   landingInline: () => import("./modules/landing-inline.js"),
@@ -33,6 +29,7 @@ const FX_LOADERS = {
   coverageGlobe: () => import("./modules/coverage-globe.js"),
   aiIntelligenceBg: () => import("./modules/ai-intelligence-bg.js"),
   aiDuoUnfold: () => import("./modules/ai-duo-unfold.js"),
+  heroGlobe: () => import("./modules/hero-globe.js"),
   roiPointWaves: () => import("./modules/roi-point-waves.js"),
   btnSwitch: () => import("./modules/btn-switch.js"),
 };
@@ -84,11 +81,10 @@ export function useLandingEffects() {
     (async () => {
       await mountNamed("responsive");
       const hero = document.querySelector(".hero");
-      /* Hero shader first — don't sit behind dock / use-cases / btn FX */
+      // border beam 已撤（2026-09-21 Park：按钮/dock 描边流光不要）
       if (hero?.classList.contains("api-s1") && !shouldReduceFx()) {
-        mountNamed("heroWash");
+        mountNamed("heroGlobe");
       }
-      await mountNamed("borderBeam");
       // Always-on: topbar opacity when over dark sections (no #ai-lab required)
       await mountNamed("topbarOnDark");
       // Tracking 同款 CTA（API 页无 #ai-lab，不能指望 ai-lab.js）
@@ -188,22 +184,7 @@ export function useLandingEffects() {
 
     // —— Data Operations 井底：纯白 + 淡点阵（纯 CSS），不再挂 WebGL liquid grain ——
 
-    // —— Applications 浅底 Point Waves ——
-    const applications = document.getElementById("applications");
-    if (applications && !shouldReduceFx()) {
-      let loaded = false;
-      disposers.push(
-        observeVisibility(
-          applications,
-          (vis) => {
-            if (!vis || loaded) return;
-            loaded = true;
-            mountNamed("roiPointWaves");
-          },
-          { rootMargin: "120px" }
-        )
-      );
-    }
+    // Applications 段已下线（2026-09-21 Park：内容并入 Use Cases），Point Waves 不再挂
 
     // —— AI 段：点阵 orb（2D，手机也挂）+ tracking Synthesis 背景 ——
     const aiIntel = document.getElementById("ai-intelligence");

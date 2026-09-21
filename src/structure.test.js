@@ -28,7 +28,6 @@ describe("API landing structure (gating)", () => {
       "DataOperations",
       "AiIntelligence",
       "HowItWorks",
-      "Applications",
       "UseCases",
       "IntegrationTogether",
       "Credentials",
@@ -44,6 +43,8 @@ describe("API landing structure (gating)", () => {
           : `components/sections/${name}.jsx`;
       expect(existsSync(join(root, sectionPath))).toBe(true);
     }
+    // Applications 段 2026-09-21 下线：内容并入 Use Cases
+    expect(lp).not.toMatch(/Applications/);
     // tracking-only sections must not drive this page
     // BrandsSay 2026-09-10 再撤：CoverageBand 上移替换
     expect(lp).not.toMatch(/ImpactBand|FeaturesSection|AiLab|BrandsSay/);
@@ -53,8 +54,7 @@ describe("API landing structure (gating)", () => {
     expect(lp.indexOf("Enterprise")).toBeLessThan(lp.indexOf("DataOperations"));
     expect(lp.indexOf("DataOperations")).toBeLessThan(lp.indexOf("AiIntelligence"));
     expect(lp.indexOf("AiIntelligence")).toBeLessThan(lp.indexOf("HowItWorks"));
-    expect(lp.indexOf("HowItWorks")).toBeLessThan(lp.indexOf("Applications"));
-    expect(lp.indexOf("Applications")).toBeLessThan(lp.indexOf("UseCases"));
+    expect(lp.indexOf("HowItWorks")).toBeLessThan(lp.indexOf("UseCases"));
     expect(lp.indexOf("UseCases")).toBeLessThan(lp.indexOf("IntegrationTogether"));
     expect(lp.indexOf("Credentials")).toBeLessThan(lp.indexOf("ExploreMore"));
     expect(lp.indexOf("ExploreMore")).toBeLessThan(lp.indexOf("BottomCta"));
@@ -123,8 +123,8 @@ describe("API landing structure (gating)", () => {
     expect(s4).toMatch(/Start Free/);
     expect(s4).toMatch(/#free-trial/);
     expect(s4).toMatch(/btn-switch/);
-    expect(read("components/sections/Applications.jsx")).toMatch(/Logistics Service/);
-    expect(read("components/sections/Applications.jsx")).toMatch(/Platforms \& SaaS/);
+    expect(read("components/sections/UseCases.jsx")).toMatch(/Logistics Service/);
+    expect(read("components/sections/UseCases.jsx")).toMatch(/Platforms \& SaaS/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Land the Integration Together/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/className=\"api-h2\"/);
     expect(read("components/sections/IntegrationTogether.jsx")).toMatch(/Each plan is valid for 12 months/);
@@ -171,7 +171,7 @@ describe("API landing structure (gating)", () => {
     expect(ai).toMatch(/api-ai-shell/);
     expect(ai).toMatch(/api-ai-live/);
     expect(ai).toMatch(/api-ai-pblur/);
-    expect(read("styles/api-page.css")).toMatch(/progressive-blur/);
+    expect(read("styles/api-page.css")).toMatch(/api-ai-pblur/);
     expect(read("styles/api-page.css")).toMatch(/backdrop-filter: blur\(calc\(160px/);
     expect(ai).toMatch(/api-ai-panel/);
     expect(ai).toMatch(/api-ai-orb/);
@@ -247,18 +247,18 @@ describe("API landing structure (gating)", () => {
     expect(boot).toMatch(/retired|no-op|useLandingEffects/i);
   });
 
-  it("Hero fluted wash is first-paint CSS; WebGL mounts before dock", () => {
+  it("Hero background is a light-blue gradient (shader retired) + three.js dot globe", () => {
     const css = read("styles/api-page.css");
-    expect(css).toMatch(/\.api-page \.api-s1\.hero[\s\S]*?repeating-linear-gradient/);
-    expect(css).toMatch(/\.api-s1-shader \{[\s\S]*?opacity: 0/);
-    expect(css).toMatch(/\.api-s1-shader\.is-ready \{[\s\S]*?opacity: 1/);
+    expect(css).toMatch(/\.api-page \.api-s1\.hero[\s\S]*?linear-gradient\(180deg, #f3f8ff/);
+    expect(css).not.toMatch(/\.api-s1-shader/);
+    expect(css).toMatch(/\.api-s1-hero-globe \{/);
     const fx = read("fx/useLandingEffects.js");
-    expect(fx).toMatch(/heroWashChunk/);
-    const heroIdx = fx.indexOf('mountNamed("heroWash")');
-    const dockIdx = fx.indexOf("await mountProductDock");
-    expect(heroIdx).toBeGreaterThan(0);
-    expect(dockIdx).toBeGreaterThan(heroIdx);
-    expect(read("fx/modules/hero-wash-shader.js")).toMatch(/classList\.add\("is-ready"\)/);
+    expect(fx).not.toMatch(/heroWash/);
+    expect(fx).toMatch(/heroGlobe/);
+    const globe = read("fx/modules/hero-globe.js");
+    expect(globe).toMatch(/from "three"/);
+    expect(globe).toMatch(/hero-globe/);
+    expect(globe).toMatch(/rotation\.y/);
   });
 
   it("topbar-on-dark mounts without requiring #ai-lab", () => {
@@ -272,14 +272,14 @@ describe("API landing structure (gating)", () => {
     expect(mod).toMatch(/return function dispose|return \(\)\s*=>/);
   });
 
-  it("Applications CTA is Tracking btn-switch", () => {
-    const apps = read("components/sections/Applications.jsx");
-    expect(apps).toMatch(/btn-switch/);
-    expect(apps).toMatch(/Start Free/);
-    expect(apps).not.toMatch(/api-s5-cta[\s\S]*api-btn-primary/);
+  it("Applications section retired; app list lives in Use Cases, waves unmounted", () => {
     const fx = read("fx/useLandingEffects.js");
-    expect(fx).toMatch(/btnSwitch|btn-switch/);
-    expect(read("fx/modules/btn-switch.js")).toMatch(/export function mount/);
+    expect(fx).not.toMatch(/mountNamed\([\"']roiPointWaves[\"']\)/);
+    const uc = read("components/sections/UseCases.jsx");
+    expect(uc).toMatch(/api-s2-app-list/);
+    expect(uc).not.toMatch(/Track and trace your shipments in bulk/);
+    const css = read("styles/api-page.css");
+    expect(css).toMatch(/\.api-s2-app-item/);
   });
 
   it("Data Operations well is white-to-gray, dot grid removed (liquid grain unmounted)", () => {
@@ -292,17 +292,10 @@ describe("API landing structure (gating)", () => {
     expect(css).not.toMatch(/\.api-s4-well::before/);
   });
 
-  it("Applications mounts light Point Waves on #f7f8fa", () => {
+  it("Applications CTA retired with the section (btn-switch still mounted for s4/CTA)", () => {
     const fx = read("fx/useLandingEffects.js");
-    expect(fx).toMatch(/roiPointWaves|roi-point-waves/);
-    expect(fx).toMatch(/mountNamed\([\"']roiPointWaves[\"']\)/);
-    const waves = read("fx/modules/roi-point-waves.js");
-    expect(waves).toMatch(/export function mount/);
-    expect(waves).toMatch(/api-s5-waves/);
-    expect(waves).toMatch(/lin\([\"']#f7f8fa[\"']\)/);
-    const css = read("styles/api-page.css");
-    expect(css).toMatch(/\.api-s5 \{[^}]*background:\s*#f7f8fa/s);
-    expect(css).not.toMatch(/\.api-s5-waves \{[^}]*display:\s*none/s);
+    expect(fx).toMatch(/btnSwitch|btn-switch/);
+    expect(read("fx/modules/btn-switch.js")).toMatch(/export function mount/);
   });
 
   it("use-cases sticky scroll drives 3D hub progress", () => {
@@ -354,7 +347,7 @@ describe("API landing structure (gating)", () => {
       "impact-metrics.js",
       "impact-bg-shader.js",
       "use-cases-bg-shader.js",
-      "hero-wash-shader.js",
+      "hero-globe.js",
       "s4-liquid-grain.js",
       "bottom-cta-shader.js",
       "coverage-globe.js",

@@ -154,21 +154,15 @@
 /* =========================================================
    Section 1 — Hero + signup form
    ========================================================= */
-/* First-paint = Undertones idle: Swirl #FFF/#EBEBEB, FlutedGlass 31° / freq 8.
-   Wide soft ridges (period ~12.5vw), not the old 24px grey pinstripe. */
+/* Hero 背景：WebGL shader 已撤（2026-09-21 Park），改淡蓝渐变底。
+   品牌浅蓝洗 + 两侧冷蓝晕，静态、无动画。 */
 .api-s1,
 .api-page .api-s1.hero,
 .api-page .api-s1.hero.hero-shader-fallback {
   background:
-    repeating-linear-gradient(
-      31deg,
-      #ffffff 0,
-      #ffffff calc(100vw / 8 * 0.42),
-      #f4f4f4 calc(100vw / 8 * 0.7),
-      #ebebeb calc(100vw / 8 * 0.86),
-      #f7f7f7 calc(100vw / 8 * 0.94),
-      #ffffff calc(100vw / 8)
-    );
+    radial-gradient(58% 78% at 12% 0%, rgba(147, 197, 253, 0.34), rgba(147, 197, 253, 0) 70%),
+    radial-gradient(62% 88% at 94% 16%, rgba(191, 219, 254, 0.42), rgba(191, 219, 254, 0) 72%),
+    linear-gradient(180deg, #f3f8ff 0%, #fafcff 55%, #ffffff 100%);
 }
 
 .api-s1 {
@@ -177,6 +171,24 @@
   box-sizing: border-box;
   padding: 48px 0 44px;
   isolation: isolate;
+}
+
+/* Hero 点阵地球（2026-09-21 Park）：左列后方，淡蓝自转 */
+.api-s1-hero-globe {
+  position: absolute;
+  z-index: 0;
+  left: -8vw;
+  bottom: -22%;
+  width: min(46vw, 620px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 74%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 74%);
+}
+.api-s1-hero-globe canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Override tracking .hero flex if present — API hero uses own grid */
@@ -321,27 +333,7 @@
   text-align: left;
 }
 
-.api-s1-shader {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-}
-
-.api-s1.has-hero-wash .api-s1-shader.is-ready {
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .api-s1-shader {
-    transition: none;
-  }
-}
+/* hero shader 已撤（2026-09-21 Park），规则已删 */
 
 /* signup card */
 .api-form-card {
@@ -816,53 +808,68 @@
   font-weight: inherit;
 }
 
-.api-s2-points {
+/* 原 .api-s2-points / .api-s2-check 已随三条 bullet 移除（2026-09-21，内容并入 app-list） */
+
+.api-s2 [data-uc="copy"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* =========================================================
+   Use Cases app list（原 Applications 五卡，2026-09-21 Park：
+   挪进标题下，滚动逐条出现、无卡片框）
+   ========================================================= */
+.api-s2-app-list {
   list-style: none;
-  margin: 0;
+  margin: 26px 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   width: 100%;
-  max-width: none !important;
 }
 
-.api-s2-points li {
+.api-s2-app-item {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
   margin: 0;
-  font-size: clamp(12.5px, calc(11.6px + 0.25vw), 15px);
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.84);
-  font-weight: 500;
-  padding: 2px 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.45s ease calc(var(--d, 0) * 40ms),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--d, 0) * 40ms);
 }
 
-.api-s2-points li::before {
-  display: none !important;
-  content: none !important;
-}
-
-.api-s2-check {
-  width: 18px;
-  height: 18px;
-  margin-top: 2px;
-  border-radius: 50%;
-  background: rgba(167, 139, 250, 0.12);
-  color: #a78bfa;
-  font-size: 11px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  line-height: 1;
-}
-
-.api-s2 [data-uc="copy"],
-.api-s2 [data-uc-line] {
+.api-s2-app-item.is-in {
   opacity: 1;
   transform: none;
+}
+
+.api-s2-app-item .api-app-ico {
+  flex-shrink: 0;
+}
+
+.api-s2-app-text h3 {
+  margin: 0 0 4px;
+  font-size: clamp(14px, calc(12.6px + 0.38vw), 16px);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.api-s2-app-text p {
+  margin: 0;
+  font-size: clamp(12.5px, calc(11.6px + 0.25vw), 14px);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .api-s2-app-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* =========================================================
@@ -1905,18 +1912,7 @@
   transform: none;
 }
 
-.api-s2 [data-uc-line] {
-  opacity: 1;
-  transform: none;
-  transition:
-    opacity 0.35s ease calc(var(--d, 0) * 60ms),
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--d, 0) * 60ms);
-}
-
-.api-s2 [data-uc-line].is-in {
-  opacity: 1;
-  transform: none;
-}
+/* data-uc-line 显隐由 use-cases-scroll 按滚动进度逐条驱动（2026-09-21 Park） */
 
 @media (prefers-reduced-motion: reduce) {
   .api-hub-trail,
@@ -7700,10 +7696,7 @@ html.is-reduce-fx .api-s5::after {
   display: none;
 }
 
-/* Hero: white fallback under shader */
-.api-s1 {
-  background: #ffffff;
-}
+/* Hero 渐变见文件头部 .api-s1 规则（此处不再压白底） */
 
 .api-s5 {
   background: #f7f8fa;

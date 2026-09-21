@@ -114,8 +114,13 @@ export function mount() {
     const copy = section.querySelector('[data-uc="copy"]');
     if (copy) copy.classList.add("is-in");
 
-    section.querySelectorAll("[data-uc-line]").forEach((el) => {
-      el.classList.add("is-in");
+    // 5 条应用条目按滚动进度逐条出现（2026-09-21 Park：替代一次性全亮）
+    const steps = section.querySelectorAll("[data-uc-line]");
+    const revealed = reduce
+      ? steps.length
+      : Math.round(1 + p * (steps.length - 1));
+    steps.forEach((el, i) => {
+      el.classList.toggle("is-in", i < revealed);
     });
   }
 
