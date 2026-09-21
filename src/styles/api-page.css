@@ -695,14 +695,15 @@
   box-sizing: border-box;
 }
 
-/* left: 3D hub — 缩两档（2026-09-21 Park「再缩小」86%→74%），垂直居中 */
+/* left: 3D hub — 74%→80%（2026-09-21 Park「稍微大一点点」）+ 整体左移 2.5%，垂直居中 */
 .api-s2-visual {
   position: relative;
   flex: 1 1 62%;
   min-width: 0;
-  height: 74%;
+  height: 80%;
   max-height: 100%;
   align-self: center;
+  margin-left: -2.5%;
   display: flex;
   align-items: stretch;
   /* visible so callout labels can extend past the 3D host into the gap */

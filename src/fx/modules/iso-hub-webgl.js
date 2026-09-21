@@ -869,7 +869,8 @@ export function createIsoHubWebGL(host, opts = {}) {
     flat,
     text,
     edgeOut = 0,
-    rightExtra = 0
+    rightExtra = 0,
+    inset = 0
   ) {
     const { h } = hostSize();
     const { w: hostW } = hostSize();
@@ -882,15 +883,16 @@ export function createIsoHubWebGL(host, opts = {}) {
       Math.max(EDGE_PAD + bh / 2, anchor.y + yBias)
     );
 
-    // pin pill to edge; edgeOut + rightExtra push Track further right
+    // pin pill to edge; edgeOut + rightExtra push Track further right;
+    // inset pulls the pill back toward the scene (2026-09-21 Park「导引线缩缩短」)
     const edge = Math.max(4, EDGE_PAD * (1 - edgeOut * 0.75));
     let pillX;
     let joinX;
     if (side === "left") {
-      pillX = edge;
+      pillX = edge + inset;
       joinX = pillX + bw + PILL_GAP;
     } else {
-      pillX = w - edge - bw;
+      pillX = w - edge - bw - inset;
       joinX = pillX - PILL_GAP;
     }
 
@@ -1024,6 +1026,7 @@ export function createIsoHubWebGL(host, opts = {}) {
       // yBias resolved per-frame via yBiasFor()
       yBiasFor: (hostH) => (hostH < 560 ? -22 : hostH < 720 ? -30 : -36),
       edgeOut: 0.15,
+      inset: 120,
       useRightExt: false,
       getWorldAnchor() {
         terminalGroup.getWorldPosition(_anchW);
@@ -1038,6 +1041,7 @@ export function createIsoHubWebGL(host, opts = {}) {
       side: "left",
       yBiasFor: (hostH) => (hostH < 560 ? -24 : hostH < 720 ? -34 : -40),
       edgeOut: 0,
+      inset: 120,
       useRightExt: false,
       getWorldAnchor() {
         // top face of upper server, left side
@@ -1054,6 +1058,7 @@ export function createIsoHubWebGL(host, opts = {}) {
       // keep label near lower stack band — below copy bullets on tall screens
       yBiasFor: (hostH) => (hostH < 560 ? 18 : hostH < 720 ? 28 : 36),
       edgeOut: 1,
+      inset: 170,
       useRightExt: true, // only into measured gap before copy
       getWorldAnchor() {
         // START on TOP of the lower server (right side of top plate)
@@ -1130,7 +1135,8 @@ export function createIsoHubWebGL(host, opts = {}) {
         flat,
         c.word,
         c.edgeOut || 0,
-        rightExtra
+        rightExtra,
+        c.inset || 0
       );
 
       // hard clamp: never paint a right-side pill into the copy column
