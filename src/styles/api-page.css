@@ -8867,6 +8867,10 @@ html.is-reduce-fx .api-ai-shell {
     right: 8px;
   }
   .api-explore .track-ui .float-card-metric {
+    /* landing.css ≤768 对 .float-card 一刀切 display:none!important（tracking 站旧规），
+       WISMO 卡手机上要保留（2026-09-21 Park，returns 同款修法） */
+    display: block !important;
+    position: absolute !important;
     right: 6px;
     bottom: 20px;
     width: 148px;
