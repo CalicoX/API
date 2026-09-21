@@ -114,13 +114,11 @@ export function mount() {
     const copy = section.querySelector('[data-uc="copy"]');
     if (copy) copy.classList.add("is-in");
 
-    // 5 条应用条目按滚动进度逐条出现（2026-09-21 Park：替代一次性全亮）
+    // 5 条应用条目：全部一起留在屏上，出现依次错开（2026-09-21 Park「全部一起放出来，但要依次出现」）
     const steps = section.querySelectorAll("[data-uc-line]");
-    const revealed = reduce
-      ? steps.length
-      : Math.round(1 + p * (steps.length - 1));
     steps.forEach((el, i) => {
-      el.classList.toggle("is-in", i < revealed);
+      const at = reduce ? 0 : 0.1 + i * 0.16;
+      el.classList.toggle("is-in", reduce || p >= at);
     });
   }
 

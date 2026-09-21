@@ -737,7 +737,7 @@
   display: block;
 }
 
-/* right: split title + bullets — title top, bullets bottom */
+/* right: split title + app list — 都从顶部往下排（2026-09-21 Park：列表别钉底） */
 .api-s2-copy {
   position: relative;
   flex: 0 0 min(420px, 38%);
@@ -748,16 +748,15 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   color: var(--uc-fg);
   z-index: 3;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Helvetica Neue",
     sans-serif;
-  z-index: 2;
   height: 100%;
-  padding: 40px 0;
+  padding: 34px 0 40px;
 }
 
 /* title block with split lines */
@@ -821,24 +820,26 @@
    ========================================================= */
 .api-s2-app-list {
   list-style: none;
-  margin: 26px 0 0;
+  margin: 48px 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
   width: 100%;
+  max-width: 380px;
 }
 
+/* 五条应用条目：滚动一屏一个，当前条亮起、其余淡出（height 占位不变，位置不跳） */
 .api-s2-app-item {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 12px;
   margin: 0;
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(12px);
   transition:
-    opacity 0.45s ease calc(var(--d, 0) * 40ms),
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--d, 0) * 40ms);
+    opacity 0.4s ease,
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .api-s2-app-item.is-in {
