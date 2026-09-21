@@ -7216,6 +7216,20 @@ html.is-reduce-fx .api-s5::after {
     padding: 0;
   }
 
+  /* 手机档取消 sticky：标题+五条应用内容高于 100vh 舞台，
+     overflow:hidden 会把第 5 条裁掉（2026-09-21 Park「怎么只有四个」）。
+     整段自然流，p 定格 1（reduce）五条全亮。
+     JS layout() 写 inline top/height，这里必须 !important。 */
+  .api-s2 .api-s2-sticky {
+    position: relative;
+    top: auto !important;
+    height: auto !important;
+    overflow: visible;
+  }
+  .api-s2 .api-s2-scroll {
+    height: auto !important;
+  }
+
   /* Onboard 4 Steps 横向滑动 + indicator（2026-08-31 Park） */
   .api-onboard-steps {
     display: flex;
