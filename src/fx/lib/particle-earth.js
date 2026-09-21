@@ -116,7 +116,7 @@ export const USE_CASES_THEME = {
   ocean: [0.28, 0.38, 0.62],
   oceanHi: [0.38, 0.48, 0.72],
   violet: [0.55, 0.45, 0.95],
-  alphaMul: 1,
+  alphaMul: 0.6, /* 2026-09-21 Park「暗一些」：从 1 压到 0.6，别抢右列文字 */
 };
 
 /** Blue globe on the carriers gray well — continents must read, keep it quiet. */

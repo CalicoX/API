@@ -173,13 +173,14 @@
   isolation: isolate;
 }
 
-/* Hero 点阵地球（2026-09-21 Park）：左列后方，淡蓝自转 */
+/* Hero 点阵地球（2026-09-21 Park）：文案和表单之间的空档，淡蓝自转 */
 .api-s1-hero-globe {
   position: absolute;
   z-index: 0;
-  left: -8vw;
-  bottom: -22%;
-  width: min(46vw, 620px);
+  left: 50%;
+  top: 46%;
+  transform: translateY(-50%);
+  width: min(38vw, 520px);
   aspect-ratio: 1;
   pointer-events: none;
   opacity: 0.55;
