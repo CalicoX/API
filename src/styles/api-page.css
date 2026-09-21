@@ -695,12 +695,12 @@
   box-sizing: border-box;
 }
 
-/* left: 3D hub — 缩一档（2026-09-21 Park「插图缩小一点」），垂直居中 */
+/* left: 3D hub — 缩两档（2026-09-21 Park「再缩小」86%→74%），垂直居中 */
 .api-s2-visual {
   position: relative;
   flex: 1 1 62%;
   min-width: 0;
-  height: 86%;
+  height: 74%;
   max-height: 100%;
   align-self: center;
   display: flex;
