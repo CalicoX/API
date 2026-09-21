@@ -8556,3 +8556,328 @@ html.is-reduce-fx .api-ai-shell {
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================================================
+   Explore Tracking 插图 → Returns 同款 os-status 模块
+   （2026-09-21 Park：用 returns 5173 的 tracking 模块替换旧 board；
+   JSX 已换，旧 .track-ui-board 系列规则失效留存于 landing.css。
+   命名空间 .api-explore，特异性压过 landing.css 的 .track-ui 基础）
+   ========================================================= */
+.api-explore .explore-card-tracking .track-ui {
+  --os-brown: #2563eb;
+  --os-ink: #12151c;
+  --os-mute: #6b7380;
+  --os-paper: #f2f6fd;
+  --os-card: #ffffff;
+  background: var(--os-paper);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+}
+
+.api-explore .track-ui .os-status {
+  position: absolute;
+  top: 14px;
+  left: 10px;
+  right: 10px;
+  bottom: 12px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 14px 12px;
+  border-radius: 4px;
+  background: var(--os-card);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+  color: var(--os-ink);
+  -webkit-text-fill-color: var(--os-ink);
+}
+
+.api-explore .track-ui .os-status h3 {
+  margin: 0 0 14px;
+  max-width: none;
+  font-family: inherit;
+  font-size: clamp(13px, calc(11.92px + 0.3vw), 16px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--os-ink);
+  -webkit-text-fill-color: var(--os-ink);
+}
+
+.api-explore .track-ui .os-progress {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  position: relative;
+  margin: 0 6px;
+}
+
+.api-explore .track-ui .os-progress::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 55%, #6d28d9 100%);
+  transform: translateY(-50%);
+}
+
+/* 纯圆点 + 淡紫光环（returns 同款，不用图标），Delivered 光环更大 */
+.api-explore .track-ui .os-progress i {
+  position: relative;
+  z-index: 1;
+  width: 10px;
+  height: 10px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #6d28d9;
+  box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.16);
+}
+
+.api-explore .track-ui .os-progress i.is-now {
+  background: #6d28d9;
+  box-shadow:
+    0 0 0 4px rgba(109, 40, 217, 0.16),
+    0 0 0 9px rgba(109, 40, 217, 0.12);
+}
+
+.api-explore .track-ui .os-progress-labels {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 6px 0 12px;
+  font-size: 8px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--os-mute);
+  -webkit-text-fill-color: var(--os-mute);
+  text-align: center;
+}
+
+.api-explore .track-ui .os-carrier {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  font-size: 11px;
+}
+
+.api-explore .track-ui .os-carrier b {
+  font-weight: 650;
+  color: var(--os-ink);
+  -webkit-text-fill-color: var(--os-ink);
+}
+
+.api-explore .track-ui .os-carrier span {
+  color: var(--os-mute);
+  -webkit-text-fill-color: var(--os-mute);
+  font-variant-numeric: tabular-nums;
+}
+
+.api-explore .track-ui .os-events {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  /* 事件多时超出卡片底部渐隐（returns 同款）：不滚动、不裁切生硬 */
+  overflow-y: auto;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
+  padding-bottom: 18px;
+}
+
+.api-explore .track-ui .os-events::-webkit-scrollbar {
+  display: none;
+}
+
+.api-explore .track-ui .os-events strong {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 650;
+  color: var(--os-ink);
+  -webkit-text-fill-color: var(--os-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.api-explore .track-ui .os-events span {
+  display: block;
+  margin-top: 1px;
+  font-size: 10px;
+  color: var(--os-mute);
+  -webkit-text-fill-color: var(--os-mute);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.api-explore .track-ui .os-events li.is-latest strong {
+  color: #15803d;
+  -webkit-text-fill-color: #15803d;
+}
+
+/* WISMO 浮卡（returns 同款毛玻璃）：压面板右缘 */
+.api-explore .track-ui .float-card {
+  position: absolute;
+  width: 200px;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.82) 0%,
+      rgba(255, 255, 255, 0.68) 48%,
+      rgba(248, 250, 252, 0.72) 100%
+    );
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(28px) saturate(1.55);
+  -webkit-backdrop-filter: blur(28px) saturate(1.55);
+  padding: 13px 13px 12px;
+  box-shadow:
+    0 0 0 0.5px rgba(15, 23, 42, 0.04),
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 -0.5px 0 rgba(15, 23, 42, 0.03) inset,
+    0 2px 4px rgba(15, 23, 42, 0.03),
+    0 12px 28px -8px rgba(15, 23, 42, 0.14),
+    0 28px 56px -18px rgba(15, 23, 42, 0.12);
+  z-index: 3;
+  pointer-events: none;
+  color: #0f172a;
+}
+
+.api-explore .track-ui .float-card-metric {
+  left: auto;
+  right: -8px;
+  top: auto;
+  bottom: 40px;
+  width: 156px;
+  z-index: 4;
+  animation: none;
+}
+
+.api-explore .track-ui .float-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.api-explore .track-ui .float-card .label {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.api-explore .track-ui .float-card-tag {
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #15803d;
+  background: rgba(240, 253, 244, 0.9);
+  border: 1px solid rgba(34, 197, 94, 0.16);
+  padding: 3px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+.api-explore .track-ui .float-card .num {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  font-size: 24px;
+  line-height: 1;
+  margin: 0 0 6px;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  color: #0b1f5c;
+  font-variant-numeric: tabular-nums;
+}
+
+.api-explore .track-ui .float-card .num-arrow {
+  font-size: 15px;
+  font-weight: 600;
+  color: #16a34a;
+  letter-spacing: 0;
+}
+
+.api-explore .track-ui .mini-bars {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 3.5px;
+  align-items: end;
+  height: 28px;
+  padding-top: 8px;
+  margin-top: 2px;
+  border-top: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.api-explore .track-ui .mini-bars span {
+  display: block;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #7ba4f0 0%, #1e4db7 100%);
+  opacity: 0.88;
+  min-height: 4px;
+  box-shadow: 0 1px 2px rgba(30, 77, 183, 0.12);
+}
+
+.api-explore .track-ui .mini-bars span:nth-child(odd) { opacity: 0.68; }
+.api-explore .track-ui .mini-bars span:last-child { opacity: 0.48; }
+
+@media (max-width: 1024px) {
+  .api-explore .explore-card-tracking .track-ui {
+    min-height: 400px;
+  }
+  .api-explore .track-ui .float-card-metric {
+    width: 148px;
+    right: -4px;
+    bottom: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .api-explore .explore-card-tracking .track-ui {
+    min-height: 380px;
+  }
+  .api-explore .track-ui .os-status {
+    left: 8px;
+    right: 8px;
+  }
+  .api-explore .track-ui .float-card-metric {
+    right: 6px;
+    bottom: 20px;
+    width: 148px;
+  }
+}
+
+@media (max-width: 640px) {
+  .api-explore .explore-card-tracking .track-ui {
+    min-height: 360px;
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    /* 中和 landing.css ≤640 的旧 PC 缩放块（board 已不在 DOM，其 scale 带 !important） */
+    transform: none !important;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+  .api-explore .track-ui .os-status {
+    left: 6px;
+    right: 6px;
+    top: 10px;
+    bottom: 10px;
+  }
+  .api-explore .track-ui .float-card-metric {
+    width: 144px;
+    right: 6px;
+    bottom: 16px;
+  }
+}

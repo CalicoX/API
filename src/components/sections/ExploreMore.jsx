@@ -1,4 +1,39 @@
 /** Presentational section: ExploreMore — Tracking (from Returns) + Returns */
+
+/* Returns 项目同款事件流（2026-09-21 Park：用 returns 的 tracking 模块替换） */
+const TRACK_EVENTS = [
+  { title: "Delivered", meta: "SAINT LOUIS, MO 63109 · 9/14/26, 8:23 PM", latest: true },
+  { title: "Out for Delivery", meta: "RUSTON, LA 71270 · 10/31/24, 8:23 AM" },
+  { title: "Arrived at Post Office", meta: "RUSTON, LA 71270 · 10/31/24, 6:49 AM" },
+  { title: "In Transit to Next Facility", meta: "10/31/24, 6:38 AM" },
+  { title: "Departed USPS Facility", meta: "MONROE, LA 71203 · 10/31/24, 4:17 AM" },
+  { title: "Arrived at USPS Facility", meta: "MONROE, LA 71203 · 10/31/24, 4:00 AM" },
+  { title: "In Transit to Next Facility", meta: "10/30/24, 6:38 PM" },
+  { title: "Departed USPS Regional Facility", meta: "SHREVEPORT LA DISTRIBUTION CENTER · 10/30/24, 5:28 PM" },
+  { title: "Accepted at USPS Regional Destination Facility", meta: "SHREVEPORT LA DISTRIBUTION CENTER · 10/30/24, 4:44 PM" },
+  { title: "Arrived at USPS Regional Facility", meta: "SHREVEPORT LA DISTRIBUTION CENTER · 10/30/24, 2:28 PM" },
+  { title: "In Transit to Next Facility", meta: "10/30/24, 2:33 AM" },
+  { title: "Departed USPS Regional Facility", meta: "DALLAS TX LOGISTICS CENTER · 10/29/24, 11:57 PM" },
+  { title: "Arrived USPS Regional Facility", meta: "DALLAS TX LOGISTICS CENTER · 10/29/24, 10:15 PM" },
+  { title: "Departed Shipping Partner Facility, USPS Awaiting Item", meta: "GRAND PRAIRIE, TX 75052 · 10/29/24, 3:26 PM" },
+  { title: "Arrived Shipping Partner Facility, USPS Awaiting Item", meta: "GRAND PRAIRIE, TX 75052 · 10/28/24, 7:22 PM" },
+  { title: "Delivered to local carrier", meta: "10/28/24, 4:45 PM" },
+  { title: "Departed from facility", meta: "LOS ANGELES, CALIFORNIA, US · 10/28/24, 6:57 AM" },
+  { title: "Arrived at sort facility", meta: "LOS ANGELES, CALIFORNIA, US · 10/26/24, 10:58 PM" },
+  { title: "Arrived at sort facility", meta: "10/25/24, 12:05 PM" },
+  { title: "Departed from facility", meta: "10/25/24, 11:10 AM" },
+  { title: "Clearance processing completed - Import", meta: "LOS ANGELES, CALIFORNIA, US · 10/25/24, 11:10 AM" },
+  { title: "In clearance processing - Import", meta: "10/24/24, 9:09 AM" },
+  { title: "International flight has arrived", meta: "US · 10/24/24, 8:03 AM" },
+  { title: "International flight has departed", meta: "CN · 10/24/24, 7:56 AM" },
+  { title: "Arrived at the origin international airport", meta: "CN · 10/24/24, 4:54 AM" },
+  { title: "Shipment is in transit to next facility", meta: "Mainland China, CN · 10/22/24, 6:35 PM" },
+  { title: "Departed from sort facility", meta: "Mainland China, CN · 10/22/24, 3:05 PM" },
+  { title: "Arrived at origin facility", meta: "Mainland China, CN · 10/21/24, 9:52 PM" },
+  { title: "Shipment information received", meta: "10/21/24, 9:26 PM" },
+  { title: "Shipping Label Created, USPS Awaiting Item", meta: "9/9/26, 12:23 PM" },
+];
+
 export default function ExploreMore() {
   return (
 <section className="section alt api-explore">
@@ -27,96 +62,45 @@ export default function ExploreMore() {
                 </span>
               </div>
               <div className="track-ui" aria-hidden="true">
-                <div className="track-ui-board">
-                  <p className="track-ui-status">Your order has been delivered.</p>
-                  <div className="track-ui-progress">
-                    <i>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                        <path d="M7 8h10l-1 12H8L7 8z" />
-                        <path d="M9.5 8V7a2.5 2.5 0 015 0v1" />
-                      </svg>
-                    </i>
-                    <i>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                        <rect x="4" y="5" width="16" height="14" rx="1.5" />
-                        <path d="M8 9h8M8 13h5" />
-                      </svg>
-                    </i>
-                    <i>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                        <path d="M3 16V8h11v8H3z" />
-                        <path d="M14 11h4l3 3v2h-7v-5z" />
-                        <circle cx="7" cy="17.5" r="1.6" />
-                        <circle cx="17" cy="17.5" r="1.6" />
-                      </svg>
-                    </i>
-                    <i>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                        <path d="M4 17V9l7-4 7 4v8" />
-                        <path d="M9 17v-5h6v5" />
-                      </svg>
-                    </i>
-                    <i className="is-now">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                        <path d="M4 20V10l8-6 8 6v10" />
-                        <path d="M10 20v-6h4v6" />
-                      </svg>
-                    </i>
+                <div className="os-status">
+                  <h3>Your order has been delivered.</h3>
+                  <div className="os-progress">
+                    <i className="is-on"></i>
+                    <i className="is-on"></i>
+                    <i className="is-on"></i>
+                    <i className="is-on"></i>
+                    <i className="is-on is-now"></i>
                   </div>
-                  <div className="track-ui-labels">
-                    <span>Ordered</span>
-                    <span>Processed</span>
-                    <span>Shipped</span>
-                    <span>Out</span>
+                  <div className="os-progress-labels">
+                    <span>Order pending</span>
+                    <span>Info received</span>
+                    <span>In transit</span>
+                    <span>Pick up</span>
                     <span>Delivered</span>
                   </div>
-                  <div className="track-ui-events">
-                    <div className="track-ui-ev-head">
-                      <strong>Shipping Events</strong>
-                      <span>USPS · United States</span>
-                    </div>
-                    <ol className="track-ui-ev-list">
-                      <li className="track-ui-ev is-now">
-                        <i></i>
-                        <div>
-                          <b>Aug 18, 10:22</b>
-                          <span>Shingle Springs, CA · Delivered</span>
-                        </div>
-                      </li>
-                      <li className="track-ui-ev">
-                        <i></i>
-                        <div>
-                          <b>Aug 18, 08:14</b>
-                          <span>Out for Delivery, USPS</span>
-                        </div>
-                      </li>
-                      <li className="track-ui-ev">
-                        <i></i>
-                        <div>
-                          <b>Aug 17, 21:06</b>
-                          <span>Arrived at Post Office</span>
-                        </div>
-                      </li>
-                      <li className="track-ui-ev">
-                        <i></i>
-                        <div>
-                          <b>Aug 16, 14:40</b>
-                          <span>Picked Up by Shipping Partner</span>
-                        </div>
-                      </li>
-                    </ol>
+                  <div className="os-carrier">
+                    <b>USPS</b>
+                    <span>9400 1000 0000 2849 1</span>
                   </div>
+                  <ul className="os-events">
+                    {TRACK_EVENTS.map((ev, i) => (
+                      <li key={`${ev.title}-${i}`} className={ev.latest ? "is-latest" : undefined}>
+                        <strong>{ev.title}</strong>
+                        <span>{ev.meta}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="track-ui-wismo">
-                  <div className="track-ui-wismo-top">
-                    <span>WISMO inquiries</span>
+                <div className="float-card float-card-metric">
+                  <div className="float-card-top">
+                    <span className="label">WISMO inquiries</span>
+                    <span className="float-card-tag">−12%</span>
                   </div>
-                  <p className="track-ui-wismo-num">
-                    <b>↓</b>
-                    35%
-                  </p>
-                  <p className="track-ui-wismo-hint">More shoppers self-serve after purchase</p>
-                  <div className="track-ui-bars">
+                  <span className="num">
+                    <span className="num-arrow" aria-hidden="true">↓</span>
+                    95%
+                  </span>
+                  <div className="mini-bars" aria-hidden="true">
                     <span style={{ height: "88%" }}></span>
                     <span style={{ height: "76%" }}></span>
                     <span style={{ height: "64%" }}></span>
@@ -126,32 +110,6 @@ export default function ExploreMore() {
                     <span style={{ height: "32%" }}></span>
                     <span style={{ height: "26%" }}></span>
                   </div>
-                </div>
-                <div className="track-ui-video">
-                  <div className="track-ui-video-top">
-                    <span>Brand video</span>
-                  </div>
-                  <div className="track-ui-thumb">
-                    <img
-                      src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=400&q=80"
-                      alt=""
-                      width="168"
-                      height="105"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <span className="track-ui-play">
-                      <svg viewBox="0 0 12 12" fill="currentColor">
-                        <path d="M3.2 2.1v7.8L10 6 3.2 2.1z" />
-                      </svg>
-                    </span>
-                  </div>
-                  <strong>Studio edit · unbox film</strong>
-                  <p>
-                    0:42
-                    <i></i>
-                    Post-purchase story
-                  </p>
                 </div>
               </div>
             </a>
