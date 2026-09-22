@@ -209,7 +209,7 @@ describe("API landing structure (gating)", () => {
     expect(explore).toMatch(/17TRACK ORDER TRACKING|explore-card-tracking/);
     expect(explore).toMatch(/17RETURNS|explore-card-returns/);
     expect(explore).toMatch(/returns-ui-photo/);
-    expect(explore).toMatch(/returns-scene\.jpg/);
+    expect(explore).toMatch(/returns-kv\.jpg/);
     expect(explore).not.toMatch(/explore-card-api/);
   });
 

@@ -134,60 +134,42 @@ export default function ExploreMore() {
                 </span>
               </div>
               <div className="returns-ui" aria-hidden="true">
-                <img className="returns-ui-photo" src="/assets/returns-scene.jpg" alt="" />
-                <div className="returns-ui-blobs" aria-hidden="true">
-                  <span></span><span></span><span></span>
-                </div>
-                <div className="returns-ui-stack">
-                  <div className="returns-ui-card">
-                    <div className="returns-win-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-                    <p className="returns-ui-brand">Urban Standards</p>
-                    <div className="returns-ui-head">
-                      <strong>Select an item to return</strong>
-                      <span>You can add more items later.</span>
-                    </div>
-                    <div className="returns-ui-list">
-                      <div className="returns-ui-item is-active" data-product="sneakers">
-                        <div className="returns-ui-thumb">
-                          <img src="/assets/returns-scene.jpg" alt="" />
-                        </div>
-                        <div className="returns-ui-meta">
-                          <span className="name">Sneakers</span>
-                          <span className="sub"><em>Size 38</em><i>·</i><b>$100.00</b></span>
-                        </div>
-                        <span className="returns-ui-arrow" aria-hidden="true">
-                          <svg viewBox="0 0 16 16" fill="none"><path d="M3.5 8h9M8.5 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                        </span>
+                <div className="returns-kv-stage">
+                  <img className="returns-ui-photo" src="/assets/returns-kv.jpg" alt="" />
+                  <div className="returns-kv-flow">
+                    <div className="returns-kv-card">
+                      <p>What would you like to return?</p>
+                      <div className="returns-kv-item">
+                        <img src="/assets/returns-thumb-set.jpg" alt="" />
+                        <span><strong>Olive Green Sports Set</strong><em>Olive | xxl · $80.00 · x2</em></span>
+                        <i />
                       </div>
+                      <div className="returns-kv-item is-on">
+                        <img src="/assets/returns-thumb-jacket.jpg" alt="" />
+                        <span><strong>Athletic Zip-Up Jacket</strong><em>White | xxl · $60.00 · x1</em></span>
+                        <b />
+                      </div>
+                      <div className="returns-kv-item">
+                        <img src="/assets/returns-thumb-sneakers.jpg" alt="" />
+                        <span><strong>Beige Athletic Sneakers</strong><em>US 9.5 · $90.00 · x1</em></span>
+                        <i />
+                      </div>
+                    </div>
+                    <span className="returns-kv-link" aria-hidden="true"><b /><s /><b /></span>
+                    <div className="returns-kv-card">
+                      <p>Select return reason</p>
+                      <div className="returns-kv-reason is-on"><b />Arrive too late</div>
+                      <div className="returns-kv-reason"><i />Poor quality/faulty</div>
+                      <div className="returns-kv-reason"><i />Parcel damaged on arrival</div>
+                      <div className="returns-kv-reason"><i />Doesn't suit me</div>
+                      <div className="returns-kv-reason"><i />Looks different to image on site</div>
                     </div>
                   </div>
-                  <div className="returns-method">
-                    <div className="returns-win-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-                    <p className="returns-method-title">Return method</p>
-                    <div className="returns-method-list">
-                      <div className="returns-method-opt" data-kind="refund">
-                        <span className="rm-dot"></span>
-                        <span className="rm-ico" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.4"/><path d="M6 12h.01M18 12h.01"/></svg>
-                        </span>
-                        <span className="rm-label">Refund</span>
-                      </div>
-                      <div className="returns-method-opt is-selected" data-kind="green">
-                        <span className="rm-dot"></span>
-                        <span className="rm-ico" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-                        </span>
-                        <span className="rm-label">Green return</span>
-                        <span className="rm-tag">ECO</span>
-                      </div>
-                      <div className="returns-method-opt" data-kind="exchange">
-                        <span className="rm-dot"></span>
-                        <span className="rm-ico" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>
-                        </span>
-                        <span className="rm-label">Exchange</span>
-                      </div>
-                    </div>
+                  <div className="returns-kv-method">
+                    <p>Select return method</p>
+                    <div><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6.5 4.5H4.2A1.2 1.2 0 003 5.7v8.6A1.2 1.2 0 004.2 15.5h7.6M13.5 15.5h2.3A1.2 1.2 0 0017 14.3V5.7A1.2 1.2 0 0015.8 4.5H8.2" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/><path d="M8.2 7.2L6.2 5.2 8.2 3.2M11.8 12.8l2 2 2-2" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>Exchanges</div>
+                    <div><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 7.2L10 4l6.5 3.2v8.1L10 18.4 3.5 15.3V7.2zM10 4v14.4M3.5 7.2L10 10.5l6.5-3.3" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round"/></svg>Return and Refund</div>
+                    <div className="is-on"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.8 8.2h12.4v7.3A1.7 1.7 0 0114.5 17.2H5.5A1.7 1.7 0 013.8 15.5V8.2zM3.8 8.2l1.4-3.4A1.4 1.4 0 016.5 3.8h7a1.4 1.4 0 011.3 1L16.2 8.2M7 11.4h6" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>Green Return</div>
                   </div>
                 </div>
               </div>
