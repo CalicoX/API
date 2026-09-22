@@ -14,6 +14,8 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 
 ## 决策
 
+- **CoverageBand 文案换成 tracking 五组（2026-09-22 Park）**：地球和标题 Top Global Carriers Coverage 不动。五组从 4,000+ / 9+30 / 99.9% Tracking Accuracy / 95%+ Carrier Recognition / 99.9% SLA 换成 **3,500+ Carriers Worldwide、230+ Countries and Regions、33+ Languages、22M+ Daily Tracking Requests、16 years Industry Expertise**（与 tracking-react CoverageBand 一致）。Hero / Enterprise / Data Ops / 底 CTA 里的 4,000+ 不动。structure.test 同步。1440 / 768 / 390 标签都一行、不出框。
+
 - **五连改（2026-09-21 Park 批量圈点，一 commit）**：
   1. **Hero 背景 shader 撤、改淡蓝渐变**：`hero-wash-shader` 不再挂（useLandingEffects 摘 heroWash；模块文件留存），`.api-s1` 首帧底改 `linear-gradient(#f3f8ff→#fafcff→#fff)` + 左上/右上两团淡蓝 radial（`#93c5fd`/`#bfdbfe` 系）。`.api-s1-shader` CSS 规则已删。
   2. **Hero 加 three.js 点阵地球**：新模块 `src/fx/modules/hero-globe.js`（46 纬度行均匀球面采样，PointsMaterial `#7fb2e5`、size 0.016、opacity 0.75，自转 0.07 rad/s），挂 `<div id="hero-globe" class="api-s1-hero-globe">`（Hero.jsx，CSS z:0、radial mask 收边、整体 opacity 0.55）。**位置（2026-09-21 Park「地球放这儿」二轮）**：从左下角改到文案和表单之间的空档——`left 50% / top 46% / translateY(-50%)`、宽 min(38vw,520px)。IO 离屏停 rAF；reduce / ≤640（shouldReduceFx）不挂。**Use Cases 背景点阵地球调暗（同日 Park）**：`particle-earth.js` 的 `USE_CASES_THEME.alphaMul 1 → 0.6`（该 theme 只有 use-cases 地球用，carriers 地球独立 0.08 不受影响）。
