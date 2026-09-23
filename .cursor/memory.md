@@ -8,7 +8,7 @@ Agent 开场必读；有新决策就改这一页。下面「日志」由 stop ho
 - 本地开发：`http://localhost:5174/`（2026-08-27 起 5173 被 returns 项目 dev server 占用；Vite 只绑 IPv6，浏览器用 localhost 访问）
 - tracking-react AI intro（`#ai-lab-intro`，5175）已同步同一套 Duo 进/离场（2026-09-11，本地未要求 push）
 - tracking-react CoverageBand 手机标签换行已同步 API（2026-09-16，本地未要求 push）
-- Explore 17RETURNS 右侧跟 tracking 同一套（2026-09-22）：底图 `returns-kv.jpg` 只有球场，三张玻璃卡是放大的 HTML 浮层，不要再烤进图片，也不要叠 Urban Standards DOM。
+- Explore 17RETURNS 右侧跟 tracking 同一套（2026-09-23）：底图 `returns-kv.jpg` 是 2:3 高网球场，三张玻璃卡是 HTML 浮层，不要再烤进图片，也不要叠 Urban Standards DOM。
 - 用户：Park，设计师，直接改代码迭代
 - 产品：17TRACK Tracking API 落地页
 

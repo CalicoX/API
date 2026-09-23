@@ -8018,9 +8018,9 @@ body.ai-case-lightbox-active {
   inset: auto;
   width: 100%;
   height: auto;
-  aspect-ratio: 1624 / 1120;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
   border-radius: 22px;
 }
 .explore-card-returns .returns-ui { overflow: visible; }
@@ -10432,7 +10432,7 @@ body.ai-case-lightbox-active {
       padding: 16px 10px 18px;
     }
     .returns-ui-photo {
-      object-position: center top;
+      object-position: center;
     }
     .returns-ui-stack {
       width: 100%;
