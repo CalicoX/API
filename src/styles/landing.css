@@ -7996,10 +7996,13 @@ body.ai-case-lightbox-active {
     0 6px 16px rgba(16, 100, 85, 0.18);
 }
 .explore-card-returns .returns-ui {
+  --kv-s: min(0.5, 100cqw / 704px);
+  container-type: inline-size;
   background: transparent;
   border: 0;
   box-shadow: none;
   overflow: hidden;
+  overflow: clip;
   height: auto;
   min-height: 0;
   max-height: none;
@@ -8009,51 +8012,70 @@ body.ai-case-lightbox-active {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 8px 8px 0;
+  padding: 0;
   color: #0f172a !important;
   -webkit-text-fill-color: #0f172a;
 }
 .explore-card-returns .returns-ui-photo {
   position: relative;
   inset: auto;
+  display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 2 / 3;
+  height: 540px;
+  margin: 12px 0 20px;
   object-fit: cover;
-  object-position: center;
+  object-position: 68% 36%;
   border-radius: 22px;
 }
-.explore-card-returns .returns-ui { overflow: visible; }
-.returns-kv-stage { position: relative; width: 100%; overflow: visible; }
+/*
+ * Returns hero 插图整组等比缩小（终态，无动画、无 hover）。
+ * 设计盒 = hero stage 620 + flow 左悬出 56 + method 右探出 28 = 704 × 572。
+ */
+.returns-kv-fit {
+  width: calc(704px * var(--kv-s));
+  height: calc(572px * var(--kv-s));
+  position: relative;
+  flex: none;
+}
+.returns-kv-stage {
+  position: absolute;
+  left: calc(56px * var(--kv-s));
+  top: 0;
+  width: 620px;
+  height: 572px;
+  transform: scale(var(--kv-s));
+  transform-origin: top left;
+}
 .returns-kv-flow, .returns-kv-method { position: absolute; z-index: 2; }
-.returns-kv-flow { left: 0; top: -6px; width: 292px; display: flex; flex-direction: column; transform: scale(0.64); transform-origin: left top; }
-.returns-kv-method { right: -18px; bottom: -22px; width: 248px; z-index: 3; padding: 16px 16px 14px; transform: scale(0.64); transform-origin: right bottom; }
+.returns-kv-flow { left: -56px; top: 28px; width: 292px; display: flex; flex-direction: column; align-items: stretch; }
+.returns-kv-method { right: 0; bottom: 24px; width: 248px; z-index: 3; padding: 16px 16px 14px; }
 .returns-kv-card, .returns-kv-method {
   border-radius: 20px;
   color: #111827;
   background: rgba(255, 255, 255, 0.74);
   border: 1px solid rgba(255, 255, 255, 0.92);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.85) inset, 0 18px 40px -16px rgba(15, 23, 42, 0.32);
-  backdrop-filter: blur(22px) saturate(1.4);
   -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  backdrop-filter: blur(22px) saturate(1.4);
 }
 .returns-kv-card { padding: 16px 16px 14px; }
 .returns-kv-card p, .returns-kv-method p { margin: 0 0 12px; font-size: 13px; font-weight: 500; letter-spacing: -0.02em; color: #111827; }
 .returns-kv-item { display: grid; grid-template-columns: 40px minmax(0, 1fr) 16px; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 12px; }
 .returns-kv-item.is-on { background: #fff; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06); }
 .returns-kv-item img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; display: block; }
-.returns-kv-item strong { display: block; font-size: 13px; font-weight: 650; color: #111827; }
-.returns-kv-item em { display: block; margin-top: 2px; font-style: normal; font-size: 11px; color: #71717a; }
+.returns-kv-item strong { display: block; font-size: 12px; font-weight: 600; color: #111827; letter-spacing: -0.02em; line-height: 1.25; }
+.returns-kv-item em { display: block; margin-top: 2px; font-style: normal; font-size: 10.5px; color: #71717a; }
 .returns-kv-item i, .returns-kv-item b, .returns-kv-reason i, .returns-kv-reason b { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid #d4d4d8; box-sizing: border-box; }
 .returns-kv-item b, .returns-kv-reason.is-on b { border-color: #14b8a6; background: #14b8a6; box-shadow: inset 0 0 0 3px #fff; }
-.returns-kv-link { display: flex; flex-direction: column; align-items: center; height: 88px; margin: 6px 0; z-index: 3; }
-.returns-kv-link b { width: 8px; height: 8px; border-radius: 50%; background: #14b8a6; }
+.returns-kv-link { display: flex; flex-direction: column; align-items: center; align-self: center; width: 10px; height: 36px; margin: -5px 0; z-index: 3; }
+.returns-kv-link b { width: 8px; height: 8px; border-radius: 50%; background: #14b8a6; box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.22); }
 .returns-kv-link s { flex: 1; width: 0; margin: 2px 0; border-left: 1.5px dashed #5eead4; }
 .returns-kv-reason { display: flex; align-items: center; gap: 10px; padding: 2px 0; font-size: 12.5px; color: #52525b; }
 .returns-kv-reason.is-on { color: #111827; font-weight: 600; }
 .returns-kv-method div { display: flex; align-items: center; gap: 10px; height: 40px; margin-top: 8px; padding: 0 12px; border-radius: 12px; background: #fff; border: 1px solid rgba(15, 23, 42, 0.08); font-size: 12.5px; font-weight: 600; color: #111; white-space: nowrap; }
+.returns-kv-method div:first-of-type { margin-top: 0; }
 .returns-kv-method div.is-on { box-shadow: 0 0 0 2px #14b8a6; }
-.returns-kv-method svg { width: 18px; height: 18px; flex: none; color: #0f766e; }
+.returns-kv-method svg { width: 16px; height: 16px; flex: none; color: #0f766e; }
 /* explicit dark type on every mock text node (beats inherit white) */
 .explore-card-returns .returns-ui-brand,
 .explore-card-returns .returns-ui-head strong,
@@ -11041,6 +11063,29 @@ body.ai-case-lightbox-active {
     right: 0;
     width: 82%;
     padding: 10px 12px 10px;
+  }
+
+  /* Returns hero 插图整组按卡片宽度等比缩。不要写死 scale，390 会撑出视口。 */
+  .explore-card-returns .returns-ui {
+    --kv-s: min(0.78, 100cqw / 704px);
+    container-type: inline-size;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    overflow: clip;
+    padding: 0;
+    transform: none !important;
+    margin: 0;
+  }
+  .explore-card-returns .returns-ui-photo {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 540px;
+    margin: 12px 0 20px;
+    object-fit: cover;
+    object-position: 68% 36%;
+    border-radius: 22px;
   }
 
   /* ≤360 窄机再小一档（只缩 tracking 插图） */
